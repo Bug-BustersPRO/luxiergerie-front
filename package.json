@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "docker-build-and-run": "docker build -t luxiergerie . && docker run -p 4201:4200 luxiergerie-front:latest",
+    "docker-run": "docker run -p 4201:4200 luxiergerie-front:latest",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
