@@ -1,3 +1,11 @@
+##DOCKER
+
+Build image
+
+docker build -t luxiergerie-front .
+
+docker run -p 4201:4200 luxiergerie-front
+
 # Luxiergerie
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.2.
