@@ -1,31 +1,29 @@
-import { Component } from "@angular/core";
-import { BehaviorSubject, Observable, map, take, tap } from "rxjs";
-import { SectionFacade } from "src/app/core/services/facades/section-facade";
-import { Section } from "src/app/core/shared/models/section";
+import { Component, OnInit } from '@angular/core';
+import { Section } from 'src/app/shared/models/section';
+import { SectionService } from 'src/app/shared/services/section-service';
 
 @Component({
-    selector: "app-section-page",
-    templateUrl: "./section-page.html",
-    styleUrls: ["./section-page.scss"]
-    })
-export class SectionPage {
+  selector: 'app-section-page',
+  templateUrl: './section-page.html',
+  styleUrls: ['./section-page.scss'],
+})
+export class SectionPage implements OnInit {
+  public sections: Section[] = [];
 
-//    private sections: BehaviorSubject<any> = new BehaviorSubject([]);
-//     readonly sections$: Observable<any> = this.sections.asObservable();
-    public sections: Section[] = [];
+  constructor(private sectionService: SectionService) {}
 
-    constructor(private sectionFacade: SectionFacade) {
-        this.showSections();
-    }
+  ngOnInit(): void {
+    this.showSections();
+  }
 
-    showSections() {
-        this.sectionFacade.getSections().pipe(take(1),
-        map((response) => response))
-        .subscribe((sections: Section) => { // Adjusted the parameter type to Section
-            this.sections = [sections]; // Wrap the section in an array
-        });
-        
-        //this.sectionFacade.getSections().subscribe();
-       
-    }
+  showSections() {
+    this.sectionService.getSections().subscribe((sections) => {
+      this.sections = sections;
+      console.log('sections', this.sections);
+      const categories = this.sections.map((section) => section.categories);
+      console.log('categories', categories);
+
+    });
+
+  }
 }

@@ -1,7 +1,27 @@
-yououu
-@for (sec of sections; track $index) {
-    <ul>
-        <li>{{ sec.image }}</li>
-        <li>{{ sec.name }}</li>
+
+<p>Test de la page section</p>
+<section>
+  <ul *ngFor="let element of sections">
+    <li>URL de l'image : {{ element.image }}</li>
+    <li>Nom de la section : {{ element.name }}</li>
+    <li>ID de la section : {{element.id}}</li>
+    <ul *ngFor="let categories of element.categories">
+      <li>
+        <ul>
+          <li>Nom de la catégorie : {{ categories.name }}</li>
+          <li>Description de la catégorie : {{ categories.description }}</li>
+          <li>URL de l'image de la catégorie : {{ categories.image }}</li>
+          <ul *ngFor="let products of categories.accommodations">
+            <li>
+              <ul>
+                <li>Nom du produit : {{ products.name }}</li>
+                <li>Description du produit : {{ products.description }}</li>
+                <li>URL de l'image du produit : {{ products.image }}</li>
+              </ul>
+            </li>
+          </ul>
+        </ul>
+      </li>
     </ul>
-}
+  </ul>
+</section>

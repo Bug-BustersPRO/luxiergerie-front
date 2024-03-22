@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SectionFacade } from './3-domains/section-facade';
+// import { SectionFacade } from './domains/section-facade';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +8,9 @@ import { SectionFacade } from './3-domains/section-facade';
 })
 export class AppComponent implements OnInit{
 
-  constructor(private sectionFacade: SectionFacade) {}
+  constructor() {}
   title = 'luxiergerie';
 
   ngOnInit() {
-    this.sectionFacade.getSections().subscribe();
   }
 }

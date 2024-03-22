@@ -1,22 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SectionFacade } from './3-domains/section-facade';
-import { SectionHttpService } from './2-services/section-http-service/section-http-service';
+import { SectionService } from './shared/services/section-service';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { SectionPage } from './pages/section/section-page';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SectionPage
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
-  providers: [SectionFacade, SectionHttpService],
+  providers: [SectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
