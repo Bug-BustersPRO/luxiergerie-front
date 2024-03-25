@@ -1,34 +1,22 @@
-// import { Injectable } from "@angular/core";
-// import { SectionService } from "../services/section-service/section-service";
-// import { BehaviorSubject, Observable, map, take, tap } from "rxjs";
-// import { Section } from "../services/models/section";
+ import { Injectable } from "@angular/core";
+ import { CoreService } from "../shared/services/core.service";
+ import { Observable, map } from "rxjs";
+ import { Section } from "../shared/models/section.model";
 
-// @Injectable()
-// export class SectionFacade {
+ @Injectable()
+ export class SectionFacade {
+    private sections: Section[] = [];
 
-//   constructor(private sectionService: SectionService) { }
+   constructor(private coreService: CoreService) { }
 
-//   getSections(): Observable<any[]> {
-//     return new Observable((observer) => {
-//       this.sectionService.getSections().subscribe((sections) => {
-//         console.log('sections',sections);
-//         observer.next(sections);
-//       });
-//     });
-//   }
+   // Création des méthodes liées aux sections depuis le CALL API du CoreService
 
-//   // getSections(): Observable<any[]> {
-//   //   return this.sectionService.getSections().pipe(
-//   //     map((sections) => {
-//   //       return sections.map((section: any) => {
-//   //         console.log('section',section);
-//   //         return new Section(section.id, section.name, section.image, section.categories);
-//   //       });
-//   //     })
-//   //   );
-//   // }
-
-//   getSection(id: number) {
-//     return fetch(`http://localhost:8090/api/sections/${id}`);
-//   }
-// }
+   getAllSections(): Observable<Section[]> {
+      return this.coreService.getSections().pipe(
+        map((sections) => {
+          this.sections = sections;
+          return sections;
+        })
+      );
+   }
+}
