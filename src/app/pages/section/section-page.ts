@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Section } from 'src/app/shared/models/section';
+import { Section } from 'src/app/shared/models/section.model';
 import { SectionService } from 'src/app/shared/services/section-service';
 
 @Component({
