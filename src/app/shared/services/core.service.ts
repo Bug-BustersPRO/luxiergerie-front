@@ -82,7 +82,7 @@ export class CoreService {
     return this.httpClient.get(`${this.url}/accommodations`, { headers: this.headers });
   }
 
-  public getAcommodationById(id: number): Observable<any> {
+  public getAccommodationById(id: number): Observable<any> {
     return this.httpClient.get(`${this.url}/accommodations/${id}`, { headers: this.headers });
   }
 
