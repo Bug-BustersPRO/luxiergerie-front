@@ -2,17 +2,19 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { SectionPage } from './pages/section/section-page';
-import {  HomePageComponent } from './pages/home/home-page.component';
-import { CategoryPage } from './pages/category/category-page';
+import { LoginClientPageComponent } from "./pages/security/room/login-client.page/login-client.page.component";
+import { AuthGuardService } from './shared/services/Guard/auth-room.guard';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
-  { path: 'sections', component: SectionPage },
+  { path: '', component: AppComponent, canActivate: [AuthGuardService] },
+  { path: 'sections', component: SectionPage, canActivate: [AuthGuardService] },
+  { path: 'login', component: LoginClientPageComponent, canActivate: [AuthGuardService] }
   {path: 'sections/:id/categories', component: CategoryPage},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuardService]
 })
 export class AppRoutingModule { }

@@ -7,6 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SectionPage } from './pages/section/section-page';
 import { SectionFacade } from './domains/section-facade';
+import { LoginClientPageComponent } from './pages/security/room/login-client.page/login-client.page.component';
+import {AuthService} from "./shared/services/auth.service";
+
 import { CardComponent } from './shared/components/card/card.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SectionListComponent } from './pages/section/section-list/section-list.component';
@@ -21,6 +24,7 @@ import { CategoryComponent } from './shared/components/category/category.compone
 @NgModule({
   declarations: [
     AppComponent,
+    LoginClientPageComponent
     SectionPage,
     CardComponent,
     HomePageComponent,
@@ -41,7 +45,7 @@ import { CategoryComponent } from './shared/components/category/category.compone
     SectionListComponent,
     AccommodationCardComponent
   ],
-  providers: [CoreService, SectionFacade, CategoryFacade],
+  providers: [CoreService, SectionFacade, AuthService, CategoryFacade],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
