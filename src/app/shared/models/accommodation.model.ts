@@ -10,7 +10,7 @@ export class Accommodation {
   public category: Category;
   public purchases: Purchase[];
 
-  constructor(id: string, name: string, description: string, image: string, price: number, category: any, purchases: any[]) {
+  constructor(id: string, name: string, description: string, image: string, price: number, category: Category, purchases: Purchase[]) {
     this.id = id;
     this.name = name;
     this.description = description;

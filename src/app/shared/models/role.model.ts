@@ -7,7 +7,7 @@ export class Role {
   public employees: Employee[];
   public rooms: Room[];
 
-  constructor(id: string, name: string, employees: any[], rooms: Room[]) {
+  constructor(id: string, name: string, employees: Employee[], rooms: Room[]) {
     this.id = id;
     this.name = name;
     this.employees = employees;
