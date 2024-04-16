@@ -15,6 +15,7 @@
       return this.coreService.getSections().pipe(
         map((sections) => {
           this.sections = sections;
+          console.log(this.sections);
           return sections;
         })
       );

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './section-list.component.html',
-  styleUrl: './section-list.component.scss'
+  styleUrls: ['./section-list.component.scss']
 })
 export class SectionListComponent {
 

@@ -8,12 +8,14 @@ import { Section } from 'src/app/shared/models/section.model';
 })
 export class SectionPage implements OnInit {
   public sections: Section[] = [];
+  public images: string[] = []
 
   constructor(private sectionFacade: SectionFacade) {
     this.getAllSections();
   }
 
   ngOnInit(): void {
+    this.images.push('assets/beach.jpg', 'assets/hotel.jpg', 'assets/towel.jpg');
   }
 
   getAllSections() {

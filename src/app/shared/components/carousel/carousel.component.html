@@ -1,0 +1,12 @@
+<div class="carousel">
+  <div class="carousel-viewport">
+    <div class="carousel-inner" [style.transform]="getTransform()">
+      <div class="carousel-item" *ngFor="let image of images">
+        <img [src]="image" alt="Slide">
+      </div>
+    </div>
+  </div>
+  <div class="carousel-indicators">
+    <div *ngFor="let image of images; let i = index" [class.active]="i === currentIndex" class="carousel-indicator"></div>
+  </div>
+</div>
