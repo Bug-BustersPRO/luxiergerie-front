@@ -35,11 +35,11 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: #104493;
+      background: #D3C6A4;
       margin: 0 5px;
     }
     .carousel-indicator.active {
-      background: #002654;
+      background: #BD9E56;
     }
   }
   .carousel-arrow-left {
@@ -54,9 +54,9 @@
     align-items: center;
     z-index: 1;
     padding: 22px;
-    color: #104493;
+    color: #D3C6A4;
     :active {
-      color: #002654;
+      color: #BD9E56;
     }
   }
   .carousel-arrow-right {
@@ -72,9 +72,9 @@
     right: 0;
     z-index: 1;
     padding: 22px;
-    color: #104493;
+    color: #D3C6A4;
     :active {
-      color: #002654;
+      color: #BD9E56;
     }
   }
 }
