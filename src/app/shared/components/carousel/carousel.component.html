@@ -9,4 +9,8 @@
   <div class="carousel-indicators">
     <div *ngFor="let image of images; let i = index" [class.active]="i === currentIndex" class="carousel-indicator"></div>
   </div>
+  <div class="carousel-navigation">
+    <div class="carousel-arrow-left" (click)="previousSlide()"> <span class="arrow-left"><</span></div>
+    <div class="carousel-arrow-right" (click)="nextSlide()"><span class="arrow-right">></span></div>
+  </div>
 </div>

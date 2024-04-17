@@ -13,6 +13,7 @@
     display: inline-flex;
     transition: transform 0.5s ease;
     height: 100%;
+    width: 100%;
   }
   .carousel-item {
     flex: 0 0 100%;
@@ -21,6 +22,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      opacity: 0.8;
     }
   }
   .carousel-indicators {
@@ -38,6 +40,41 @@
     }
     .carousel-indicator.active {
       background: #002654;
+    }
+  }
+  .carousel-arrow-left {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55px;
+    height: 74px;
+    font-size: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    padding: 22px;
+    color: #104493;
+    :active {
+      color: #002654;
+    }
+  }
+  .carousel-arrow-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55px;
+    height: 74px;
+    font-size: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+    z-index: 1;
+    padding: 22px;
+    color: #104493;
+    :active {
+      color: #002654;
     }
   }
 }
