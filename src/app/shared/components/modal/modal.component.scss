@@ -6,6 +6,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 999;
+  padding: 1px;
 }
 
 .modal-container {
@@ -32,12 +33,11 @@
       justify-content: center;
     }
     .close {
-      cursor: pointer;
       font-size: 24px;
       color: #888;
     }
     .close:hover {
-      color: #000;
+      color: #BD9E56;
     }
   }
   .modal-content {
