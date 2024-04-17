@@ -8,18 +8,22 @@ import { CommonModule } from '@angular/common';
 import { SectionPage } from './pages/section/section-page';
 import { SectionFacade } from './domains/section-facade';
 import { NavbarComponent } from './pages/navbar/navbar.component';
+import { SectionListComponent } from './pages/section/section-list/section-list.component';
+import { HomePageComponent } from './pages/home/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SectionPage
+    SectionPage,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     CommonModule, 
-    NavbarComponent
+    NavbarComponent,
+    SectionListComponent
   ],
   providers: [CoreService, SectionFacade],
   bootstrap: [AppComponent]
