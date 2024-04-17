@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SectionFacade } from 'src/app/domains/section-facade';
 import { Section } from 'src/app/shared/models/section.model';
 @Component({
@@ -6,20 +6,23 @@ import { Section } from 'src/app/shared/models/section.model';
   templateUrl: './section-page.html',
   styleUrls: ['./section-page.scss'],
 })
-export class SectionPage implements OnInit {
+export class SectionPage {
+  public isModalOpen: boolean = false; // to use the modal, we need this variable
   public sections: Section[] = [];
 
   constructor(private sectionFacade: SectionFacade) {
     this.getAllSections();
   }
 
-  ngOnInit(): void {
-  }
-
   getAllSections() {
     this.sectionFacade.getAllSections().subscribe((sections) => {
       this.sections = sections;
     });
+  }
+
+  // this function allows us to open the modal
+  openModal() {
+    this.isModalOpen = true;
   }
 
 }

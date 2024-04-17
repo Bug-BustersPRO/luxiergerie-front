@@ -1,5 +1,6 @@
 
 <p>Test de la page section</p>
+<button (click)="openModal()">Click here to open Modal</button>
 <section>
   <ul *ngFor="let element of sections">
     <li>URL de l'image : {{ element.image }}</li>
@@ -25,3 +26,16 @@
     </ul>
   </ul>
 </section>
+
+<!-- Exemple of using the app-modal -->
+<app-modal
+  title="Réserver ma séance"
+  [showModal]="isModalOpen"
+  (closeModalEvent)="isModalOpen = false"
+>
+  <section>
+    <div>test data</div>
+    <div>test data</div>
+    <div>test data</div>
+  </section>
+</app-modal>

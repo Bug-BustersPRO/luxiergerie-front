@@ -7,11 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SectionPage } from './pages/section/section-page';
 import { SectionFacade } from './domains/section-facade';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SectionPage
+    SectionPage,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
