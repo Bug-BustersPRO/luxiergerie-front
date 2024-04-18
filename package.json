@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --disable-host-check",
     "build": "ng build",
     "docker-build-and-run": "docker build -t luxiergerie . && docker run -p 4201:4200 luxiergerie-front:latest",
     "docker-run": "docker run -p 4201:4200 luxiergerie-front:latest",
