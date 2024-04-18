@@ -8,7 +8,8 @@ import { CommonModule } from '@angular/common';
 import { SectionPage } from './pages/section/section-page';
 import { SectionFacade } from './domains/section-facade';
 import { LoginClientPageComponent } from './pages/security/room/login-client.page/login-client.page.component';
-import {AuthService} from "./shared/services/auth.service";
+import {AuthGuardService} from "./shared/services/Guard/auth-room.guard";
+import {ReactiveFormsModule} from "@angular/forms";
 
 import { CardComponent } from './shared/components/card/card.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
@@ -40,12 +41,21 @@ import { CategoryComponent } from './shared/components/category/category.compone
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
-    CommonModule,
+    ReactiveFormsModule
     NavbarComponent,
     SectionListComponent,
     AccommodationCardComponent
   ],
-  providers: [CoreService, SectionFacade, AuthService, CategoryFacade],
+  providers: [
+    CoreService,
+    SectionFacade,
+    {
+    provide: 'authRoom',
+    useFactory: (service: AuthGuardService) => service.authRoom(),
+    deps: [AuthGuardService]
+    },
+    CategoryFacade
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
