@@ -6,7 +6,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./carousel.component.scss'],
 })
 export class CarouselComponent implements OnInit, OnDestroy {
-  @Input() images: string[] = [];
+  @Input() public images: string[] = [];
+  @Input() public title: string = '';
+  @Input() public description: string = '';
   public currentIndex: number = 0;
   public interval: any;
 
@@ -14,7 +16,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
   // set an images variables like : public images: string[] = [];
   // set images on the variables or by pushing it in the ngOnInit like :
   // this.images.push('assets/beach.jpg', 'assets/hotel.jpg', 'assets/towel.jpg');
-  // in the template use : <app-carousel [images]="images"></app-carousel>
+  // in the template use : <app-carousel [images]="images" title="" description=""></app-carousel>
 
   ngOnInit(): void {
     this.startCarousel();
@@ -34,11 +36,8 @@ export class CarouselComponent implements OnInit, OnDestroy {
     return `translateX(-${this.currentIndex * 100}%)`;
   }
 
-  previousSlide() {
-    this.currentIndex = this.currentIndex === 0 ? this.images.length - 1 : this.currentIndex - 1;
+  navigate(index: number) {
+    this.currentIndex = index;
   }
 
-  nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
-  }
 }

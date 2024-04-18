@@ -46,17 +46,8 @@ describe('CarouselComponent', () => {
     expect(component.getTransform()).toBe('translateX(-200%)');
   });
 
-  it('should go to previous slide', () => {
-    component.images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-    component.currentIndex = 2;
-    component.previousSlide();
+  it('should navigate to index', () => {
+    component.navigate(1);
     expect(component.currentIndex).toBe(1);
-  });
-
-  it('should go to next slide', () => {
-    component.images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-    component.currentIndex = 1;
-    component.nextSlide();
-    expect(component.currentIndex).toBe(2);
   });
 });

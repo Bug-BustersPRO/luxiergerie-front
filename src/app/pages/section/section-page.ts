@@ -15,7 +15,7 @@ export class SectionPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.images.push('assets/beach.jpg', 'assets/hotel.jpg', 'assets/towel.jpg');// to remove, it's a test for carousel
+    this.images.push('assets/beach.jpg', 'assets/hotel.jpg', 'assets/towel.jpg', 'assets/golfer.jpg');// to remove, it's a test for carousel
   }
 
   getAllSections() {

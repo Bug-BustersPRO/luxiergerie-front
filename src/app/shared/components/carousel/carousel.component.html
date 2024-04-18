@@ -7,10 +7,12 @@
     </div>
   </div>
   <div class="carousel-indicators">
-    <div *ngFor="let image of images; let i = index" [class.active]="i === currentIndex" class="carousel-indicator"></div>
+    <div class="carousel-bg">
+      <div *ngFor="let image of images; let i = index" [class.active]="i === currentIndex" class="carousel-indicator" (click)="navigate(i)"></div>
+    </div>
   </div>
-  <div class="carousel-navigation">
-    <div class="carousel-arrow-left" (click)="previousSlide()"> <span class="arrow-left"><</span></div>
-    <div class="carousel-arrow-right" (click)="nextSlide()"><span class="arrow-right">></span></div>
-  </div>
+</div>
+<div class="carousel-container">
+  <h2>{{title}}</h2>
+  <p>{{description}}</p>
 </div>
