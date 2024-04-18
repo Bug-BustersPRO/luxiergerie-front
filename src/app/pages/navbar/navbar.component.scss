@@ -2,12 +2,12 @@
 
 nav {
     height: 130px;
-    background: #BD9E56;
+    background: $primary-background-color;
 }
 
 .infos-container {
     font-weight: 500;
-    color: $main-text-color;
+    color: $primary-text-color;
     p {
         margin: 0;
     }
@@ -32,7 +32,7 @@ nav {
         justify-content: space-evenly;
         height: 160px;
         width: 220px;
-        background-color: #BD9E56;
+        background-color: $primary-background-color;
         justify-content: space-between;
         align-items: center;
         font-size: 32px;
