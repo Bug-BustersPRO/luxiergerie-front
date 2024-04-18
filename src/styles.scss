@@ -1,5 +1,19 @@
+  /* Couleurs textes */
+    $main-text-color: #FEFEFE;
+    $secondary-text-color :#7AD7F0 ;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   display: block;
+  height: 100vh;
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: Montserrat, Open-Sans, sans-serif;
+  background-image: url('../src/assets/background-stars.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
