@@ -40,6 +40,4 @@ export class CategoryFacade {
   deleteCategory(id: number): Observable<any> {
      return this.coreService.deleteCategory(id);
   }
-
-
 }
