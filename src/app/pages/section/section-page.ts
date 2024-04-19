@@ -9,13 +9,13 @@ import { Section } from 'src/app/shared/models/section.model';
 })
 export class SectionPage implements OnInit {
   public sections: Section[] = [];
+  public isMultiple: boolean = true;
 
   constructor(private sectionFacade: SectionFacade) {}
 
   ngOnInit(): void {
-    this.sectionFacade.getAllSections().subscribe((sections) => {
+    this.sectionFacade.getAllSections().pipe().subscribe((sections) => {
       this.sections = sections;
     });
-
   }
 }

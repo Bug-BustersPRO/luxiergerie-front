@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { Section } from "../models/section.model";
 import { Category } from "../models/category.model";
 import { Accommodation } from "../models/accommodation.model";
@@ -18,8 +18,8 @@ export class CoreService {
   // Sections API - call vers le backend
 
   // GET
-  public getSections(): Observable<any> {
-    return this.httpClient.get(`${this.url}/sections`, { headers: this.headers });
+  public getSections(): Observable<Section[]> {
+    return this.httpClient.get<Section[]>(`${this.url}/sections`, { headers: this.headers });
   }
 
   public getSectionById(id: number): Observable<any> {
