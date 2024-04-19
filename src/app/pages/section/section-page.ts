@@ -8,19 +8,28 @@ import { Section } from 'src/app/shared/models/section.model';
 })
 export class SectionPage implements OnInit {
   public sections: Section[] = [];
-  public images: string[] = []; // to remove, it's a test for carousel
+  public carouselItems: any[] = [];
 
   constructor(private sectionFacade: SectionFacade) {
     this.getAllSections();
   }
 
   ngOnInit(): void {
-    this.images.push('assets/beach.jpg', 'assets/hotel.jpg', 'assets/towel.jpg', 'assets/golfer.jpg');// to remove, it's a test for carousel
   }
 
   getAllSections() {
     this.sectionFacade.getAllSections().subscribe((sections) => {
       this.sections = sections;
+      this.carouselItems = [];
+      this.sections[0].image = 'assets/beach.jpg'
+      this.sections[1].image = 'assets/hotel.jpg'
+      for (let i = 0; i < this.sections.length; i++) {
+        this.carouselItems.push({
+          title: this.sections[i].title,
+          description: this.sections[i].description,
+          image: this.sections[i].image
+        });
+      }
     });
   }
 

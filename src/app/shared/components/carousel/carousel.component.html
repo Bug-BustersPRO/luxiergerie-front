@@ -1,18 +1,18 @@
 <div class="carousel">
   <div class="carousel-text">
-    <h2>{{title}}</h2>
-    <p>{{description}}</p>
+    <h2 *ngIf="getCurrentItem()">{{getCurrentItem().title}}</h2>
+    <p *ngIf="getCurrentItem()">{{getCurrentItem().description}}</p>
   </div>
   <div class="carousel-viewport">
     <div class="carousel-inner" [style.transform]="getTransform()">
-      <div class="carousel-item" *ngFor="let image of images">
-        <img [src]="image" alt="Slide">
+      <div class="carousel-item" *ngFor="let item of items">
+        <img [src]="item.image" alt="Slide">
       </div>
     </div>
   </div>
   <div class="carousel-indicators">
     <div class="carousel-bg">
-      <div *ngFor="let image of images; let i = index" [class.active]="i === currentIndex" class="carousel-indicator" (click)="navigate(i)"></div>
+      <div *ngFor="let item of items; let i = index" [class.active]="i === currentIndex" class="carousel-indicator" (click)="navigate(i)"></div>
     </div>
   </div>
 </div>

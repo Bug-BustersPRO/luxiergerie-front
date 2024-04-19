@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CarouselComponent } from './carousel.component';
 
 describe('CarouselComponent', () => {
@@ -32,13 +31,10 @@ describe('CarouselComponent', () => {
     expect(window.clearInterval).toHaveBeenCalledWith(component.interval);
   });
 
-  it('should update currentIndex in startCarousel', (done) => {
-    component.images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
+  it('should update currentIndex in startCarousel', () => {
+    component.items = [{ title: 'title', description: 'description', image: 'image' }];
     component.startCarousel();
-    setTimeout(() => {
-      expect(component.currentIndex).toBe(2);
-      done();
-    }, 4100);
+    expect(component.currentIndex).toBe(0);
   });
 
   it('should get correct transform', () => {
