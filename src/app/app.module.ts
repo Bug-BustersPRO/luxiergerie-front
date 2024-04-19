@@ -7,11 +7,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SectionPage } from './pages/section/section-page';
 import { SectionFacade } from './domains/section-facade';
+import { CardComponent } from './shared/components/card/card.component';
+import { CardsListComponent } from './shared/components/cards-list/cards-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SectionPage
+    SectionPage,
+    CardComponent,
+    CardsListComponent
   ],
   imports: [
     BrowserModule,
