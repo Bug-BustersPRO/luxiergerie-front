@@ -7,14 +7,19 @@ import { Section } from 'src/app/shared/models/section.model';
   templateUrl: './section-page.html',
   styleUrls: ['./section-page.scss', '../../shared/components/cards-list/cards-list.component.scss'],
 })
+
 export class SectionPage implements OnInit {
   public sections: Section[] = [];
-  public isMultiple: boolean = true;
 
-  constructor(private sectionFacade: SectionFacade) {}
+  constructor(private sectionFacade: SectionFacade) {
+    this.getAllSections();
+  }
 
   ngOnInit(): void {
-    this.sectionFacade.getAllSections().pipe().subscribe((sections) => {
+  }
+
+  getAllSections() {
+    this.sectionFacade.getAllSections().subscribe((sections) => {
       this.sections = sections;
     });
   }

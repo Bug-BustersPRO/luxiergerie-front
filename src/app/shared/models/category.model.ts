@@ -9,7 +9,7 @@ export class Category {
   public accommodations: Accommodation[];
   public section: Section;
 
-  constructor(id: string, name: string, description: string, image: string, accommodations: any[], section: Section) {
+  constructor(id: string, name: string, description: string, image: string, accommodations: Accommodation[], section: Section) {
     this.id = id;
     this.name = name;
     this.description = description;

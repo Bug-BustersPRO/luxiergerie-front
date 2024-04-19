@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 import { Section } from "../models/section.model";
 import { Category } from "../models/category.model";
 import { Accommodation } from "../models/accommodation.model";
@@ -20,6 +20,7 @@ export class CoreService {
   // GET
   public getSections(): Observable<Section[]> {
     return this.httpClient.get<Section[]>(`${this.url}/sections`, { headers: this.headers });
+
   }
 
   public getSectionById(id: number): Observable<any> {
@@ -82,7 +83,8 @@ export class CoreService {
     return this.httpClient.get(`${this.url}/accommodations`, { headers: this.headers });
   }
 
-  public getAcommodationById(id: number): Observable<any> {
+
+  public getAccommodationById(id: number): Observable<any> {
     return this.httpClient.get(`${this.url}/accommodations/${id}`, { headers: this.headers });
   }
 
@@ -126,5 +128,4 @@ export class CoreService {
   public deletePurchase(id: number): Observable<any> {
     return this.httpClient.delete(`${this.url}/purchases/${id}`, { headers: this.headers });
   }
-
 }

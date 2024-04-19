@@ -9,19 +9,25 @@ import { SectionPage } from './pages/section/section-page';
 import { SectionFacade } from './domains/section-facade';
 import { CardComponent } from './shared/components/card/card.component';
 import { CardsListComponent } from './shared/components/cards-list/cards-list.component';
+import { NavbarComponent } from './pages/navbar/navbar.component';
+import { SectionListComponent } from './pages/section/section-list/section-list.component';
+import { HomePageComponent } from './pages/home/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SectionPage,
     CardComponent,
-    CardsListComponent
+    CardsListComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule
+    CommonModule, 
+    NavbarComponent,
+    SectionListComponent
   ],
   providers: [CoreService, SectionFacade],
   bootstrap: [AppComponent]

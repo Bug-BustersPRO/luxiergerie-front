@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { CoreService } from "../shared/services/core.service";
 import { Observable, map } from "rxjs";
 import { Category } from "../shared/models/category.model";
+import { Section } from "../shared/models/section.model";
 
 @Injectable()
 export class CategoryFace {
@@ -18,5 +19,25 @@ export class CategoryFace {
          return categories;
        })
      );
+  }
+
+  getCategoryById(id: number): Observable<Category> {
+     return this.coreService.getCategoryById(id);
+  }
+
+  getAccommodationsByCategory(id: number): Observable<any> {
+     return this.coreService.getAccommodationsByCategory(id);
+  }
+
+  createCategory(category: Category, section: Section): Observable<any> {
+     return this.coreService.createCategory(category, section);
+  }
+
+  updateCategory(category: Category): Observable<any> {
+     return this.coreService.updateCategory(category);
+  }
+
+  deleteCategory(id: number): Observable<any> {
+     return this.coreService.deleteCategory(id);
   }
 }

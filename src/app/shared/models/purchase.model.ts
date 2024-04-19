@@ -8,7 +8,8 @@ export class Purchase {
   public status: string;
   public accommodations: Accommodation[];
 
-  constructor(id: string, date: Date, room: Room, status: string, accommodations: any[]) {
+
+  constructor(id: string, date: Date, room: Room, status: string, accommodations: Accommodation[]) {
     this.id = id;
     this.date = date;
     this.room = room;

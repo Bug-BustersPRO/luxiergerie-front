@@ -19,4 +19,24 @@
         })
       );
    }
+
+   getSectionById(id: number): Observable<Section> {
+      return this.coreService.getSectionById(id);
+   }
+
+   getCategoriesBySection(id: number): Observable<any> {
+      return this.coreService.getCategoriesBySection(id);
+   }
+
+   createSection(section: Section): Observable<any> {
+      return this.coreService.createSection(section);
+   }
+
+   updateSection(section: Section): Observable<any> {
+      return this.coreService.updateSection(section);
+   }
+
+   deleteSection(id: number): Observable<any> {
+      return this.coreService.deleteSection(id);
+   }
 }
