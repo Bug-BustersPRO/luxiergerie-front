@@ -5,7 +5,7 @@ import { Category } from "../shared/models/category.model";
 import { Section } from "../shared/models/section.model";
 
 @Injectable()
-export class CategoryFace {
+export class CategoryFacade {
    private categories: Category[] = [];
 
   constructor(private coreService: CoreService) { }

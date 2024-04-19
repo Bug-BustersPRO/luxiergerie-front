@@ -10,22 +10,24 @@ import { SectionFacade } from './domains/section-facade';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SectionListComponent } from './pages/section/section-list/section-list.component';
 import { HomePageComponent } from './pages/home/home-page.component';
-
+import { CategoryPage } from './pages/category/category-page';
+import { CategoryFacade } from './domains/category-facade';
 @NgModule({
   declarations: [
     AppComponent,
     SectionPage,
-    HomePageComponent
+    HomePageComponent,
+    CategoryPage,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule, 
+    CommonModule,
     NavbarComponent,
     SectionListComponent
   ],
-  providers: [CoreService, SectionFacade],
+  providers: [CoreService, SectionFacade, CategoryFacade],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
