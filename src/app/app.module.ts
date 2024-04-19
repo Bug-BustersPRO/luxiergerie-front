@@ -12,6 +12,7 @@ import { CardsListComponent } from './shared/components/cards-list/cards-list.co
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SectionListComponent } from './pages/section/section-list/section-list.component';
 import { HomePageComponent } from './pages/home/home-page.component';
+import { CarouselComponent } from './shared/components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +20,14 @@ import { HomePageComponent } from './pages/home/home-page.component';
     SectionPage,
     CardComponent,
     CardsListComponent,
-    HomePageComponent
+    HomePageComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule, 
+    CommonModule,
     NavbarComponent,
     SectionListComponent
   ],
