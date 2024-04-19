@@ -3,6 +3,8 @@
 nav {
     height: 130px;
     background: $primary-background-color;
+    position: relative;
+    z-index: 2;
 }
 
 .infos-container {
@@ -88,6 +90,7 @@ input {position: absolute; display: none}
     top: -2.5%;
     right: 68px;
     height: 95px;
+    z-index: 3;
 }
 
 .btn {
