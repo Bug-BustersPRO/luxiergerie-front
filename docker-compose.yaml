@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4200:4200
+    environment:
+      - API_URL=http://localhost:8080 # Remplacez cette URL par l'URL de votre backend si nécessaire
+    networks:
+      - springboot-mysql-network
+
+networks:
+  springboot-mysql-network:
+    name: springboot-mysql-network

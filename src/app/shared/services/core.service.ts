@@ -18,8 +18,8 @@ export class CoreService {
   // Sections API - call vers le backend
 
   // GET
-  public getSections(): Observable<any> {
-    return this.httpClient.get(`${this.url}/sections`, { headers: this.headers });
+  public getSections(): Observable<Section[]> {
+    return this.httpClient.get<Section[]>(`${this.url}/sections`, { headers: this.headers });
   }
 
   public getSectionById(id: number): Observable<any> {
@@ -82,6 +82,7 @@ export class CoreService {
     return this.httpClient.get(`${this.url}/accommodations`, { headers: this.headers });
   }
 
+
   public getAccommodationById(id: number): Observable<any> {
     return this.httpClient.get(`${this.url}/accommodations/${id}`, { headers: this.headers });
   }
@@ -126,5 +127,4 @@ export class CoreService {
   public deletePurchase(id: number): Observable<any> {
     return this.httpClient.delete(`${this.url}/purchases/${id}`, { headers: this.headers });
   }
-
 }

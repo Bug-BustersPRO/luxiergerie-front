@@ -40,6 +40,4 @@ export class CategoryFace {
   deleteCategory(id: number): Observable<any> {
      return this.coreService.deleteCategory(id);
   }
-
-
 }
