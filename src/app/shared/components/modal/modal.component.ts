@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class ModalComponent{
 
   //to use modal in an other component, set this variable and function
-  //public isModalOpen: boolean = false; openModal() {this.isModalOpen = true;}
+  // public isModalOpen: boolean = false; openModal() {this.isModalOpen = true;}
   // call the function where you need to open the modal
   // exemple of use of the component
   //   <app-modal
