@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { SectionFacade } from 'src/app/domains/section-facade';
-import { CardsListComponent } from 'src/app/shared/components/cards-list/cards-list.component';
+import { Component, OnInit, effect, inject } from '@angular/core';
 import { Section } from 'src/app/shared/models/section.model';
+import { SectionService } from 'src/app/shared/services/section.service';
 @Component({
   selector: 'app-section-page',
   templateUrl: './section-page.html',
@@ -11,16 +10,11 @@ import { Section } from 'src/app/shared/models/section.model';
 export class SectionPage implements OnInit {
   public sections: Section[] = [];
   public carouselItems: any[] = [];
+  public sectionService = inject(SectionService);
 
-  constructor(private sectionFacade: SectionFacade) {
-    this.getAllSections();
-  }
-
-  ngOnInit(): void {
-  }
-
-  getAllSections() {
-    this.sectionFacade.getAllSections().subscribe((sections) => {
+  constructor() {
+    effect(() => {
+      const sections = this.sectionService.getAllSections$();
       this.sections = sections;
       this.carouselItems = [];
       this.sections[0].image = 'assets/beach.jpg'
@@ -34,4 +28,9 @@ export class SectionPage implements OnInit {
       }
     });
   }
+
+  ngOnInit(): void {
+    this.sectionService.getSections();
+  }
+
 }
