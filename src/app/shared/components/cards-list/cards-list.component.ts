@@ -10,5 +10,5 @@ export class CardsListComponent {
 
 constructor() { }
 
-@Input() cards!: Section[];
+@Input() cards!: any[];
 }

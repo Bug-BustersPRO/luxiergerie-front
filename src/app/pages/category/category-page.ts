@@ -5,7 +5,7 @@ import { Category } from 'src/app/shared/models/category.model';
 @Component({
   selector: 'app-category-page',
   templateUrl: './category-page.html',
-  styleUrls: ['./category-page.scss'],
+  styleUrls: ['./category-page.scss', '../../shared/components/cards-list/cards-list.component.scss'],
 })
 export class CategoryPage implements OnInit {
   public categories: Category[] = [];
@@ -21,6 +21,7 @@ export class CategoryPage implements OnInit {
     this.categoryFacade.getAllCategories().subscribe((categories) => {
       this.categories = categories;
     });
+    console.log(this.categories);
   }
 
 /*   getAllCategoriesBySection() {

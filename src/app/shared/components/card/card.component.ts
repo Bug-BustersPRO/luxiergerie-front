@@ -8,7 +8,10 @@ import { Section } from '../../models/section.model';
 })
 export class CardComponent {
 
-  constructor() { }
-@Input() card!: Section;
+constructor() {}
+@Input() card!: any;
+
+ngOnInit(): void {
+}
 
 }
