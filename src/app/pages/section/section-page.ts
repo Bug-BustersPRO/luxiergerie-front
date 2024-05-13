@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SectionFacade } from 'src/app/domains/section-facade';
-import { CardsListComponent } from 'src/app/shared/components/cards-list/cards-list.component';
 import { Section } from 'src/app/shared/models/section.model';
 @Component({
   selector: 'app-section-page',
@@ -8,15 +7,12 @@ import { Section } from 'src/app/shared/models/section.model';
   styleUrls: ['./section-page.scss', '../../shared/components/cards-list/cards-list.component.scss'],
 })
 
-export class SectionPage implements OnInit {
+export class SectionPage {
   public sections: Section[] = [];
   public carouselItems: any[] = [];
 
   constructor(private sectionFacade: SectionFacade) {
     this.getAllSections();
-  }
-
-  ngOnInit(): void {
   }
 
   getAllSections() {
@@ -25,11 +21,11 @@ export class SectionPage implements OnInit {
       this.carouselItems = [];
       this.sections[0].image = 'assets/beach.jpg'
       this.sections[1].image = 'assets/hotel.jpg'
-      for (let i = 0; i < this.sections.length; i++) {
+      for (const element of this.sections) {
         this.carouselItems.push({
-          title: this.sections[i].title,
-          description: this.sections[i].description,
-          image: this.sections[i].image
+          title: element.title,
+          description: element.description,
+          image: element.image
         });
       }
     });
