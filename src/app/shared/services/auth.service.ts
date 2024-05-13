@@ -8,6 +8,7 @@ import { HttpClient, HttpResponse } from "@angular/common/http";
   providedIn: 'root'
 })
 export class AuthService {
+    private url: string = "http://localhost:8090/api/auth";
   constructor(private cookieService: CookieService, private http: HttpClient) {}
 
   // faire une vérification différente quand on est connecté via le serial number de l'employée, la solution est pour le moment uniquement via le client room
@@ -47,3 +48,8 @@ export class AuthService {
     });
   }
 }
+
+  public login(serialNumber: number, password: string) {
+    return this.httpClient.post(`${this.url}/login`, { serialNumber, password, headers: this.headers });
+  }
+  

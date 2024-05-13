@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'sections', component: SectionPage, canActivate: ['authRoom'] },
   { path: 'login', component: LoginClientPageComponent, canActivate: ['authRoom'] },
   { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom'] },
+  { path: 'login-employee', component: LoginEmployeeComponent}
 ];
 
 @NgModule({

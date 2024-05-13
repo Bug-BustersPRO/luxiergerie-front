@@ -24,6 +24,7 @@ import { SectionComponent } from './shared/components/section/section.component'
 import { CategoryPage } from './pages/category/category-page';
 import { CategoryFacade } from './domains/category-facade';
 import { CategoryComponent } from './shared/components/category/category.component';
+import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { CategoryComponent } from './shared/components/category/category.compone
     CategoryPage,
     SectionComponent,
     CategoryComponent
+    LoginEmployeeComponent
   ],
   imports: [
     BrowserModule,
