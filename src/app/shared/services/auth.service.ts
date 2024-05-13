@@ -1,8 +1,4 @@
-import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
-import { LoginClient } from "../models/loginClient.model";
-import {catchError, Observable, of} from "rxjs";
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,19 +33,9 @@ export class AuthService {
     );
   }
 
-  getToken(): string | null {
-    return this.cookieService.get('jwt-token');
-  }
-
-  clientLogout(): void {
-    this.cookieService.delete('jwt-token');
-    this.http.get('http://localhost:8090/api/auth/logout', {
-      withCredentials: true
-    });
-  }
-}
-
-  public login(serialNumber: number, password: string) {
+  
+  public login(serialNumber: number, password: string): Observable<any> {
     return this.httpClient.post(`${this.url}/login`, { serialNumber, password, headers: this.headers });
   }
+}
   

@@ -1,10 +1,11 @@
-<div>
+<div class="container">
   <div class="input-container">
     <label for="">Numéro d'utilisateur</label>
-    <input type="text" (ngModel)="serialNumber"/>
+    <input type="text" [(ngModel)]="serialNumber"/>
   </div>
   <div class="input-container">
     <label for="">Mot de passe</label>
-    <input type="text" (ngModel)="password" />
+    <input type="password" [(ngModel)]="password" />
   </div>
+  <button (click)="login()">Se connecter</button>
 </div>

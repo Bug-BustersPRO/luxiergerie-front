@@ -25,6 +25,7 @@ import { CategoryPage } from './pages/category/category-page';
 import { CategoryFacade } from './domains/category-facade';
 import { CategoryComponent } from './shared/components/category/category.component';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,8 +52,7 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
     LoginModalComponent,
     BrowserAnimationsModule,
     NavbarComponent,
-    SectionListComponent,
-    AccommodationCardComponent
+    FormsModule
   ],
   providers: [
     CoreService,
