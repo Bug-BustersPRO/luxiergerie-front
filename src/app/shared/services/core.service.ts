@@ -127,4 +127,9 @@ export class CoreService {
   public deletePurchase(id: number): Observable<any> {
     return this.httpClient.delete(`${this.url}/purchases/${id}`, { headers: this.headers });
   }
+
+  // LOGOUT ENDPOINT
+  public logout(): Observable<any> {
+    return this.httpClient.get(`${this.url}/auth/logout`, { headers: this.headers });
+  }
 }
