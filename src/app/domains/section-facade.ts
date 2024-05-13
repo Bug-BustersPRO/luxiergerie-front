@@ -24,7 +24,7 @@
       return this.coreService.getSectionById(id);
    }
 
-   getCategoriesBySection(id: number): Observable<any> {
+   getCategoriesBySection(id: string): Observable<any[]> {
       return this.coreService.getCategoriesBySection(id);
    }
 

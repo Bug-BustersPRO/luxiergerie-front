@@ -11,4 +11,5 @@ export class CardsListComponent {
 constructor() { }
 
 @Input() cards!: any[];
+@Input() typeList!: string;
 }

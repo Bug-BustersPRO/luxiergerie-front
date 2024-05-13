@@ -10,8 +10,13 @@ export class CardComponent {
 
 constructor() {}
 @Input() card!: any;
+@Input() type!: string;
+@Input() typeList!: string;
+link!: string;
+
 
 ngOnInit(): void {
+  this.link = `${this.card.id}/${this.typeList}`
 }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryFacade } from 'src/app/domains/category-facade';
 import { SectionFacade } from 'src/app/domains/section-facade';
 import { Category } from 'src/app/shared/models/category.model';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-category-page',
   templateUrl: './category-page.html',
@@ -9,23 +10,34 @@ import { Category } from 'src/app/shared/models/category.model';
 })
 export class CategoryPage implements OnInit {
   public categories: Category[] = [];
+  public category!: Category;
+  public typeList = 'accommodations';
 
-  constructor(private categoryFacade: CategoryFacade, private sectionFacade: SectionFacade) {
-    this.getAllCategories();
+  constructor(private route: ActivatedRoute, private categoryFacade: CategoryFacade, private sectionFacade: SectionFacade) {
+    const sectionId = this.getSectionId();
+    this.getCategoriesBySection(sectionId);
   }
 
   ngOnInit(): void {
+
   }
 
-  getAllCategories() {
-    this.categoryFacade.getAllCategories().subscribe((categories) => {
+  getSectionId(): string  {
+    const url = this.route.snapshot.url;
+    const sectionUrlSegment = url.find(segment => segment.path === 'sections');
+    if (sectionUrlSegment) {
+      const idUrlSegment = url[1].path;
+      if (idUrlSegment) {
+        return idUrlSegment;
+      }
+    }
+    return '';
+  }
+
+  getCategoriesBySection(id: string) {
+    this.categories = [];
+    this.sectionFacade.getCategoriesBySection(id).subscribe((categories) => {
       this.categories = categories;
     });
-    console.log(this.categories);
   }
-
-/*   getAllCategoriesBySection() {
-    this.sectionFacade.getCategoriesBySection(1).subscribe((categories) => {
-      this.categories = categories;
-    }); */
   }
