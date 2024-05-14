@@ -14,6 +14,7 @@ import { SectionListComponent } from './pages/section/section-list/section-list.
 import { HomePageComponent } from './pages/home/home-page.component';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
 import { AccommodationCardComponent } from './shared/components/accommodation-card/accommodation-card.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AccommodationCardComponent } from './shared/components/accommodation-ca
     CardComponent,
     CardsListComponent,
     HomePageComponent,
-    CarouselComponent
+    CarouselComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
