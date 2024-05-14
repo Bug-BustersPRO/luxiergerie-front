@@ -11,5 +11,4 @@ export class CategoryComponent {
   constructor() { }
 
 @Input() category!: Category;
-
 }

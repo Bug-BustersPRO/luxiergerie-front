@@ -14,7 +14,6 @@ export class SectionPage {
   public section!: Section;
   public carouselItems: any[] = [];
 
-
   constructor(private sectionFacade: SectionFacade, private router: Router) {
     this.getAllSections();
   }

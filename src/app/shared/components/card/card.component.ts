@@ -9,6 +9,5 @@ export class CardComponent {
 
 constructor() {}
 @Input() item!: any;
-@Input() link!: any;
 
 }

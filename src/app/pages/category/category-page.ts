@@ -20,7 +20,6 @@ export class CategoryPage implements OnInit {
     const sectionId = this.route.snapshot.paramMap.get('id');
     if (sectionId) {
       this.getCategoriesBySection(sectionId);
-
     }
   }
 
