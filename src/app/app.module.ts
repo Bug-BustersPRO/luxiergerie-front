@@ -14,6 +14,8 @@ import { SectionListComponent } from './pages/section/section-list/section-list.
 import { HomePageComponent } from './pages/home/home-page.component';
 import { CategoryPage } from './pages/category/category-page';
 import { CategoryFacade } from './domains/category-facade';
+import { CarouselComponent } from './shared/components/carousel/carousel.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,7 @@ import { CategoryFacade } from './domains/category-facade';
     CardsListComponent,
     HomePageComponent,
     CategoryPage,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,

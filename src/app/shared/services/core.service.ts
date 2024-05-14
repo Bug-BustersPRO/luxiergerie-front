@@ -20,7 +20,6 @@ export class CoreService {
   // GET
   public getSections(): Observable<Section[]> {
     return this.httpClient.get<Section[]>(`${this.url}/sections`, { headers: this.headers });
-
   }
 
   public getSectionById(id: number): Observable<any> {
