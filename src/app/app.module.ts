@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { SectionPage } from './pages/section/section-page';
 import { SectionFacade } from './domains/section-facade';
 import { CardComponent } from './shared/components/card/card.component';
-import { CardsListComponent } from './shared/components/cards-list/cards-list.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SectionListComponent } from './pages/section/section-list/section-list.component';
 import { HomePageComponent } from './pages/home/home-page.component';
@@ -17,18 +16,19 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { SectionComponent } from './shared/components/section/section.component';
 import { CategoryPage } from './pages/category/category-page';
 import { CategoryFacade } from './domains/category-facade';
+import { CategoryComponent } from './shared/components/category/category.component';
 @NgModule({
   declarations: [
     AppComponent,
     SectionPage,
     CardComponent,
-    CardsListComponent,
     HomePageComponent,
     CarouselComponent,
     ModalComponent,
     HomePageComponent,
     CategoryPage,
     SectionComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,4 @@
-<app-cards-list [cards]="categories" class="cards"></app-cards-list>
+  <div class="cards">
+    <li *ngFor="let category of categories">
+    <app-category [category]="category"></app-category>
+    </li>

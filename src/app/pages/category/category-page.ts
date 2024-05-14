@@ -1,43 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CategoryFacade } from 'src/app/domains/category-facade';
-import { SectionFacade } from 'src/app/domains/section-facade';
 import { Category } from 'src/app/shared/models/category.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Section } from 'src/app/shared/models/section.model';
 @Component({
   selector: 'app-category-page',
   templateUrl: './category-page.html',
-  styleUrls: ['./category-page.scss', '../../shared/components/cards-list/cards-list.component.scss'],
+  styleUrls: ['./category-page.scss', '../../../styles.scss'],
 })
 export class CategoryPage implements OnInit {
   public categories: Category[] = [];
   public category!: Category;
-  public typeList = 'accommodations';
+  @Input() section!: Section;
 
-  constructor(private route: ActivatedRoute, private categoryFacade: CategoryFacade, private sectionFacade: SectionFacade, private router:Router) {
-    const sectionId = this.getSectionId();
-    this.getCategoriesBySection(sectionId);
+  constructor(private categoryFacade: CategoryFacade, private route:ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    const sectionId = this.route.snapshot.paramMap.get('id');
+    if (sectionId) {
+      this.getCategoriesBySection(sectionId);
 
-  }
-
-  getSectionId(): string {
-    const url = this.route.snapshot.url;
-    const sectionUrlSegment = url.find(segment => segment.path === 'sections');
-    if (sectionUrlSegment) {
-      const idUrlSegment = url[1].path;
-      if (idUrlSegment) {
-        return idUrlSegment;
-      }
     }
-    return url[0].path;
   }
 
-  getCategoriesBySection(id: string) {
-    this.categories = [];
-    this.sectionFacade.getCategoriesBySection(id).subscribe((categories) => {
+  getCategoriesBySection(sectionId: string) {
+    this.categoryFacade.getCategoriesBySection(sectionId).subscribe((categories) => {
       this.categories = categories;
     });
   }
+
   }

@@ -8,7 +8,6 @@ import { CategoryPage } from './pages/category/category-page';
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'sections', component: SectionPage },
-  {path: 'categories', component: CategoryPage},
   {path: 'sections/:id/categories', component: CategoryPage},
 ];
 

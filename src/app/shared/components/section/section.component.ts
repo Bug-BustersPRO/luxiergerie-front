@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { CardComponent } from '../card/card.component';
 import { Section } from '../../models/section.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-section',
@@ -10,11 +10,13 @@ import { Section } from '../../models/section.model';
 export class SectionComponent {
 
   @Input() section!: Section;
-  link: string = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.link = `${this.section.id}/categories`;
+  }
+
+  navigateToCategories() {
+    this.router.navigate([`sections/${this.section.id}/categories`]);
   }
 }
