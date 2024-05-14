@@ -26,7 +26,7 @@ export class CoreService {
     return this.httpClient.get(`${this.url}/sections/${id}`, { headers: this.headers });
   }
 
-  public getCategoriesBySection(id: number): Observable<any> {
+  public getCategoriesBySection(id: string): Observable<any> {
     return this.httpClient.get(`${this.url}/sections/${id}/categories`, { headers: this.headers });
   }
 

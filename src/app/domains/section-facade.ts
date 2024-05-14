@@ -15,7 +15,6 @@
       return this.coreService.getSections().pipe(
         map((sections) => {
           this.sections = sections;
-          console.log(this.sections);
           return sections;
         })
       );
@@ -25,19 +24,15 @@
       return this.coreService.getSectionById(id);
    }
 
-   getCategoriesBySection(id: number): Observable<any> {
-      return this.coreService.getCategoriesBySection(id);
-   }
-
-   createSection(section: Section): Observable<any> {
+   createSection(section: Section): Observable<Section> {
       return this.coreService.createSection(section);
    }
 
-   updateSection(section: Section): Observable<any> {
+   updateSection(section: Section): Observable<Section> {
       return this.coreService.updateSection(section);
    }
 
-   deleteSection(id: number): Observable<any> {
+   deleteSection(id: number): Observable<Section> {
       return this.coreService.deleteSection(id);
    }
 }
