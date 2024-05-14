@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './accommodation-card.component.html',
   styleUrls: ['./accommodation-card.component.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class AccommodationCardComponent {
   @Input() title: string = 'café';
@@ -20,9 +20,10 @@ export class AccommodationCardComponent {
   }
 
   lessQuantity(): number {
-    if(this.quantity === 0) {
+    if (this.quantity === 0) {
       return 0;
-    } 
-    return this.quantity--;  
+    }
+    return this.quantity--;
   }
+  
 }
