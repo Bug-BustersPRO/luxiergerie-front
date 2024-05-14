@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SectionFacade } from 'src/app/domains/section-facade';
 import { CardsListComponent } from 'src/app/shared/components/cards-list/cards-list.component';
 import { Section } from 'src/app/shared/models/section.model';
@@ -8,15 +8,13 @@ import { Section } from 'src/app/shared/models/section.model';
   styleUrls: ['./section-page.scss', '../../shared/components/cards-list/cards-list.component.scss'],
 })
 
-export class SectionPage implements OnInit {
+export class SectionPage {
+  public isModalOpen: boolean = false; // to use the modal, we need this variable
   public sections: Section[] = [];
   public carouselItems: any[] = [];
 
   constructor(private sectionFacade: SectionFacade) {
     this.getAllSections();
-  }
-
-  ngOnInit(): void {
   }
 
   getAllSections() {
@@ -34,4 +32,10 @@ export class SectionPage implements OnInit {
       }
     });
   }
+
+  // this function allows us to open the modal
+  openModal() {
+    this.isModalOpen = true;
+  }
+
 }

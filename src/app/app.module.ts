@@ -13,6 +13,7 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SectionListComponent } from './pages/section/section-list/section-list.component';
 import { HomePageComponent } from './pages/home/home-page.component';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CarouselComponent } from './shared/components/carousel/carousel.compone
     CardComponent,
     CardsListComponent,
     HomePageComponent,
-    CarouselComponent
+    CarouselComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
