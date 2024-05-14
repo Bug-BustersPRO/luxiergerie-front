@@ -1,0 +1,22 @@
+<section class="global-container">
+  <div class="picture">
+    <img [src]="picture" alt="{{ title }}" />
+  </div>
+  <div class="info-container">
+    <div class="title-description">
+      <h2 class="title">{{ title }}</h2>
+      <div class="description">{{ description }}</div>
+    </div>
+
+    <div class="price-button">
+      <div class="price">{{ price }}</div>
+      <button *ngIf="quantity > 0" type="button" class="button-less" (click)="lessQuantity()">
+       <p>-</p>
+      </button>
+      <div *ngIf="quantity > 0" class="quantity">{{ quantity }}</div>
+      <button type="button" class="button-more" (click)="addQuantity()">
+        <p>+</p>
+      </button>
+    </div>
+  </div>
+</section>
