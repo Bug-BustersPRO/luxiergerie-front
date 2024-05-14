@@ -1,1 +1,19 @@
+<app-carousel [items]="carouselItems"></app-carousel>
+<!-- App-carousel to remove, it's a test bro -->
 <app-cards-list [cards]="sections" [typeList]="typeList" class="cards"></app-cards-list>
+<p>Test de la page section</p>
+<button (click)="openModal()">Click here to open Modal</button>
+
+
+<!-- Exemple of using the app-modal // TO REMOVE -->
+<app-modal
+  title="Réserver ma séance"
+  [showModal]="isModalOpen"
+  (closeModalEvent)="isModalOpen = false"
+>
+  <section>
+    <div>test data</div>
+    <div>test data</div>
+    <div>test data</div>
+  </section>
+</app-modal>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryFacade } from 'src/app/domains/category-facade';
 import { SectionFacade } from 'src/app/domains/section-facade';
 import { Category } from 'src/app/shared/models/category.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-category-page',
   templateUrl: './category-page.html',
@@ -13,7 +13,7 @@ export class CategoryPage implements OnInit {
   public category!: Category;
   public typeList = 'accommodations';
 
-  constructor(private route: ActivatedRoute, private categoryFacade: CategoryFacade, private sectionFacade: SectionFacade) {
+  constructor(private route: ActivatedRoute, private categoryFacade: CategoryFacade, private sectionFacade: SectionFacade, private router:Router) {
     const sectionId = this.getSectionId();
     this.getCategoriesBySection(sectionId);
   }
@@ -22,7 +22,7 @@ export class CategoryPage implements OnInit {
 
   }
 
-  getSectionId(): string  {
+  getSectionId(): string {
     const url = this.route.snapshot.url;
     const sectionUrlSegment = url.find(segment => segment.path === 'sections');
     if (sectionUrlSegment) {
@@ -31,7 +31,7 @@ export class CategoryPage implements OnInit {
         return idUrlSegment;
       }
     }
-    return '';
+    return url[0].path;
   }
 
   getCategoriesBySection(id: string) {

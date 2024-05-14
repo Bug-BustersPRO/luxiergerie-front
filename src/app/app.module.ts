@@ -12,6 +12,9 @@ import { CardsListComponent } from './shared/components/cards-list/cards-list.co
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SectionListComponent } from './pages/section/section-list/section-list.component';
 import { HomePageComponent } from './pages/home/home-page.component';
+import { CarouselComponent } from './shared/components/carousel/carousel.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
+
 import { CategoryPage } from './pages/category/category-page';
 import { CategoryFacade } from './domains/category-facade';
 @NgModule({
@@ -21,12 +24,16 @@ import { CategoryFacade } from './domains/category-facade';
     CardComponent,
     CardsListComponent,
     HomePageComponent,
+    CarouselComponent,
+    ModalComponent
+    HomePageComponent,
     CategoryPage,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    CommonModule,
     CommonModule,
     NavbarComponent,
     SectionListComponent
