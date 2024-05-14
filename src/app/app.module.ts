@@ -13,6 +13,7 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SectionListComponent } from './pages/section/section-list/section-list.component';
 import { HomePageComponent } from './pages/home/home-page.component';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
+import { AccommodationCardComponent } from './shared/components/accommodation-card/accommodation-card.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ModalComponent } from './shared/components/modal/modal.component';
     HttpClientModule,
     CommonModule,
     NavbarComponent,
-    SectionListComponent
+    SectionListComponent,
+    AccommodationCardComponent
   ],
   providers: [CoreService, SectionFacade],
   bootstrap: [AppComponent]
