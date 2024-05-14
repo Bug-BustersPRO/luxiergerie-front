@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CardComponent } from '../card/card.component';
+import { Section } from '../../models/section.model';
 
 @Component({
   selector: 'app-section',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class SectionComponent {
 
+  @Input() section!: Section;
+  link: string = '';
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.link = `${this.section.id}/categories`;
+  }
 }
