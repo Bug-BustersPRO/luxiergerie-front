@@ -1,0 +1,37 @@
+:host {
+    width: 100%;
+}
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #F6F6F6;
+    border: 1px solid white;
+    .infos-container {
+        padding: 20px;
+    }
+    h3 {
+        margin: 0;
+    }  
+    p {
+        margin: 0;
+        line-height: 1.5rem;
+    }
+    .price {
+        font-weight: bold;
+    }
+    .icons-container {
+        display: flex;
+        justify-content: space-evenly;
+        width: 30%;
+    }
+    .icons-container span {
+        text-align: center;
+        font-size: 50px;
+        p {
+            font-size: 20px;
+            font-family: Montserrat, Open-Sans, sans-serif;
+        }
+    }
+} 

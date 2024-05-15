@@ -1,0 +1,32 @@
+<section class="main-container">
+    <div class="infos-container">
+     <h3>
+        Commande n° {{ purchase.id }}
+     </h3>
+     <p>
+        du {{ purchase.date | date: 'dd/MM/yyyy'}}
+     </p>
+     <p>
+        Chambre {{ purchase.roomNumber }}
+     </p>
+     <p class="price">
+        {{ purchase.totalPrice}} €
+     </p>
+    </div>
+    <div class="icons-container">
+        <span class="material-symbols-outlined">
+            search      
+            <p>
+            Voir
+            </p>
+        </span>
+  
+        <span class="material-symbols-outlined">
+            cancel
+            <p>
+                Annuler
+            </p>
+        </span>
+
+    </div>
+</section>

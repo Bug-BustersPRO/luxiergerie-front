@@ -1,0 +1,34 @@
+<nav class="vertical-navbar">
+    <h1>{{adminFirstname}}</h1>
+    <ul>
+        <li>
+            <a routerLink="/purchases">
+                <fa-icon [icon]="cart"></fa-icon>
+                <span class="nav-text">Commandes</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/accomodations">
+                <fa-icon [icon]="list"></fa-icon>
+                <span class="nav-text">Services proposés</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <fa-icon [icon]="clipBoard"></fa-icon>
+                <span class="nav-text">Informations</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <fa-icon [icon]="key"></fa-icon>
+                <span class="nav-text">Chambres</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <fa-icon [icon]="carousel"></fa-icon>
+                <span class="nav-text">Carousel</span>
+            </a>
+    </ul>
+</nav>
