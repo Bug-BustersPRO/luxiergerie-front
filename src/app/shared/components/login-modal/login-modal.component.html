@@ -1,0 +1,40 @@
+<div class="form-modal-container" *ngIf="isOpen" [@fadeInOut]>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="step === 1" class="first-step-container">
+      <label for="roomNumber">Indiquez votre numéro de chambre</label>
+      <input id="roomNumber" type="number" formControlName="roomNumber" placeholder="Room Number">
+      <button class="button-next-step" (click)="onSubmit()" [disabled]="!loginForm.get('roomNumber')?.value">
+        <p>Suivant</p>
+      </button>
+    </div>
+    <div *ngIf="step === 2" class="second-step-container">
+      <label for="password">
+        Entrez le mot de passe pour la chambre {{loginForm.get('roomNumber')?.value}}
+        <span class="edit-icon" (click)="onEditRoomNumber()">&#9998;</span>
+      </label>
+      <div *ngIf="invalidLogin" class="error-message">
+        Numéro de chambre ou mot de passe ne correspondent pas.
+      </div>
+      <div id="password" class="password-container">
+        <div class="password-dot" *ngFor="let i of [0, 1, 2, 3]">
+          <span *ngIf="i < (loginForm.get('password')?.value.length || 0)" class="filled"></span>
+          <span *ngIf="i >= (loginForm.get('password')?.value.length || 0)" class="empty"></span>
+        </div>
+      </div>
+      <div id="digipad">
+        <div class="key" (click)="onKey(1)">1</div>
+        <div class="key" (click)="onKey(2)">2</div>
+        <div class="key" (click)="onKey(3)">3</div>
+        <div class="key" (click)="onKey(4)">4</div>
+        <div class="key" (click)="onKey(5)">5</div>
+        <div class="key" (click)="onKey(6)">6</div>
+        <div class="key" (click)="onKey(7)">7</div>
+        <div class="key" (click)="onKey(8)">8</div>
+        <div class="key" (click)="onKey(9)">9</div>
+        <div class="key action" (click)="onErase()">&#8617;</div>
+        <div class="key" (click)="onKey(0)">0</div>
+        <div class="key action" (click)="onSubmit()">&#9773;</div>
+      </div>
+    </div>
+  </form>
+</div>

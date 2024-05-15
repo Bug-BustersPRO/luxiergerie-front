@@ -14,7 +14,7 @@ export class CoreService {
   // faire une vérification différente quand on est connecté via le serial number de l'employée, la solution est pour le moment uniquement via le client room
   private url: string = "http://localhost:8090/api";
   private headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + this.cookieService.get('client-JWT-token')
+    'Authorization': 'Bearer ' + this.cookieService.get('jwt-token')
   });
 
   // Sections API - call vers le backend

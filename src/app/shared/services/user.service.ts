@@ -17,7 +17,7 @@ export class UserService {
 
   // faire une vérification différente quand on est connecté via le serial number de l'employée, la solution est pour le moment uniquement via le client room
   private headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + this.cookieService.get('client-JWT-token')
+    'Authorization': 'Bearer ' + this.cookieService.get('jwt-token')
   });
 
   // Employee API - call vers le backend

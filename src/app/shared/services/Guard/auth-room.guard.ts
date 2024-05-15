@@ -1,27 +1,31 @@
 import {Injectable} from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot} from '@angular/router';
 import { AuthService } from '../auth.service';
+import {catchError, from, map, Observable, of, switchMap, take, tap} from "rxjs";
+import {HttpResponse, HttpStatusCode} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuardService {
-  constructor(private authService: AuthService, private router: Router) {}
+  private status: any
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   public authRoom(): CanActivateFn {
-    return (route, state) => {
-      const isLoggedIn = this.authService.isUserLoggedIn();
-      const isLoginPage = state.url.includes('/login');
-
-      if (isLoggedIn && isLoginPage) {
-        this.router.navigate(['/']);
-        return false;
-      } else if (!isLoggedIn && !isLoginPage) {
-        this.router.navigate(['/login']);
-        return false;
-      }
-      return true;
-    };
+    return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
+      return this.authService.isUserLoggedIn().pipe(
+        map((response: HttpResponse<any>) => {
+          const status = response.status
+          const isLoginPage = state.url.includes('/login')
+          if (status !== HttpStatusCode.Ok && !isLoginPage) {
+            this.router.navigate(['/login'])
+            return false
+          }
+          return true
+        })
+      );
+    }
   }
 
 }
