@@ -1,14 +1,23 @@
-<div class="container">
-  <div class="input-container">
-    <label for="">Numéro d'utilisateur</label>
-    <input type="text" [(ngModel)]="serialNumber"/>
+<section class="login">
+  <div class="login-card">
+    <div class="container">
+      <div class="input-container">
+        <label for="">Numéro d'utilisateur</label>
+        <input type="text"
+               [(ngModel)]="serialNumber" />
+      </div>
+      <div class="input-container">
+        <label for="">Mot de passe</label>
+        <input type="password"
+               [(ngModel)]="password" >
+      </div>
+      <div class="btn-container">
+        <button (click)="loginEmployee()">Valider</button>
+      </div>
+      <div *ngIf="isNotLoggedIn"
+           class="error-message">
+        <p>Le numéro d'utilisateur et/ou le mot de passe est incorrect</p>
+      </div>
+    </div>
   </div>
-  <div class="input-container">
-    <label for="">Mot de passe</label>
-    <input type="password" [(ngModel)]="password" />
-  </div>
-  <button (click)="loginEmployee()">Valider</button>
-  <div *ngIf="isNotLoggedIn" class="error-message">
-    <p>Le numéro d'utilisateur et/ou le mot de passe est incorrect</p>
-  </div>
-</div>
+</section>
