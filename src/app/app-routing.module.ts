@@ -4,6 +4,7 @@ import { SectionPage } from './pages/section/section-page';
 import { LoginClientPageComponent } from "./pages/security/room/login-client.page/login-client.page.component";
 import {CategoryPage} from "./pages/category/category-page";
 import {HomePageComponent} from "./pages/home/home-page.component";
+import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent, canActivate: ['authRoom'] },

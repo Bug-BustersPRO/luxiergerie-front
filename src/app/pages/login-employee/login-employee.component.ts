@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginEmployee } from 'src/app/shared/models/loginEmployee.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -11,24 +12,28 @@ export class LoginEmployeeComponent {
 
   private authService = inject(AuthService);
   private router = inject(Router);
-  public serialNumber!: number;
+  public serialNumber!: string;
   public password!: string;
+  public loginEmployee: LoginEmployee = {password: "", serialNumber: ""}
   public isNotLoggedIn: boolean = false;
 
   constructor() { }
 
-  loginEmployee() {
+  async login() {
     console.log('Serial Number: ', this.serialNumber);
-    console.log('Password, ', this.password);
-    this.authService.login(this.serialNumber, this.password).subscribe({
+    console.log('Password: ', this.password);
+    this.loginEmployee.serialNumber = this.serialNumber;
+    this.loginEmployee.password = this.password;
+
+    this.authService.login(this.loginEmployee).subscribe({
       next: response => {
-        if (response.token && response.status === "200") {
-          window.localStorage.setItem('jwt-token', response.token);
+        console.log(response)
+        if (response.status === 200) {
           this.router.navigate(['/sections']);
         }
       },
       error: (error) => {
-        console.log(error);
+        console.error(error);
         this.isNotLoggedIn = true;
       }
     });
