@@ -18,6 +18,9 @@ import { SectionComponent } from './shared/components/section/section.component'
 import { CategoryPage } from './pages/category/category-page';
 import { CategoryFacade } from './domains/category-facade';
 import { CategoryComponent } from './shared/components/category/category.component';
+import { AccommodationPage } from './pages/accommodation-page/accommodation-page.component';
+import { AccommodationComponent } from './shared/components/accommodation/accommodation.component';
+import { AccommodationFacade } from './domains/accommodation-facade';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +32,9 @@ import { CategoryComponent } from './shared/components/category/category.compone
     HomePageComponent,
     CategoryPage,
     SectionComponent,
-    CategoryComponent
+    CategoryComponent,
+    AccommodationPage,
+    AccommodationComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,7 @@ import { CategoryComponent } from './shared/components/category/category.compone
     SectionListComponent,
     AccommodationCardComponent
   ],
-  providers: [CoreService, SectionFacade, CategoryFacade],
+  providers: [CoreService, SectionFacade, CategoryFacade, AccommodationFacade],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

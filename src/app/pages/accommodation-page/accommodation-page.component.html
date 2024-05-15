@@ -1,0 +1,5 @@
+<div class="cards">
+  <li *ngFor="let accommodation of accommodations">
+  <app-accommodation [accommodation]="accommodation">
+  <p>{{accommodation.reservable}}</p></app-accommodation></li>
+</div>

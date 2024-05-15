@@ -5,6 +5,7 @@ import { Section } from "../models/section.model";
 import { Category } from "../models/category.model";
 import { Accommodation } from "../models/accommodation.model";
 import { Purchase } from "../models/purchase.model";
+import { tap } from "rxjs";
 
 @Injectable()
 export class CoreService {
@@ -26,8 +27,8 @@ export class CoreService {
     return this.httpClient.get(`${this.url}/sections/${id}`, { headers: this.headers });
   }
 
-  public getCategoriesBySection(id: string): Observable<any> {
-    return this.httpClient.get(`${this.url}/sections/${id}/categories`, { headers: this.headers });
+  public getCategoriesBySection(id: string): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(`${this.url}/sections/${id}/categories`, { headers: this.headers });
   }
 
   // CREATE
@@ -56,8 +57,8 @@ export class CoreService {
     return this.httpClient.get(`${this.url}/categories/${id}`, { headers: this.headers });
   }
 
-  public getAccommodationsByCategory(id: number): Observable<any> {
-    return this.httpClient.get(`${this.url}/categories/${id}/accommodations`, { headers: this.headers });
+  public getAccommodationsByCategory(id: string): Observable<Accommodation[]> {
+    return this.httpClient.get<Accommodation[]>(`${this.url}/categories/${id}/accommodations`, { headers: this.headers });
   }
 
   // CREATE
