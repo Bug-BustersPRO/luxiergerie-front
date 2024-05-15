@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../auth.service';
-import {catchError, from, map, Observable, of, switchMap, take, tap} from "rxjs";
-import {HttpResponse, HttpStatusCode} from "@angular/common/http";
+import { map, Observable} from "rxjs";
+import { HttpResponse, HttpStatusCode } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +17,9 @@ export class AuthGuardService {
       return this.authService.isUserLoggedIn().pipe(
         map((response: HttpResponse<any>) => {
           const status = response.status
-          const isLoginPage = state.url.includes('/login')
+          const isLoginPage = state.url.includes('/login/room')
           if (status !== HttpStatusCode.Ok && !isLoginPage) {
-            this.router.navigate(['/login'])
+            this.router.navigate(['/login/room'])
             return false
           }
           return true

@@ -9,9 +9,9 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
 const routes: Routes = [
   { path: '', component: HomePageComponent, canActivate: ['authRoom'] },
   { path: 'sections', component: SectionPage, canActivate: ['authRoom'] },
-  { path: 'login', component: LoginClientPageComponent, canActivate: ['authRoom'] },
+  { path: 'login/room', component: LoginClientPageComponent, canActivate: ['authRoom'] },
   { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom'] },
-  { path: 'login-employee', component: LoginEmployeeComponent}
+  { path: 'login/employee', component: LoginEmployeeComponent}
 ];
 
 @NgModule({

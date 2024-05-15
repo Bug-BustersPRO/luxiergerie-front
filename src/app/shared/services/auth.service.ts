@@ -42,9 +42,9 @@ export class AuthService {
     return this.cookieService.get('jwt-token');
   }
 
-  public login(loginEmployee: LoginEmployee): Observable<any> {
+  public login(loginEmployee: LoginEmployee): Observable<HttpResponse<any>>  {
     return this.http.post(`${this.url}/login`, loginEmployee, {
-      observe: 'response', withCredentials: true
+      observe: 'response', withCredentials: true, responseType: 'text'
     });
   }
 }

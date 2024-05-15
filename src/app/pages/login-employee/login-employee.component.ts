@@ -14,16 +14,16 @@ export class LoginEmployeeComponent {
   private router = inject(Router);
   public serialNumber!: string;
   public password!: string;
-  public loginEmployee: LoginEmployee = {password: "", serialNumber: ""}
+  public loginEmployee: LoginEmployee = {serialNumber: "", password: ""}
   public isNotLoggedIn: boolean = false;
 
   constructor() { }
 
   async login() {
-    console.log('Serial Number: ', this.serialNumber);
-    console.log('Password: ', this.password);
+
     this.loginEmployee.serialNumber = this.serialNumber;
     this.loginEmployee.password = this.password;
+    console.log(this.loginEmployee);
 
     this.authService.login(this.loginEmployee).subscribe({
       next: response => {
