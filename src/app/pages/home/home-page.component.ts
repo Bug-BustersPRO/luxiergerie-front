@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home-page',
@@ -8,15 +7,6 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent {
 
-  private router = inject(Router);
   constructor() { }
-
-  clientLogin() {
-    this.router.navigate(['/login-client']);
-  }
-
-  employeeLogin() {
-    this.router.navigate(['/login-employee']);
-  }
 
 }
