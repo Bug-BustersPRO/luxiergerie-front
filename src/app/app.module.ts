@@ -27,7 +27,7 @@ import { CategoryComponent } from './shared/components/category/category.compone
 @NgModule({
   declarations: [
     AppComponent,
-    LoginClientPageComponent
+    LoginClientPageComponent,
     SectionPage,
     CardComponent,
     HomePageComponent,
@@ -47,7 +47,7 @@ import { CategoryComponent } from './shared/components/category/category.compone
     NgOptimizedImage,
     HammerModule,
     LoginModalComponent,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
     NavbarComponent,
     SectionListComponent,
     AccommodationCardComponent

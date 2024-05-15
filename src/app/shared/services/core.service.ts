@@ -130,5 +130,3 @@ export class CoreService {
     return this.httpClient.delete(`${this.url}/purchases/${id}`, { headers: this.headers });
   }
 }
-
-}

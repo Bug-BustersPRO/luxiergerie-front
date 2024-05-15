@@ -12,7 +12,7 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   height: 75vh;
-  padding-top: 25vh;
+  padding-top: 15vh;
   color: #ffffff;
   font-family: "Italianno", cursive;
   font-size: 2rem;
@@ -36,6 +36,9 @@ body {
   color: #ffffff;
   font-family: "Italianno", cursive;
   font-size: 2rem;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
   h3 {
     margin: 0;
   }
