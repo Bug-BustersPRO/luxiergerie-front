@@ -34,6 +34,12 @@ export class LoginModalComponent {
   loginClient?: LoginClient
   step: number = 1
   invalidLogin: boolean = false
+  keys = [
+    ...Array.from({length: 9}, (_, i) => ({type: 'number', value: i + 1})),
+    {type: 'action', value: 'erase', symbol: `&#8617;`},
+    {type: 'number', value: 0},
+    {type: 'action', value: 'submit', symbol: `&#9773;`}
+  ]
   @Input() isOpen: boolean = false
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
@@ -44,9 +50,9 @@ export class LoginModalComponent {
   }
 
 
-  onKey(key: number) {
+  onKey(key: number | string) {
     let password = this.loginForm.get('password')?.value || ''
-    if (password.length < 4) {
+    if (typeof key === 'number' && password.length < 4) {
       password += key
       this.loginForm.get('password')?.setValue(password)
     }
@@ -79,6 +85,10 @@ export class LoginModalComponent {
       password = password.slice(0, -1)
       this.loginForm.get('password')?.setValue(password)
     }
+  }
+
+  getKeyDisplay(key: {type: string, value: number | string, symbol?: string}) {
+    return key.type === 'number' ? key.value : key.symbol
   }
 
   onEditRoomNumber() {
