@@ -3,16 +3,21 @@
     <div class="container">
       <div class="input-container">
         <label for="">Numéro d'utilisateur</label>
-        <input type="text"
-               [(ngModel)]="serialNumber" />
+        <input type="number"
+               [(ngModel)]="serialNumber"
+               [ngClass]="{'invalid' : isNotLoggedIn}"
+               class="input-field" />
       </div>
       <div class="input-container">
         <label for="">Mot de passe</label>
         <input type="password"
-               [(ngModel)]="password" >
+               [(ngModel)]="password"
+               [ngClass]="{'invalid' : isNotLoggedIn}"
+               class="input-field">
       </div>
       <div class="btn-container">
-        <button (click)="login()">Valider</button>
+        <button (click)="login()"
+                [disabled]="!canValidate">Valider</button>
       </div>
       <div *ngIf="isNotLoggedIn"
            class="error-message">

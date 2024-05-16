@@ -14,17 +14,14 @@ export class LoginEmployeeComponent {
   private router = inject(Router);
   public serialNumber!: string;
   public password!: string;
-  public loginEmployee: LoginEmployee = {serialNumber: "", password: ""}
+  public loginEmployee: LoginEmployee = { serialNumber: "", password: "" }
   public isNotLoggedIn: boolean = false;
 
   constructor() { }
 
   async login() {
-
     this.loginEmployee.serialNumber = this.serialNumber;
     this.loginEmployee.password = this.password;
-    console.log(this.loginEmployee);
-
     this.authService.login(this.loginEmployee).subscribe({
       next: response => {
         console.log(response)
@@ -37,6 +34,11 @@ export class LoginEmployeeComponent {
         this.isNotLoggedIn = true;
       }
     });
+  }
+
+  public get canValidate() {
+    if (this.password == "" || (this.serialNumber == null || undefined)) return false;
+    return true;
   }
 
 }
