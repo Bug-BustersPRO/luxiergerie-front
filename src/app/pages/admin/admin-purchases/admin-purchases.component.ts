@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AdminPurchaseCardComponent } from '../admin-purchase-card/admin-purchase-card.component';
 import { CoreService } from 'src/app/shared/services/core.service';
 import { Purchase } from 'src/app/shared/models/purchase.model';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-purchases',
