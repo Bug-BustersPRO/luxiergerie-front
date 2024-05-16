@@ -9,9 +9,18 @@ constructor() {}
 
 items: Accommodation[] = [];
 
-addtoCart(addedItem: Accommodation) {
+addtoCart(addedItem: Accommodation): void {
   this.items.push(addedItem);
   this.saveCart();
+}
+
+removeItem(item: Accommodation): void {
+  const index = this.items.findIndex(o => o.id === item.id);
+
+  if (index > -1) {
+    this.items.splice(index, 1);
+    this.saveCart();
+  }
 }
 
 getItems() {
@@ -27,7 +36,7 @@ loadCart(): void {
   this.items = cartItems ? JSON.parse(cartItems) : [];
 }
 
-clearCart() {
+clearCart(): void {
   this.items = []
   localStorage.removeItem("cart_items")
 }
