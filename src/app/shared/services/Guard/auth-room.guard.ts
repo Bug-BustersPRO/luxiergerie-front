@@ -21,6 +21,9 @@ export class AuthGuardService {
           if (status !== HttpStatusCode.Ok && !isLoginPage) {
             this.router.navigate(['/login/room'])
             return false
+          } else if (status === HttpStatusCode.Ok && isLoginPage) {
+            this.router.navigate(['/sections'])
+            return false
           }
           return true
         })
