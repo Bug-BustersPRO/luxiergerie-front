@@ -26,6 +26,7 @@ import { AccommodationPage } from './pages/accommodation-page/accommodation-page
 import { AccommodationComponent } from './shared/components/accommodation/accommodation.component';
 import { AccommodationFacade } from './domains/accommodation-facade';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
+import { ButtonComponent } from './shared/components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
     NavbarComponent,
     FormsModule,
     AccommodationCardComponent,
+    ButtonComponent
   ],
   providers: [
     CoreService,
