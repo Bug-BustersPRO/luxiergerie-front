@@ -10,7 +10,14 @@ constructor() {}
 items: Accommodation[] = [];
 
 addtoCart(addedItem: Accommodation): void {
+  const intemInCart = this.items.find(item => item.id === addedItem.id)
+  if (!intemInCart) {
   this.items.push(addedItem);
+  addedItem.quantity = 1;
+
+  } else {
+    intemInCart.quantity++;
+  }
   this.saveCart();
 }
 
@@ -21,6 +28,9 @@ removeItem(item: Accommodation): void {
     this.items.splice(index, 1);
     this.saveCart();
   }
+}
+
+isItemInCart(item: Accommodation): void {
 }
 
 getItems() {
