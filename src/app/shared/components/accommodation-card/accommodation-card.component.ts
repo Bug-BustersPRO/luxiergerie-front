@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Accommodation } from '../../models/accommodation.model';
 
 @Component({
   selector: 'app-accommodation-card',
@@ -9,10 +10,7 @@ import { Component, Input } from '@angular/core';
   imports: [CommonModule],
 })
 export class AccommodationCardComponent {
-  @Input() title: string = 'café';
-  @Input() description: string = "c'est bon";
-  @Input() picture: string = '../../../../assets/golfer.jpg';
-  @Input() price: string = '2,50 euros';
+  @Input() item!: Accommodation;
   @Input() quantity: number = 1;
 
   addQuantity(): number {
@@ -25,5 +23,5 @@ export class AccommodationCardComponent {
     }
     return this.quantity--;
   }
-  
+
 }

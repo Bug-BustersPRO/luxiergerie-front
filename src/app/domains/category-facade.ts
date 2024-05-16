@@ -30,10 +30,6 @@ export class CategoryFacade {
     return this.coreService.getCategoriesBySection(id);
  }
 
-  getAccommodationsByCategory(id: number): Observable<Accommodation[]> {
-     return this.coreService.getAccommodationsByCategory(id);
-  }
-
   createCategory(category: Category, section: Section): Observable<Category> {
      return this.coreService.createCategory(category, section);
   }
