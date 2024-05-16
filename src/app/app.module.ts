@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule, HammerModule} from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreService } from './shared/services/core.service';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { SectionPage } from './pages/section/section-page';
 import { SectionFacade } from './domains/section-facade';
+import { LoginClientPageComponent } from './pages/security/room/login-client.page/login-client.page.component';
+import {AuthGuardService} from "./shared/services/Guard/auth-room.guard";
+import {ReactiveFormsModule} from "@angular/forms";
+import {LoginModalComponent} from "./shared/components/login-modal/login-modal.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CardComponent } from './shared/components/card/card.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SectionListComponent } from './pages/section/section-list/section-list.component';
@@ -24,6 +29,7 @@ import { AccommodationFacade } from './domains/accommodation-facade';
 @NgModule({
   declarations: [
     AppComponent,
+    LoginClientPageComponent,
     SectionPage,
     CardComponent,
     HomePageComponent,
@@ -41,12 +47,26 @@ import { AccommodationFacade } from './domains/accommodation-facade';
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
-    CommonModule,
+    ReactiveFormsModule,
+    NgOptimizedImage,
+    HammerModule,
+    LoginModalComponent,
+    BrowserAnimationsModule,
     NavbarComponent,
     SectionListComponent,
     AccommodationCardComponent
   ],
-  providers: [CoreService, SectionFacade, CategoryFacade, AccommodationFacade],
+  providers: [
+    CoreService,
+    SectionFacade,
+    {
+    provide: 'authRoom',
+    useFactory: (service: AuthGuardService) => service.authRoom(),
+    deps: [AuthGuardService]
+    },
+    CategoryFacade,
+    AccommodationFacade
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,14 +6,16 @@ import { Category } from "../models/category.model";
 import { Accommodation } from "../models/accommodation.model";
 import { Purchase } from "../models/purchase.model";
 import { tap } from "rxjs";
+import {CookieService} from "ngx-cookie-service";
 
 @Injectable()
 export class CoreService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
 
+  // faire une vérification différente quand on est connecté via le serial number de l'employée, la solution est pour le moment uniquement via le client room
   private url: string = "http://localhost:8090/api";
   private headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
+    'Authorization': 'Bearer ' + this.cookieService.get('jwt-token')
   });
 
   // Sections API - call vers le backend
