@@ -5,7 +5,6 @@ import { Section } from "../models/section.model";
 import { Category } from "../models/category.model";
 import { Accommodation } from "../models/accommodation.model";
 import { Purchase } from "../models/purchase.model";
-import { tap } from "rxjs";
 import {CookieService} from "ngx-cookie-service";
 
 @Injectable()

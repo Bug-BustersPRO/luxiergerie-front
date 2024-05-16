@@ -1,19 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CategoryFacade } from 'src/app/domains/category-facade';
 import { Category } from 'src/app/shared/models/category.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Section } from 'src/app/shared/models/section.model';
 @Component({
   selector: 'app-category-page',
   templateUrl: './category-page.html',
-  styleUrls: ['./category-page.scss', '../../../styles.scss'],
+  styleUrls: ['./category-page.scss'],
 })
 export class CategoryPage implements OnInit {
   public categories: Category[] = [];
   public category!: Category;
   @Input() section!: Section;
 
-  constructor(private categoryFacade: CategoryFacade, private route:ActivatedRoute, private router: Router) {
+  constructor(private categoryFacade: CategoryFacade, private route:ActivatedRoute) {
   }
 
   ngOnInit(): void {

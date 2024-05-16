@@ -21,7 +21,7 @@ import { SectionComponent } from './shared/components/section/section.component'
 import { CategoryPage } from './pages/category/category-page';
 import { CategoryFacade } from './domains/category-facade';
 import { CategoryComponent } from './shared/components/category/category.component';
-
+import {AccommodationCardComponent } from './shared/components/accommodation-card/accommodation-card.component';
 import { AccommodationPage } from './pages/accommodation-page/accommodation-page.component';
 import { AccommodationComponent } from './shared/components/accommodation/accommodation.component';
 import { AccommodationFacade } from './domains/accommodation-facade';
@@ -55,7 +55,8 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
     LoginModalComponent,
     BrowserAnimationsModule,
     NavbarComponent,
-    FormsModule
+    FormsModule,
+    AccommodationCardComponent,
   ],
   providers: [
     CoreService,
