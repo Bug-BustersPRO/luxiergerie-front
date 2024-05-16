@@ -1,0 +1,28 @@
+<section class="login">
+  <div class="login-card">
+    <div class="container">
+      <div class="input-container">
+        <label for="">Numéro d'utilisateur</label>
+        <input type="number"
+               [(ngModel)]="serialNumber"
+               [ngClass]="{'invalid' : isNotLoggedIn}"
+               class="input-field" />
+      </div>
+      <div class="input-container">
+        <label for="">Mot de passe</label>
+        <input type="password"
+               [(ngModel)]="password"
+               [ngClass]="{'invalid' : isNotLoggedIn}"
+               class="input-field">
+      </div>
+      <div class="btn-container">
+        <button (click)="login()"
+                [disabled]="!canValidate">Valider</button>
+      </div>
+      <div *ngIf="isNotLoggedIn"
+           class="error-message">
+        <p>Le numéro d'utilisateur et/ou le mot de passe est incorrect</p>
+      </div>
+    </div>
+  </div>
+</section>
