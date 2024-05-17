@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable, WritableSignal, computed, inject, signal } from '@angular/core';
 import { Room } from '../models/room.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,11 @@ export class RoomService {
 
   constructor() { }
 
-  public http = inject(HttpClient);
+  http = inject(HttpClient);
+  cookieService = inject(CookieService);
   private url: string = "http://localhost:8090/api";
   private headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
+    'Authorization': 'Bearer ' + this.cookieService.get('jwt-token')
   });
   public getAllRooms$: WritableSignal<Room[]> = signal([]);
   getAllRoomsSig = computed(() => this.getAllRooms$());
@@ -39,7 +41,7 @@ export class RoomService {
       });
   }
 
-  public createRooms(room: Room, maxRooms: number): void{
+  public createRooms(room: Room, maxRooms: number): void {
     this.http.post(`${this.url}/room/create-multiple/${maxRooms}`, room, { headers: this.headers })
       .subscribe({
         next: () => console.log("Rooms created successfully"),

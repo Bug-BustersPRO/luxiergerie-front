@@ -3,8 +3,8 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width:100%;
-  height:100%
+  width: 100%;
+  height: 100%
 }
 
 #hotel-information {
@@ -22,6 +22,7 @@ body {
   text-align: center;
   font-family: "Italianno", cursive;
   font-size: 2rem;
+
   h1 {
     margin: 0;
   }
@@ -39,9 +40,11 @@ body {
   position: absolute;
   width: 100%;
   bottom: 0;
+
   h3 {
     margin: 0;
   }
+
   .arrow-down {
     display: flex;
     flex-direction: column;
@@ -68,24 +71,31 @@ body {
   0% {
     opacity: 0;
   }
+
   50% {
     opacity: 0.5;
   }
+
   100% {
     opacity: 1;
   }
 }
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: rotate(270deg) translateX(0);
   }
+
   25% {
     transform: rotate(270deg) translateX(-1px);
   }
+
   50% {
     transform: rotate(270deg) translateX(0);
   }
+
   75% {
     transform: rotate(270deg) translateX(1px);
   }
@@ -96,6 +106,7 @@ body {
     transform: rotate(0) translateY(0);
     opacity: 1;
   }
+
   100% {
     transform: rotate(0) translateY(-50px);
     opacity: 0;

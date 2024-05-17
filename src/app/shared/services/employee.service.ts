@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, WritableSignal, computed, inject, signal } from '@angular/core';
 import { Employee } from '../models/employee.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,11 @@ export class EmployeeService {
 
   constructor() { }
 
-  public http = inject(HttpClient);
+  http = inject(HttpClient);
+  cookieService = inject(CookieService);
   private url: string = "http://localhost:8090/api";
   private headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
+    'Authorization': 'Bearer ' + this.cookieService.get('jwt-token')
   });
   public getAllEmployees$: WritableSignal<Employee[]> = signal([]);
   getAllEmployeesSig = computed(() => this.getAllEmployees$);

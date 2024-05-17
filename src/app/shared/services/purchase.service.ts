@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable, WritableSignal, computed, inject, signal } from '@angular/core';
 import { Purchase } from '../models/purchase.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,11 @@ export class PurchaseService {
 
   constructor() { }
 
-  public http = inject(HttpClient);
+  http = inject(HttpClient);
+  cookieService = inject(CookieService);
   private url: string = "http://localhost:8090/api";
   private headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
+    'Authorization': 'Bearer ' + this.cookieService.get('jwt-token')
   });
   public getAllPurchases$: WritableSignal<Purchase[]> = signal([]);
   getAllPurchasesSig = computed(() => this.getAllPurchases$());

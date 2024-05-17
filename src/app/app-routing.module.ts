@@ -8,8 +8,8 @@ import { LoginClientPageComponent } from "./pages/security/room/login-client.pag
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
-  { path: 'sections', component: SectionPage, canActivate: ['authRoom'] },
+  // { path: '', component: HomePageComponent },
+  { path: '', component: SectionPage, canActivate: ['authRoom'] },
   { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom'] },
   { path: 'categories/:id/accommodations', component: AccommodationPage, canActivate: ['authRoom'] },
   { path: '', component: HomePageComponent, canActivate: ['authRoom'] },

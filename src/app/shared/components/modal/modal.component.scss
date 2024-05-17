@@ -20,21 +20,25 @@
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
+
   .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
+
     // border-bottom: 1px solid #ddd;
     .modal-header-content {
       width: 100%;
       display: flex;
       justify-content: center;
+
       h2 {
         color: #BD9E56;
         font-size: 48px;
       }
     }
+
     .close {
       font-size: 24px;
       color: #888;
@@ -45,10 +49,12 @@
       font-size: 58px;
       cursor: pointer;
     }
+
     .close:hover {
       color: #BD9E56;
     }
   }
+
   .modal-content {
     padding: 20px;
     overflow-y: auto;

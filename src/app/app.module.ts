@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreService } from './shared/services/core.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { SectionPage } from './pages/section/section-page';
@@ -19,7 +18,7 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { SectionComponent } from './shared/components/section/section.component';
 import { CategoryPage } from './pages/category/category-page';
 import { CategoryComponent } from './shared/components/category/category.component';
-import {AccommodationCardComponent } from './shared/components/accommodation-card/accommodation-card.component';
+import { AccommodationCardComponent } from './shared/components/accommodation-card/accommodation-card.component';
 import { AccommodationPage } from './pages/accommodation-page/accommodation-page.component';
 import { AccommodationComponent } from './shared/components/accommodation/accommodation.component';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
@@ -34,10 +33,10 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
     CarouselComponent,
     ModalComponent,
     HomePageComponent,
-
+    AccommodationPage,
     SectionComponent,
     CategoryComponent,
-
+    CategoryPage,
     AccommodationComponent,
     LoginEmployeeComponent,
   ],
@@ -56,7 +55,6 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
     AccommodationCardComponent,
   ],
   providers: [
-    CoreService,
     {
       provide: 'authRoom',
       useFactory: (service: AuthGuardService) => service.authRoom(),

@@ -2,6 +2,9 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable, WritableSignal, computed, inject, signal } from '@angular/core';
 import { Section } from '../models/section.model';
 import { Category } from '../models/category.model';
+import { Observable } from 'rxjs';
+import { CookieService } from "ngx-cookie-service";
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +13,17 @@ export class SectionService {
 
   constructor() { }
 
-  public http = inject(HttpClient);
+  http = inject(HttpClient);
+  cookieService = inject(CookieService);
   private url: string = "http://localhost:8090/api";
   private headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
+    'Authorization': 'Bearer ' + this.cookieService.get('jwt-token')
   });
   public getAllSections$: WritableSignal<Section[]> = signal([]);
   getAllSectionsSig = computed(() => this.getAllSections$());
   public getSectionById!: Section;
 
-   // Sections API - call vers le backend
+  // Sections API - call vers le backend
 
   // GET
   public getSections(): void {
@@ -30,7 +34,7 @@ export class SectionService {
       });
   }
 
-  public getById(id: number): void {
+  public getById(id: string): void {
     this.http.get<Section>(`${this.url}/sections/${id}`, { headers: this.headers })
       .subscribe({
         next: section => this.getSectionById = section,
@@ -38,12 +42,12 @@ export class SectionService {
       });
   }
 
-  public getCategoriesBySection(id: number): void {
-    this.http.get<Category[]>(`${this.url}/sections/${id}/categories`, { headers: this.headers })
-      .subscribe({
-        next: categories => console.log(categories),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching categories")
-      });
+  public getCategoriesBySection(id: string): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.url}/sections/${id}/categories`, { headers: this.headers })
+    // .subscribe({
+    //   next: categories => console.log(categories),
+    //   error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching categories")
+    // });
   }
 
   // CREATE

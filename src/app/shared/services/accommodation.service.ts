@@ -2,6 +2,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable, WritableSignal, computed, inject, signal } from '@angular/core';
 import { Accommodation } from '../models/accommodation.model';
 import { Category } from '../models/category.model';
+import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +12,11 @@ export class AccommodationService {
 
   constructor() { }
 
-  public http = inject(HttpClient);
+  http = inject(HttpClient);
+  cookieService = inject(CookieService);
   private url: string = "http://localhost:8090/api";
   private headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
+    'Authorization': 'Bearer ' + this.cookieService.get('jwt-token')
   });
   public getAllAccomodations$: WritableSignal<Accommodation[]> = signal([]);
   getAllAccomodations = computed(this.getAllAccomodations$);
@@ -38,6 +41,10 @@ export class AccommodationService {
         next: accommodation => this.getAccommodationById = accommodation,
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching accommodation whith id: " + id)
       });
+  }
+
+  public getAccommodationsByCategory(id: string): Observable<Accommodation[]> {
+    return this.http.get<Accommodation[]>(`${this.url}/categories/${id}/accommodations`, { headers: this.headers });
   }
 
   // CREATE
