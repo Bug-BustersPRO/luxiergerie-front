@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import { Observable, tap } from "rxjs";
 import { Section } from "../models/section.model";
 import { Category } from "../models/category.model";
 import { Accommodation } from "../models/accommodation.model";
@@ -54,8 +54,12 @@ export class CoreService {
     return this.httpClient.get(`${this.url}/categories`, { headers: this.headers });
   }
 
-  public getCategoryById(id: number): Observable<any> {
-    return this.httpClient.get(`${this.url}/categories/${id}`, { headers: this.headers });
+  public getCategoryById(id: string): Observable<Category> {
+    return this.httpClient.get<Category>(`${this.url}/categories/${id}`,{ headers: this.headers });
+  }
+
+  public getCategoryNameByAccommodation(accommodationId: string): Observable<any> {
+    return this.httpClient.get(`${this.url}/categories/accommodations/${accommodationId}/category`,{ headers: this.headers, observe: "response", responseType: 'text' });
   }
 
   public getAccommodationsByCategory(id: string): Observable<Accommodation[]> {

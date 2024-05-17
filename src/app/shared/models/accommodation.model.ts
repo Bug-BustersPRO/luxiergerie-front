@@ -7,12 +7,13 @@ export class Accommodation {
   public description: string;
   public image: string;
   public price: number;
-  public category: Category;
+  public category: any;
   public purchases: Purchase[];
   public reservable: boolean;
   public quantity: number = 0;
+  public priceToDisplay: string;
 
-  constructor(id: string, name: string, description: string, image: string, price: number, category: Category, purchases: Purchase[], reservable: boolean, quantity: number) {
+  constructor(id: string, name: string, description: string, image: string, price: number, category: any, purchases: Purchase[], reservable: boolean, quantity: number, priceToDisplay: string) {
     this.id = id;
     this.name = name;
     this.description = description;
@@ -22,5 +23,6 @@ export class Accommodation {
     this.purchases = purchases;
     this.reservable = reservable;
     this.quantity = quantity;
+    this.priceToDisplay = priceToDisplay;
   }
 }

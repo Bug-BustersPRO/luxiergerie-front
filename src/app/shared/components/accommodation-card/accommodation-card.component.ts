@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Accommodation } from '../../models/accommodation.model';
-import { CartFacade } from 'src/app/domains/cart-facade';
+import { CartService } from '../../services/cart.service';
 
 
 
@@ -15,17 +15,19 @@ import { CartFacade } from 'src/app/domains/cart-facade';
 export class AccommodationCardComponent {
   @Input() item!: Accommodation;
 
-  constructor(private cartFacade: CartFacade){}
+  constructor(private cartService: CartService){}
 
   addQuantity(): void {
-    this.cartFacade.addtoCart(this.item);
+    this.cartService.addtoCart(this.item);
+    const cat = this.cartService.getCategory(this.item);
+    console.log(cat);
   }
 
   lessQuantity(): number {
     if (this.item.quantity === 0) {
       return 0;
     }
-    this.cartFacade.removeItem(this.item);
+    this.cartService.removeItem(this.item);
     return this.item.quantity--;
   }
 
