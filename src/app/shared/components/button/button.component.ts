@@ -1,5 +1,5 @@
 import { CommonModule, Location } from '@angular/common';
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,6 +21,7 @@ export class ButtonComponent implements OnInit {
   backgroundPrimary: string = '#BD9E56';
   backgroundSecondary: string = '#8391AA';
   goToUrl: any = "";
+  disabled = input<boolean>(false);
    
   @Input() action: string = 'Confirmer';
 
