@@ -1,0 +1,14 @@
+<section *ngIf="showModal">
+  <div class="modal-background" (click)="closeModal()"></div>
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class="modal-header-content">
+        <h2>{{ title }}</h2>
+      </div>
+      <span class="close" (click)="closeModal()">&times;</span>
+    </div>
+    <div class="modal-content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</section>

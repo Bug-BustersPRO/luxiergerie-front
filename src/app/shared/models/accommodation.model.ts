@@ -9,8 +9,9 @@ export class Accommodation {
   public price: number;
   public category: Category;
   public purchases: Purchase[];
+  public reservable: boolean;
 
-  constructor(id: string, name: string, description: string, image: string, price: number, category: Category, purchases: Purchase[]) {
+  constructor(id: string, name: string, description: string, image: string, price: number, category: Category, purchases: Purchase[], reservable: boolean) {
     this.id = id;
     this.name = name;
     this.description = description;
@@ -18,5 +19,6 @@ export class Accommodation {
     this.price = price;
     this.category = category;
     this.purchases = purchases;
+    this.reservable = reservable;
   }
 }

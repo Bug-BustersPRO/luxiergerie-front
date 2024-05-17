@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Section } from '../../models/section.model';
 
 @Component({
   selector: 'app-card',
@@ -8,7 +7,7 @@ import { Section } from '../../models/section.model';
 })
 export class CardComponent {
 
-  constructor() { }
-@Input() card!: Section;
+constructor() {}
+@Input() item!: any;
 
 }
