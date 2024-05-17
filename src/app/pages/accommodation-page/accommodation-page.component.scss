@@ -1,0 +1,17 @@
+.section-global {
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    max-width: 628px;
+    padding-top: 100px;
+
+
+  .buttons {
+    justify-content: space-between;
+    list-style: none;
+    display: flex;
+    padding-top: 3rem;
+    width: 100%;
+  }
+}

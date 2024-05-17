@@ -1,65 +1,76 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-
+import { CommonModule, Location } from '@angular/common';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-button',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './button.component.html',
-  styleUrl: './button.component.scss'
+  styleUrl: './button.component.scss',
 })
 export class ButtonComponent implements OnInit {
+
   ngOnInit(): void {
     this.isActionned();
   }
-//availableAction: string[] = ["Confirmer","Précédent","Annuler","Suivant","Commander", "Fermer","Retour", "Réserver"]
 
-  text: string ="";
-  background: string ="";
-  @Input() action : string = "Confirmer";
+
+  text: string = '';
+  background: string = '';
+  backgroundPrimary: string = '#BD9E56';
+  backgroundSecondary: string = '#8391AA';
+  goToUrl: any = "";
+   
+  @Input() action: string = 'Confirmer';
+
+  router = inject(Router);
+  location = inject(Location);
 
   isActionned() {
-   switch (this.action) {
-    case 'précédent' : 
-      this.text = "Précédent";
-      this.background = "#8391AA";
+    switch (this.action) {
+      case 'précédent':
+        this.text = 'Précédent';
+        this.background = this.backgroundSecondary;
+        break;
+
+      case 'annuler':
+        this.text = 'Annuler';
+        this.background = this.backgroundSecondary;
+        break;
+
+      case 'commander':
+        this.text = 'Commander';
+        this.background = this.backgroundPrimary;
+       
+        break;
+
+      case 'fermer':
+        this.text = 'Fermer';
+        this.background = this.backgroundSecondary;
+        break;
+
+      case 'réserver':
+        this.text = 'Réserver';
+        this.background = this.backgroundPrimary;
+        break;
+
+      default:
+        this.text = 'Confirmer';
+        this.background = this.backgroundPrimary;
+       
+    }
+  }
+
+  navigateTo() {
+  switch (this.action) {
+    case 'confirmer' :
+      this.goToUrl = this.router.navigate(['/sections'])
       break
 
-    case 'annuler' :
-      this.text = "Annuler";
-      this.background = "#8391AA";
-      break
-     // au lieu de reprendre this.text partout prend action et algo uppercase 1ere lettre
-    case 'suivant' :
-      this.text = "Suivant";
-      this.background = "#BD9E56";
-      break
-     
-    case 'commander' :
-      this.text = "Commander";
-      this.background = "#BD9E56";
-      break
-
-    case 'fermer' :
-      this.text = "Fermer";
-      this.background = "#8391AA";
-      break
-      
-    case 'retour' :
-      this.text = "Retour";
-      this.background = "#8391AA";
-      break  
-
-    case 'réserver' :
-      this.text = "Réserver";
-      this.background = "#BD9E56";
-      break  
-
-     default: 
-      this.text = "Confirmer";
-      this.background = "#BD9E56";
-
-   }
+     case 'précédent':
+    this.goToUrl = this.location.back();
+        break; 
+  }
 }
 }
