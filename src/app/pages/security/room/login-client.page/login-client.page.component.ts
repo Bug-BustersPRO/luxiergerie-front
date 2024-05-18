@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   OnDestroy,
   Renderer2,
   ElementRef,
@@ -15,7 +14,7 @@ import * as Hammer from 'hammerjs';
   templateUrl: './login-client.page.component.html',
   styleUrls: ['./login-client.page.component.scss']
 })
-export class LoginClientPageComponent implements OnInit, OnDestroy, AfterViewInit {
+export class LoginClientPageComponent implements OnDestroy, AfterViewInit {
   startY = 0;
   arrowClass = '';
   hammer!: HammerManager;
@@ -29,9 +28,6 @@ export class LoginClientPageComponent implements OnInit, OnDestroy, AfterViewIni
     this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
     this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
     this.renderer.setStyle(document.body, 'background-position', 'center');
-  }
-
-  ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
@@ -55,7 +51,7 @@ export class LoginClientPageComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   initializeHammer(): void {
-    if (this.arrow && this.arrow.nativeElement) {
+    if (this.arrow.nativeElement) {
       this.hammer = new Hammer(this.arrow.nativeElement);
       this.hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
 

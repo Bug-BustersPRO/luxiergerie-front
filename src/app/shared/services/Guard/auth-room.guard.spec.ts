@@ -4,7 +4,7 @@ import { CanActivateFn } from '@angular/router';
 import { authRoomGuard } from './auth-room.guard';
 
 describe('authRoomGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
+  const executeGuard: CanActivateFn = (...guardParameters) =>
       TestBed.runInInjectionContext(() => authRoomGuard(...guardParameters));
 
   beforeEach(() => {
