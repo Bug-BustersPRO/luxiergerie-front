@@ -17,16 +17,33 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    const hotels = this.hotelService.getHotels().subscribe({
+    this.getHotels();
+    this.getHotelImage(this.hotel.id)
+    console.log(this.hotel.id)
+  }
+
+  getHotels(): void {
+    this.hotelService.getHotels().subscribe({
       next: response => {
-        console.log(response)
-        this.hotel = response;
+        this.hotel = response[0];
+        console.log(this.hotel)
       },
       error: (error) => {
         console.error(error);
       }
     });
-    console.log(hotels)
+  }
+
+  // FIX ME
+  getHotelImage(hotel_id: string): void {
+    this.hotelService.getHotelImage(hotel_id).subscribe({
+      next: response => {
+        console.log(response)
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    })
   }
 
   navigateTo(route: string): void {
