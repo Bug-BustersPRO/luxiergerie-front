@@ -6,6 +6,7 @@ import { CategoryPage } from './pages/category/category-page';
 import { AccommodationPage } from './pages/accommodation-page/accommodation-page.component';
 import { LoginClientPageComponent } from "./pages/security/room/login-client.page/login-client.page.component";
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
+import { ConfigHotelComponent } from './pages/config-hotel/config-hotel.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'sections', component: SectionPage, canActivate: ['authRoom'] },
   { path: 'login/room', component: LoginClientPageComponent, canActivate: ['authRoom'] },
   { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom'] },
-  { path: 'login/employee', component: LoginEmployeeComponent, canActivate: ['authEmployee']}
+  { path: 'login/employee', component: LoginEmployeeComponent, canActivate: ['authEmployee'] },
+  { path: 'config-hotel', component: ConfigHotelComponent}
 ];
 
 @NgModule({

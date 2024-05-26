@@ -23,11 +23,11 @@ export class NavbarComponent implements OnInit {
   }
 
   async getHotels() {
-    await this.hotelService.getHotels().subscribe({
+    await this.hotelService.getHotel().subscribe({
       next: response => {
         this.hotel = response[0];
         this.applyColors(this.hotel.colors);
-        this.getHotelImage(this.hotel.id)
+        this.getHotelImage();
       },
       error: (error) => {
         console.error(error);
@@ -35,8 +35,8 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  getHotelImage(hotelId: string): void {
-    this.hotelService.getHotelImage(hotelId).subscribe({
+  getHotelImage(): void {
+    this.hotelService.getHotelImage().subscribe({
       next: (response) => {
         const reader = new FileReader();
         reader.readAsDataURL(response);

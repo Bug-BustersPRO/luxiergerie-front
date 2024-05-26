@@ -31,7 +31,7 @@
       display: flex;
       justify-content: center;
       h2 {
-        color: #BD9E56;
+        color: var(--primary-background-color);
         font-size: 48px;
       }
     }
@@ -46,7 +46,7 @@
       cursor: pointer;
     }
     .close:hover {
-      color: #BD9E56;
+      color: var(--primary-background-color);
     }
   }
   .modal-content {

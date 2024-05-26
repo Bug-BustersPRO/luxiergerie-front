@@ -17,16 +17,12 @@ export class HotelService {
 
   constructor() { }
 
-  public getHotels(): Observable<any> {
+  public getHotel(): Observable<any> {
     return this.httpClient.get(`${this.url}/hotel`, { headers: this.headers });
   }
 
-  public getHotelImage(id: string): Observable<Blob> {
-    return this.httpClient.get(`${this.url}/hotel/${id}/image`, { headers: this.headers, responseType: 'blob' })
-  }
-
-  public getHotelById(id: number): Observable<any> {
-    return this.httpClient.get(`${this.url}/hotel/${id}`, { headers: this.headers });
+  public getHotelImage(): Observable<Blob> {
+    return this.httpClient.get(`${this.url}/hotel/image`, { headers: this.headers, responseType: 'blob' })
   }
 
   public createHotel(): Observable<any> {
