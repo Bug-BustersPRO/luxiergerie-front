@@ -13,20 +13,21 @@ import { HotelService } from 'src/app/shared/services/hotel.service';
 export class NavbarComponent implements OnInit {
 
   hotelService = inject(HotelService);
-  public hotel!: Hotel;
+  public hotel: Hotel = {} as Hotel;
+  public hotelImageUrl!: string;
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.getHotels();
-    this.getHotelImage(this.hotel.id)
-    console.log(this.hotel.id)
   }
 
-  getHotels(): void {
-    this.hotelService.getHotels().subscribe({
+  async getHotels() {
+    await this.hotelService.getHotels().subscribe({
       next: response => {
         this.hotel = response[0];
-        console.log(this.hotel)
+        this.applyColors(this.hotel.colors);
+        this.getHotelImage(this.hotel.id)
       },
       error: (error) => {
         console.error(error);
@@ -34,16 +35,25 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  // FIX ME
-  getHotelImage(hotel_id: string): void {
-    this.hotelService.getHotelImage(hotel_id).subscribe({
-      next: response => {
-        console.log(response)
+  getHotelImage(hotelId: string): void {
+    this.hotelService.getHotelImage(hotelId).subscribe({
+      next: (response) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(response);
+        reader.onloadend = () => {
+          this.hotelImageUrl = reader.result as string;
+        };
       },
-      error: (error) => {
-        console.error(error)
+      error: error => {
+        console.error(error);
       }
-    })
+    });
+  }
+
+  applyColors(colors: string[]): void {
+    document.documentElement.style.setProperty('--primary-background-color', colors[0]);
+    document.documentElement.style.setProperty('--secondary-background-color', colors[1]);
+    document.documentElement.style.setProperty('--tertiary-background-color', colors[2]);
   }
 
   navigateTo(route: string): void {
