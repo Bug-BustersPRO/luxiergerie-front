@@ -130,5 +130,27 @@
       margin-top: 50px;
       gap: 30px;
     }
+
+    .config-confirmation {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 40px;
+
+      .confirmation-text {
+        display: flex;
+        align-items: center;
+        margin-bottom: 45px;
+
+        img{
+          width: 80px;
+          height: 80px;
+        }
+
+        .confirmation-colors{
+          display: flex;
+          padding-left: 12px;
+        }
+      }
+    }
   }
 }

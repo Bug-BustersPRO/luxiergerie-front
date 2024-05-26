@@ -90,9 +90,33 @@
         </div>
       }
       @case ('confirmation') {
-
+        <div class="steps">
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+        </div>
+        <div class="config-body">
+          <h2>Voici le compte rendu de configuration : </h2>
+        </div>
+        <div class="config-confirmation">
+          <div class="confirmation-text">
+            Nom : {{hotel.name}}
+          </div>
+          <div class="confirmation-text">
+            Logo : <img [src]="imageUrl" alt="">
+          </div>
+          <div class="confirmation-text">
+            Couleurs choisies :
+            <div *ngFor="let color of hotel.colors" class="confirmation-colors">{{color}}</div>
+          </div>
+        </div>
+        <div class="config-button">
+          <button (click)="goToColors()">Retour</button>
+          <button (click)="setHotelConfiguration()">Valider</button>
+        </div>
       }
     }
   </div>
-
 </section>
