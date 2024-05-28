@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
 
@@ -14,6 +16,7 @@ import { HotelService } from 'src/app/shared/services/hotel.service';
 export class ConfigHotelComponent implements OnInit {
 
   hotelService = inject(HotelService);
+  router = inject(Router)
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
   public steps: string[] = ['name', 'image', 'colors', 'confirmation'];
   public currentStep: string = 'name';
@@ -97,16 +100,31 @@ export class ConfigHotelComponent implements OnInit {
     console.log(this.hotel);
   }
 
-  //TODO
-  setHotelConfiguration() {
+  createHotel(): Observable<any> {
+    const formData = new FormData();
+    formData.append('name', this.hotel.name);
+    if (this.hotel.image) {
+      formData.append('image', this.hotel.image[0]);
+    }
+    this.hotel.colors.forEach((color) => {
+      formData.append(`colors`, color);
+    });
 
-    // const formData = new FormData();
-    // formData.append('name', this.hotel.name);
-    // if (this.hotel.image) {
-    //   formData.append('image', this.hotel.image[0]);
-    // }
-    // this.hotel.colors.forEach((color, index) => {
-    //   formData.append(`colors[${index}]`, color);
-    // });
+    return this.hotelService.createHotel(formData);
+  }
+
+  submitHotel(): void {
+    this.createHotel().subscribe(
+      {
+        next: response => {
+          console.log('Hôtel créé avec succès :', response);
+          this.router.navigate(['/sections'])
+        },
+        error: error => {
+          console.error('Erreur lors de la création de l\'hôtel :', error);
+          window.location.reload;
+        }
+      }
+    );
   }
 }

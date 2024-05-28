@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +25,14 @@ export class HotelService {
     return this.httpClient.get(`${this.url}/hotel/image`, { headers: this.headers, responseType: 'blob' })
   }
 
-  public createHotel(): Observable<any> {
-    return this.httpClient.post(`${this.url}/hotel`, { headers: this.headers });
+  public createHotel(formData: any): Observable<any> {
+    return this.httpClient.post(`${this.url}/hotel`, formData, { headers: this.headers });
+  }
+
+  public hasHotel(): Observable<boolean> {
+    return this.httpClient.get<any[]>(this.url).pipe(
+      map((hotels: any[]) => hotels.length > 0)
+    );
   }
 
 }
