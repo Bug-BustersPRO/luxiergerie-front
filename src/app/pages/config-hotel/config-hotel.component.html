@@ -12,6 +12,8 @@
           <div class="step-round"></div>
           <div class="step-line"></div>
           <div class="step-round"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
         </div>
         <div class="config-body">
           <h2>Veuillez choisir un nom pour l'hôtel :</h2>
@@ -28,6 +30,8 @@
           <div class="step-round-checked"></div>
           <div class="step-line"></div>
           <div class="step-round"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
         </div>
         <div class="config-body">
           <h2>Ajoutez le logo de l'hôtel :</h2>
@@ -38,6 +42,9 @@
         </div>
         <div *ngIf="fileName" class="file-name">
           Fichier ajouté : {{fileName}}
+        </div>
+        <div *ngIf="hotel.image.length > 0" class="config-image">
+          <img [src]="imageUrl" alt="">
         </div>
         <div class="config-button">
           <button (click)="goToTitle()">Retour</button>
@@ -50,6 +57,8 @@
           <div class="step-line-checked"></div>
           <div class="step-round-checked"></div>
           <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+          <div class="step-line"></div>
           <div class="step-round"></div>
         </div>
         <div class="config-body">
@@ -59,27 +68,21 @@
               <p>Couleur principale</p>
               <div class="color-hex">
                 <input type="color" [(ngModel)]="firstSelectedColor" (change)="onColorSelectedFirst($event)" class="color-input" />
-                <div *ngIf="firstSelectedColor">
-                  {{ firstSelectedColor }}
-                </div>
+                <input type="text" [(ngModel)]="firstSelectedColor">
               </div>
             </div>
             <div class="colors-container">
               <p>Couleur secondaire</p>
               <div class="color-hex">
                 <input type="color" [(ngModel)]="secondSelectedColor" (change)="onColorSelectedSecond($event)" class="color-input" />
-                <div *ngIf="secondSelectedColor">
-                  {{ secondSelectedColor }}
-                </div>
+                <input type="text" [(ngModel)]="secondSelectedColor">
               </div>
             </div>
             <div class="colors-container">
               <p>Couleur tertiaire</p>
               <div class="color-hex">
                 <input type="color" [(ngModel)]="thirdSelectedColor" (change)="onColorSelectedThird($event)" class="color-input" />
-                <div *ngIf="thirdSelectedColor">
-                  {{ thirdSelectedColor }}
-                </div>
+                <input type="text" [(ngModel)]="thirdSelectedColor">
               </div>
             </div>
           </div>
@@ -91,6 +94,8 @@
       }
       @case ('confirmation') {
         <div class="steps">
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
           <div class="step-round-checked"></div>
           <div class="step-line-checked"></div>
           <div class="step-round-checked"></div>

@@ -9,15 +9,20 @@ import { HotelService } from '../hotel.service';
 })
 export class ConfigHotelGuard {
 
-  constructor(private hotelService: HotelService, private router: Router) {}
+  constructor(private hotelService: HotelService, private router: Router) { }
 
   public configHotel(): CanActivateFn {
-    return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
-      return this.hotelService.hasHotel().pipe(
-        map((hasHotel: boolean) => {
-          if (hasHotel) {
+    return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> => {
+      return this.hotelService.getHotel().pipe(
+        map((hotels: any[]) => {
+          if (hotels.length === 0 && !state.url.includes('/config-hotel')) {
             this.router.navigate(['/config-hotel']);
             return false;
+          } else if (hotels.length > 0) {
+            if (state.url.includes('/config-hotel')) {
+              this.router.navigate(['/sections']);
+              return false;
+            }
           }
           return true;
         })

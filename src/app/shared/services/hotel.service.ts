@@ -10,7 +10,7 @@ export class HotelService {
 
   cookieService = inject(CookieService);
   httpClient = inject(HttpClient)
-  private url: string = "http://localhost:8090/api";
+  private url: string = "http://localhost:8090/api/hotel";
   private headers = new HttpHeaders({
     'Authorization': 'Bearer ' + this.cookieService.get('jwt-token')
   });
@@ -18,21 +18,15 @@ export class HotelService {
   constructor() { }
 
   public getHotel(): Observable<any> {
-    return this.httpClient.get(`${this.url}/hotel`, { headers: this.headers });
+    return this.httpClient.get(`${this.url}`, { headers: this.headers });
   }
 
   public getHotelImage(): Observable<Blob> {
-    return this.httpClient.get(`${this.url}/hotel/image`, { headers: this.headers, responseType: 'blob' })
+    return this.httpClient.get(`${this.url}/image`, { headers: this.headers, responseType: 'blob' })
   }
 
   public createHotel(formData: any): Observable<any> {
-    return this.httpClient.post(`${this.url}/hotel`, formData, { headers: this.headers });
-  }
-
-  public hasHotel(): Observable<boolean> {
-    return this.httpClient.get<any[]>(this.url).pipe(
-      map((hotels: any[]) => hotels.length > 0)
-    );
+    return this.httpClient.post(`${this.url}`, formData, { headers: this.headers });
   }
 
 }
