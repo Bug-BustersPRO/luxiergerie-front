@@ -10,7 +10,7 @@ import { ConfigHotelComponent } from './pages/config-hotel/config-hotel.componen
 
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent, canActivate: ['configHotel']},
+  { path: '', component: HomePageComponent, canActivate: ['authRoom']},
   { path: 'sections', component: SectionPage, canActivate: ['authRoom', 'configHotel'] },
   { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom', 'configHotel'] },
   { path: 'categories/:id/accommodations', component: AccommodationPage, canActivate: ['authRoom', 'configHotel'] },

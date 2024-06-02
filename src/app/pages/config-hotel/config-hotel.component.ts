@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -15,8 +15,6 @@ import { HotelService } from 'src/app/shared/services/hotel.service';
 })
 export class ConfigHotelComponent implements OnInit {
 
-  hotelService = inject(HotelService);
-  router = inject(Router)
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
   public steps: string[] = ['name', 'image', 'colors', 'confirmation'];
   public currentStep: string = 'name';
@@ -27,7 +25,7 @@ export class ConfigHotelComponent implements OnInit {
   public secondSelectedColor: string = '#000000';
   public thirdSelectedColor: string = '#000000';
 
-  constructor(private cdRef: ChangeDetectorRef) {
+  constructor(private cdRef: ChangeDetectorRef, private hotelService: HotelService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -67,9 +65,6 @@ export class ConfigHotelComponent implements OnInit {
       this.fileName = file.name;
       this.hotel.image.push(file);
 
-      console.log(this.hotel);
-      console.log('Selected file:', file);
-
       const reader = new FileReader();
       reader.onload = (e) => {
         this.imageUrl = reader.result;
@@ -83,21 +78,18 @@ export class ConfigHotelComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     this.firstSelectedColor = input.value;
     this.hotel.colors[0] = input.value;
-    console.log(this.hotel);
   }
 
   onColorSelectedSecond(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.secondSelectedColor = input.value;
     this.hotel.colors[1] = input.value;
-    console.log(this.hotel);
   }
 
   onColorSelectedThird(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.thirdSelectedColor = input.value;
     this.hotel.colors[2] = input.value;
-    console.log(this.hotel);
   }
 
   createHotel(): Observable<any> {

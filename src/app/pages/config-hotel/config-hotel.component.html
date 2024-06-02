@@ -68,21 +68,21 @@
               <p>Couleur principale</p>
               <div class="color-hex">
                 <input type="color" [(ngModel)]="firstSelectedColor" (change)="onColorSelectedFirst($event)" class="color-input" />
-                <input type="text" [(ngModel)]="firstSelectedColor">
+                <input type="text" [(ngModel)]="firstSelectedColor" class="text-input">
               </div>
             </div>
             <div class="colors-container">
               <p>Couleur secondaire</p>
               <div class="color-hex">
                 <input type="color" [(ngModel)]="secondSelectedColor" (change)="onColorSelectedSecond($event)" class="color-input" />
-                <input type="text" [(ngModel)]="secondSelectedColor">
+                <input type="text" [(ngModel)]="secondSelectedColor" class="text-input">
               </div>
             </div>
             <div class="colors-container">
               <p>Couleur tertiaire</p>
               <div class="color-hex">
                 <input type="color" [(ngModel)]="thirdSelectedColor" (change)="onColorSelectedThird($event)" class="color-input" />
-                <input type="text" [(ngModel)]="thirdSelectedColor">
+                <input type="text" [(ngModel)]="thirdSelectedColor" class="text-input">
               </div>
             </div>
           </div>
@@ -107,14 +107,16 @@
         </div>
         <div class="config-confirmation">
           <div class="confirmation-text">
-            Nom : {{hotel.name}}
+            <h4>Nom : </h4>  {{hotel.name}}
           </div>
           <div class="confirmation-text">
-            Logo : <img [src]="imageUrl" alt="">
+            <h4>Logo : </h4>  <img [src]="imageUrl" alt="">
           </div>
           <div class="confirmation-text">
-            Couleurs choisies :
-            <div *ngFor="let color of hotel.colors" class="confirmation-colors">{{color}}</div>
+            <h4>Couleurs choisies : </h4>
+            <div *ngFor="let color of hotel.colors" class="confirmation-colors">
+              <input type="color" [ngModel]="([color])" disabled class="color-input">  {{color}}
+            </div>
           </div>
         </div>
         <div class="config-button">

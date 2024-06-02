@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
@@ -11,12 +11,10 @@ import { HotelService } from 'src/app/shared/services/hotel.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
-  hotelService = inject(HotelService);
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private hotelService: HotelService) { }
 
   ngOnInit(): void {
     this.getHotels();
@@ -26,8 +24,10 @@ export class NavbarComponent implements OnInit {
     await this.hotelService.getHotel().subscribe({
       next: response => {
         this.hotel = response[0];
-        this.applyColors(this.hotel.colors);
-        this.getHotelImage();
+        if (this.hotel !== undefined && this.hotel !== null) {
+          this.applyColors(this.hotel?.colors);
+          this.getHotelImage();
+        }
       },
       error: (error) => {
         console.error(error);
