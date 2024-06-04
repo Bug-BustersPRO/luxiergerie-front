@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { CartFacade } from 'src/app/domains/cart-facade';
 import { Accommodation } from '../../models/accommodation.model';
 import { Category } from '../../models/category.model';
-import { CoreService } from '../../services/core.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,20 +13,18 @@ export class CartComponent {
   item!: Accommodation;
   category!: Category;
   categoryName!: string;
+  categories: Category[] = this.cartService.categories;
 
-constructor(private cartFacade: CartFacade, private coreService: CoreService){}
+
+constructor(private cartService: CartService){}
 
 ngOnInit() {
   this.loadCart;
-  this.items = this.getItems();
-}
+  this.items = this.cartService.getItems();}
 
 isItemInCart(item: Accommodation): void {
 }
 
-getItems() {
-  return this.items;
-}
 
 loadCart(): void {
   const cartItems = localStorage.getItem('cart_items');

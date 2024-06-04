@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Accommodation } from '../models/accommodation.model';
 import { Category } from '../models/category.model';
 import { CoreService } from './core.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,22 +12,26 @@ export class CartService {
 items: Accommodation[] = [];
 category!: Category;
 categoryName!: string;
+categories: Category[] = [];
 
 
   constructor(private coreService: CoreService) { }
 
   addtoCart(addedItem: Accommodation): void {
+    this.getCategory(addedItem).subscribe((categoryName: string) => {
+      addedItem.category = categoryName;
+      this.saveCategories(addedItem);
     const intemInCart = this.items.find(item => item.id === addedItem.id)
     if (!intemInCart) {
     this.items.push(addedItem);
-    console.log(this.items);
-    console.log(this.items[0].category);
     addedItem.quantity = 1;
 
     } else {
       intemInCart.quantity++;
     }
-    this.saveCart();
+      this.saveCart();
+  });
+
   }
 
   removeItem(item: Accommodation): void {
@@ -38,15 +43,28 @@ categoryName!: string;
     }
   }
 
+  getItems() {
+    return this.items;
+  }
+
   saveCart(): void {
     localStorage.setItem('cart_items', JSON.stringify(this.items));
     }
 
+  saveCategories(addedItem: Accommodation): void {
+    if(!this.categories.some(cat => cat.id === addedItem.category.id)){
+    this.categories.push(addedItem.category)
+    }
+  }
 
-getCategory(addedItem: Accommodation): void {
-  this.coreService.getCategoryNameByAccommodation(addedItem.id).subscribe((categoryName) =>
-   this.categoryName = categoryName.body)
-  console.log(this.categoryName)
-  console.log(addedItem.id)
-}
+
+    getCategory(addedItem: Accommodation): Observable<string> {
+      return new Observable<string>((observer) => {
+        this.coreService.getCategoryNameByAccommodation(addedItem.id)
+          .subscribe((categoryName) => {
+            observer.next(categoryName.body);
+            observer.complete();
+          });
+      });
+    }
 }

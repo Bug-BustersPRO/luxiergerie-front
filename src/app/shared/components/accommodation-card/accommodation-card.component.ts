@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, ViewChild } from '@angular/core';
 import { Accommodation } from '../../models/accommodation.model';
 import { CartService } from '../../services/cart.service';
+import { Category } from '../../models/category.model';
 
 
 
@@ -19,8 +20,7 @@ export class AccommodationCardComponent {
 
   addQuantity(): void {
     this.cartService.addtoCart(this.item);
-    const cat = this.cartService.getCategory(this.item);
-    console.log(cat);
+    this.cartService.getItems;
   }
 
   lessQuantity(): number {
