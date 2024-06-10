@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
@@ -105,16 +106,15 @@ export class ConfigHotelComponent implements OnInit {
     return this.hotelService.createHotel(formData);
   }
 
-  submitHotel(): void {
+  submitHotel() {
     this.createHotel().subscribe(
       {
         next: response => {
           console.log('Hôtel créé avec succès :', response);
-          this.router.navigate(['/sections'])
+          this.router.navigate(['/sections']);
         },
         error: error => {
           console.error('Erreur lors de la création de l\'hôtel :', error);
-          window.location.reload;
         }
       }
     );

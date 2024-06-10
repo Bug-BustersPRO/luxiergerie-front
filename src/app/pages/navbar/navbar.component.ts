@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
 
@@ -14,25 +15,29 @@ export class NavbarComponent implements OnInit {
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
 
-  constructor(private router: Router, private hotelService: HotelService) { }
+  constructor(private router: Router, private hotelService: HotelService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.getHotels();
   }
 
-  async getHotels() {
-    await this.hotelService.getHotel().subscribe({
-      next: response => {
-        this.hotel = response[0];
-        if (this.hotel !== undefined && this.hotel !== null) {
-          this.applyColors(this.hotel?.colors);
-          this.getHotelImage();
+  getHotels() {
+    const cookie = this.cookieService.get('jwt-token');
+    if (cookie !== '') {
+      this.hotelService.getHotel().subscribe({
+        next: response => {
+          this.hotel = response[0];
+          if (this.hotel !== undefined && this.hotel !== null) {
+            this.applyColors(this.hotel?.colors);
+            this.getHotelImage();
+          }
+        },
+        error: (error) => {
+          console.error(error);
         }
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
+      });
+    }
+
   }
 
   getHotelImage(): void {

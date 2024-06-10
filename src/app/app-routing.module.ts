@@ -10,15 +10,14 @@ import { ConfigHotelComponent } from './pages/config-hotel/config-hotel.componen
 
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent, canActivate: ['authRoom']},
-  { path: 'sections', component: SectionPage, canActivate: ['authRoom', 'configHotel'] },
-  { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom', 'configHotel'] },
-  { path: 'categories/:id/accommodations', component: AccommodationPage, canActivate: ['authRoom', 'configHotel'] },
-  { path: '', component: HomePageComponent, canActivate: ['authRoom', 'configHotel'] },
-  { path: 'login/room', component: LoginClientPageComponent, canActivate: ['authRoom', 'configHotel'] },
-  { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom', 'configHotel'] },
-  { path: 'login/employee', component: LoginEmployeeComponent, canActivate: ['authEmployee'] },
-  { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['configHotel']}
+  { path: '', component: HomePageComponent, canActivate: ['authRoom', 'authEmployee']},
+  { path: 'sections', component: SectionPage, canActivate: ['authRoom', 'authEmployee'] },
+  { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom', 'authEmployee'] },
+  { path: 'categories/:id/accommodations', component: AccommodationPage, canActivate: ['authRoom','authEmployee'] },
+  { path: 'login/room', component: LoginClientPageComponent },
+  { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom','authEmployee'] },
+  { path: 'login/employee', component: LoginEmployeeComponent },
+  { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel']}
 ];
 
 @NgModule({
