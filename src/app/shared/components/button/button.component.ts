@@ -15,7 +15,6 @@ export class ButtonComponent implements OnInit {
     this.isActionned();
   }
 
-
   text: string = '';
   background: string = '';
   backgroundPrimary: string = '#BD9E56';
@@ -43,7 +42,6 @@ export class ButtonComponent implements OnInit {
       case 'commander':
         this.text = 'Commander';
         this.background = this.backgroundPrimary;
-       
         break;
 
       case 'fermer':
@@ -58,8 +56,7 @@ export class ButtonComponent implements OnInit {
 
       default:
         this.text = 'Confirmer';
-        this.background = this.backgroundPrimary;
-       
+        this.background = this.backgroundPrimary; 
     }
   }
 
