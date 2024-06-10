@@ -1,0 +1,18 @@
+@import "../../../../styles.scss";
+  
+  .button {
+    text-decoration: none;
+    border: none;
+    background-color: $primary-background-color;
+    border-radius: 3px;
+    height: 40px;
+    width: 148px;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 8.8px;
+    text-align: center;   
+  }
+
+  p {
+    margin : 0;
+    font-size: 14px;
+  }
