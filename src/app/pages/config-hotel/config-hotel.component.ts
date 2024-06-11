@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
@@ -25,6 +24,12 @@ export class ConfigHotelComponent implements OnInit {
   public firstSelectedColor: string = '#000000';
   public secondSelectedColor: string = '#000000';
   public thirdSelectedColor: string = '#000000';
+  public recommandedColors: any =
+    [
+      { name: 'Option 1', value: ['#F8F8F8', '#D4AF37', '#2C3E50'] },
+      { name: 'Option 2', value: ['#F5F5DC', '#FFFFFF', '#2ECC71'] },
+      { name: 'Option 3', value: ['#34495E', '#ECF0F1', '#AED6F1'] },
+    ]
 
   constructor(private cdRef: ChangeDetectorRef, private hotelService: HotelService, private router: Router) {
   }
@@ -93,6 +98,15 @@ export class ConfigHotelComponent implements OnInit {
     this.hotel.colors[2] = input.value;
   }
 
+  setRecommandedColors(index: number): void {
+    this.firstSelectedColor = this.recommandedColors[index].value[0];
+    this.secondSelectedColor = this.recommandedColors[index].value[1];
+    this.thirdSelectedColor = this.recommandedColors[index].value[2];
+    this.hotel.colors[0] = this.firstSelectedColor;
+    this.hotel.colors[1] = this.secondSelectedColor;
+    this.hotel.colors[2] = this.thirdSelectedColor;
+  }
+
   createHotel(): Observable<any> {
     const formData = new FormData();
     formData.append('name', this.hotel.name);
@@ -110,7 +124,6 @@ export class ConfigHotelComponent implements OnInit {
     this.createHotel().subscribe(
       {
         next: response => {
-          console.log('Hôtel créé avec succès :', response);
           this.router.navigate(['/sections']);
         },
         error: error => {

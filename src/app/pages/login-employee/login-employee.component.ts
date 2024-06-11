@@ -21,7 +21,6 @@ export class LoginEmployeeComponent {
     this.loginEmployee.password = this.password;
     this.authService.login(this.loginEmployee).subscribe({
       next: response => {
-        console.log(response)
         if (response.status === 200) {
           this.router.navigate(['/config-hotel']);
         }

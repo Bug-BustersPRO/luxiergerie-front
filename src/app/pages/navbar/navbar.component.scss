@@ -51,6 +51,7 @@ nav {
       text-align: center;
       font-size: 32px;
       line-height: 85%;
+      color: var(--tertiary-background-color);
       filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
     }
   }
@@ -68,6 +69,7 @@ nav {
     .guest-name {
       font-size: 24px;
       font-weight: 600;
+      color: var(--tertiary-background-color);
       filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
     }
   }
@@ -76,6 +78,7 @@ nav {
     position: absolute;
     right: 8%;
     top: 105px;
+    color: var(--tertiary-background-color);
     font-size: 15px;
   }
 }
@@ -112,11 +115,12 @@ input {
   cursor: pointer;
   top: 15px;
   left: 25px;
+
 }
 
 .material-icons.md-36 {
   font-size: 30px;
-  color: var(--primary-background-color);
+  color: var(--tertiary-background-color);
   padding: 1px;
 }
 

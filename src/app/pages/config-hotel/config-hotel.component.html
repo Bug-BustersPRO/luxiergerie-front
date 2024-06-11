@@ -86,6 +86,16 @@
               </div>
             </div>
           </div>
+          <div class="recommanded-colors">
+            <div class="colors-choice">
+              <p>Couleurs prédéfinis</p>
+              <div class="colors-btn">
+                @for (colors of recommandedColors; track $index) {
+                <button (click)="setRecommandedColors($index)">{{colors.name}}</button>
+              }
+              </div>
+            </div>
+          </div>
         </div>
         <div class="config-button">
           <button (click)="goToImage()">Retour</button>
