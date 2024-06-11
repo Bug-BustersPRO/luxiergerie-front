@@ -27,6 +27,7 @@ import { AccommodationComponent } from './shared/components/accommodation/accomm
 import { AccommodationFacade } from './domains/accommodation-facade';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
 import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
+import { ButtonComponent } from './shared/components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
     NavbarComponent,
     FormsModule,
     AccommodationCardComponent,
+    ButtonComponent
   ],
   providers: [
     CoreService,

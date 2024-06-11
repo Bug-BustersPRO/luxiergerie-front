@@ -25,6 +25,10 @@ $tertiary-background-color: #642424;
   box-sizing: border-box;
 }
 
+button {
+  cursor: pointer;
+}
+
 body {
   display: block;
   height: 100vh;
