@@ -3,13 +3,14 @@ import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@an
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
 
 @Component({
   selector: 'app-config-hotel',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ButtonComponent],
   templateUrl: './config-hotel.component.html',
   styleUrl: './config-hotel.component.scss'
 })

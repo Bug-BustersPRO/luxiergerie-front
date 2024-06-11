@@ -19,8 +19,8 @@
           <h2>Veuillez choisir un nom pour l'hôtel :</h2>
           <input type="text" [(ngModel)]="hotel.name" class="hotel-name" placeholder="Veuillez saisir un nom" required>
         </div>
-        <div class="config-button">
-          <button (click)="goToImage()" [disabled]="hotel.name === ''">Suivant</button>
+        <div class="config-button" *ngIf="hotel.name !== ''">
+          <app-button (click)="goToImage()" [disabled]="hotel.name === ''" action="suivant"/>
         </div>
       }
       @case ('image') {
@@ -47,8 +47,8 @@
           <img [src]="imageUrl" alt="">
         </div>
         <div class="config-button">
-          <button (click)="goToTitle()">Retour</button>
-          <button (click)="goToColors()" [disabled]="hotel.image.length === 0">Suivant</button>
+          <app-button (click)="goToTitle()" action="retour"/>
+          <app-button (click)="goToColors()" [disabled]="hotel.image.length === 0" *ngIf="hotel.image.length" action="suivant"/>
         </div>
       }
       @case ('colors') {
@@ -98,8 +98,8 @@
           </div>
         </div>
         <div class="config-button">
-          <button (click)="goToImage()">Retour</button>
-          <button (click)="goToConfirmation()" [disabled]="hotel.image.length === 0">Suivant</button>
+          <app-button (click)="goToImage()" action="retour"/>
+          <app-button (click)="goToConfirmation()" [disabled]="hotel.colors.length === 0" *ngIf="hotel.colors.length " action="suivant"/>
         </div>
       }
       @case ('confirmation') {
@@ -130,8 +130,8 @@
           </div>
         </div>
         <div class="config-button">
-          <button (click)="goToColors()">Retour</button>
-          <button (click)="submitHotel()">Valider</button>
+          <app-button (click)="goToColors()" action="retour"/>
+          <app-button (click)="submitHotel()" action="valider"/>
         </div>
       }
     }
