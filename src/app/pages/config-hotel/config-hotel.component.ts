@@ -31,6 +31,9 @@ export class ConfigHotelComponent implements OnInit {
       { name: 'Option 2', value: ['#F5F5DC', '#FFFFFF', '#2ECC71'] },
       { name: 'Option 3', value: ['#34495E', '#ECF0F1', '#AED6F1'] },
     ]
+  public isFileError: boolean = false;
+  public filesExtension = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+  public errorMessage!: string;
 
   constructor(private cdRef: ChangeDetectorRef, private hotelService: HotelService, private router: Router) {
   }
@@ -68,7 +71,19 @@ export class ConfigHotelComponent implements OnInit {
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
+      if (input.files[0].size > 1000000) {
+        this.isFileError = true;
+        this.errorMessage = 'La taille du fichier doit être inférieure à 1 Mo';
+        return;
+      }
+      if (!this.filesExtension.includes(input.files[0].type)) {
+        this.errorMessage = 'Le format du fichier doit être de type: png, jpg, jpeg ou gif';
+        this.isFileError = true;
+        return;
+      }
+
       const file = input.files[0];
+      this.isFileError = false;
       this.fileName = file.name;
       this.hotel.image.push(file);
 

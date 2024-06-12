@@ -35,7 +35,7 @@
         </div>
         <div class="config-body">
           <h2>Ajoutez le logo de l'hôtel :</h2>
-          <div class="add-button" (click)="selectFile()">
+          <div class="add-button" (click)="selectFile()" title="Ajouter" >
             <span class="button-icon">+</span>
           </div>
           <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;"/>
@@ -43,8 +43,11 @@
         <div *ngIf="fileName" class="file-name">
           Fichier ajouté : {{fileName}}
         </div>
+        <div *ngIf="isFileError">
+          <p class="error">{{errorMessage}}</p>
+        </div>
         <div *ngIf="hotel.image.length > 0" class="config-image">
-          <img [src]="imageUrl" alt="">
+          <img [src]="imageUrl" alt="" width="115px">
         </div>
         <div class="config-button">
           <app-button (click)="goToTitle()" action="retour"/>
@@ -120,7 +123,7 @@
             <h4>Nom : </h4>  {{hotel.name}}
           </div>
           <div class="confirmation-text">
-            <h4>Logo : </h4>  <img [src]="imageUrl" alt="">
+            <h4>Logo : </h4>  <img [src]="imageUrl" alt="" width="115px">
           </div>
           <div class="confirmation-text">
             <h4>Couleurs choisies : </h4>

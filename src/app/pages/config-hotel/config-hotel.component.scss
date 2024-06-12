@@ -88,6 +88,7 @@
           height: 100%;
           width: 100%;
           font-size: xxx-large;
+          cursor: pointer;
         }
       }
 
@@ -179,11 +180,6 @@
         margin-bottom: 45px;
         gap: 8px;
 
-        img {
-          width: 80px;
-          height: 80px;
-        }
-
         .confirmation-colors {
           display: flex;
           padding-left: 12px;
@@ -198,4 +194,11 @@
       }
     }
   }
+}
+
+.error {
+  color: red;
+  margin: 0;
+  margin-top: 20px;
+  font-weight: 600;
 }
