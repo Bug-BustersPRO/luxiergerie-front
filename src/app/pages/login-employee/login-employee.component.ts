@@ -22,7 +22,7 @@ export class LoginEmployeeComponent {
     this.authService.login(this.loginEmployee).subscribe({
       next: response => {
         if (response.status === 200) {
-          this.router.navigate(['/config-hotel']);
+          this.router.navigate(['/admin']);
         }
       },
       error: (error) => {

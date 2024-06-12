@@ -140,7 +140,7 @@ export class ConfigHotelComponent implements OnInit {
     this.createHotel().subscribe(
       {
         next: response => {
-          this.router.navigate(['/sections']);
+          this.router.navigate(['/admin']);
         },
         error: error => {
           console.error('Erreur lors de la création de l\'hôtel :', error);

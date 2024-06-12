@@ -167,17 +167,16 @@
     .config-button {
       display: flex;
       margin-top: 50px;
+      margin-bottom: 50px;
       gap: 30px;
     }
 
     .config-confirmation {
       font-size: 24px;
-      margin-top: 40px;
 
       .confirmation-text {
         display: flex;
         align-items: center;
-        margin-bottom: 45px;
         gap: 8px;
 
         .confirmation-colors {

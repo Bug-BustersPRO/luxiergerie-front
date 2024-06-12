@@ -20,7 +20,7 @@ export class ConfigHotelGuard {
             return false;
           } else if (hotels.length > 0) {
             if (state.url.includes('/config-hotel')) {
-              this.router.navigate(['/sections']);
+              this.router.navigate(['/admin']);
               return false;
             }
           }

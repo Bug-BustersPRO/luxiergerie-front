@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { CoreService } from "../shared/services/core.service";
 import { Observable, map } from "rxjs";
 import { Purchase } from "../shared/models/purchase.model";
+import { Bill } from "../shared/models/bill.model";
 
 
 @Injectable()
@@ -16,6 +17,15 @@ export class PurchaseFacade {
 
   getAllPurchases(): Observable<Purchase[]> {
     return this.coreService.getPurchases().pipe(
+      map((purchases) => {
+        this.purchases = purchases;
+        return purchases;
+      })
+    );
+  }
+
+  getBillByClient(): Observable<Bill[]> {
+    return this.coreService.getBillByClient().pipe(
       map((purchases) => {
         this.purchases = purchases;
         return purchases;
