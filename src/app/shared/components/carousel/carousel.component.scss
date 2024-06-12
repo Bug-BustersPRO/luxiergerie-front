@@ -77,7 +77,7 @@
         margin: 0 5px;
       }
       .carousel-indicator.active {
-        background: #BD9E56;
+        background: var(--primary-background-color);
       }
     }
   }

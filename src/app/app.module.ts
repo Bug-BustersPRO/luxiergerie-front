@@ -26,6 +26,7 @@ import { AccommodationPage } from './pages/accommodation-page/accommodation-page
 import { AccommodationComponent } from './shared/components/accommodation/accommodation.component';
 import { AccommodationFacade } from './domains/accommodation-facade';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
+import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
 import { ButtonComponent } from './shared/components/button/button.component';
 
 @NgModule({
@@ -72,6 +73,11 @@ import { ButtonComponent } from './shared/components/button/button.component';
       provide: 'authEmployee',
       useFactory: (service: AuthGuardService) => service.authEmployee(),
       deps: [AuthGuardService]
+    },
+    {
+      provide: 'configHotel',
+      useFactory: (service: ConfigHotelGuard) => service.configHotel(),
+      deps: [ConfigHotelGuard]
     },
     CategoryFacade,
     AccommodationFacade

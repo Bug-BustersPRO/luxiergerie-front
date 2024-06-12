@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Client } from '../models/client.model';
 import { Role } from '../models/role.model';
 import { Room } from '../models/room.model';
-import {CookieService} from "ngx-cookie-service";
+import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
   providedIn: 'root'

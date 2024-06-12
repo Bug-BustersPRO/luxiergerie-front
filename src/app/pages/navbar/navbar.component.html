@@ -1,50 +1,51 @@
 <nav>
-    <div class="infos-container"> 
-        <div class="hotel-infos-container">
-            <div class="logo">
-                <img src="assets/logo_luxiergerie.png" alt="Le logo de l'hotel">
-            </div>
-            <div class="hotel-name">
-               <p>Hôtel</p> 
-               <p>Sierra Monaco</p>
-            </div>
-        </div>
-       
-        <div class="guest-infos-container">
-        <div class="guest-name">
-            <p>Bienvenue</p>
-            <p>John Doe</p>
-        </div>
-
-        </div>
-        <div class="connection">
-            <a>Se déconnecter</a>
-        </div>
+  <div class="infos-container">
+    <div class="hotel-infos-container">
+      <div class="logo">
+        @if (hotelImageUrl) {
+          <img [src]="hotelImageUrl"
+             alt="{{hotel.name}}">
+        }
+      </div>
+      <div class="hotel-name">
+        @if (hotel !== undefined && hotel !== null) {
+          <p>{{hotel.name}}</p>
+        }
+      </div>
     </div>
-    <div class="half-circle"></div>
+    <div class="guest-infos-container">
+      <div class="guest-name">
+        <p>Bienvenue</p>
+        <p>John Doe</p>
+      </div>
+    </div>
+    <div class="connection">
+      <a>Se déconnecter</a>
+    </div>
+  </div>
+  <div class="half-circle"></div>
 </nav>
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 <div class="menu">
-<input type="checkbox" id="toggle" />
-<label id="show-menu" for="toggle">
+  <input type="checkbox"
+         id="toggle" />
+  <label id="show-menu"
+         for="toggle">
     <div class="btn">
-    <i class="material-icons md-36 toggleBtn menuBtn">menu</i>
-    <i class="material-icons md-36 toggleBtn closeBtn">close</i>
+      <i class="material-icons md-36 toggleBtn menuBtn">menu</i>
+      <i class="material-icons md-36 toggleBtn closeBtn">close</i>
     </div>
     <div class="btn">
-    <i class="material-icons md-36">calendar_month</i>
+      <i class="material-icons md-36">calendar_month</i>
     </div>
     <div class="btn">
-    <i class="material-icons md-36" (click)="navigateTo('/sections')">shopping_basket</i>
+      <i class="material-icons md-36"
+         (click)="navigateTo('/sections')">shopping_basket</i>
     </div>
     <div class="btn">
-    <i class="material-icons md-36" (click)="navigateTo('/')">home</i>
+      <i class="material-icons md-36"
+         (click)="navigateTo('/')">home</i>
     </div>
-
-</label>
+  </label>
 </div>
-
-
-
