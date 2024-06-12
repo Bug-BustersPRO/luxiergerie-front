@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Category } from '../../models/category.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-category',
@@ -8,7 +9,12 @@ import { Category } from '../../models/category.model';
 })
 export class CategoryComponent {
 
-  constructor() { }
+  @Input() category!: Category;
 
-@Input() category!: Category;
+  constructor(private router: Router) { }
+
+  navigateToAccommodations(){
+    this.router.navigate([`categories/${this.category.id}/accommodations`])
+  }
+
 }

@@ -1,5 +1,5 @@
 .section-global {
-    display: flex;
+   display: flex;
     flex-direction: column;
     justify-content: center;
     margin: auto;
@@ -13,13 +13,4 @@
     padding-top: 3rem;
     width: 100%;
   }
-
-  #cardsForCategory {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3rem;
-    width: 105%;
-    justify-content: center;
-}
 }

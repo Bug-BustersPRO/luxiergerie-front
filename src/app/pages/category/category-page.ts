@@ -6,7 +6,7 @@ import { Section } from 'src/app/shared/models/section.model';
 @Component({
   selector: 'app-category-page',
   templateUrl: './category-page.html',
-  styleUrls: ['./category-page.scss', '../../../styles.scss'],
+  styleUrls: ['./category-page.scss'],
 })
 export class CategoryPage implements OnInit {
   public categories: Category[] = [];
@@ -28,5 +28,4 @@ export class CategoryPage implements OnInit {
       this.categories = categories;
     });
   }
-
   }

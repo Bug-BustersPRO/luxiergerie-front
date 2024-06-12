@@ -26,6 +26,10 @@ export class AccommodationFacade {
     return this.coreService.getAccommodationById(id);
   }
 
+  getAccommodationsByCategory(id: string): Observable<Accommodation[]> {
+    return this.coreService.getAccommodationsByCategory(id);
+ }
+
   createAccommodation(accommodation: Accommodation, category: Category): Observable<any> {
     return this.coreService.createAccommodation(accommodation, category);
   }

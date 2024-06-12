@@ -21,7 +21,13 @@ import { SectionComponent } from './shared/components/section/section.component'
 import { CategoryPage } from './pages/category/category-page';
 import { CategoryFacade } from './domains/category-facade';
 import { CategoryComponent } from './shared/components/category/category.component';
+import {AccommodationCardComponent } from './shared/components/accommodation-card/accommodation-card.component';
+import { AccommodationPage } from './pages/accommodation-page/accommodation-page.component';
+import { AccommodationComponent } from './shared/components/accommodation/accommodation.component';
+import { AccommodationFacade } from './domains/accommodation-facade';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
+import { ButtonComponent } from './shared/components/button/button.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +40,8 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
     CategoryPage,
     SectionComponent,
     CategoryComponent,
+    AccommodationPage,
+    AccommodationComponent,
     LoginEmployeeComponent,
   ],
   imports: [
@@ -47,7 +55,9 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
     LoginModalComponent,
     BrowserAnimationsModule,
     NavbarComponent,
-    FormsModule
+    FormsModule,
+    AccommodationCardComponent,
+    ButtonComponent
   ],
   providers: [
     CoreService,
@@ -62,7 +72,8 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
       useFactory: (service: AuthGuardService) => service.authEmployee(),
       deps: [AuthGuardService]
     },
-    CategoryFacade
+    CategoryFacade,
+    AccommodationFacade
   ],
   bootstrap: [AppComponent]
 })
