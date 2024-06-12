@@ -1,4 +1,5 @@
 <section>
-    <app-admin-purchase-card></app-admin-purchase-card>
-    <app-admin-purchase-card></app-admin-purchase-card>
+@for (bill of bills; track $index) {
+    <app-admin-purchase-card [bill]="bill"></app-admin-purchase-card>
+}
 </section>

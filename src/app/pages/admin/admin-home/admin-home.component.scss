@@ -1,4 +1,26 @@
 :host {
     display: flex;
-    height: 100vh;
+}
+
+
+.horizontal-navbar {
+    display: flex;
+    width: calc(100vw - 293px);
+    justify-content: space-between;
+    border-bottom: 2px solid #ECECEC;
+    height: 100px;
+    .user-infos{
+        padding-right: 20px;
+    }
+}
+
+.horizontal-navbar h1 {
+    padding-left: 20px;
+    font-weight: 400;
+    color: black;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
 }

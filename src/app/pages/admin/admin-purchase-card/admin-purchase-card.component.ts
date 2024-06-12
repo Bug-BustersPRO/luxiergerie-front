@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AdminPurchasesComponent } from '../admin-purchases/admin-purchases.component';
+
+import { Purchase } from 'src/app/shared/models/purchase.model';
+import { Router } from '@angular/router';
+import { AdminPurchaseDetailComponent } from '../admin-purchase-detail/admin-purchase-detail.component';
+import { Bill } from 'src/app/shared/models/bill.model';
 
 
 @Component({
@@ -8,13 +13,22 @@ import { AdminPurchasesComponent } from '../admin-purchases/admin-purchases.comp
   templateUrl: './admin-purchase-card.component.html',
   styleUrls: ['./admin-purchase-card.component.scss'],
   standalone: true,
-  imports: [CommonModule, AdminPurchasesComponent],
+  imports: [CommonModule, AdminPurchasesComponent, AdminPurchaseDetailComponent],
 })
 export class AdminPurchaseCardComponent {
-   purchase = {
-    id: "31000-0000-0000-0000",
-    date: new Date("2021-10-10"),
-    roomNumber : 1,
-    totalPrice : 1000,
+  @Input() bill!: Bill;
+  openDetailSwitch: boolean = false;
+  
+  constructor(private router: Router) { }
+
+  navigateTo(route: string): void {
+    this.router.navigate([route]);
+    console.log(route);
+    
   }
+
+  openDetail(): void {
+    this.openDetailSwitch = !this.openDetailSwitch;
+  }
+
 }

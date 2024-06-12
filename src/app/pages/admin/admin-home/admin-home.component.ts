@@ -12,4 +12,6 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 })
 export class AdminHomeComponent {
 
+  adminFirstname = "Kéké";
+  adminRole = "Admin";
 }
