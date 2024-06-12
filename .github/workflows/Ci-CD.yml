@@ -42,4 +42,4 @@ jobs:
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
       - name: Push Docker Image
-        run: docker push bugbstrspro/luxiergerie-front:${{ github.ref_name }}
+        run: docker push bugbstrspro/luxiergerie-front:${GITHUB_REF##*/}
