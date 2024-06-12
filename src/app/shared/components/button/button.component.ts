@@ -21,7 +21,7 @@ export class ButtonComponent implements OnInit {
   backgroundSecondary: string = '#8391AA';
   goToUrl: any = "";
   disabled = input<boolean>(false);
-   
+
   @Input() action: string = 'Confirmer';
 
   router = inject(Router);
@@ -32,6 +32,21 @@ export class ButtonComponent implements OnInit {
       case 'précédent':
         this.text = 'Précédent';
         this.background = this.backgroundSecondary;
+        break;
+
+      case 'suivant':
+        this.text = 'Suivant';
+        this.background = this.backgroundPrimary;
+        break;
+
+      case 'retour':
+        this.text = 'Retour';
+        this.background = this.backgroundSecondary;
+        break;
+
+      case 'valider':
+        this.text = 'Valider';
+        this.background = this.backgroundPrimary;
         break;
 
       case 'annuler':
@@ -56,7 +71,7 @@ export class ButtonComponent implements OnInit {
 
       default:
         this.text = 'Confirmer';
-        this.background = this.backgroundPrimary; 
+        this.background = this.backgroundPrimary;
     }
   }
 
@@ -68,7 +83,7 @@ export class ButtonComponent implements OnInit {
 
      case 'précédent':
     this.goToUrl = this.location.back();
-        break; 
+        break;
   }
 }
 }

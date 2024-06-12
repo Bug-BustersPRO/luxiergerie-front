@@ -16,7 +16,7 @@
                class="input-field">
       </div>
       <div class="btn-container">
-         <app-button action="='valider'" (click)="login()" [disabled]="!canValidate"></app-button>       
+         <app-button action="valider" (click)="login()" [disabled]="!canValidate"/>
       </div>
       <div *ngIf="isNotLoggedIn"
            class="error-message">
