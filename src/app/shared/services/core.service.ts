@@ -111,6 +111,10 @@ export class CoreService {
     return this.httpClient.get(`${this.url}/purchases`, { headers: this.headers });
   }
 
+  public getBillByClient(): Observable<any> {
+    return this.httpClient.get(`${this.url}/purchases/billByClient`, { headers: this.headers });
+  }
+
   public getPurchaseById(id: number): Observable<any> {
     return this.httpClient.get(`${this.url}/purchases/${id}`, { headers: this.headers });
   }

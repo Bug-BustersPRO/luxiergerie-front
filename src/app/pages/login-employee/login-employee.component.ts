@@ -26,7 +26,7 @@ export class LoginEmployeeComponent {
       next: response => {
         console.log(response)
         if (response.status === 200) {
-          this.router.navigate(['/sections']);
+          this.router.navigate(['/admin']);
         }
       },
       error: (error) => {
