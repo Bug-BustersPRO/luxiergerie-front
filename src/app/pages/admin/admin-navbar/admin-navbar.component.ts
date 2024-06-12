@@ -13,4 +13,37 @@ import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.comp
 
 
 export class AdminNavbarComponent {
+
+  public navItems = [
+    {
+      name: 'Commandes',
+      route: 'admin/purchases',
+      icon: 'shopping_cart'
+    },
+    {
+      name: 'Services',
+      route: 'admin/accomodations',
+      icon: 'list_alt'
+    },
+    {
+      name: 'Informations',
+      route: 'admin/info',
+      icon: 'note_alt'
+    },
+    {
+      name: 'Chambres',
+      route: 'admin/config',
+      icon: 'key'
+    },
+    {
+      name: 'Carousel',
+      route: 'admin/carousel',
+      icon: 'note_alt'
+    },
+    {
+      name: 'Mon hôtel',
+      route: 'admin/config',
+      icon: 'settings'
+    }
+  ];
 }

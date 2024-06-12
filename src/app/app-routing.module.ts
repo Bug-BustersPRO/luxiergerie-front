@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SectionPage } from './pages/section/section-page';
 import { LoginClientPageComponent } from "./pages/security/room/login-client.page/login-client.page.component";
-import {CategoryPage} from "./pages/category/category-page";
-import {HomePageComponent} from "./pages/home/home-page.component";
+import { CategoryPage } from "./pages/category/category-page";
+import { HomePageComponent } from "./pages/home/home-page.component";
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { AdminPurchasesComponent } from './pages/admin/admin-purchases/admin-purchases.component';
 import { AdminAccomodationsComponent } from './pages/admin/admin-accomodations/admin-accomodations.component';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
 import { AdminPurchaseDetailComponent } from './pages/admin/admin-purchase-detail/admin-purchase-detail.component';
+import { AdminConfigComponent } from './pages/admin/admin-config/admin-config.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent, canActivate: ['authRoom'] },
@@ -16,12 +17,14 @@ const routes: Routes = [
   { path: 'login', component: LoginClientPageComponent, canActivate: ['authRoom'] },
   { path: 'login/room', component: LoginClientPageComponent, canActivate: ['authRoom'] },
   { path: 'sections/:id/categories', component: CategoryPage,canActivate: ['authRoom'] },
-  { path: 'admin', component: AdminHomeComponent, canActivate: ['authEmployee'], 
+  { path: 'admin', component: AdminHomeComponent, canActivate: ['authEmployee'],
     children: [
       { path: 'purchases', component: AdminPurchasesComponent},
       { path: 'purchases/:id', component: AdminPurchaseDetailComponent},
-      { path: 'accomodations', component:AdminAccomodationsComponent }
-]},
+      { path: 'accomodations', component: AdminAccomodationsComponent },
+      { path: 'config', component: AdminConfigComponent}
+    ]
+  },
   { path: 'login/employee', component: LoginEmployeeComponent, canActivate: ['authEmployee']}
 ];
 

@@ -1,41 +1,20 @@
 <nav class="vertical-navbar">
-    <div class="hotel-infos-container">
-        <div class="logo">
-            <img src="assets/logo_luxiergerie.png" alt="Le logo de l'hotel">
-        </div>
-        <div class="hotel-name">
-           <p>Hôtel Sierra Monaco</p>
-        </div>
+  <div class="hotel-infos-container">
+    <div class="logo">
+      <img src="assets/logo_luxiergerie.png" alt="Le logo de l'hotel" />
     </div>
-    <ul>
-        <li>
-            <a routerLink="/admin/purchases">
-                <span class="material-symbols-outlined">shopping_cart</span>
-                <span class="nav-text">Commandes</span>
-            </a>
-        </li>
-        <li>
-            <a routerLink="/admin/accomodations">
-                <span class="material-symbols-outlined">list_alt</span>
-                <span class="nav-text">Services</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="material-symbols-outlined">note_alt</span>
-                <span class="nav-text">Informations</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="material-symbols-outlined">key</span>
-                <span class="nav-text">Chambres</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="material-symbols-outlined">note_alt</span>
-                <span class="nav-text">Carousel</span>
-            </a>
-    </ul>
+    <div class="hotel-name">
+      <p>Hôtel Sierra Monaco</p>
+    </div>
+  </div>
+  <ul>
+    @for (navItem of navItems; track $index) {
+    <li>
+      <a [routerLink]="navItem.route">
+        <span class="material-symbols-outlined">{{ navItem.icon }}</span>
+        <span class="nav-text">{{ navItem.name }}</span>
+      </a>
+    </li>
+    }
+  </ul>
 </nav>
