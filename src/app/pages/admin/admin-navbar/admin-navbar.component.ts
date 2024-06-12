@@ -17,32 +17,32 @@ export class AdminNavbarComponent {
   public navItems = [
     {
       name: 'Commandes',
-      route: 'admin/purchases',
+      route: 'purchases',
       icon: 'shopping_cart'
     },
     {
       name: 'Services',
-      route: 'admin/accomodations',
+      route: 'accomodations',
       icon: 'list_alt'
     },
     {
       name: 'Informations',
-      route: 'admin/info',
+      route: 'info',
       icon: 'note_alt'
     },
     {
       name: 'Chambres',
-      route: 'admin/config',
+      route: 'config',
       icon: 'key'
     },
     {
       name: 'Carousel',
-      route: 'admin/carousel',
+      route: 'carousel',
       icon: 'note_alt'
     },
     {
       name: 'Mon hôtel',
-      route: 'admin/config',
+      route: 'config',
       icon: 'settings'
     }
   ];
