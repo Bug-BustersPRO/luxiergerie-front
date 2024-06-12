@@ -11,7 +11,7 @@
         Chambre {{ bill.roomNumber }}
      </p>
      <p class="price">
-       Total des commandes : {{ bill.totalPrice}} €
+       Total des commandes : {{ bill.totalPrice | currency: 'EUR' }}
      </p>
     </div>
     <div class="icons-container" (click)="openDetail()">

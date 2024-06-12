@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { AdminPurchasesComponent } from '../admin-purchases/admin-purchases.component';
-
-import { Purchase } from 'src/app/shared/models/purchase.model';
 import { Router } from '@angular/router';
+
+import { AdminPurchasesComponent } from '../admin-purchases/admin-purchases.component';
 import { AdminPurchaseDetailComponent } from '../admin-purchase-detail/admin-purchase-detail.component';
 import { Bill } from 'src/app/shared/models/bill.model';
 
@@ -13,7 +12,7 @@ import { Bill } from 'src/app/shared/models/bill.model';
   templateUrl: './admin-purchase-card.component.html',
   styleUrls: ['./admin-purchase-card.component.scss'],
   standalone: true,
-  imports: [CommonModule, AdminPurchasesComponent, AdminPurchaseDetailComponent],
+  imports: [CommonModule, AdminPurchasesComponent, AdminPurchaseDetailComponent, CurrencyPipe],
 })
 export class AdminPurchaseCardComponent {
   @Input() bill!: Bill;
