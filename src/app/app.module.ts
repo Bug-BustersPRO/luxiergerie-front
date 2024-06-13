@@ -30,6 +30,8 @@ import { CartFacade } from './domains/cart-facade';
 import { CartComponent } from './shared/components/cart/cart.component';
 import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
 import { ButtonComponent } from './shared/components/button/button.component';
+import { AdminEmployeeComponent } from './pages/admin/admin-employee/admin-employee.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,6 @@ import { ButtonComponent } from './shared/components/button/button.component';
     SectionPage,
     CardComponent,
     CarouselComponent,
-    ModalComponent,
     HomePageComponent,
     CategoryPage,
     SectionComponent,
@@ -61,11 +62,11 @@ import { ButtonComponent } from './shared/components/button/button.component';
     NavbarComponent,
     FormsModule,
     AccommodationCardComponent,
-    ButtonComponent
+    ButtonComponent,
   ],
   providers: [
     CoreService,
-    SectionFacade,
+    SectionFacade,  
     {
       provide: 'authRoom',
       useFactory: (service: AuthGuardService) => service.authRoom(),

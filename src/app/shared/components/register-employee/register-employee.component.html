@@ -1,0 +1,45 @@
+<section class="global-container">
+  <form (ngSubmit)="onSubmit()">
+    <div class="forms">
+      <div class="label-and-input">
+        <label> Nom de l'employé(e) </label>
+        <input type="text" placeholder="Entrez le nom" />
+      </div>
+
+      <div class="label-and-input">
+        <label> Prénoms de l'employé(e) </label>
+        <input type="text" placeholder="Entrez le(s) prénom(s)" />
+      </div>
+
+      <div class="label-and-input">
+        <label> Role de l'employé(e) </label>
+        <select name="ROLE">
+          <option value="ADMIN">Admin</option>
+          <option value="EMPLOYE(E)">Employé(e)</option>
+        </select>
+      </div>
+
+      <div class="password-input label-and-input">
+        <label> Mot de passe </label>
+        <div class="password-input-wrapper">
+          <input
+            class="contain"
+            type="{{ showPassword ? 'text' : 'password' }}"
+            placeholder="Entrez votre mot de passe"
+          />
+          <div
+            class="material-symbols-outlined eye"
+            (click)="togglePasswordVisibility()"
+          >
+            {{ text }}
+          </div>
+        </div>
+      </div>
+
+      <div class="button-alignement">
+        <app-button class="button-for-modal" action="annuler"></app-button>
+        <app-button class="button-for-modal" action="valider" click="onSubmit()"></app-button>
+      </div>
+    </div>
+  </form>
+</section>

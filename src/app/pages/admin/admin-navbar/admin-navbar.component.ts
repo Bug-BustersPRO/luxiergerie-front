@@ -6,6 +6,7 @@ import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.comp
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
 import { AccommodationFacade } from 'src/app/domains/accommodation-facade';
+import { Employee } from 'src/app/shared/models/employee.model';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -48,6 +49,11 @@ export class AdminNavbarComponent {
       name: 'Carousel',
       route: 'carousel',
       icon: 'note_alt'
+    },
+    {
+      name: 'Ajouter un employé',
+      route: 'employee',
+      icon: 'person'
     },
     {
       name: 'Mon établissement',

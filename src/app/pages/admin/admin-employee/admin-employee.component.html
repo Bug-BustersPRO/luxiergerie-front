@@ -1,0 +1,12 @@
+<section>
+
+  <div>
+    <h1>AJOUT D'UN EMPLOYE(E)</h1>
+  </div>
+  <div class="add-button" (click)="openModal()" title="Ajouter">
+    <span class="button-icon">+</span>
+  </div>
+</section>
+<app-modal title="Ajout d'un employé" [showModal]="isModalOpen" (closeModalEvent)="isModalOpen = false">
+  <app-register-employee></app-register-employee>
+</app-modal>
