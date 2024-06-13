@@ -1,0 +1,16 @@
+.add-button {
+        width: 115px;
+        height: 115px;
+        background-color: #BD9E56;
+
+        .button-icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          height: 100%;
+          width: 100%;
+          font-size: xxx-large;
+          cursor: pointer;
+        }
+      }

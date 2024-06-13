@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 })
 export class ButtonComponent implements OnInit {
 
-  ngOnInit(): void {
-    this.isActionned();
-  }
+  @Input() action: string = 'Confirmer';
+  // @Input() width!: string;
+  // @Input() height!: string;
 
   text: string = '';
   background: string = '';
@@ -22,10 +22,14 @@ export class ButtonComponent implements OnInit {
   goToUrl: any = "";
   disabled = input<boolean>(false);
 
-  @Input() action: string = 'Confirmer';
-
   router = inject(Router);
   location = inject(Location);
+
+  ngOnInit(): void {
+    this.isActionned();
+    // this.width = this.width || "148 px";
+    // this.height = this.height || "40 px";
+  }
 
   isActionned() {
     switch (this.action) {

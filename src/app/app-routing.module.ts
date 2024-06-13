@@ -12,6 +12,7 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
 import { ConfigHotelComponent } from './pages/config-hotel/config-hotel.component';
 
 import { AdminPurchaseDetailComponent } from './pages/admin/admin-purchase-detail/admin-purchase-detail.component';
+import { AdminEmployeeComponent } from './pages/admin/admin-employee/admin-employee.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent, canActivate: ['authRoom']},
@@ -23,7 +24,8 @@ const routes: Routes = [
     children: [
       { path: 'purchases', component: AdminPurchasesComponent},
       { path: 'purchases/:id', component: AdminPurchaseDetailComponent},
-      { path: 'accomodations', component:AdminAccomodationsComponent }
+      { path: 'accomodations', component:AdminAccomodationsComponent },
+      { path: 'employee', component: AdminEmployeeComponent }
   ]},
   { path: 'login/employee', component: LoginEmployeeComponent},
   { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel'] }
