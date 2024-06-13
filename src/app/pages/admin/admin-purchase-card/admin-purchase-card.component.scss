@@ -1,0 +1,67 @@
+@import "../../../../styles";
+
+:host {
+    width: 100%;
+}
+.main-container {
+    color: $primary-text-color;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: $secondary-background-color;
+    border-bottom: 5px solid white;
+    .infos-container {
+        padding: 10px;
+    }
+    h3 {
+        margin: 0;
+    }  
+    p {
+        margin: 0;
+        line-height: 1.5rem;
+    }
+    .price {
+        font-weight: bold;
+    }
+    .icons-container {
+        display: flex;
+        justify-content: space-evenly;
+        width: 30%;
+        cursor: pointer;
+    }
+    .icons-container span {
+        text-align: center;
+        font-size: 40px;
+        p {
+            font-size: 20px;
+            font-family: Montserrat, Open-Sans, sans-serif;
+        }
+    }
+} 
+
+#purchases-main-container {
+    display: flex;
+    h4 {
+        margin: 0;
+    }
+    p {
+        margin: 0;
+    }
+}
+
+#customer-infos-container {
+    padding-right: 25px;
+    border-bottom: 5px solid white;
+    min-width: fit-content;
+    h4 {
+        margin-bottom: 0.5rem;
+    }
+    p {
+        margin: 0.3rem;
+    }
+}
+
+#purchases-container h4, p{
+ margin: 0;
+}

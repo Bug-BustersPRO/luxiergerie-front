@@ -47,4 +47,11 @@ export class AuthService {
       observe: 'response', withCredentials: true, responseType: 'text'
     });
   }
+  
+  clientLogout(): void {
+    this.cookieService.delete('jwt-token');
+    this.http.get('http://localhost:8090/api/auth/logout', {
+      withCredentials: true
+    });
+  }
 }

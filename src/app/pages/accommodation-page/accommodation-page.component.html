@@ -1,3 +1,4 @@
+<section class="section-global">
 <div class="cards">
   <li *ngFor="let accommodation of accommodations">
     <app-accommodation [accommodation]="accommodation">
@@ -5,3 +6,8 @@
     </app-accommodation>
   </li>
 </div>
+<div class="buttons">
+<app-button action='précédent'></app-button>
+<app-button action='confirmer'></app-button>
+</div>
+</section>
