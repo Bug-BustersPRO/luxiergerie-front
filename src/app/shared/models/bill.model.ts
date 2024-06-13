@@ -11,12 +11,12 @@ export class Bill {
   public totalPrice: number;
 
 
-  constructor(id: string, 
-    date: Date, 
-    client: Client, 
-    status: string, 
-    purchasesForBillDTO: Purchase[], 
-    roomNumber: number, 
+  constructor(id: string,
+    date: Date,
+    client: Client,
+    status: string,
+    purchasesForBillDTO: Purchase[],
+    roomNumber: number,
     totalPrice: number) {
     this.id = id;
     this.date = date;

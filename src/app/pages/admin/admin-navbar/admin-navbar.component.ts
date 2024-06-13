@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink} from '@angular/router';
-
+import { RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-
 import { AdminHomeComponent } from '../admin-home/admin-home.component';
 import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
-import { AccommodationFacade } from 'src/app/domains/accommodation-facade';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -15,7 +12,7 @@ import { AccommodationFacade } from 'src/app/domains/accommodation-facade';
   styleUrls: ['./admin-navbar.component.scss'],
   standalone: true,
   imports: [AdminHomeComponent, RouterLink, AdminDashboardComponent],
-  providers: [AccommodationFacade]
+  providers: []
 })
 
 export class AdminNavbarComponent {

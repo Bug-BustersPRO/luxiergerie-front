@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable, WritableSignal, computed, inject, signal } from '@angular/core';
+import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Client } from '../models/client.model';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -8,14 +8,14 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ClientService {
 
-  constructor() { }
-
-  http = inject(HttpClient);
-  cookieService = inject(CookieService);
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
   private url: string = "http://localhost:8090/api";
-  private headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + this.cookieService.get('jwt-token')
-  });
+  private getHeaders(): HttpHeaders {
+    const token = this.cookieService.get('jwt-token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
   public getAllClients$: WritableSignal<Client[]> = signal([]);
   getAllClientsSig = computed(() => this.getAllClients$);
   public getClientById!: Client;
@@ -23,14 +23,14 @@ export class ClientService {
   // Clients API - call vers le backend
 
   public getAll(): void {
-    this.http.get<Client[]>(`${this.url}/client`, { headers: this.headers })
+    this.http.get<Client[]>(`${this.url}/client`, { headers: this.getHeaders() })
       .subscribe({
         next: clients => this.getAllClients$.set(clients),
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching clients")
       });
   }
   public createClient(client: Client): void {
-    this.http.post(`${this.url}/client`, client, { headers: this.headers })
+    this.http.post(`${this.url}/client`, client, { headers: this.getHeaders() })
       .subscribe({
         next: () => console.log("Client created successfully"),
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while creating client")
@@ -38,7 +38,7 @@ export class ClientService {
   }
 
   public addClientToRoom(clientId: number, roleName: string): void {
-    this.http.post(`${this.url}/client/add-room/${clientId}/with-role/${roleName}`, roleName, { headers: this.headers })
+    this.http.post(`${this.url}/client/add-room/${clientId}/with-role/${roleName}`, roleName, { headers: this.getHeaders() })
       .subscribe({
         next: () => console.log("Client added to room successfully"),
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while adding client to room")

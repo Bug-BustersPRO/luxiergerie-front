@@ -10,13 +10,12 @@ export class Purchase {
   public roomNumber: number;
   public totalPrice: number;
 
-
-  constructor(id: string, 
-    date: Date, 
-    client: Client, 
-    status: string, 
-    accommodations: Accommodation[], 
-    roomNumber: number, 
+  constructor(id: string,
+    date: Date,
+    client: Client,
+    status: string,
+    accommodations: Accommodation[],
+    roomNumber: number,
     totalPrice: number) {
     this.id = id;
     this.date = date;

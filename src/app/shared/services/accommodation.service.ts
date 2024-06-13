@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable, WritableSignal, computed, inject, signal } from '@angular/core';
+import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Accommodation } from '../models/accommodation.model';
 import { Category } from '../models/category.model';
 import { Observable } from 'rxjs';
@@ -10,14 +10,14 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AccommodationService {
 
-  constructor() { }
-
-  http = inject(HttpClient);
-  cookieService = inject(CookieService);
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
   private url: string = "http://localhost:8090/api";
-  private headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + this.cookieService.get('jwt-token')
-  });
+  private getHeaders(): HttpHeaders {
+    const token = this.cookieService.get('jwt-token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
   public getAllAccomodations$: WritableSignal<Accommodation[]> = signal([]);
   getAllAccomodations = computed(this.getAllAccomodations$);
   public getAccommodationById!: Accommodation;
@@ -27,7 +27,7 @@ export class AccommodationService {
 
   // GET
   public getAll(): void {
-    this.http.get<Accommodation[]>(`${this.url}/accommodations`, { headers: this.headers })
+    this.http.get<Accommodation[]>(`${this.url}/accommodations`, { headers: this.getHeaders() })
       .subscribe({
         next: accommodations => this.getAllAccomodations$.set(accommodations),
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching accommodations")
@@ -36,7 +36,7 @@ export class AccommodationService {
 
 
   public getById(id: number): void {
-    this.http.get<Accommodation>(`${this.url}/accommodations/${id}`, { headers: this.headers })
+    this.http.get<Accommodation>(`${this.url}/accommodations/${id}`, { headers: this.getHeaders() })
       .subscribe({
         next: accommodation => this.getAccommodationById = accommodation,
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching accommodation whith id: " + id)
@@ -44,12 +44,12 @@ export class AccommodationService {
   }
 
   public getAccommodationsByCategory(id: string): Observable<Accommodation[]> {
-    return this.http.get<Accommodation[]>(`${this.url}/categories/${id}/accommodations`, { headers: this.headers });
+    return this.http.get<Accommodation[]>(`${this.url}/categories/${id}/accommodations`, { headers: this.getHeaders() });
   }
 
   // CREATE
   public createAccommodation(accommodation: Accommodation, category: Category): void {
-    this.http.post(`${this.url}/categories/${category.id}/accommodations`, accommodation, { headers: this.headers })
+    this.http.post(`${this.url}/categories/${category.id}/accommodations`, accommodation, { headers: this.getHeaders() })
       .subscribe({
         next: () => console.log("Accommodation created successfully"),
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while creating accommodation")
@@ -59,7 +59,7 @@ export class AccommodationService {
 
   // UPDATE
   public updateAccommodation(accommodation: Accommodation): void {
-    this.http.put(`${this.url}/accommodations/${accommodation.id}`, accommodation, { headers: this.headers })
+    this.http.put(`${this.url}/accommodations/${accommodation.id}`, accommodation, { headers: this.getHeaders() })
       .subscribe({
         next: () => console.log("Accommodation updated successfully"),
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while updating accommodation with id: " + accommodation.id)
@@ -68,7 +68,7 @@ export class AccommodationService {
 
   // DELETE
   public deleteAccommodation(id: number): void {
-    this.http.delete(`${this.url}/accommodations/${id}`, { headers: this.headers })
+    this.http.delete(`${this.url}/accommodations/${id}`, { headers: this.getHeaders() })
       .subscribe({
         next: () => console.log("Accommodation deleted successfully"),
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while deleting accommodation with id: " + id)

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { AdminPurchaseCardComponent } from '../admin-purchase-card/admin-purchase-card.component';
-import { CoreService } from 'src/app/shared/services/core.service';
-import { Purchase } from 'src/app/shared/models/purchase.model';
-import { map, take, pipe } from 'rxjs';
+import { take } from 'rxjs';
 import { Bill } from 'src/app/shared/models/bill.model';
+import { PurchaseService } from 'src/app/shared/services/purchase.service';
 
 @Component({
   selector: 'app-admin-purchases',
@@ -13,19 +12,18 @@ import { Bill } from 'src/app/shared/models/bill.model';
   imports: [AdminPurchaseCardComponent]
 })
 export class AdminPurchasesComponent {
- public bills: Bill[] = [];
-constructor(private purchasesService: CoreService) 
-{
-  this.getBillByClient();
-}
+  public bills: Bill[] = [];
+  constructor(private purchasesService: PurchaseService) {
+    this.getBillByClient();
+  }
 
-getBillByClient() {
-  this.purchasesService.getBillByClient()
-    .pipe(
-      take(1))
-    .subscribe((bills: Bill[]) => {
-      this.bills = bills;
-      console.log(this.bills);
-    });
-}
+  getBillByClient() {
+    this.purchasesService.getBillByClient()
+      .pipe(
+        take(1))
+      .subscribe((bills: Bill[]) => {
+        this.bills = bills;
+        console.log(this.bills);
+      });
+  }
 }
