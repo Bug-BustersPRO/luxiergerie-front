@@ -12,20 +12,24 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
 import { ConfigHotelComponent } from './pages/config-hotel/config-hotel.component';
 
 import { AdminPurchaseDetailComponent } from './pages/admin/admin-purchase-detail/admin-purchase-detail.component';
+import { AdminHotelComponent } from './pages/admin/admin-hotel/admin-hotel.component';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent, canActivate: ['authRoom']},
+  { path: '', component: HomePageComponent, canActivate: ['authRoom'] },
   { path: 'sections', component: SectionPage, canActivate: ['authRoom'] },
   { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom'] },
   { path: 'categories/:id/accommodations', component: AccommodationPage, canActivate: ['authRoom'] },
   { path: 'login/room', component: LoginClientPageComponent, canActivate: ['authRoom'] },
-  { path: 'admin', component: AdminHomeComponent, canActivate: ['authEmployee', 'configHotel'], 
+  {
+    path: 'admin', component: AdminHomeComponent, canActivate: ['authEmployee', 'configHotel'],
     children: [
-      { path: 'purchases', component: AdminPurchasesComponent},
-      { path: 'purchases/:id', component: AdminPurchaseDetailComponent},
-      { path: 'accomodations', component:AdminAccomodationsComponent }
-  ]},
-  { path: 'login/employee', component: LoginEmployeeComponent},
+      { path: 'purchases', component: AdminPurchasesComponent },
+      { path: 'purchases/:id', component: AdminPurchaseDetailComponent },
+      { path: 'accomodations', component: AdminAccomodationsComponent },
+      { path: 'hotel', component: AdminHotelComponent }
+    ]
+  },
+  { path: 'login/employee', component: LoginEmployeeComponent },
   { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel'] }
 ];
 

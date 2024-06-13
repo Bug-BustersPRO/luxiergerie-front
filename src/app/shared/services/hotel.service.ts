@@ -30,4 +30,8 @@ export class HotelService {
     return this.httpClient.post(`${this.url}`, formData, { headers: this.getHeaders() });
   }
 
+  public updateHotel(formData: any, id: string): Observable<any> {
+    return this.httpClient.put(`${this.url}/${id}`, formData, { headers: this.getHeaders() });
+  }
+
 }

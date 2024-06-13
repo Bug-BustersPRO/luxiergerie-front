@@ -1,0 +1,16 @@
+.hotel-container {
+  background-color: #F6F6F6;
+  width: 90%;
+  height: 80vh;
+  display: block;
+  margin: auto;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 0;
+
+  .container-title {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+  }
+}
