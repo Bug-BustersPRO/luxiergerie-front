@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { Hotel } from '../models/hotel.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,13 @@ export class HotelService {
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
+  }
+
+  private hotelUpdateSubject = new Subject<Hotel>();
+  hotelUpdate$ = this.hotelUpdateSubject.asObservable();
+
+  public emitHotelUpdate(hotel: Hotel) {
+    this.hotelUpdateSubject.next(hotel);
   }
 
   public getHotel(): Observable<any> {

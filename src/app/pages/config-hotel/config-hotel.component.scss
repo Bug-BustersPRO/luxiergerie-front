@@ -100,6 +100,7 @@
 
       .config-colors {
         display: flex;
+        flex-wrap: wrap;
         width: 500px;
         gap: 32px;
 
@@ -158,6 +159,11 @@
 
         }
       }
+    }
+
+
+    .config-image {
+      margin-top: 30px;
     }
 
     .file-name {

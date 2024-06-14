@@ -15,9 +15,8 @@ import { HotelService } from 'src/app/shared/services/hotel.service';
   styleUrl: './config-hotel.component.scss'
 })
 export class ConfigHotelComponent implements OnInit {
-
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
-  @Input() isCreateHotel!: boolean;
+  @Input() isCreateHotel: boolean = true;
   public steps: string[] = ['name', 'image', 'colors', 'confirmation'];
   public currentStep: string = 'name';
   public hotel: Hotel = { id: '', name: '', image: [], colors: [] }
@@ -44,21 +43,36 @@ export class ConfigHotelComponent implements OnInit {
     this.hotel.image = [];
     this.hotel.colors = [];
     if (!this.isCreateHotel) {
-      this.hotelService.getHotel().subscribe(
-        {
-          next: response => {
-            console.log(response);
-            this.hotel.id = response[0].id;
-            this.hotel.name = response[0].name;
-            this.hotel.colors = response[0].colors;
-            this.imageUrl = `data:image/png;base64,${this.hotel.image}`;
-          },
-          error: error => {
-            console.error('Erreur lors de la récupération de l\'hôtel :', error);
-          }
+      this.getHotelImage();
+      this.hotelService.getHotel().subscribe({
+        next: response => {
+          this.hotel.id = response[0].id;
+          this.hotel.name = response[0].name;
+          this.hotel.colors = response[0].colors;
+          this.hotel.image.push(response[0].image);
+        },
+        error: error => {
+          console.error('Erreur lors de la récupération de l\'hôtel :', error);
         }
-      );
+      });
     }
+  }
+
+  getHotelImage(): void {
+    this.hotelService.getHotelImage().subscribe({
+      next: (response) => {
+        console.log(response);
+        const reader = new FileReader();
+        reader.readAsDataURL(response);
+        reader.onloadend = () => {
+          this.imageUrl = reader.result as string;
+          console.log(this.imageUrl);
+        };
+      },
+      error: error => {
+        console.error(error);
+      }
+    });
   }
 
   goToImage(): void {
@@ -147,7 +161,7 @@ export class ConfigHotelComponent implements OnInit {
       formData.append('image', this.hotel.image[0]);
     }
     this.hotel.colors.forEach((color) => {
-      formData.append(`colors`, color);
+      formData.append('colors', color);
     });
 
     if (this.isCreateHotel) {
@@ -162,8 +176,8 @@ export class ConfigHotelComponent implements OnInit {
       {
         next: response => {
           console.log(response);
-          this.hotel = response;
-          this.router.navigate(['/admin/purchases']);
+          this.router.navigate(['/admin']);
+          this.hotelService.emitHotelUpdate(this.hotel);
           this.cdRef.detectChanges();
         },
         error: error => {
@@ -177,4 +191,5 @@ export class ConfigHotelComponent implements OnInit {
     );
     this.cdRef.detectChanges();
   }
+
 }

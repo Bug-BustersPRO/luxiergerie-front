@@ -57,6 +57,12 @@ export class AdminNavbarComponent {
   ]
 
   ngOnInit(): void {
+    this.hotelService.hotelUpdate$.subscribe({
+      next: (hotel) => {
+        this.hotel = hotel;
+        this.getHotelImage();
+      }
+    });
     this.getHotels();
   }
 
