@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterLink} from '@angular/router';
-
+import { RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-
 import { AdminHomeComponent } from '../admin-home/admin-home.component';
 import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
 import { Hotel } from 'src/app/shared/models/hotel.model';
@@ -51,9 +49,20 @@ export class AdminNavbarComponent {
       route: 'carousel',
       icon: 'note_alt'
     },
+    {
+      name: 'Mon établissement',
+      route: 'hotel',
+      icon: 'business'
+    }
   ]
 
   ngOnInit(): void {
+    this.hotelService.hotelUpdate$.subscribe({
+      next: (hotel) => {
+        this.hotel = hotel;
+        this.getHotelImage();
+      }
+    });
     this.getHotels();
   }
 
