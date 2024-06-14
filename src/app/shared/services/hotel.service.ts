@@ -19,12 +19,16 @@ export class HotelService {
     });
   }
 
+  // Methods
+
   private hotelUpdateSubject = new Subject<Hotel>();
   hotelUpdate$ = this.hotelUpdateSubject.asObservable();
 
   public emitHotelUpdate(hotel: Hotel) {
     this.hotelUpdateSubject.next(hotel);
   }
+
+  // Call API
 
   public getHotel(): Observable<any> {
     return this.httpClient.get(`${this.url}/infos`);

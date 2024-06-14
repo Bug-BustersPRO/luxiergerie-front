@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
 
@@ -15,7 +14,7 @@ export class NavbarComponent implements OnInit {
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
 
-  constructor(private router: Router, private hotelService: HotelService, private cookieService: CookieService) { }
+  constructor(private router: Router, private hotelService: HotelService) { }
 
   ngOnInit(): void {
     this.getHotels();
