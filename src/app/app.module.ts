@@ -26,6 +26,8 @@ import { AccommodationPage } from './pages/accommodation-page/accommodation-page
 import { AccommodationComponent } from './shared/components/accommodation/accommodation.component';
 import { AccommodationFacade } from './domains/accommodation-facade';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
+import { CartFacade } from './domains/cart-facade';
+import { CartComponent } from './shared/components/cart/cart.component';
 import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
 import { ButtonComponent } from './shared/components/button/button.component';
 
@@ -44,6 +46,7 @@ import { ButtonComponent } from './shared/components/button/button.component';
     AccommodationPage,
     AccommodationComponent,
     LoginEmployeeComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,8 @@ import { ButtonComponent } from './shared/components/button/button.component';
       deps: [ConfigHotelGuard]
     },
     CategoryFacade,
-    AccommodationFacade
+    AccommodationFacade,
+    CartFacade
   ],
   bootstrap: [AppComponent]
 })

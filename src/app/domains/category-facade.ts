@@ -22,7 +22,7 @@ export class CategoryFacade {
      );
   }
 
-  getCategoryById(id: number): Observable<Category> {
+  getCategoryById(id: string): Observable<Category> {
      return this.coreService.getCategoryById(id);
   }
 

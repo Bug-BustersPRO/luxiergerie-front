@@ -1,0 +1,53 @@
+@import '../../../../styles.scss';
+
+.cart {
+  max-width: 100%;
+  max-height: calc(100vh - 130px);
+  padding: 1rem;
+
+  h1 {
+    color: $primary-background-color;
+    font-family: Satisfy;
+    font-size: 48px;
+    font-weight: lighter;
+    text-align: center;
+  }
+  p {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 1rem;
+    text-align: start;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    grid-gap: 1rem;
+
+    .centerded-p {
+      text-align: center;
+    }
+    .right-p {
+      text-align: end;
+    }
+    .quantity {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .tertiary {
+      color: $tertiary-background-color;
+    }
+  }
+
+  .golden-text {
+    color: $primary-background-color;
+  }
+
+  .golden-border {
+    border-bottom: 3px solid $quaternary-background-color;
+  }
+}

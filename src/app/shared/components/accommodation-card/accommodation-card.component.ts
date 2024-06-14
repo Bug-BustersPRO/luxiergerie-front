@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Accommodation } from '../../models/accommodation.model';
+import { CartService } from '../../services/cart.service';
+import { Subscription, EMPTY } from 'rxjs';
+
 
 @Component({
   selector: 'app-accommodation-card',
@@ -9,19 +12,41 @@ import { Accommodation } from '../../models/accommodation.model';
   standalone: true,
   imports: [CommonModule],
 })
-export class AccommodationCardComponent {
+export class AccommodationCardComponent implements OnInit, OnDestroy {
   @Input() item!: Accommodation;
-  @Input() quantity: number = 1;
+  private subscription: Subscription = EMPTY.subscribe();
 
-  addQuantity(): number {
-    return this.quantity++;
+  constructor(private cartService: CartService, private cdr: ChangeDetectorRef) {
   }
 
-  lessQuantity(): number {
-    if (this.quantity === 0) {
-      return 0;
-    }
-    return this.quantity--;
+  ngOnInit() {
+    this.updateQuantity();
   }
 
+  updateQuantity() {
+    this.subscription = this.cartService.getCartItems().subscribe(items => {
+
+      const itemInCart = items.find(i => i.id === this.item.id);
+      if (itemInCart) {
+        this.item.quantity = itemInCart.quantity;
+      } else {
+        this.item.quantity = 0;
+      }
+      this.cdr.detectChanges();
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  increaseQuantity(): void {
+    this.cartService.addToCart(this.item);
+    this.cdr.detectChanges();
+  }
+
+  decreaseQuantity(): void {
+    this.cartService.removeItem(this.item);
+    this.cdr.detectChanges();
+  }
 }
