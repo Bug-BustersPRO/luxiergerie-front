@@ -6,6 +6,9 @@ import { LoginClient } from '../../models/loginClient.model';
 import { CommonModule } from '@angular/common';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {catchError, of} from "rxjs";
+import { CookieService } from 'ngx-cookie-service';
+import { Hotel } from '../../models/hotel.model';
+import { HotelService } from '../../services/hotel.service';
 
 @Component({
   selector: 'app-login-modal',
@@ -34,21 +37,30 @@ export class LoginModalComponent {
   loginClient?: LoginClient
   step: number = 1
   invalidLogin: boolean = false
+  public hotel: Hotel = {} as Hotel;
   keys = [
     ...Array.from({length: 9}, (_, i) => ({type: 'number', value: i + 1})),
-    {type: 'action', value: 'erase', symbol: `&#8617;`},
+    {type: 'action', value: 'erase', symbol: `&#8592;`},
     {type: 'number', value: 0},
-    {type: 'action', value: 'submit', symbol: `&#9773;`}
+    {type: 'action', value: 'submit', symbol: `&#10004;`}
   ]
   @Input() isOpen: boolean = false
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder, 
+    private authService: AuthService, 
+    private router: Router, 
+    private cookieService: CookieService, 
+    private hotelService: HotelService) {
     this.loginForm = this.formBuilder.group({
       roomNumber: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
+  ngOnInit(): void {
+    this.getHotels();
+  }
 
   onKey(key: number | string) {
     let password = this.loginForm.get('password')?.value || ''
@@ -94,4 +106,25 @@ export class LoginModalComponent {
   onEditRoomNumber() {
     this.step = 1
   }
+
+  getHotels() {
+      this.hotelService.getHotel().subscribe({
+        next: response => {
+          this.hotel = response[0];
+          if (this.hotel !== undefined && this.hotel !== null) {
+            this.applyColors(this.hotel?.colors);
+          }
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+  }
+
+  applyColors(colors: string[]): void {
+    document.documentElement.style.setProperty('--primary-background-color', colors[0]);
+    document.documentElement.style.setProperty('--secondary-background-color', colors[1]);
+    document.documentElement.style.setProperty('--tertiary-background-color', colors[2]);
+  }
+
 }
