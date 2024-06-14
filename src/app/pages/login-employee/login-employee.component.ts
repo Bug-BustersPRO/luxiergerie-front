@@ -19,12 +19,17 @@ export class LoginEmployeeComponent {
   public hotelImageUrl!: string;
 
   constructor(public authService: AuthService, public router: Router, private hotelService: HotelService) {
-    this.getHotels();
-    if (this.hotel) {
-      this.applyColors(this.hotel?.colors);
-    } else {
-      this.applyColors(["#FDFBF5"]);
-    }
+    this.hotelService.getHotels().subscribe(() => {
+      this.hotel = this.hotelService.hotel;
+      if (this.hotel) {
+        this.hotelService.applyColors(this.hotel?.colors);
+        this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
+          this.hotelImageUrl = url;
+        });
+      } else {
+        this.hotelService.applyColors(["#FDFBF5"]);
+      }
+    });
   }
 
   async login() {
@@ -46,41 +51,6 @@ export class LoginEmployeeComponent {
   public get canValidate() {
     if (this.password == "" || (this.serialNumber == null || undefined)) return false;
     return true;
-  }
-
-  getHotels() {
-    this.hotelService.getHotel().subscribe({
-      next: response => {
-        this.hotel = response[0];
-        if (this.hotel !== undefined && this.hotel !== null) {
-          this.getHotelImage();
-        }
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
-  }
-
-  getHotelImage(): void {
-    this.hotelService.getHotelImage().subscribe({
-      next: (response) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(response);
-        reader.onloadend = () => {
-          this.hotelImageUrl = reader.result as string;
-        };
-      },
-      error: error => {
-        console.error(error);
-      }
-    });
-  }
-
-  applyColors(colors: string[]): void {
-    document.documentElement.style.setProperty('--primary-background-color', colors[0]);
-    document.documentElement.style.setProperty('--secondary-background-color', colors[1]);
-    document.documentElement.style.setProperty('--tertiary-background-color', colors[2]);
   }
 
 }
