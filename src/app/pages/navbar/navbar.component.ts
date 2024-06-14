@@ -22,8 +22,6 @@ export class NavbarComponent implements OnInit {
   }
 
   getHotels() {
-    const cookie = this.cookieService.get('jwt-token');
-    if (cookie !== '') {
       this.hotelService.getHotel().subscribe({
         next: response => {
           this.hotel = response[0];
@@ -36,8 +34,6 @@ export class NavbarComponent implements OnInit {
           console.error(error);
         }
       });
-    }
-
   }
 
   getHotelImage(): void {
