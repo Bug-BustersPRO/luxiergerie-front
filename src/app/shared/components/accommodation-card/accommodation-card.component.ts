@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Accommodation } from '../../models/accommodation.model';
 import { CartService } from '../../services/cart.service';
-import {Subscription, EMPTY} from 'rxjs';
+import { Subscription, EMPTY } from 'rxjs';
 
 
 @Component({
@@ -16,11 +16,16 @@ export class AccommodationCardComponent implements OnInit, OnDestroy {
   @Input() item!: Accommodation;
   private subscription: Subscription = EMPTY.subscribe();
 
-  constructor(private cartService: CartService, private cdr: ChangeDetectorRef){
+  constructor(private cartService: CartService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    this.updateQuantity();
+  }
+
+  updateQuantity() {
     this.subscription = this.cartService.getCartItems().subscribe(items => {
+
       const itemInCart = items.find(i => i.id === this.item.id);
       if (itemInCart) {
         this.item.quantity = itemInCart.quantity;
@@ -35,12 +40,12 @@ export class AccommodationCardComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  addQuantity(): void {
+  increaseQuantity(): void {
     this.cartService.addToCart(this.item);
     this.cdr.detectChanges();
   }
 
-  lessQuantity(): void {
+  decreaseQuantity(): void {
     this.cartService.removeItem(this.item);
     this.cdr.detectChanges();
   }
