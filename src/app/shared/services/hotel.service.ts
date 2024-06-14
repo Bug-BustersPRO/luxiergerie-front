@@ -19,7 +19,7 @@ export class HotelService {
   }
 
   public getHotel(): Observable<any> {
-    return this.httpClient.get(`${this.url}`, { headers: this.getHeaders() });
+    return this.httpClient.get(`${this.url}/infos`);
   }
 
   public getHotelImage(): Observable<Blob> {
