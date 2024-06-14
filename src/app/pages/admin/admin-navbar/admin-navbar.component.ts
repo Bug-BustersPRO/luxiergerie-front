@@ -51,7 +51,7 @@ export class AdminNavbarComponent {
       icon: 'note_alt'
     },
     {
-      name: 'Ajouter un employé',
+      name: 'Employé(e)s',
       route: 'employee',
       icon: 'person'
     },
