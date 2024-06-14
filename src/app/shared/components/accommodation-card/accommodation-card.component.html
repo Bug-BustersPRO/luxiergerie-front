@@ -9,7 +9,7 @@
     </div>
 
     <div class="price-button">
-      <div class="price">{{ item.priceToDisplay }}</div>
+      <div class="price">{{ item.price | number: '1.2-2' }} €</div>
       <div
         [ngClass]="{ 'only-more-button': item.quantity == 0 }"
         class="quantity-button"
@@ -22,7 +22,7 @@
         >
           <p>-</p>
         </button>
-        <div *ngIf="item.quantity > 0" class="quantity">{{ item.quantity }}</div>
+        <div *ngIf="item.quantity > 0" class="quantity">{{item.quantity}}</div>
         <button type="button" class="button-more" (click)="addQuantity()">
           <p>+</p>
         </button>

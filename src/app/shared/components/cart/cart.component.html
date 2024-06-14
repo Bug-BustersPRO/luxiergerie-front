@@ -1,3 +1,34 @@
-<ul *ngFor="let item of items">
-<li>  {{item.category}} {{item.name}} {{item.price}} {{item.quantity}}</li>
-</ul>
+<div class="cart">
+  <h1>Mon Panier</h1>
+  <div class="columns golden-border">
+  <p>Produits/Services</p>
+  <p class="centerded-p">Quantité</p>
+  <p class="centerded-p">Prix</p>
+  </div>
+    <div class="golden-border" *ngFor="let category of categories">
+        <p class="bold">  {{category.category}}</p>
+        <div *ngFor="let item of items">
+          <div *ngIf="item.category == category.category" class="columns">
+            <p>{{item.name}} </p>
+            <div class="quantity">
+              <p class="right-p tertiary bold" (click)="removeItem(item)">-</p>
+              <p class="centerded-p">{{item.quantity}}</p>
+              <p class="tertiary bold" (click)="addQuantity(item)">+</p>
+            </div>
+            <p class="centerded-p">{{item.price*item.quantity | number: '1.2-2'}} €</p>
+          </div>
+        </div>
+        <div class="columns">
+          <p class="golden-text">Sous total</p>
+          <div></div>
+          <p class="golden-text centerded-p"> {{category.totalPricePerCat.round(2).getPrettyValue()}} €</p>
+        </div>
+    </div>
+    <div class="columns">
+      <div></div>
+      <p class="centerded-p bold">Prix total : </p>
+      <p class="golden-text centerded-p">{{totalPrice.getPrettyValue()}} €</p>
+    </div>
+  <p (click) = "clearCategories()">Clear categories</p>
+  <p (click)= "clearCart()">Clear cart</p>
+</div>
