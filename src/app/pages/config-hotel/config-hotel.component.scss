@@ -1,0 +1,203 @@
+.config-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+
+  .config-header {
+    color: white;
+    background-color: #BD9E56;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      font-size: 32px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+  }
+
+  .config-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    margin-left: 30px;
+
+    .steps {
+      display: flex;
+      margin-top: 50px;
+      align-items: center;
+      gap: 3px;
+
+      .step-round {
+        width: 40px;
+        height: 40px;
+        background-color: #8391AA;
+        border-radius: 50px;
+        gap: 3px;
+      }
+
+      .step-line {
+        width: 77px;
+        height: 10px;
+        background-color: #8391AA;
+      }
+
+      .step-line-checked {
+        width: 77px;
+        height: 10px;
+        background-color: #BD9E56;
+      }
+
+      .step-round-checked {
+        width: 40px;
+        height: 40px;
+        background-color: #BD9E56;
+        border-radius: 50px;
+        gap: 3px;
+      }
+    }
+
+    .config-body {
+      margin-top: 40px;
+
+      h2 {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .add-button {
+        width: 115px;
+        height: 115px;
+        background-color: #BD9E56;
+
+        .button-icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          height: 100%;
+          width: 100%;
+          font-size: xxx-large;
+          cursor: pointer;
+        }
+      }
+
+      .hotel-name {
+        margin-top: 30px;
+        width: 495px;
+        height: 57px;
+      }
+
+      .config-colors {
+        display: flex;
+        width: 500px;
+        gap: 32px;
+
+        .colors-container {
+
+          p {
+            font-weight: 600;
+          }
+
+          .color-hex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            border: 1px solid black;
+
+            .color-input {
+              width: 30px;
+              height: 30px;
+              border: none;
+              background: transparent;
+              border-right: 1px solid black;
+            }
+
+            .text-input {
+              border: none;
+            }
+          }
+        }
+      }
+
+      .recommanded-colors {
+        width: 100%;
+        height: auto;
+        display: flex;
+        margin-top: 20px;
+
+        .colors-choice {
+          display: block;
+          width: 100%;
+          height: 100%;
+
+          p {
+            font-weight: 600;
+          }
+
+          .colors-btn {
+            display: flex;
+            gap: 25px;
+
+            button {
+              width: 100px;
+              height: 30px;
+            }
+          }
+
+        }
+      }
+    }
+
+    .file-name {
+      margin-top: 20px;
+    }
+
+    .config-button {
+      display: flex;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      gap: 30px;
+    }
+
+    .config-confirmation {
+      font-size: 24px;
+
+      .confirmation-text {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .confirmation-colors {
+          display: flex;
+          padding-left: 12px;
+        }
+
+        .color-input {
+          width: 30px;
+          height: 30px;
+          border: none;
+          background: transparent;
+        }
+      }
+    }
+  }
+}
+
+.error {
+  color: red;
+  margin: 0;
+  margin-top: 20px;
+  font-weight: 600;
+}

@@ -21,13 +21,15 @@ import { SectionComponent } from './shared/components/section/section.component'
 import { CategoryPage } from './pages/category/category-page';
 import { CategoryFacade } from './domains/category-facade';
 import { CategoryComponent } from './shared/components/category/category.component';
-import {AccommodationCardComponent } from './shared/components/accommodation-card/accommodation-card.component';
+import { AccommodationCardComponent } from './shared/components/accommodation-card/accommodation-card.component';
 import { AccommodationPage } from './pages/accommodation-page/accommodation-page.component';
 import { AccommodationComponent } from './shared/components/accommodation/accommodation.component';
 import { AccommodationFacade } from './domains/accommodation-facade';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
 import { CartFacade } from './domains/cart-facade';
 import { CartComponent } from './shared/components/cart/cart.component';
+import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
+import { ButtonComponent } from './shared/components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,6 @@ import { CartComponent } from './shared/components/cart/cart.component';
     LoginClientPageComponent,
     SectionPage,
     CardComponent,
-    HomePageComponent,
     CarouselComponent,
     ModalComponent,
     HomePageComponent,
@@ -60,6 +61,7 @@ import { CartComponent } from './shared/components/cart/cart.component';
     NavbarComponent,
     FormsModule,
     AccommodationCardComponent,
+    ButtonComponent
   ],
   providers: [
     CoreService,
@@ -73,6 +75,11 @@ import { CartComponent } from './shared/components/cart/cart.component';
       provide: 'authEmployee',
       useFactory: (service: AuthGuardService) => service.authEmployee(),
       deps: [AuthGuardService]
+    },
+    {
+      provide: 'configHotel',
+      useFactory: (service: ConfigHotelGuard) => service.configHotel(),
+      deps: [ConfigHotelGuard]
     },
     CategoryFacade,
     AccommodationFacade,

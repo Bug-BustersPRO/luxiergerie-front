@@ -99,5 +99,6 @@ body {
   100% {
     transform: rotate(0) translateY(-50px);
     opacity: 0;
+    z-index: -2;
   }
 }
