@@ -1,28 +1,60 @@
-<section class="global-container">
-  <form (ngSubmit)="onSubmit()">
+<!-- <section class="global-container">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <div class="forms">
       <div class="label-and-input">
-        <label> Nom de l'employé(e) </label>
-        <input type="text" placeholder="Entrez le nom" />
+        <label for="name"> Nom de l'employé(e) </label>
+        <input
+          name="name"
+          [(ngModel)]="model.name"
+          type="text"
+          placeholder="Entrez le nom"
+          #name="ngModel"
+          required minlength="2"
+        />
+        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+          <div class="error-length-required" *ngIf="name.errors?.['required']">Le nom est requis</div>
+          <div class="error-length-required" *ngIf="name.errors?.['minlength']">
+            le nom doit contenir plus de 2 caractères
+          </div>
+        </div>
       </div>
 
       <div class="label-and-input">
-        <label> Prénoms de l'employé(e) </label>
-        <input type="text" placeholder="Entrez le(s) prénom(s)" />
+        <label for="firstname"> Prénoms de l'employé(e) </label>
+        <input
+          name="firstname"
+          [(ngModel)]="model.firstname"
+          required minlength="2"
+          type="text"
+          #firstname="ngModel"
+          placeholder="Entrez le(s) prénom(s)"
+        />
+        <div *ngIf="firstname.invalid&& (firstname.dirty || firstname.touched)">
+          <div class="error-length-required" *ngIf="firstname.errors?.['required']">Le prénom est requis</div>
+          <div class="error-length-required" *ngIf="firstname.errors?.['minlength']">
+            le prénom doit contenir plus de 2 caractères
+          </div>
+        </div>
       </div>
 
       <div class="label-and-input">
-        <label> Role de l'employé(e) </label>
-        <select name="ROLE">
+        <label for="role"> Role de l'employé(e) </label>
+        <select name="role" [(ngModel)]="model.role" required #role="ngModel">
+          <option value="EMPLOYEE">Employé(e)</option>
           <option value="ADMIN">Admin</option>
-          <option value="EMPLOYE(E)">Employé(e)</option>
         </select>
+        <div *ngIf="role.invalid && (role.dirty || role.touched)"></div>
+        <div class="error-length-required" *ngIf="role.errors?.['required']">Le rôle est requis</div>
       </div>
 
       <div class="password-input label-and-input">
-        <label> Mot de passe </label>
+        <label for="password"> Mot de passe </label>
         <div class="password-input-wrapper">
           <input
+            name="password"
+            [(ngModel)]="model.password"
+            required minlength="6"
+            #password="ngModel"
             class="contain"
             type="{{ showPassword ? 'text' : 'password' }}"
             placeholder="Entrez votre mot de passe"
@@ -33,13 +65,61 @@
           >
             {{ text }}
           </div>
+          <div class="error-length-required" *ngIf="password.invalid&& (password.dirty || password.touched)">
+          <div class="error-length-required" *ngIf="password.errors?.['required']">Le mot de passe est requis</div>
+          <div class="error-length-required" *ngIf="password.errors?.['minlength']">
+            le mot de passe doit contenir plus de 6 caractères
+          </div>
+        </div>
         </div>
       </div>
 
       <div class="button-alignement">
         <app-button class="button-for-modal" action="annuler"></app-button>
-        <app-button class="button-for-modal" action="valider" click="onSubmit()"></app-button>
+        <app-button
+          class="button-for-modal"
+          action="valider"
+          click="onSubmit()"
+        ></app-button>
       </div>
     </div>
   </form>
-</section>
+</section> -->
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <div>
+    <label for="firstName">First Name</label>
+    <input id="firstName" name="firstName" [(ngModel)]="model.firstName" required minlength="3" #firstName="ngModel" #firstname="ngModel">
+    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+      <div *ngIf="firstName.errors?.['required']">First Name is required.</div>
+      <div *ngIf="firstName.errors?.['minlength']">First Name must be at least 3 characters long.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="lastName">Prénoms</label>
+    <input id="lastName" name="lastName" [(ngModel)]="model.lastName" required minlength="3" #lastName="ngModel">
+    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+      <div *ngIf="lastName.errors?.['required']">Last Name is required.</div>
+      <div *ngIf="lastName.errors?.['minlength']">Last Name must be at least 3 characters long.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="Roles">Role</label>
+    <input id="roles" name="Roles" [(ngModel)]="model.roles" required #role="ngModel">
+    <div *ngIf="role.invalid && (role.dirty || role.touched)">
+      <div *ngIf="role.errors?.['required']">Role is required.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" [(ngModel)]="model.password" required minlength="6" #password="ngModel">
+    <div *ngIf="password.invalid && (password.dirty || password.touched)">
+      <div *ngIf="password.errors?.['required']">Password is required.</div>
+      <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long.</div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>

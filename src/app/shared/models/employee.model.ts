@@ -1,10 +1,10 @@
 import { Role } from "./role.model";
 
 export class Employee {
-  public id: string;
+  public id?: string;
   public firstName: string;
   public lastName: string;
-  public serialNumber: string;
+  public serialNumber?: string;
   public password: string;
   public roles: Role[];
 

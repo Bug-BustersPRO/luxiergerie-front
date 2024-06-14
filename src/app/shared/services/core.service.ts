@@ -6,6 +6,7 @@ import { Category } from "../models/category.model";
 import { Accommodation } from "../models/accommodation.model";
 import { Purchase } from "../models/purchase.model";
 import {CookieService} from "ngx-cookie-service";
+import { Employee } from "../models/employee.model";
 
 @Injectable()
 export class CoreService {
@@ -132,5 +133,10 @@ export class CoreService {
   // DELETE
   public deletePurchase(id: number): Observable<any> {
     return this.httpClient.delete(`${this.url}/purchases/${id}`, { headers: this.headers });
+  }
+
+  //CREATE
+  public createEmployee(employee: Employee): Observable<any> {
+    return this.httpClient.post(`${this.url}/employee`, employee, {headers: this.headers});
   }
 }
