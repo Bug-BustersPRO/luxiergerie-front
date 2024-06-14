@@ -42,6 +42,10 @@ export class ConfigHotelComponent implements OnInit {
     this.hotel.name = '';
     this.hotel.image = [];
     this.hotel.colors = [];
+    this.getCurrentHotelConfig();
+  }
+
+  getCurrentHotelConfig(): void {
     if (!this.isCreateHotel) {
       this.getHotelImage();
       this.hotelService.getHotel().subscribe({
@@ -50,23 +54,25 @@ export class ConfigHotelComponent implements OnInit {
           this.hotel.name = response[0].name;
           this.hotel.colors = response[0].colors;
           this.hotel.image.push(response[0].image);
+          this.firstSelectedColor = this.hotel.colors[0];
+          this.secondSelectedColor = this.hotel.colors[1];
+          this.thirdSelectedColor = this.hotel.colors[2];
         },
         error: error => {
           console.error('Erreur lors de la récupération de l\'hôtel :', error);
         }
       });
     }
+    this.cdRef.detectChanges();
   }
 
   getHotelImage(): void {
     this.hotelService.getHotelImage().subscribe({
       next: (response) => {
-        console.log(response);
         const reader = new FileReader();
         reader.readAsDataURL(response);
         reader.onloadend = () => {
           this.imageUrl = reader.result as string;
-          console.log(this.imageUrl);
         };
       },
       error: error => {
@@ -116,6 +122,7 @@ export class ConfigHotelComponent implements OnInit {
       const file = input.files[0];
       this.isFileError = false;
       this.fileName = file.name;
+      this.hotel.image = [];
       this.hotel.image.push(file);
 
       const reader = new FileReader();
