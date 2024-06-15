@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoginEmployee } from 'src/app/shared/models/loginEmployee.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -14,7 +15,7 @@ export class LoginEmployeeComponent {
   public loginEmployee: LoginEmployee = { serialNumber: "", password: "" }
   public isNotLoggedIn: boolean = false;
 
-  constructor(public authService: AuthService, public router: Router) { }
+  constructor(public authService: AuthService, public router: Router, private toastr: ToastrService) { }
 
   async login() {
     this.loginEmployee.serialNumber = this.serialNumber;
@@ -23,10 +24,12 @@ export class LoginEmployeeComponent {
       next: response => {
         if (response.status === 200) {
           this.router.navigate(['/admin']);
+          this.toastr.success('Connexion réussie');
         }
       },
       error: (error) => {
-        console.error(error);
+        console.log(error);
+        this.toastr.error('Erreur de connexion');
         this.isNotLoggedIn = true;
       }
     });

@@ -21,7 +21,9 @@ $tertiary-background-color: #642424;
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
 
-
+.toast-info {
+  background-color: var($primary-background-color); // Couleur de fond pour les toasts d'information
+}
 
 * {
   box-sizing: border-box;

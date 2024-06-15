@@ -3,6 +3,7 @@ import { Component, Input, OnDestroy, OnInit, ChangeDetectorRef } from '@angular
 import { Accommodation } from '../../models/accommodation.model';
 import { CartService } from '../../services/cart.service';
 import { Subscription, EMPTY } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class AccommodationCardComponent implements OnInit, OnDestroy {
   @Input() item!: Accommodation;
   private subscription: Subscription = EMPTY.subscribe();
 
-  constructor(private cartService: CartService, private cdr: ChangeDetectorRef) {
+  constructor(private cartService: CartService, private cdr: ChangeDetectorRef, private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -42,11 +43,13 @@ export class AccommodationCardComponent implements OnInit, OnDestroy {
 
   increaseQuantity(): void {
     this.cartService.addToCart(this.item);
+    this.toastr.info('Article ajouté au panier');
     this.cdr.detectChanges();
   }
 
   decreaseQuantity(): void {
     this.cartService.removeItem(this.item);
+    this.toastr.info('Article retiré du panier');
     this.cdr.detectChanges();
   }
 }
