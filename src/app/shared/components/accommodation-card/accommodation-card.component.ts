@@ -26,7 +26,6 @@ export class AccommodationCardComponent implements OnInit, OnDestroy {
 
   updateQuantity() {
     this.subscription = this.cartService.getCartItems().subscribe(items => {
-
       const itemInCart = items.find(i => i.id === this.item.id);
       if (itemInCart) {
         this.item.quantity = itemInCart.quantity;
