@@ -1,4 +1,10 @@
 <section class="login">
+  @if (hotel) {
+    <div class="hotel-container">
+      <img src="{{hotelImageUrl}}" alt="hôtel logo" class="hotel-img">
+      <h2 class="hotel-title">{{hotel.name}}</h2>
+    </div>
+  }
   <div class="login-card">
     <div class="container">
       <div class="input-container">
@@ -16,7 +22,11 @@
                class="input-field">
       </div>
       <div class="btn-container">
-         <app-button action="valider" (click)="login()" [disabled]="!canValidate"/>
+        @if (hotel) {
+          <app-button action="valider" (click)="login()" [disabled]="!canValidate" [btnBackground]="hotel.colors[1]" [txtColor]="hotel.colors[0]"/>
+        }@else {
+          <app-button action="valider" (click)="login()" [disabled]="!canValidate"/>
+        }
       </div>
       <div *ngIf="isNotLoggedIn"
            class="error-message">
