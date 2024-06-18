@@ -19,19 +19,24 @@ export class LoginEmployeeComponent {
   public hotel!: Hotel;
   public hotelImageUrl!: string;
 
-  constructor(public authService: AuthService, public router: Router, private hotelService: HotelService) {
-    this.hotelService.getHotels().subscribe(() => {
-      this.hotel = this.hotelService.hotel;
-      if (this.hotel) {
-        this.hotelService.applyColors(this.hotel?.colors);
-        this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
-          this.hotelImageUrl = url;
-        });
-      } else {
-        this.hotelService.applyColors(["#FDFBF5"]);
-      }
-    });
-  }
+  constructor(
+    public authService: AuthService,
+    public router: Router,
+    private hotelService: HotelService,
+    private toastr: ToastrService) {
+      this.hotelService.getHotels().subscribe(() => {
+        this.hotel = this.hotelService.hotel;
+        if (this.hotel) {
+          this.hotelService.applyColors(this.hotel?.colors);
+          this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
+            this.hotelImageUrl = url;
+          });
+        } else {
+          this.hotelService.applyColors(["#FDFBF5"]);
+        }
+      });
+    }
+
 
   async login() {
     this.loginEmployee.serialNumber = this.serialNumber;
