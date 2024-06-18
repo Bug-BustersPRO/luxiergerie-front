@@ -5,8 +5,32 @@
   display: flex;
   flex-direction: column;
 
+  .hotel-container {
+    position: absolute;
+    height: 110px;
+    width: 170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .hotel-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hotel-title {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   .login-card {
-    background-color: #FDFBF5;
+    background-color: var(--primary-background-color);
     display: flex;
     justify-content: center;
     width: 50%;
