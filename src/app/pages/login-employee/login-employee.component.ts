@@ -37,7 +37,6 @@ export class LoginEmployeeComponent {
       });
     }
 
-
   async login() {
     this.loginEmployee.serialNumber = this.serialNumber;
     this.loginEmployee.password = this.password;

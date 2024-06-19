@@ -5,7 +5,6 @@ import { CartService } from '../../services/cart.service';
 import { Subscription, EMPTY } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-accommodation-card',
   templateUrl: './accommodation-card.component.html',
