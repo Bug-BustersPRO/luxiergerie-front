@@ -15,7 +15,7 @@ import { HotelService } from 'src/app/shared/services/hotel.service';
   templateUrl: './login-client.page.component.html',
   styleUrls: ['./login-client.page.component.scss']
 })
-export class LoginClientPageComponent implements OnInit, OnDestroy, AfterViewInit {
+export class LoginClientPageComponent implements OnDestroy, AfterViewInit {
   public startY = 0;
   public arrowClass = '';
   public hammer!: HammerManager;

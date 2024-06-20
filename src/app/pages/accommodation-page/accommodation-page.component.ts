@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Accommodation } from 'src/app/shared/models/accommodation.model';
 import { Category } from 'src/app/shared/models/category.model';
@@ -19,8 +19,8 @@ export class AccommodationPage {
   public hotelImageUrl!: string;
 
   constructor(
-    private accommodationFacade: AccommodationFacade,
     private route: ActivatedRoute,
+    private accommodationService: AccommodationService,
     private hotelService: HotelService) {
     this.hotelService.getHotels().subscribe(() => {
       this.hotel = this.hotelService.hotel;

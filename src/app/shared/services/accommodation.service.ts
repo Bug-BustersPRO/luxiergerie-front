@@ -34,6 +34,9 @@ export class AccommodationService {
       });
   }
 
+  public getCategoryNameByAccommodation(accommodationId: string): Observable<any> {
+    return this.http.get(`${this.url}/categories/accommodations/${accommodationId}/category`, { headers: this.getHeaders(), observe: "response", responseType: 'text' });
+  }
 
   public getById(id: number): void {
     this.http.get<Accommodation>(`${this.url}/accommodations/${id}`, { headers: this.getHeaders() })
