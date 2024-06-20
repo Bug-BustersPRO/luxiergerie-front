@@ -9,7 +9,7 @@
       </div>
       <div class="hotel-name">
         @if (hotel !== undefined && hotel !== null) {
-          <p>{{hotel.name}}</p>
+          <p>Hôtel - {{hotel.name}}</p>
         }
       </div>
     </div>
@@ -40,8 +40,7 @@
       <i class="material-icons md-36">calendar_month</i>
     </div>
     <div class="btn">
-      <i class="material-icons md-36"
-         (click)="navigateTo('/sections')">shopping_basket</i>
+    <i class="material-icons md-36" (click)="navigateTo('/cart')">shopping_basket</i>
     </div>
     <div class="btn">
       <i class="material-icons md-36"

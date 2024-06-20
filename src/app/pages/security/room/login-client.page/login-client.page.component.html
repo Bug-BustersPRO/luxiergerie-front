@@ -4,14 +4,17 @@
          alt="logo-hotel"
          width="200px"
          height="200px">
-    <h1>Bienvenue à l'hotel</h1>
-    <h1>Sierra Monaco</h1>
+    <h1>Bienvenue à l'hôtel</h1>
+    <h1 *ngIf="hotel">{{hotel.name}}</h1>
   </div>
   <div class="login-container">
     <app-login-modal *ngIf="openModal"
-                     [isOpen]="openModal"></app-login-modal>
+                     [isOpen]="openModal" />
   </div>
 </section>
+<div #arrow
+     class="arrow"
+     [ngClass]="arrowClass">
 <div #arrow
      class="arrow"
      [ngClass]="arrowClass">

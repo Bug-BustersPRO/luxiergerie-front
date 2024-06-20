@@ -2,6 +2,8 @@ import { Component, Input, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Accommodation } from 'src/app/shared/models/accommodation.model';
 import { Category } from 'src/app/shared/models/category.model';
+import { HotelService } from 'src/app/shared/services/hotel.service';
+import { Hotel } from 'src/app/shared/models/hotel.model';
 import { AccommodationService } from 'src/app/shared/services/accommodation.service';
 
 @Component({
@@ -13,9 +15,24 @@ export class AccommodationPage {
   public accommodations: Accommodation[] = [];
   public accommodation!: Accommodation;
   @Input() category!: Category;
-  accommodationService = inject(AccommodationService);
+  public hotel!: Hotel;
+  public hotelImageUrl!: string;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private accommodationFacade: AccommodationFacade,
+    private route: ActivatedRoute,
+    private hotelService: HotelService) {
+    this.hotelService.getHotels().subscribe(() => {
+      this.hotel = this.hotelService.hotel;
+      if (this.hotel) {
+        this.hotelService.applyColors(this.hotel?.colors);
+        this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
+          this.hotelImageUrl = url;
+        });
+      } else {
+        this.hotelService.applyColors(["#FDFBF5"]);
+      }
+    });
   }
 
   ngOnInit(): void {
