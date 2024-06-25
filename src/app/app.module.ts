@@ -30,6 +30,7 @@ import { CartFacade } from './domains/cart-facade';
 import { CartComponent } from './shared/components/cart/cart.component';
 import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
 import { ButtonComponent } from './shared/components/button/button.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,12 @@ import { ButtonComponent } from './shared/components/button/button.component';
     NavbarComponent,
     FormsModule,
     AccommodationCardComponent,
-    ButtonComponent
+    ButtonComponent,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    })
   ],
   providers: [
     CoreService,

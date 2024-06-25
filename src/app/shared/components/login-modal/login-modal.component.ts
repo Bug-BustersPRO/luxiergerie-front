@@ -8,6 +8,7 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
 import { catchError, of } from "rxjs";
 import { Hotel } from '../../models/hotel.model';
 import { HotelService } from '../../services/hotel.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-modal',
@@ -46,7 +47,8 @@ export class LoginModalComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private hotelService: HotelService) {
+    private hotelService: HotelService,
+    private toastr: ToastrService) {
     this.loginForm = this.formBuilder.group({
       roomNumber: ['', Validators.required],
       password: ['', Validators.required]
@@ -59,9 +61,6 @@ export class LoginModalComponent {
         this.hotelService.applyColors(["#FDFBF5"]);
       }
     });
-  }
-
-  ngOnInit(): void {
   }
 
   onKey(key: number | string) {
@@ -81,10 +80,12 @@ export class LoginModalComponent {
         catchError((error) => {
           this.invalidLogin = true
           console.log(this.invalidLogin)
+          this.toastr.error('Erreur de connexion');
           return of(error)
         })
       ).subscribe(response => {
         if (response.status === 200) {
+          this.toastr.success('Connexion réussie');
           this.router.navigate(['/'])
         }
       });
