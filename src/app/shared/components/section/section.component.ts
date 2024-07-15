@@ -13,9 +13,6 @@ export class SectionComponent {
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-  }
-
   navigateToCategories() {
     this.router.navigate([`sections/${this.section.id}/categories`]);
   }

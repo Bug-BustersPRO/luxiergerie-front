@@ -13,7 +13,7 @@ export class CategoryComponent {
 
   constructor(private router: Router) { }
 
-  navigateToAccommodations(){
+  navigateToAccommodations() {
     this.router.navigate([`categories/${this.category.id}/accommodations`])
   }
 

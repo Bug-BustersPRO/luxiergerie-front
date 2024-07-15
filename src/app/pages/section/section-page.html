@@ -1,21 +1,14 @@
-
 <app-carousel [items]="carouselItems"></app-carousel>
-<!-- App-carousel to remove, it's a test bro -->
-<div class = "cards">
-<li *ngFor="let section of sections">
-<app-section [section]="section" ></app-section>
-</li>
+<div class="cards">
+  <li *ngFor="let section of sections">
+    <app-section [section]="section"></app-section>
+  </li>
 </div>
-
 <button (click)="openModal()">Click here to open Modal</button>
-
-
 <!-- Exemple of using the app-modal // TO REMOVE -->
-<app-modal
-  title="Réserver ma séance"
-  [showModal]="isModalOpen"
-  (closeModalEvent)="isModalOpen = false"
->
+<app-modal title="Réserver ma séance"
+           [showModal]="isModalOpen"
+           (closeModalEvent)="isModalOpen = false">
   <section>
     <div>test data</div>
     <div>test data</div>

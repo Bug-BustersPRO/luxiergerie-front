@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Accommodation } from '../models/accommodation.model';
 import { Category } from '../models/category.model';
-import { CoreService } from './core.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import bigDecimal from 'js-big-decimal';
+import { AccommodationService } from './accommodation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  items: Accommodation[] = [];
-  categories: { category: Category, totalPricePerCat: bigDecimal }[] = [];
-  totalPrice: bigDecimal = new bigDecimal(0);
-  cartItems = new BehaviorSubject<Accommodation[]>([]);
+  public items: Accommodation[] = [];
+  public categories: { category: Category, totalPricePerCat: bigDecimal }[] = [];
+  public totalPrice: bigDecimal = new bigDecimal(0);
+  public cartItems = new BehaviorSubject<Accommodation[]>([]);
 
-  constructor(private coreService: CoreService) {
+  constructor(private accomodationService: AccommodationService ) {
     this.loadCart();
   }
 
@@ -126,7 +126,7 @@ export class CartService {
 
   getCategory(addedItem: Accommodation): Observable<string> {
     return new Observable<string>((observer) => {
-      this.coreService.getCategoryNameByAccommodation(addedItem.id)
+      this.accomodationService.getCategoryNameByAccommodation(addedItem.id)
         .subscribe((categoryName) => {
           observer.next(categoryName.body);
           observer.complete();

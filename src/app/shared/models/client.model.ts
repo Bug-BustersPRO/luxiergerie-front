@@ -6,10 +6,10 @@ export class Client {
   public lastName: string;
   public email: string;
   public phoneNumber: string;
-  public pin: Number;
+  public pin: number;
   public room: Room;
 
-  constructor(id: string, firstName: string, lastName: string, email: string, phoneNumber: string, pin: Number, room: Room) {
+  constructor(id: string, firstName: string, lastName: string, email: string, phoneNumber: string, pin: number, room: Room) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;

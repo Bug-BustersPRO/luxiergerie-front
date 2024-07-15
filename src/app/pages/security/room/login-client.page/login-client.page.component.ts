@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   OnDestroy,
   Renderer2,
   ElementRef,
@@ -16,7 +15,7 @@ import { HotelService } from 'src/app/shared/services/hotel.service';
   templateUrl: './login-client.page.component.html',
   styleUrls: ['./login-client.page.component.scss']
 })
-export class LoginClientPageComponent implements OnInit, OnDestroy, AfterViewInit {
+export class LoginClientPageComponent implements OnDestroy, AfterViewInit {
   public startY = 0;
   public arrowClass = '';
   public hammer!: HammerManager;
@@ -31,17 +30,6 @@ export class LoginClientPageComponent implements OnInit, OnDestroy, AfterViewIni
     this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
     this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
     this.renderer.setStyle(document.body, 'background-position', 'center');
-    this.hotelService.getHotels().subscribe(() => {
-      this.hotel = this.hotelService.hotel;
-      if (this.hotel) {
-        this.hotelService.applyColors(this.hotel?.colors);
-        this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
-          this.hotelImageUrl = url;
-        });
-      } else {
-        this.hotelService.applyColors(["#FDFBF5"]);
-      }
-    });
   }
 
   ngOnInit(): void {
@@ -68,7 +56,7 @@ export class LoginClientPageComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   initializeHammer(): void {
-    if (this.arrow && this.arrow.nativeElement) {
+    if (this.arrow.nativeElement) {
       this.hammer = new Hammer(this.arrow.nativeElement);
       this.hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
 

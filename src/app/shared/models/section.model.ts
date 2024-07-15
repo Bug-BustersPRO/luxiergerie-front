@@ -9,7 +9,7 @@ export class Section {
   public title: string;
   public categories: Category[];
 
-  constructor(id: string, name: string, image: string, description: string, title:string, categories: Category[]) {
+  constructor(id: string, name: string, image: string, description: string, title: string, categories: Category[]) {
     this.id = id;
     this.name = name;
     this.image = image;
