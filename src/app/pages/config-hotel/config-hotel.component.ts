@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { Hotel } from 'src/app/shared/models/hotel.model';
@@ -35,7 +36,11 @@ export class ConfigHotelComponent implements OnInit {
   public filesExtension = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
   public errorMessage!: string;
 
-  constructor(private cdRef: ChangeDetectorRef, private hotelService: HotelService, private router: Router) {
+  constructor(
+    private cdRef: ChangeDetectorRef,
+    private hotelService: HotelService,
+    private router: Router,
+    private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -185,13 +190,16 @@ export class ConfigHotelComponent implements OnInit {
           console.log(response);
           this.router.navigate(['/admin']);
           this.hotelService.emitHotelUpdate(this.hotel);
+          this.toastr.success('Hôtel configuré avec succès');
           this.cdRef.detectChanges();
         },
         error: error => {
           if (this.isCreateHotel === true) {
             console.error('Erreur lors de la création de l\'hôtel :', error);
+            this.toastr.error('Erreur lors de la création de l\'hôtel');
           } else {
             console.error('Erreur lors de la mise à jour de l\'hôtel :', error);
+            this.toastr.error('Erreur lors de la mise à jour de l\'hôtel');
           }
         }
       }
