@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { CoreService } from '../../services/core.service';
 import { Role } from '../../models/role.model';
+import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-register-employee',
@@ -17,10 +18,10 @@ export class RegisterEmployeeComponent {
   showPassword: boolean = false;
   text: string = 'visibility_off';
   
-  model = {
-    lastName: '',
+  model: any = {
     firstName: '',
-    roles: [] as Role[],
+    lastName: '',
+    roles: [],
     password: ''
   }
 
@@ -36,6 +37,7 @@ export class RegisterEmployeeComponent {
   }
 
   onSubmit(form: { valid: any; }) {
+    console.log('form: ', form);
     if(form.valid) {
       this.coreService.createEmployee(this.model).subscribe(
         response => {
