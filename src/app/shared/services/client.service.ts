@@ -16,7 +16,7 @@ export class ClientService {
       'Authorization': `Bearer ${token}`
     });
   }
-  public getAllClients$: WritableSignal<Client[]> = signal([]);
+  private getAllClients$: WritableSignal<Client[]> = signal([]);
   getAllClientsSig = computed(() => this.getAllClients$);
   public getClientById!: Client;
 

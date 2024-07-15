@@ -18,7 +18,7 @@ export class PurchaseService {
       'Authorization': `Bearer ${token}`
     });
   }
-  public getAllPurchases$: WritableSignal<Purchase[]> = signal([]);
+  private getAllPurchases$: WritableSignal<Purchase[]> = signal([]);
   getAllPurchasesSig = computed(() => this.getAllPurchases$());
   public getPurchaseById!: Purchase;
 

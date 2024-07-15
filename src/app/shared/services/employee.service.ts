@@ -16,7 +16,7 @@ export class EmployeeService {
       'Authorization': `Bearer ${token}`
     });
   }
-  public getAllEmployees$: WritableSignal<Employee[]> = signal([]);
+  private getAllEmployees$: WritableSignal<Employee[]> = signal([]);
   getAllEmployeesSig = computed(() => this.getAllEmployees$);
   public employeeById!: Employee;
 

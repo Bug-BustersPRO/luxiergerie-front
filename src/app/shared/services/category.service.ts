@@ -17,7 +17,7 @@ export class CategoryService {
       'Authorization': `Bearer ${token}`
     });
   }
-  public getAllCategories$: WritableSignal<Category[]> = signal([]);
+  private getAllCategories$: WritableSignal<Category[]> = signal([]);
   getAllCategoriesSig = computed(() => this.getAllCategories$());
   public getCategoryById!: Category;
 

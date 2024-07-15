@@ -15,7 +15,8 @@ export class RoleService {
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-  } public getAllRoles$: WritableSignal<Role[]> = signal([]);
+  }
+  private getAllRoles$: WritableSignal<Role[]> = signal([]);
   getAllRolesSig = computed(() => this.getAllRoles$());
   public getRoleById!: Role;
 

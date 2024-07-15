@@ -15,7 +15,7 @@ export class SectionPage implements OnInit {
 
   constructor() {
     effect(() => {
-      const sections = this.sectionService.getAllSections$();
+      const sections = this.sectionService.getAllSectionsSig();
       this.sections = sections;
       if (this.sections.length > 0) {
         this.carouselItems = [];

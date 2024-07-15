@@ -18,7 +18,7 @@ export class AccommodationService {
       'Authorization': `Bearer ${token}`
     });
   }
-  public getAllAccomodations$: WritableSignal<Accommodation[]> = signal([]);
+  private getAllAccomodations$: WritableSignal<Accommodation[]> = signal([]);
   getAllAccomodations = computed(this.getAllAccomodations$);
   public getAccommodationById!: Accommodation;
 

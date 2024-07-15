@@ -19,7 +19,7 @@ export class SectionService {
       'Authorization': `Bearer ${token}`
     });
   }
-  public getAllSections$: WritableSignal<Section[]> = signal([]);
+  private getAllSections$: WritableSignal<Section[]> = signal([]);
   getAllSectionsSig = computed(() => this.getAllSections$());
   public getSectionById!: Section;
 

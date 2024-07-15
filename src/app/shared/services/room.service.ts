@@ -16,9 +16,9 @@ export class RoomService {
       'Authorization': `Bearer ${token}`
     });
   }
-  public getAllRooms$: WritableSignal<Room[]> = signal([]);
+  private getAllRooms$: WritableSignal<Room[]> = signal([]);
   getAllRoomsSig = computed(() => this.getAllRooms$());
-  public getAllAvailableRooms$: WritableSignal<Room[]> = signal([]);
+  private getAllAvailableRooms$: WritableSignal<Room[]> = signal([]);
   getAllAvailableRoomsSig = computed(() => this.getAllAvailableRooms$());
 
   public getRoomById!: Room;
