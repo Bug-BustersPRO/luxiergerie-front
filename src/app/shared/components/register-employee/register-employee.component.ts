@@ -3,11 +3,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { CoreService } from '../../services/core.service';
-import { Role } from '../../models/role.model';
-<<<<<<< HEAD
 import { Employee } from '../../models/employee.model';
-=======
->>>>>>> e09b07145e18dc79ce63561a43e67523426f261b
+import { Role } from '../../models/role.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register-employee',
@@ -20,22 +18,40 @@ export class RegisterEmployeeComponent {
 
   showPassword: boolean = false;
   text: string = 'visibility_off';
+
+  roles!: Role[];
   
-<<<<<<< HEAD
-  model: any = {
-    firstName: '',
-    lastName: '',
-    roles: [],
-=======
-  model = {
-    lastName: '',
-    firstName: '',
-    roles: [] as Role[],
->>>>>>> e09b07145e18dc79ce63561a43e67523426f261b
-    password: ''
+   model: Employee = new Employee(
+    "",
+    "",
+    "",
+    '',
+    '',
+    [{ name: '' }],
+  );
+
+  constructor(private coreService: CoreService, private userService: UserService) {
+    this.userService.getRoles().subscribe(
+      response => {
+        this.roles = response.filter((role: Role) => role.name !== 'ROLE_DIAMOND' && role.name !== 'ROLE_GOLD');
+         console.log('roles: ', this.roles);     
+      },
+     
+      error => {
+        console.error('Error getting roles', error);
+   });
   }
 
-  constructor(private coreService: CoreService) {}
+  getRoleName(role: string) {
+    switch(role) {
+      case 'ROLE_ADMIN':
+        return 'Admin';
+      case 'ROLE_EMPLOYEE':
+        return 'Employé(e)';
+      default:
+        return 'Employé(e)';
+    }
+  }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -47,11 +63,9 @@ export class RegisterEmployeeComponent {
   }
 
   onSubmit(form: { valid: any; }) {
-<<<<<<< HEAD
     console.log('form: ', form);
-=======
->>>>>>> e09b07145e18dc79ce63561a43e67523426f261b
     if(form.valid) {
+      console.log('model: ', this.model);-+
       this.coreService.createEmployee(this.model).subscribe(
         response => {
           console.log('employee created succesfully: ', response);
@@ -59,7 +73,9 @@ export class RegisterEmployeeComponent {
         error => {
           console.error('Error creating employees' ,error)
         }
-      );      
+      );  
+      //fermer la modale   
+      //fetch les employés et les afficher (serialnumber !!!)
     }
   }
 

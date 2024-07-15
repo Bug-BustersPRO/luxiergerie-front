@@ -141,6 +141,7 @@ export class CoreService {
 
   //CREATE
   public createEmployee(employee: Employee): Observable<any> {
+    console.log('employee: ', employee);
     return this.httpClient.post(`${this.url}/employee`, employee, {headers: this.headers});
   }
 }

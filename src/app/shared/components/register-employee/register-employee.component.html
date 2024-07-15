@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 <section class="global-container">
-=======
-<!-- <section class="global-container">
->>>>>>> e09b07145e18dc79ce63561a43e67523426f261b
   <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <div class="forms">
       <div class="label-and-input">
-        <label for="name"> Nom de l'employé(e) </label>
+        <label for="lastName"> Nom de l'employé(e) </label>
         <input
-<<<<<<< HEAD
           name="lastName"
           [(ngModel)]="model.lastName"
           type="text"
@@ -19,25 +14,12 @@
         <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
           <div class="error-length-required" *ngIf="lastName.errors?.['required']">Le nom est requis</div>
           <div class="error-length-required" *ngIf="lastName.errors?.['minlength']">
-=======
-          name="name"
-          [(ngModel)]="model.name"
-          type="text"
-          placeholder="Entrez le nom"
-          #name="ngModel"
-          required minlength="2"
-        />
-        <div *ngIf="name.invalid && (name.dirty || name.touched)">
-          <div class="error-length-required" *ngIf="name.errors?.['required']">Le nom est requis</div>
-          <div class="error-length-required" *ngIf="name.errors?.['minlength']">
->>>>>>> e09b07145e18dc79ce63561a43e67523426f261b
             le nom doit contenir plus de 2 caractères
           </div>
         </div>
       </div>
 
       <div class="label-and-input">
-<<<<<<< HEAD
         <label for="firstName"> Prénoms de l'employé(e) </label>
         <input
           name="firstName"
@@ -50,43 +32,22 @@
         <div *ngIf="firstName.invalid&& (firstName.dirty || firstName.touched)">
           <div class="error-length-required" *ngIf="firstName.errors?.['required']">Le prénom est requis</div>
           <div class="error-length-required" *ngIf="firstName.errors?.['minlength']">
-=======
-        <label for="firstname"> Prénoms de l'employé(e) </label>
-        <input
-          name="firstname"
-          [(ngModel)]="model.firstname"
-          required minlength="2"
-          type="text"
-          #firstname="ngModel"
-          placeholder="Entrez le(s) prénom(s)"
-        />
-        <div *ngIf="firstname.invalid&& (firstname.dirty || firstname.touched)">
-          <div class="error-length-required" *ngIf="firstname.errors?.['required']">Le prénom est requis</div>
-          <div class="error-length-required" *ngIf="firstname.errors?.['minlength']">
->>>>>>> e09b07145e18dc79ce63561a43e67523426f261b
             le prénom doit contenir plus de 2 caractères
           </div>
         </div>
       </div>
 
       <div class="label-and-input">
-<<<<<<< HEAD
         <label for="roles"> Role de l'employé(e) </label>
-        <select name="roles" [(ngModel)]="model.roles" required #roles="ngModel">
-          <option value="ROLE_EMPLOYEE">Employé(e)</option>
-          <option value="ROLE_ADMIN">Admin</option>
-        </select>
-        <div *ngIf="roles.invalid && (roles.dirty || roles.touched)"></div>
-        <div class="error-length-required" *ngIf="roles.errors?.['required']">Le rôle est requis</div>
-=======
-        <label for="role"> Role de l'employé(e) </label>
-        <select name="role" [(ngModel)]="model.role" required #role="ngModel">
-          <option value="EMPLOYEE">Employé(e)</option>
-          <option value="ADMIN">Admin</option>
-        </select>
-        <div *ngIf="role.invalid && (role.dirty || role.touched)"></div>
-        <div class="error-length-required" *ngIf="role.errors?.['required']">Le rôle est requis</div>
->>>>>>> e09b07145e18dc79ce63561a43e67523426f261b
+        <select name="roles" [(ngModel)]="model.roles[0].name" required>
+          @for (role of roles; track $index) {
+            <option [value]="role.name">{{getRoleName(role.name)}}</option>
+          }
+          
+        </select> 
+        <!-- validation des roles -->
+        <!-- <div *ngIf="roles.invalid && (roles.dirty || roles.touched)"></div>
+        <div class="error-length-required" *ngIf="roles.errors?.['required']">Le rôle est requis</div> -->
       </div>
 
       <div class="password-input label-and-input">
@@ -126,46 +87,4 @@
       </div>
     </div>
   </form>
-<<<<<<< HEAD
 </section>
-=======
-</section> -->
-<form #form="ngForm" (ngSubmit)="onSubmit(form)">
-  <div>
-    <label for="firstName">First Name</label>
-    <input id="firstName" name="firstName" [(ngModel)]="model.firstName" required minlength="3" #firstName="ngModel" #firstname="ngModel">
-    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
-      <div *ngIf="firstName.errors?.['required']">First Name is required.</div>
-      <div *ngIf="firstName.errors?.['minlength']">First Name must be at least 3 characters long.</div>
-    </div>
-  </div>
-
-  <div>
-    <label for="lastName">Prénoms</label>
-    <input id="lastName" name="lastName" [(ngModel)]="model.lastName" required minlength="3" #lastName="ngModel">
-    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
-      <div *ngIf="lastName.errors?.['required']">Last Name is required.</div>
-      <div *ngIf="lastName.errors?.['minlength']">Last Name must be at least 3 characters long.</div>
-    </div>
-  </div>
-
-  <div>
-    <label for="Roles">Role</label>
-    <input id="roles" name="Roles" [(ngModel)]="model.roles" required #role="ngModel">
-    <div *ngIf="role.invalid && (role.dirty || role.touched)">
-      <div *ngIf="role.errors?.['required']">Role is required.</div>
-    </div>
-  </div>
-
-  <div>
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" [(ngModel)]="model.password" required minlength="6" #password="ngModel">
-    <div *ngIf="password.invalid && (password.dirty || password.touched)">
-      <div *ngIf="password.errors?.['required']">Password is required.</div>
-      <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long.</div>
-    </div>
-  </div>
-
-  <button type="submit" [disabled]="form.invalid">Submit</button>
-</form>
->>>>>>> e09b07145e18dc79ce63561a43e67523426f261b
