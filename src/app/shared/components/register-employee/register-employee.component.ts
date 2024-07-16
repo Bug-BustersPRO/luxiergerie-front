@@ -6,6 +6,7 @@ import { Employee } from '../../models/employee.model';
 import { Role } from '../../models/role.model';
 import { RoleService } from '../../services/role.service';
 import { EmployeeService } from '../../services/employee.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register-employee',
@@ -30,7 +31,7 @@ export class RegisterEmployeeComponent {
     [{ name: '' }],
   );
 
-  constructor(private roleService: RoleService, private employeeService: EmployeeService) {
+  constructor(private roleService: RoleService, private employeeService: EmployeeService, private toastr: ToastrService) {
         this.roleService.getRoles();
         effect(() => {
           this.roles = this.roleService.getAllRolesSig().filter((role: Role) => role.name !== 'ROLE_DIAMOND' && role.name !== 'ROLE_GOLD');
@@ -67,7 +68,7 @@ export class RegisterEmployeeComponent {
       this.employeeService.createEmployee(this.model).subscribe(
         response => {
           this.closeModal.emit();
-          // this.toastr.success('Employé(e) créé(e) avec succès');
+          this.toastr.success('Employé(e) créé(e) avec succès');
           console.log('employee created succesfully: ', response);
         },
         error => {
