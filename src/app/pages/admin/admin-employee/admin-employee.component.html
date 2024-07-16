@@ -7,5 +7,5 @@
   </div>
 </section>
 <app-modal title="Ajout d'un employé" [showModal]="isModalOpen" (closeModalEvent)="isModalOpen = false">
-  <app-register-employee></app-register-employee>
+  <app-register-employee (closeModal)="closeModal()"></app-register-employee>
 </app-modal>

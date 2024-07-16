@@ -16,5 +16,8 @@ export class AdminEmployeeComponent {
   openModal()  {
     this.isModalOpen = true;
   }
+  closeModal() {
+    this.isModalOpen = false;
+  }
 
 }
