@@ -42,12 +42,10 @@ export class AccommodationCardComponent implements OnInit, OnDestroy {
   increaseQuantity(): void {
     this.cartService.addToCart(this.item);
     this.toastr.info('Article ajouté au panier');
-    this.cdr.detectChanges();
   }
 
   decreaseQuantity(): void {
     this.cartService.removeItem(this.item);
     this.toastr.info('Article retiré du panier');
-    this.cdr.detectChanges();
   }
 }

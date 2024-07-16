@@ -42,7 +42,6 @@ import { ToastrModule } from 'ngx-toastr';
     CategoryPage,
     AccommodationComponent,
     LoginEmployeeComponent,
-    CartComponent,
     AccommodationPage
   ],
   imports: [
@@ -59,7 +58,9 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     AccommodationCardComponent,
     ButtonComponent,
+    ModalComponent,
     BrowserAnimationsModule,
+    CartComponent,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,

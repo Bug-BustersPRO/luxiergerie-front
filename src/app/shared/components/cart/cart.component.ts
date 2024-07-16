@@ -1,24 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Accommodation } from '../../models/accommodation.model';
 import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
 import bigDecimal from 'js-big-decimal';
 import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { HotelService } from '../../services/hotel.service';
+import { Hotel } from '../../models/hotel.model';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.scss'
+  styleUrl: './cart.component.scss',
+  imports: [CommonModule, ButtonComponent],
+  standalone: true
 })
 export class CartComponent implements OnInit {
   items: Accommodation[] = [];
   categories: { category: Category; totalPricePerCat: bigDecimal }[] = [];
   totalPrice: bigDecimal = this.cartService.getTotalPrice().round(2);
+  public hotel!: Hotel;
+  public hotelImageUrl!: string;
 
-  constructor(private cartService: CartService, private toastr: ToastrService) { }
+  constructor(private cartService: CartService, private toastr: ToastrService, private hotelService: HotelService, private cdr: ChangeDetectorRef)
+  {this.hotelService.getHotels().subscribe(() => {
+    this.hotel = this.hotelService.hotel;
+    if (this.hotel) {
+      this.hotelService.applyColors(this.hotel?.colors);
+      this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
+        this.hotelImageUrl = url;
+      });
+    } else {
+      this.hotelService.applyColors(["#FDFBF5"]);
+    }
+  });
+  this.loadCart();
+  }
 
   ngOnInit() {
-    this.loadCart();
+    this.cartService.cartItems.subscribe(items => {
+      this.items = items;
+      this.cdr.markForCheck(); // Trigger change detection
+    });
+
+    this.cartService.categoriesSubject.subscribe(categories => {
+      this.categories = categories;
+      this.cdr.markForCheck(); // Trigger change detection
+    });
+
+    this.cartService.totalPriceSubject.subscribe(totalPrice => {
+      this.totalPrice = totalPrice;
+      this.cdr.markForCheck(); // Trigger change detection
+    });
   }
 
   loadCart(): void {
@@ -38,13 +72,11 @@ export class CartComponent implements OnInit {
 
   removeItem(item: Accommodation) {
     this.cartService.removeItem(item);
-    this.totalPrice = this.cartService.getTotalPrice().round(2);
     this.toastr.info('Article retiré du panier');
   }
 
   addQuantity(item: Accommodation): void {
     this.cartService.addToCart(item);
-    this.totalPrice = this.cartService.getTotalPrice().round(2);
     this.toastr.info('Article ajouté au panier');
   }
 }
