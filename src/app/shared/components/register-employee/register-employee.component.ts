@@ -1,14 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, output, ViewChild, viewChild } from '@angular/core';
+import { Component, effect, EventEmitter, Output, output, ViewChild, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
-import { CoreService } from '../../services/core.service';
 import { Employee } from '../../models/employee.model';
 import { Role } from '../../models/role.model';
-import { UserService } from '../../services/user.service';
-import { AdminEmployeeComponent } from 'src/app/pages/admin/admin-employee/admin-employee.component';
-import { ModalComponent } from '../modal/modal.component';
-import { ToastrService } from 'ngx-toastr';
+import { RoleService } from '../../services/role.service';
+import { EmployeeService } from '../../services/employee.service';
 
 @Component({
   selector: 'app-register-employee',
@@ -33,17 +30,15 @@ export class RegisterEmployeeComponent {
     [{ name: '' }],
   );
 
-  constructor(private coreService: CoreService, private userService: UserService) {
-    this.userService.getRoles().subscribe(
-      response => {
-        this.roles = response.filter((role: Role) => role.name !== 'ROLE_DIAMOND' && role.name !== 'ROLE_GOLD');
-         console.log('roles: ', this.roles);     
-      },
-     
-      error => {
-        console.error('Error getting roles', error);
-   });
+  constructor(private roleService: RoleService, private employeeService: EmployeeService) {
+        this.roleService.getRoles();
+        effect(() => {
+          this.roles = this.roleService.getAllRolesSig().filter((role: Role) => role.name !== 'ROLE_DIAMOND' && role.name !== 'ROLE_GOLD');
+          console.log('roles: ', this.roles);
+        });
+        
   }
+ 
 
   getRoleName(role: string) {
     switch(role) {
@@ -69,7 +64,7 @@ export class RegisterEmployeeComponent {
     console.log('form: ', form);
     if(form.valid) {
       console.log('model: ', this.model);-+
-      this.coreService.createEmployee(this.model).subscribe(
+      this.employeeService.createEmployee(this.model).subscribe(
         response => {
           this.closeModal.emit();
           // this.toastr.success('Employé(e) créé(e) avec succès');

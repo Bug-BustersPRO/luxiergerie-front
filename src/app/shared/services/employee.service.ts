@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,10 @@ export class EmployeeService {
         next: employee => this.employeeById = employee,
         error: error => console.log(error, "There was an error while fetching employee")
       });
+  }
+
+  public createEmployee(employee: Employee): Observable<any> {
+    console.log('employee: ', employee);
+    return this.http.post(`${this.url}/employee`, employee, {headers: this.getHeaders()});
   }
 }
