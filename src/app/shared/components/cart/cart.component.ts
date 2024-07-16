@@ -3,6 +3,7 @@ import { Accommodation } from '../../models/accommodation.model';
 import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
 import bigDecimal from 'js-big-decimal';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +15,7 @@ export class CartComponent implements OnInit {
   categories: { category: Category; totalPricePerCat: bigDecimal }[] = [];
   totalPrice: bigDecimal = this.cartService.getTotalPrice().round(2);
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.loadCart();
@@ -32,15 +33,18 @@ export class CartComponent implements OnInit {
     localStorage.removeItem("cart_items");
     localStorage.removeItem("total_price");
     localStorage.removeItem("cart_categories");
+    this.toastr.info('Votre panier a été vidé avec succès');
   }
 
   removeItem(item: Accommodation) {
     this.cartService.removeItem(item);
     this.totalPrice = this.cartService.getTotalPrice().round(2);
+    this.toastr.info('Article retiré du panier');
   }
 
   addQuantity(item: Accommodation): void {
     this.cartService.addToCart(item);
     this.totalPrice = this.cartService.getTotalPrice().round(2);
+    this.toastr.info('Article ajouté au panier');
   }
 }

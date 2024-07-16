@@ -25,7 +25,7 @@ describe('CarouselComponent', () => {
   });
 
   it('should clear interval on destroy', () => {
-    component.interval = setInterval(() => {}, 1000);
+    component.interval = setInterval(() => { }, 1000);
     spyOn(window, 'clearInterval');
     component.ngOnDestroy();
     expect(window.clearInterval).toHaveBeenCalledWith(component.interval);

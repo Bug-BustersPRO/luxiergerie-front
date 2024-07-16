@@ -1,5 +1,5 @@
-<section  class="global-container">
-  <button [ngStyle]="{'background-color': background}" (click)='navigateTo()' [disabled]="disabled()" class="button button-for-modal">
-    <p class="text">{{text}}</p>
+<section class="global-container">
+  <button [ngStyle]="{'background-color': background}" (click)='navigateTo()' [disabled]="disabled()" class="button">
+    <p class="text" [ngStyle]="{'color': txtColor}">{{text}}</p>
   </button>
 </section>

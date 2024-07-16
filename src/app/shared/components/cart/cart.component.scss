@@ -6,7 +6,7 @@
   padding: 1rem;
 
   h1 {
-    color: $primary-background-color;
+    color: var(--primary-background-color);
     font-family: Satisfy;
     font-size: 48px;
     font-weight: lighter;
@@ -39,15 +39,15 @@
       grid-template-columns: 1fr 1fr 1fr;
     }
     .tertiary {
-      color: $tertiary-background-color;
+      color: var(--tertiary-background-color);
     }
   }
 
   .golden-text {
-    color: $primary-background-color;
+    color: var(--primary-background-color);
   }
 
   .golden-border {
-    border-bottom: 3px solid $quaternary-background-color;
+    border-bottom: 3px solid var(--secondary-background-color);
   }
 }

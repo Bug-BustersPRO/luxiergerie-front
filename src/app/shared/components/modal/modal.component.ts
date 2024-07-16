@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true
 })
-export class ModalComponent{
+export class ModalComponent {
 
   //to use modal in an other component, set this variable and function
   // public isModalOpen: boolean = false; openModal() {this.isModalOpen = true;}
