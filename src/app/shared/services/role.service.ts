@@ -24,10 +24,11 @@ export class RoleService {
 
   public getRoles(): void {
     this.http.get<Role[]>(`${this.url}/role`, { headers: this.getHeaders() })
-      .subscribe({
+      .subscribe({ 
         next: roles => this.getAllRoles$.set(roles),
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching roles")
-      });
+      }
+      );
   }
 
   public getById(id: number): void {

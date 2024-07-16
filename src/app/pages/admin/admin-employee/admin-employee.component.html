@@ -1,0 +1,19 @@
+<section class="global-container">
+  <div>
+    <h3>AJOUTER UN(E) EMPLOYE(E)</h3>
+  </div>
+  <div
+    class="add-button"
+    (click)="openModal()"
+    title="Ajouter un(e) employé(e)"
+  >
+    <span class="button-icon">+</span>
+  </div>
+</section>
+<app-modal
+  title="Ajout d'un employé"
+  [showModal]="isModalOpen"
+  (closeModalEvent)="isModalOpen = false"
+>
+  <app-register-employee (closeModal)="closeModal()"></app-register-employee>
+</app-modal>
