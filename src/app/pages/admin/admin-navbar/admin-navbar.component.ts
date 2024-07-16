@@ -31,11 +31,6 @@ export class AdminNavbarComponent {
       icon: 'list_alt'
     },
     {
-      name: 'Informations',
-      route: 'info',
-      icon: 'note_alt'
-    },
-    {
       name: 'Chambres',
       route: 'config',
       icon: 'key'
