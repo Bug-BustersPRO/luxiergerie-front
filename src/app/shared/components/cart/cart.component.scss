@@ -1,9 +1,16 @@
 @import '../../../../styles.scss';
 
+:host {
+  height: 100%;
+  display: block;
+  width: 100%;
+}
+
 .cart {
   max-width: 100%;
-  max-height: calc(100vh - 130px);
+  height: 100%;
   padding: 1rem;
+  overflow: hidden;
 
   h1 {
     color: var(--primary-background-color);
@@ -49,5 +56,15 @@
 
   .golden-border {
     border-bottom: 3px solid var(--secondary-background-color);
+  }
+
+  .scrollable {
+    overflow-y: auto;
+    height: 70%;
+  }
+  .buttons {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-around;
   }
 }
