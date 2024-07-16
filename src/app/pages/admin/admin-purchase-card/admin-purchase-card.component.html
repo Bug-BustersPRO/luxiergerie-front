@@ -1,14 +1,11 @@
 <section class="main-container">
     <div class="infos-container">
-     <h3>
+     <p>
         Facture n° {{ bill.id }}
         
-     </h3>
-     <p>
-        du {{ bill.date| date: 'dd/MM/yyyy'}}
      </p>
      <p>
-        Chambre {{ bill.roomNumber }}
+        du {{ bill.date| date: 'dd/MM/yyyy'}}   --   Chambre {{ bill.roomNumber }}
      </p>
      <p class="price">
        Total des commandes : {{ bill.totalPrice | currency: 'EUR' }}

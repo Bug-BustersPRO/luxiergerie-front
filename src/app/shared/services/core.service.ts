@@ -69,12 +69,17 @@ export class CoreService {
 
   // UPDATE
   public updateCategory(category: Category): Observable<any> {
-    return this.httpClient.put(`${this.url}/categories/${category.id}`, category, { headers: this.headers });
+    return this.httpClient.put(`${this.url}/categories/categories/${category.id}`, category, { headers: this.headers });
   }
 
   // DELETE
   public deleteCategory(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.url}/categories/${id}`, { headers: this.headers });
+    return this.httpClient.delete(`${this.url}/categories/categories/${id}`, { headers: this.headers });
+  }
+
+  //GET Category image
+  public getCategoryImage(id: number): Observable<Blob> {
+    return this.httpClient.get(`${this.url}/categories/${id}/image`, { headers: this.headers, responseType: 'blob' });
   }
 
   // Accommodations API - call vers le backend

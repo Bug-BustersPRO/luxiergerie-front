@@ -1,0 +1,16 @@
+<section id="main_container">
+    <div>
+      <img [src]="image" alt="">
+    </div>
+
+    <div>
+        Nom : {{infos.name}}
+    </div>
+    <div>
+        Description : {{infos.description}}
+    </div>
+    <div *ngIf="infos.price">
+        Prix : {{infos.price | currency: 'EUR' }}
+    </div>
+</section>
+

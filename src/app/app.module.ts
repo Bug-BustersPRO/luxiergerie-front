@@ -36,7 +36,6 @@ import { ButtonComponent } from './shared/components/button/button.component';
     SectionPage,
     CardComponent,
     CarouselComponent,
-    ModalComponent,
     HomePageComponent,
     CategoryPage,
     SectionComponent,
@@ -58,7 +57,8 @@ import { ButtonComponent } from './shared/components/button/button.component';
     NavbarComponent,
     FormsModule,
     AccommodationCardComponent,
-    ButtonComponent
+    ButtonComponent,
+    ModalComponent
   ],
   providers: [
     CoreService,

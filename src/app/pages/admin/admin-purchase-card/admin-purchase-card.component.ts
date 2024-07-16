@@ -21,9 +21,7 @@ export class AdminPurchaseCardComponent {
   constructor(private router: Router) { }
 
   navigateTo(route: string): void {
-    this.router.navigate([route]);
-    console.log(route);
-    
+    this.router.navigate([route]);   
   }
 
   openDetail(): void {

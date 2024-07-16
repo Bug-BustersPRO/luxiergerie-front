@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,7 +7,8 @@ import { Observable } from 'rxjs';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
+  standalone: true,
+  imports: [CommonModule],
 })
 export class ModalComponent{
 
