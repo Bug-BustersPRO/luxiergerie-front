@@ -78,9 +78,8 @@
       </div>
 
       <div class="button-alignement">
-        <app-button class="button-for-modal" action="annuler"></app-button>
-        <app-button
-          class="button-for-modal"
+        <app-button #submitBtn   action="annuler"></app-button>
+        <app-button #submitBtn     
           action="valider"
           [hidden]="form.invalid"
           click="onSubmit()"
