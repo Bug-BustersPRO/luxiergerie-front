@@ -8,19 +8,19 @@
 
 .add-button {
   margin-top: 15px;
-        width: 25px;
-        height: 25px;
-        background-color: #BD9E56;
-        border-radius: 5%;
+  width: 25px;
+  height: 25px;
+  background-color: #bd9e56;
+  border-radius: 5%;
 
-        .button-icon {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: white;
-          height: 100%;
-          width: 100%;
-          font-size: xx-large;
-          cursor: pointer;
-        }
-      }
+  .button-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 100%;
+    width: 100%;
+    font-size: xx-large;
+    cursor: pointer;
+  }
+}

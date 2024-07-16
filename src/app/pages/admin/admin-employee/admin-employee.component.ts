@@ -7,17 +7,15 @@ import { RegisterEmployeeComponent } from 'src/app/shared/components/register-em
   templateUrl: './admin-employee.component.html',
   styleUrl: './admin-employee.component.scss',
   standalone: true,
-  imports: [ModalComponent, RegisterEmployeeComponent]
+  imports: [ModalComponent, RegisterEmployeeComponent],
 })
 export class AdminEmployeeComponent {
-
   public isModalOpen: boolean = false;
-  
-  openModal()  {
+
+  openModal() {
     this.isModalOpen = true;
   }
   closeModal() {
     this.isModalOpen = false;
   }
-
 }

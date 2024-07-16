@@ -9,11 +9,22 @@
           type="text"
           placeholder="Entrez le nom"
           #lastName="ngModel"
-          required minlength="2"
+          required
+          minlength="2"
         />
-        <div *ngIf="lastName.invalid && (lastName.pristine || lastName.touched)">
-          <div class="error-length-required" *ngIf="lastName.errors?.['required']">Le nom est requis</div>
-          <div class="error-length-required" *ngIf="lastName.errors?.['minlength']">
+        <div
+          *ngIf="lastName.invalid && (lastName.pristine || lastName.touched)"
+        >
+          <div
+            class="error-length-required"
+            *ngIf="lastName.errors?.['required']"
+          >
+            Le nom est requis
+          </div>
+          <div
+            class="error-length-required"
+            *ngIf="lastName.errors?.['minlength']"
+          >
             le nom doit contenir plus de 2 caractères
           </div>
         </div>
@@ -24,14 +35,25 @@
         <input
           name="firstName"
           [(ngModel)]="model.firstName"
-          required minlength="2"
+          required
+          minlength="2"
           type="text"
           #firstName="ngModel"
           placeholder="Entrez le(s) prénom(s)"
         />
-        <div *ngIf="firstName.invalid&& (firstName.pristine || firstName.touched)">
-          <div class="error-length-required" *ngIf="firstName.errors?.['required']">Le prénom est requis</div>
-          <div class="error-length-required" *ngIf="firstName.errors?.['minlength']">
+        <div
+          *ngIf="firstName.invalid && (firstName.pristine || firstName.touched)"
+        >
+          <div
+            class="error-length-required"
+            *ngIf="firstName.errors?.['required']"
+          >
+            Le prénom est requis
+          </div>
+          <div
+            class="error-length-required"
+            *ngIf="firstName.errors?.['minlength']"
+          >
             le prénom doit contenir plus de 2 caractères
           </div>
         </div>
@@ -39,15 +61,26 @@
 
       <div class="label-and-input">
         <label for="roles"> Role de l'employé(e) </label>
-        <select name="roles" #roleList="ngModel" [(ngModel)]="model.roles[0].name" required>
+        <select
+          name="roles"
+          #roleList="ngModel"
+          [(ngModel)]="model.roles[0].name"
+          required
+        >
           @for (role of roles; track $index) {
-            <option [value]="role.name">{{getRoleName(role.name)}}</option>
+          <option [value]="role.name">{{ getRoleName(role.name) }}</option>
           }
-          
-        </select> 
+        </select>
         <!-- validation des roles -->
-       <div *ngIf="roleList.invalid && (roleList.dirty || roleList.touched)"></div>
-        <div class="error-length-required" *ngIf="roleList.errors?.['required']">Le rôle est requis</div>
+        <div
+          *ngIf="roleList.invalid && (roleList.dirty || roleList.touched)"
+        ></div>
+        <div
+          class="error-length-required"
+          *ngIf="roleList.errors?.['required']"
+        >
+          Le rôle est requis
+        </div>
       </div>
 
       <div class="password-input label-and-input">
@@ -56,7 +89,8 @@
           <input
             name="password"
             [(ngModel)]="model.password"
-            required minlength="6"
+            required
+            minlength="6"
             #password="ngModel"
             class="contain"
             type="{{ showPassword ? 'text' : 'password' }}"
@@ -68,18 +102,30 @@
           >
             {{ text }}
           </div>
-          <div class="error-length-required" *ngIf="password.invalid&& (password.pristine || password.touched)">
-          <div class="error-length-required" *ngIf="password.errors?.['required']">Le mot de passe est requis</div>
-          <div class="error-length-required" *ngIf="password.errors?.['minlength']">
-            le mot de passe doit contenir plus de 6 caractères
+          <div
+            class="error-length-required"
+            *ngIf="password.invalid && (password.pristine || password.touched)"
+          >
+            <div
+              class="error-length-required"
+              *ngIf="password.errors?.['required']"
+            >
+              Le mot de passe est requis
+            </div>
+            <div
+              class="error-length-required"
+              *ngIf="password.errors?.['minlength']"
+            >
+              le mot de passe doit contenir plus de 6 caractères
+            </div>
           </div>
-        </div>
         </div>
       </div>
 
       <div class="button-alignement">
-        <app-button #submitBtn   action="annuler"></app-button>
-        <app-button #submitBtn     
+        <app-button #submitBtn action="annuler"></app-button>
+        <app-button
+          #submitBtn
           action="valider"
           [hidden]="form.invalid"
           click="onSubmit()"
