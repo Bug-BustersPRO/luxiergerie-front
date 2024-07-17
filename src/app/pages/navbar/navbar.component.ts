@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
@@ -10,7 +10,7 @@ import { HotelService } from 'src/app/shared/services/hotel.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
 
@@ -26,9 +26,6 @@ export class NavbarComponent implements OnInit {
         this.hotelService.applyColors(["#FDFBF5"]);
       }
     });
-  }
-
-  ngOnInit(): void {
   }
 
   navigateTo(route: string): void {

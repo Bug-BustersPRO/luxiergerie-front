@@ -61,6 +61,7 @@ export class ConfigHotelComponent implements OnInit {
   getCurrentHotelConfig(): void {
     if (!this.isCreateHotel) {
       this.getHotelImage();
+      this.getBackgroundHotelImage();
       this.hotelService.getHotel().subscribe({
         next: (response) => {
           this.hotel.id = response[0].id;
@@ -112,6 +113,9 @@ export class ConfigHotelComponent implements OnInit {
 
   goToStep(step: string): void {
     switch (step) {
+      case 'name':
+        this.currentStep = 'name';
+        break;
       case 'image':
         this.currentStep = 'image';
         break;

@@ -6,6 +6,12 @@ body {
   height: 100%
 }
 
+#hotel-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 #hotel-information {
   display: flex;
   flex-direction: column;

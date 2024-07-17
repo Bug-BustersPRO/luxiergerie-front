@@ -33,7 +33,6 @@ export class LoginClientPageComponent implements OnDestroy, AfterViewInit {
       if (this.hotel) {
         this.hotelService.backgroundImageUrlUpdate$.subscribe((url) => {
           this.hotelBackgroundImageUrl = url;
-          document.body.style.backgroundImage = `url(${url})`;
         });
         this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
           this.hotelImageUrl = url;
