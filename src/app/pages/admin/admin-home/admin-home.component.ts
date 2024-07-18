@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdminNavbarComponent } from '../admin-navbar/admin-navbar.component';
 import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
-import { RouterOutlet, RouterLink, Route, Router } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { Employee } from 'src/app/shared/models/employee.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -17,7 +17,7 @@ export class AdminHomeComponent implements OnInit {
   public currentEmployee!: Employee;
   public roles: string[] = [];
 
-  constructor(private authService: AuthService, private router: Router, private cdRef: ChangeDetectorRef) {
+  constructor(private authService: AuthService) {
     this.currentEmployee = localStorage.getItem('employee') ? JSON.parse(localStorage.getItem('employee') as string) : {} as Employee;
   }
 
@@ -37,7 +37,7 @@ export class AdminHomeComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logOut();
+    this.authService.logOut(true);
   }
 
 }
