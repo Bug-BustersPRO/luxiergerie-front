@@ -14,6 +14,7 @@ import { ConfigHotelComponent } from './pages/config-hotel/config-hotel.componen
 import { AdminPurchaseDetailComponent } from './pages/admin/admin-purchase-detail/admin-purchase-detail.component';
 import { CartComponent } from './shared/components/cart/cart.component';
 import { AdminHotelComponent } from './pages/admin/admin-hotel/admin-hotel.component';
+import { AdminEmployeeComponent } from './pages/admin/admin-employee/admin-employee.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent, canActivate: ['authRoom'] },
@@ -24,17 +25,15 @@ const routes: Routes = [
   {
     path: 'admin', component: AdminHomeComponent, canActivate: ['authEmployee', 'configHotel'],
     children: [
-      { path: 'purchases', component: AdminPurchasesComponent },
-      { path: 'purchases/:id', component: AdminPurchaseDetailComponent },
-      { path: 'accomodations', component: AdminAccomodationsComponent },
-      { path: 'hotel', component: AdminHotelComponent }
-    ]
-  },
-  { path: 'login/employee', component: LoginEmployeeComponent },
-  { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel'] },
+      { path: 'purchases', component: AdminPurchasesComponent},
+      { path: 'purchases/:id', component: AdminPurchaseDetailComponent},
+      { path: 'accomodations', component:AdminAccomodationsComponent },
+      { path: 'employee', component: AdminEmployeeComponent },
+      { path: 'hotel', component: AdminHotelComponent },
+  ]},
+  { path: 'login/employee', component: LoginEmployeeComponent},
+  { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel'] }, 
   { path: 'cart', component: CartComponent, canActivate: ['authRoom'] }
-
-
 ];
 
 @NgModule({

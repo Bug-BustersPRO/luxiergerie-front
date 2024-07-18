@@ -25,6 +25,8 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
 import { CartComponent } from './shared/components/cart/cart.component';
 import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
 import { ButtonComponent } from './shared/components/button/button.component';
+import { AdminEmployeeComponent } from './pages/admin/admin-employee/admin-employee.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -34,14 +36,12 @@ import { ToastrModule } from 'ngx-toastr';
     SectionPage,
     CardComponent,
     CarouselComponent,
-    ModalComponent,
     HomePageComponent,
     SectionComponent,
     CategoryComponent,
     CategoryPage,
     AccommodationComponent,
     LoginEmployeeComponent,
-    CartComponent,
     AccommodationPage
   ],
   imports: [
@@ -58,7 +58,9 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     AccommodationCardComponent,
     ButtonComponent,
+    ModalComponent,
     BrowserAnimationsModule,
+    CartComponent,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
