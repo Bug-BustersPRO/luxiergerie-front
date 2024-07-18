@@ -5,7 +5,6 @@ import { AdminHomeComponent } from '../admin-home/admin-home.component';
 import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
-import { Employee } from 'src/app/shared/models/employee.model';
 
 @Component({
   selector: 'app-admin-navbar',

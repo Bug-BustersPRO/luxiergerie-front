@@ -1,16 +1,20 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal, WritableSignal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
 import { LoginClient } from '../models/loginClient.model';
 import { LoginEmployee } from '../models/loginEmployee.model';
+import { Employee } from '../models/employee.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private url: string = "http://localhost:8090/api/auth";
-  constructor(private cookieService: CookieService, private http: HttpClient) { }
+  private employee$: WritableSignal<Employee> = signal({} as Employee);
+  public employee = computed(() => this.employee$());
+  constructor(private cookieService: CookieService, private http: HttpClient, private router: Router) { }
 
   // faire une vérification différente quand on est connecté via le serial number de l'employée, la solution est pour le moment uniquement via le client room
   clientLogin(loginClient: LoginClient): Observable<HttpResponse<any>> {
@@ -44,14 +48,22 @@ export class AuthService {
 
   public login(loginEmployee: LoginEmployee): Observable<HttpResponse<any>> {
     return this.http.post(`${this.url}/login`, loginEmployee, {
-      observe: 'response', withCredentials: true, responseType: 'text'
-    });
+      withCredentials: true,
+      observe: 'response',
+      responseType: 'json',
+    }).pipe(tap((response: HttpResponse<any>) => {
+      if (response.status === 200) this.employee$.set(response.body);
+      localStorage.setItem('employee', JSON.stringify(response.body));
+    }));
   }
 
-  clientLogout(): void {
+  public logOut(): void {
     this.cookieService.delete('jwt-token');
+    localStorage.removeItem('employee');
     this.http.get('http://localhost:8090/api/auth/logout', {
-      withCredentials: true
-    });
+      withCredentials: true,
+    })
+    this.router.navigate(['/login/employee']);
   }
+
 }
