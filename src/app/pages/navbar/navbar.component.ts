@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { CartComponent } from 'src/app/shared/components/cart/cart.component';
@@ -15,7 +15,7 @@ import { HotelService } from 'src/app/shared/services/hotel.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
   public isModalOpen: boolean = false;
@@ -33,6 +33,9 @@ export class NavbarComponent {
         this.hotelService.applyColors(["#FDFBF5"]);
       }
     });
+  }
+
+  ngOnInit(): void {
     this.currentClient = localStorage.getItem('client') ? JSON.parse(localStorage.getItem('client') as string) : {} as Client;
     console.log(this.currentClient);
   }
