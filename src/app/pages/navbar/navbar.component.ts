@@ -18,6 +18,7 @@ export class NavbarComponent {
   public hotelImageUrl!: string;
   public isModalOpen: boolean = false;
   public openModal() {this.isModalOpen = true;}
+  public cartModalTitle: string = "Mon Panier";
 
   constructor(private router: Router, private hotelService: HotelService, private cartService: CartService) {
     this.hotelService.getHotels().subscribe(() => {

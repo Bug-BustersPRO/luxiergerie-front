@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Accommodation } from '../../models/accommodation.model';
 import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
@@ -8,6 +8,12 @@ import { CommonModule } from '@angular/common';
 import { HotelService } from '../../services/hotel.service';
 import { Hotel } from '../../models/hotel.model';
 import { ButtonComponent } from '../button/button.component';
+import { Purchase } from '../../models/purchase.model';
+import { Client } from '../../models/client.model';
+import { PurchaseService } from '../../services/purchase.service';
+import { AuthService } from '../../services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-cart',
@@ -22,8 +28,16 @@ export class CartComponent implements OnInit {
   totalPrice: bigDecimal = this.cartService.getTotalPrice().round(2);
   public hotel!: Hotel;
   public hotelImageUrl!: string;
+  currentClient!: Client;
+  roomNumber!: string;
+  @Output() changeTitle: EventEmitter<string> = new EventEmitter();
+  orderConfirmed: boolean = false;
+  purchase!: Purchase;
 
-  constructor(private cartService: CartService, private toastr: ToastrService, private hotelService: HotelService, private cdr: ChangeDetectorRef)
+  constructor(private cartService: CartService, private toastr: ToastrService,
+    private hotelService: HotelService, private cdr: ChangeDetectorRef,
+     private purchaseService: PurchaseService, private authService: AuthService,
+    private modalService: ModalService)
   {this.hotelService.getHotels().subscribe(() => {
     this.hotel = this.hotelService.hotel;
     if (this.hotel) {
@@ -41,18 +55,27 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.cartService.cartItems.subscribe(items => {
       this.items = items;
-      this.cdr.markForCheck(); // Trigger change detection
+      this.cdr.markForCheck();
     });
 
     this.cartService.categoriesSubject.subscribe(categories => {
       this.categories = categories;
-      this.cdr.markForCheck(); // Trigger change detection
+      this.cdr.markForCheck();
     });
 
     this.cartService.totalPriceSubject.subscribe(totalPrice => {
       this.totalPrice = totalPrice;
-      this.cdr.markForCheck(); // Trigger change detection
+      this.cdr.markForCheck();
     });
+
+    this.getCurrentClientAndRoom();
+  }
+
+  getCurrentClientAndRoom() {
+    const clientStored = localStorage.getItem('current_client');
+    this.currentClient = clientStored? JSON.parse(clientStored) : null;
+    const roomStored = localStorage.getItem('room_number');
+    this.roomNumber = roomStored? JSON.parse(roomStored) : null;
   }
 
   loadCart(): void {
@@ -78,5 +101,30 @@ export class CartComponent implements OnInit {
   addQuantity(item: Accommodation): void {
     this.cartService.addToCart(item);
     this.toastr.info('Article ajouté au panier');
+  }
+
+  createNewPurchase(purchase: Purchase) {
+    this.purchaseService.createPurchase(purchase).subscribe({
+      next: (response: Purchase) => {
+        console.log('Purchase created successfully', response);
+        this.changeTitle.emit('Confirmation');
+        this.orderConfirmed = true;
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log('There was an error while creating purchase', error);
+      }
+    });
+  }
+
+   order(){
+    this.purchase = new Purchase(new Date(), this.currentClient, "Validée", this.cartService.items, this.roomNumber, this.cartService.getTotalPrice().getValue());
+    this.createNewPurchase(this.purchase);
+    this.clearCart();
+  }
+
+  closeConfirmation() {
+    this.modalService.closeModal();
+    this.orderConfirmed = false;
+    this.changeTitle.emit('Mon Panier');
   }
 }

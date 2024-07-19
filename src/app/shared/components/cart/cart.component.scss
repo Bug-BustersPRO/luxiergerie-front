@@ -12,13 +12,6 @@
   padding: 1rem;
   overflow: hidden;
 
-  h1 {
-    color: var(--primary-background-color);
-    font-family: Satisfy;
-    font-size: 48px;
-    font-weight: lighter;
-    text-align: center;
-  }
   p {
     font-size: 18px;
     font-weight: 600;
@@ -28,6 +21,10 @@
 
   .bold {
     font-weight: bold;
+  }
+
+  .slim{
+    font-weight: 300;
   }
 
   .columns {
@@ -50,11 +47,11 @@
     }
   }
 
-  .golden-text {
+  .colored-text {
     color: var(--primary-background-color);
   }
 
-  .golden-border {
+  .colored-border {
     border-bottom: 3px solid var(--secondary-background-color);
   }
 

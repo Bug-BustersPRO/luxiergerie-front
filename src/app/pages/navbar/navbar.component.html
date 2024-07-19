@@ -50,8 +50,8 @@
 </div>
 
    <app-modal
- title="Mon Panier"
+ title={{cartModalTitle}}
   [showModal]="isModalOpen"
   (closeModalEvent)="isModalOpen = false">
-    <app-cart></app-cart>
+    <app-cart (changeTitle)="cartModalTitle = $event"></app-cart>
 </app-modal>
