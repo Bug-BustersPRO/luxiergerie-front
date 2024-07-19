@@ -1,0 +1,62 @@
+<form #genericForm="ngForm" (ngSubmit)="onSubmit()">
+    <div>
+        <div>
+            <label for="title">Titre</label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                [(ngModel)]="infos.title"
+            />
+        </div>
+        <div>
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" [(ngModel)]="infos.name" />
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea
+                id="description"
+                name="description"
+                [(ngModel)]="infos.description"
+            ></textarea>
+        </div>
+        <div class="add-button" (click)="selectFile()" title="Ajouter">
+            @if (openModalForCreation) {
+                <span class="button-icon"> + </span>
+            } @else {
+                <span class="material-symbols-outlined">edit</span>
+            }
+        </div>
+        <input
+            type="file"
+            #fileInput
+            name="image"
+            (change)="onFileSelected($event)"
+            (ngModel)="(infos.image)"
+            style="display: none"
+        />
+        <div class="image">
+            <label for="image">Image</label>
+            <img [src]="imageUrl" alt="" />
+        </div>
+        <div *ngIf="infos.price">
+            <label for="price">Prix</label>
+            <input
+                type="number"
+                id="price"
+                name="price"
+                [(ngModel)]="infos.price"
+            />
+        </div>
+    </div>
+    <div>
+        <button type="submit" [disabled]="!genericForm.valid">
+            @if (openModalForCreation) {
+                Créer {{ typeForDisplay }}
+            } @else {
+                Mettre à jour
+            }
+        </button>
+    </div>
+</form>
