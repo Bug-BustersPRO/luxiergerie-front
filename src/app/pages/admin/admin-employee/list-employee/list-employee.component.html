@@ -1,0 +1,24 @@
+<section class="section-container">
+  <div class="global-container">
+    <div class="title-container">
+      <div class="title">Nom</div>
+      <div class="title">Prénoms</div>
+      <div class="title">Identifiant</div>
+      <div class="title">Role</div>
+      <div class="title">Actions</div>
+      
+    </div>
+    <div class="list-employee-container">
+      <ul class="ul-employee" *ngFor="let employee of employees">
+        <li class="li-attribut">{{ employee.lastName }}</li>
+        <li class="li-attribut">{{ employee.firstName }}</li>
+        <li class="li-attribut">{{ employee.serialNumber }}</li>
+        <li class="li-attribut">{{ employee.roles[0].name }}</li>
+        <div class="actions">
+          <span class="action-icon" title="Modifier l'employé(e)">✏️</span>
+          <span class="action-icon" title="Supprimer l'employé(e)">❌</span>
+        </div>
+      </ul>
+    </div>
+  </div>
+</section>

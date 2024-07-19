@@ -64,11 +64,11 @@
         <select
           name="roles"
           #roleList="ngModel"
-          [(ngModel)]="model.roles[0].name"
+          [(ngModel)]="model.roles[0]"
           required
         >
           @for (role of roles; track $index) {
-          <option [value]="role.name">{{ getRoleName(role.name) }}</option>
+          <option (click)="getId($event)" [value]="role">{{ getRoleName(role.name) }}</option>
           }
         </select>
         <!-- validation des roles -->
