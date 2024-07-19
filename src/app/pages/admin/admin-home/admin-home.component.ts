@@ -10,19 +10,25 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './admin-home.component.html',
   styleUrls: ['./admin-home.component.scss'],
   standalone: true,
-  imports: [AdminNavbarComponent, AdminDashboardComponent, RouterOutlet, RouterLink]
+  imports: [
+    AdminNavbarComponent,
+    AdminDashboardComponent,
+    RouterOutlet,
+    RouterLink,
+  ],
 })
 export class AdminHomeComponent implements OnInit {
-
   public currentEmployee!: Employee;
   public roles: string[] = [];
 
   constructor(private authService: AuthService) {
-    this.currentEmployee = localStorage.getItem('employee') ? JSON.parse(localStorage.getItem('employee') as string) : {} as Employee;
+    this.currentEmployee = localStorage.getItem('employee')
+      ? JSON.parse(localStorage.getItem('employee') as string)
+      : ({} as Employee);
   }
 
   ngOnInit(): void {
-    this.roles = this.currentEmployee.roles.map(role => role.name);
+    this.roles = this.currentEmployee.roles.map((role) => role.name);
   }
 
   getRoleName(role: string) {

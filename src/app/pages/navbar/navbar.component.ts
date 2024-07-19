@@ -8,6 +8,7 @@ import { Hotel } from 'src/app/shared/models/hotel.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { HotelService } from 'src/app/shared/services/hotel.service';
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
