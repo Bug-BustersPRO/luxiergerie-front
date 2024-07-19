@@ -10,7 +10,6 @@ import { AdminPurchasesComponent } from './pages/admin/admin-purchases/admin-pur
 import { AdminAccomodationsComponent } from './pages/admin/admin-accomodations/admin-accomodations.component';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
 import { ConfigHotelComponent } from './pages/config-hotel/config-hotel.component';
-
 import { AdminPurchaseDetailComponent } from './pages/admin/admin-purchase-detail/admin-purchase-detail.component';
 import { CartComponent } from './shared/components/cart/cart.component';
 import { AdminHotelComponent } from './pages/admin/admin-hotel/admin-hotel.component';
@@ -32,7 +31,7 @@ const routes: Routes = [
       { path: 'hotel', component: AdminHotelComponent },
   ]},
   { path: 'login/employee', component: LoginEmployeeComponent},
-  { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel'] }, 
+  { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel'] },
   { path: 'cart', component: CartComponent, canActivate: ['authRoom'] }
 ];
 
