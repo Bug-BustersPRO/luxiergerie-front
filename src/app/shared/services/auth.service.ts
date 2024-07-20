@@ -7,13 +7,14 @@ import { LoginEmployee } from '../models/loginEmployee.model';
 import { Employee } from '../models/employee.model';
 import { Router } from '@angular/router';
 import { Client } from '../models/client.model';
+import { Role } from '../models/role.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private url: string = 'http://localhost:8090/api/auth';
-  public currentUserRole: string = '';
+  public currentUserRole: WritableSignal<Array<Role>> = signal([]);
   private employee$: WritableSignal<Employee> = signal({} as Employee);
   public employee = computed(() => this.employee$());
   private client$: WritableSignal<Client> = signal({} as Client);
@@ -33,8 +34,12 @@ export class AuthService {
       })
       .pipe(
         tap((response: HttpResponse<any>) => {
-          if (response.status === 200) this.client$.set(response.body);
-          localStorage.setItem('client', JSON.stringify(response.body));
+          if (response.status === 200) {
+            this.client$.set(response.body);
+            localStorage.setItem('client', JSON.stringify(response.body));
+            this.currentUserRole.set(response.body.role);
+            console.log(this.currentUserRole);
+          }
         })
       );
   }
@@ -77,8 +82,12 @@ export class AuthService {
       })
       .pipe(
         tap((response: HttpResponse<any>) => {
-          if (response.status === 200) this.employee$.set(response.body);
-          localStorage.setItem('employee', JSON.stringify(response.body));
+          if (response.status === 200) {
+            this.employee$.set(response.body);
+            localStorage.setItem('employee', JSON.stringify(response.body));
+            this.currentUserRole.set(response.body.roles);
+            console.log(this.currentUserRole()[0]);
+          }
         })
       );
   }

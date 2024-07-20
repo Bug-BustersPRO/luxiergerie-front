@@ -17,12 +17,12 @@ import { AdminEmployeeComponent } from './pages/admin/admin-employee/admin-emplo
 
 const routes: Routes = [
   { path: '', component: HomePageComponent, canActivate: ['authRoom'] },
-  { path: 'sections', component: SectionPage, canActivate: ['authRoom'] },
+  { path: 'sections', component: SectionPage, canActivate: ['authRoom', 'roleGuard'] },
   { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom'] },
   { path: 'categories/:id/accommodations', component: AccommodationPage, canActivate: ['authRoom'] },
   { path: 'login/room', component: LoginClientPageComponent, canActivate: ['authRoom'] },
   {
-    path: 'admin', component: AdminHomeComponent, canActivate: ['authEmployee', 'configHotel'],
+    path: 'admin', component: AdminHomeComponent, canActivate: ['authEmployee', 'configHotel', 'roleGuard'],
     children: [
       { path: 'purchases', component: AdminPurchasesComponent},
       { path: 'purchases/:id', component: AdminPurchaseDetailComponent},

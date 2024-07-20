@@ -5,21 +5,26 @@ import { AuthService } from '../auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class roleGuard{
+export class RoleGuard{
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  // canActivate(
-  //   next: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot): boolean {
-  //   const userRole = ??
-  //   if (!this.authService.isUserLoggedIn()) {
-  //     this.router.navigate(['/login']);
-  //     return false;
-  //   } else if (next.data.roles && next.data.roles.indexOf(userRole) === -1) {
-  //     this.router.navigate(['/unauthorized']);
-  //     return false;
-  //   }
-  //   return true;
-  // }
+  public roleGuard(): boolean {
+    const userRole = this.authService.currentUserRole()[0];
+    // Le signal disparait après avoir refresh la page.
+    // Voir pour récupérer le role depuis localStorage
+    if (!this.authService.isUserLoggedIn()) {
+      if (userRole?.name === 'ROLE_ADMIN' || userRole?.name === 'ROLE_EMPLOYEE') {
+        return true
+      }
+      this.router.navigate(['/admin']);
+      return false;
+    }
+    else if (userRole?.name !== 'ROLE_ADMIN' && userRole?.name !== 'ROLE_EMPLOYEE') {
+      this.router.navigate(['/sections']);
+      return false;
+    }
+    return true;
+  }
+
 }

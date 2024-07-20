@@ -28,6 +28,7 @@ import { ButtonComponent } from './shared/components/button/button.component';
 import { AdminEmployeeComponent } from './pages/admin/admin-employee/admin-employee.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { ToastrModule } from 'ngx-toastr';
+import { RoleGuard } from './shared/services/Guard/role.guard';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,11 @@ import { ToastrModule } from 'ngx-toastr';
       useFactory: (service: ConfigHotelGuard) => service.configHotel(),
       deps: [ConfigHotelGuard]
     },
+    {
+      provide: 'roleGuard',
+      useFactory: (service: RoleGuard) => service.roleGuard,
+      deps: [RoleGuard]
+    }
   ],
   bootstrap: [AppComponent]
 })
