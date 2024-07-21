@@ -6,10 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { SectionPage } from './pages/section/section-page';
 import { LoginClientPageComponent } from './pages/security/room/login-client.page/login-client.page.component';
-import { AuthGuardService } from "./shared/services/Guard/auth-room.guard";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { LoginModalComponent } from "./shared/components/login-modal/login-modal.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AuthGuardService } from './shared/services/Guard/auth-room.guard';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LoginModalComponent } from './shared/components/login-modal/login-modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardComponent } from './shared/components/card/card.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { HomePageComponent } from './pages/home/home-page.component';
@@ -43,7 +43,7 @@ import { RoleGuard } from './shared/services/Guard/role.guard';
     CategoryPage,
     AccommodationComponent,
     LoginEmployeeComponent,
-    AccommodationPage
+    AccommodationPage,
   ],
   imports: [
     BrowserModule,
@@ -65,30 +65,30 @@ import { RoleGuard } from './shared/services/Guard/role.guard';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    })
+    }),
   ],
   providers: [
     {
       provide: 'authRoom',
       useFactory: (service: AuthGuardService) => service.authRoom(),
-      deps: [AuthGuardService]
+      deps: [AuthGuardService],
     },
     {
       provide: 'authEmployee',
       useFactory: (service: AuthGuardService) => service.authEmployee(),
-      deps: [AuthGuardService]
+      deps: [AuthGuardService],
     },
     {
       provide: 'configHotel',
       useFactory: (service: ConfigHotelGuard) => service.configHotel(),
-      deps: [ConfigHotelGuard]
+      deps: [ConfigHotelGuard],
     },
     {
       provide: 'roleGuard',
-      useFactory: (service: RoleGuard) => service.roleGuard,
-      deps: [RoleGuard]
-    }
+      useFactory: (service: RoleGuard) => service.roleGuard(),
+      deps: [RoleGuard],
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

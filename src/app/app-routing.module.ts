@@ -17,7 +17,7 @@ import { AdminEmployeeComponent } from './pages/admin/admin-employee/admin-emplo
 
 const routes: Routes = [
   { path: '', component: HomePageComponent, canActivate: ['authRoom'] },
-  { path: 'sections', component: SectionPage, canActivate: ['authRoom', 'roleGuard'] },
+  { path: 'sections', component: SectionPage, canActivate: ['authRoom'] },
   { path: 'sections/:id/categories', component: CategoryPage, canActivate: ['authRoom'] },
   { path: 'categories/:id/accommodations', component: AccommodationPage, canActivate: ['authRoom'] },
   { path: 'login/room', component: LoginClientPageComponent, canActivate: ['authRoom'] },
@@ -30,8 +30,8 @@ const routes: Routes = [
       { path: 'employee', component: AdminEmployeeComponent },
       { path: 'hotel', component: AdminHotelComponent },
   ]},
-  { path: 'login/employee', component: LoginEmployeeComponent},
-  { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel'] },
+  { path: 'login/employee', component: LoginEmployeeComponent, canActivate: ['roleGuard'] },
+  { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel', 'roleGuard'] },
   { path: 'cart', component: CartComponent, canActivate: ['authRoom'] }
 ];
 

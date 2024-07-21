@@ -41,7 +41,7 @@ export class AuthGuardService {
             this.router.navigate(['/login/employee'])
             return false
           } else if (status === HttpStatusCode.Ok && isLoginEmployeePage) {
-            this.router.navigate(['/sections'])
+            this.router.navigate(['/admin'])
             return false
           }
           return true
