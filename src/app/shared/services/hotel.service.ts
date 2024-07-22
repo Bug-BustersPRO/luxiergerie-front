@@ -11,10 +11,13 @@ export class HotelService {
   private url: string = "http://localhost:8090/api/hotel";
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
+  public backgroundImageUrl!: string;
   private hotelUpdateSubject = new Subject<Hotel>();
   public hotelUpdate$ = this.hotelUpdateSubject.asObservable();
   public hotelImageUrlUpdateSubject = new Subject<string>();
+  public backgroundImageUrlUpdateSubject = new Subject<string>();
   public hotelImageUrlUpdate$ = this.hotelImageUrlUpdateSubject.asObservable();
+  public backgroundImageUrlUpdate$ = this.backgroundImageUrlUpdateSubject.asObservable();
 
   constructor(private cookieService: CookieService, private httpClient: HttpClient) { }
 
@@ -33,6 +36,7 @@ export class HotelService {
         this.hotel = response[0];
         if (this.hotel !== undefined && this.hotel !== null) {
           this.getHotelImageSub();
+          this.getBackgroundHotelImageSub();
         }
       })
     );
@@ -46,6 +50,22 @@ export class HotelService {
         reader.onloadend = () => {
           this.hotelImageUrl = reader.result as string;
           this.hotelImageUrlUpdateSubject.next(this.hotelImageUrl);
+        };
+      },
+      error: error => {
+        console.error(error);
+      }
+    });
+  }
+
+  getBackgroundHotelImageSub(): void {
+    this.getBackgroundHotelImage().subscribe({
+      next: (response) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(response);
+        reader.onloadend = () => {
+          this.backgroundImageUrl = reader.result as string;
+          this.backgroundImageUrlUpdateSubject.next(this.backgroundImageUrl);
         };
       },
       error: error => {
@@ -72,6 +92,10 @@ export class HotelService {
 
   public getHotelImage(): Observable<Blob> {
     return this.httpClient.get(`${this.url}/image`, { responseType: 'blob' });
+  }
+
+  public getBackgroundHotelImage(): Observable<Blob> {
+    return this.httpClient.get(`${this.url}/background-image`, { responseType: 'blob' });
   }
 
   public createHotel(formData: any): Observable<any> {
