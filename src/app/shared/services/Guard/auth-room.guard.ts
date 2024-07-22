@@ -8,9 +8,7 @@ import { HttpResponse, HttpStatusCode } from "@angular/common/http";
   providedIn: 'root'
 })
 export class AuthGuardService {
-  private status: any
-  constructor(private authService: AuthService, private router: Router) {
-  }
+  constructor(private authService: AuthService, private router: Router) { }
 
   public authRoom(): CanActivateFn {
     return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {

@@ -20,8 +20,8 @@ export class AuthService {
   constructor(
     private cookieService: CookieService,
     private http: HttpClient,
-    private router: Router
-  ) {}
+    private router: Router,
+  ) { }
 
   // faire une vérification différente quand on est connecté via le serial number de l'employée, la solution est pour le moment uniquement via le client room
   public clientLogin(loginClient: LoginClient): Observable<HttpResponse<any>> {

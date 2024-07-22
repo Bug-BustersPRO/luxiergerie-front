@@ -6,6 +6,7 @@ import { Observable, map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+
 export class RoleGuard {
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -13,17 +14,22 @@ export class RoleGuard {
     return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
       return this.authService.isUserLoggedIn().pipe(
         map(() => {
-          const employee = JSON.parse(localStorage.getItem('employee')!);
-          const client = JSON.parse(localStorage.getItem('client')!);
-          const restrictedRoutes = ['/admin', '/login/employee', '/config-hotel'];
-          const isRestrictedRoute = restrictedRoutes.some(route => state.url.includes(route)) || state.url.startsWith('/admin/');
 
-          if (employee) {
+          const isEmployeeLoggedIn = JSON.parse(localStorage.getItem('employee')!);
+          const isClientLoggedIn = JSON.parse(localStorage.getItem('client')!);
+          const restrictedRoutes = ['/admin', '/config-hotel', '/login/employee'];
+          const isRestrictedRoute = restrictedRoutes.some(route => state.url.includes(route)) || state.url.startsWith('/admin');
+
+          if (isEmployeeLoggedIn) {
             return true;
-          } else if (client && isRestrictedRoute) {
+          } else if (isClientLoggedIn && isRestrictedRoute) {
+            this.router.navigate(['/sections']);
+            return false;
+          } else if (!isClientLoggedIn) {
             this.router.navigate(['/sections']);
             return false;
           }
+
           return true;
         })
       );
