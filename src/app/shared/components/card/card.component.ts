@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class CardComponent {
 
-constructor() {}
-@Input() item!: any;
+  constructor() { }
+  @Input() item!: any;
 
 }

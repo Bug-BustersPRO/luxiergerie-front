@@ -1,12 +1,12 @@
 import {
     ChangeDetectorRef,
     Component,
+    effect,
     ElementRef,
     OnInit,
     ViewChild,
 } from '@angular/core'
 import { AdminServicesGenericCardComponent } from '../admin-services-generic-card/admin-services-generic-card.component'
-import { CoreService } from 'src/app/shared/services/core.service'
 import { Section } from 'src/app/shared/models/section.model'
 import { Category } from 'src/app/shared/models/category.model'
 import { Accommodation } from 'src/app/shared/models/accommodation.model'
@@ -14,6 +14,9 @@ import { ModalComponent } from '../../../shared/components/modal/modal.component
 import { FormsModule, NgForm } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { AdminServiceFormComponent } from './admin-services-form/admin-service-form/admin-service-form.component'
+import { SectionService } from 'src/app/shared/services/section.service'
+import { CategoryService } from 'src/app/shared/services/category.service'
+import { AccommodationService } from 'src/app/shared/services/accommodation.service'
 
 @Component({
     selector: 'app-admin-services',
@@ -42,36 +45,42 @@ export class AdminAccomodationsComponent {
     public openModalForCreation: boolean = false
 
     constructor(
-        private coreService: CoreService,
+        private sectionService: SectionService,
+        private categoryService: CategoryService,
+        private accommodationService: AccommodationService,
         private cdRef: ChangeDetectorRef
     ) {
-        this.getSections()
+        this.sectionService.getSections()
+        this.categoryService.getAll()
+        this.accommodationService.getAll()
+        effect(() => {
+            this.getSections()
+        })
     }
 
     getSections() {
-        this.coreService.getSections().subscribe((sections: Section[]) => {
-            sections.forEach((section: Section) => {
-                this.coreService
-                    .getSectionImageById(section.id)
-                    .subscribe((sectionImage) => {
-                        const reader = new FileReader()
-                        reader.readAsDataURL(sectionImage)
-                        reader.onloadend = () => {
-                            section.urlImage = reader.result as string
-                        }
-                    })
-                this.sectionsWithImage.push(section)
-            })
+        const sections = this.sectionService.getAllSectionsSig()
+        sections.forEach((section: Section) => {
+            this.sectionService
+                .getSectionImageById(section.id)
+                .subscribe((sectionImage) => {
+                    const reader = new FileReader()
+                    reader.readAsDataURL(sectionImage)
+                    reader.onloadend = () => {
+                        section.urlImage = reader.result as string
+                    }
+                })
+            this.sectionsWithImage.push(section)
         })
     }
 
     getCategoriesBySection(id: any) {
         this.categoriesWithImage = []
-        this.coreService
+        this.categoryService
             .getCategoriesBySection(id)
             .subscribe((categories: Category[]) => {
                 categories.forEach((category: Category) => {
-                    this.coreService
+                    this.categoryService
                         .getCategoryImageById(category.id)
                         .subscribe((categoryImage) => {
                             const reader = new FileReader()
@@ -91,11 +100,12 @@ export class AdminAccomodationsComponent {
 
     getAccommodationsByCategory(id: string) {
         this.accommodationsWithImages = []
-        this.coreService
+
+        this.accommodationService
             .getAccommodationsByCategory(id)
             .subscribe((accommodations: Accommodation[]) => {
                 accommodations.forEach((accommodation: Accommodation) => {
-                    this.coreService
+                    this.accommodationService
                         .getAccomodationImageById(accommodation.id)
                         .subscribe((accommodationImage) => {
                             const reader = new FileReader()
@@ -150,6 +160,7 @@ export class AdminAccomodationsComponent {
     closeModalOnSubmit() {
         this.isModalOpen = false
         this.resetInfos()
+      
     }
 
     closeModal() {
@@ -165,12 +176,11 @@ export class AdminAccomodationsComponent {
         this.infos = []
         this.image = ''
         this.imageUrl = ''
-        this.getSections()
-        
+        this.sectionService.getSections()
     }
 
     deleteSection(sectionID: any) {
-        this.coreService.deleteSection(sectionID).subscribe(
+        this.sectionService.deleteSection(sectionID).subscribe(
             (response) => {
                 this.resetInfos()
             },
@@ -181,7 +191,7 @@ export class AdminAccomodationsComponent {
     }
 
     deleteCategory(categoryID: any) {
-        this.coreService.deleteCategory(categoryID).subscribe(
+        this.categoryService.deleteCategory(categoryID).subscribe(
             (response) => {
                 this.getCategoriesBySection(this.infos.section_id)
             },
@@ -192,14 +202,16 @@ export class AdminAccomodationsComponent {
     }
 
     deleteAccommodation(accommodationID: any) {
-        this.coreService.deleteAccommodation(accommodationID).subscribe(
-            (response) => {
-                this.getAccommodationsByCategory(this.infos.category_id)
-            },
-            (error) => {
-                console.log(error)
-            }
-        )
+        this.accommodationService
+            .deleteAccommodation(accommodationID)
+            .subscribe(
+                (response) => {
+                    this.getAccommodationsByCategory(this.infos.category_id)
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
     }
 
     // createSection(form: any) {

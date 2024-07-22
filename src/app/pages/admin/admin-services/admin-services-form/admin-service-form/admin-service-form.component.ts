@@ -10,7 +10,9 @@ import {
 import { FormsModule, NgForm } from '@angular/forms'
 import { Category } from 'src/app/shared/models/category.model'
 import { Section } from 'src/app/shared/models/section.model'
-import { CoreService } from 'src/app/shared/services/core.service'
+import { AccommodationService } from 'src/app/shared/services/accommodation.service'
+import { CategoryService } from 'src/app/shared/services/category.service'
+import { SectionService } from 'src/app/shared/services/section.service'
 
 @Component({
     selector: 'app-admin-service-form',
@@ -40,7 +42,7 @@ export class AdminServiceFormComponent {
     @Input() openModalForCreation!: boolean
     @Output() closeModal = new EventEmitter<void>()
 
-    constructor(private coreService: CoreService) {}
+    constructor(private sectionService: SectionService, private categoryService: CategoryService, private accommodationService: AccommodationService) {}
 
     onSubmit() {
         if (this.typeForChoice === 'newSection') {
@@ -49,13 +51,14 @@ export class AdminServiceFormComponent {
             formData.append('description', this.genericForm.value.description)
             formData.append('title', this.genericForm.value.title)
             formData.append('image', this.newImage[0])
-            this.coreService.createSection(formData).subscribe(
+            this.sectionService.createSection(formData).subscribe(
                 (response) => {
                     formData
                     this.openModalForCreation = false
                     this.closeModal.emit()
                     this.imageUrl = ''
                     this.newImage = []
+                    this.sectionService.getAllSectionsSig()
                 },
                 (error) => {
                     console.log(error)
@@ -75,7 +78,7 @@ export class AdminServiceFormComponent {
             formData.append('title', this.genericForm.value.title)
             formData.append('image', this.newImage[0])
 
-            this.coreService.updateSection(formData, this.infos.id).subscribe(
+            this.sectionService.updateSection(formData, this.infos.id).subscribe(
                 (response) => {
                     formData
                     this.openModalForCreation = false
@@ -88,7 +91,7 @@ export class AdminServiceFormComponent {
             )
         }
         if (this.typeForChoice === 'updateCategory') {
-            this.coreService.updateCategory(this.infos as Category).subscribe(
+            this.categoryService.updateCategory(this.infos as Category).subscribe(
                 (response) => {
                     this.closeModal.emit()
                 },
@@ -98,7 +101,7 @@ export class AdminServiceFormComponent {
             )
         }
         if (this.typeForChoice === 'updateAccommodation') {
-            this.coreService.updateAccommodation(this.infos).subscribe(
+            this.accommodationService.updateAccommodation(this.infos).subscribe(
                 (response) => {
                     this.closeModal.emit()
                 },

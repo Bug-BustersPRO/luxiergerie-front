@@ -26,17 +26,17 @@
         </span>
     </div>
 </section>
-<section id="purchases-main-container" *ngIf="openDetailSwitch">
-    <div id="customer-infos-container">
-        <h4>Informations client</h4>
-        <p>{{ bill.client.firstName }} {{ bill.client.lastName }}</p>
-        <p>{{ bill.client.email }}</p>
-        <p>{{ bill.client.phoneNumber }}</p>
-    </div>
-    <div id="purchases-container">
-        @for (purchase of bill.purchasesForBillDTO; track $index) {
-    <app-admin-purchase-detail [purchase]="purchase"></app-admin-purchase-detail>
-}
-
-    </div>
+<section id="purchases-main-container"
+         *ngIf="openDetailSwitch">
+  <div id="customer-infos-container">
+    <h4>Informations client</h4>
+    <p>{{ bill.client.firstName }} {{ bill.client.lastName }}</p>
+    <p>{{ bill.client.email }}</p>
+    <p>{{ bill.client.phoneNumber }}</p>
+  </div>
+  <div id="purchases-container">
+    @for (purchase of bill.purchasesForBillDTO; track $index) {
+      <app-admin-purchase-detail [purchase]="purchase"></app-admin-purchase-detail>
+    }
+  </div>
 </section>

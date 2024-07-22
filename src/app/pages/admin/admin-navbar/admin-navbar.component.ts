@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink} from '@angular/router';
-
+import { RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-
 import { AdminHomeComponent } from '../admin-home/admin-home.component';
 import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
-import { AccommodationFacade } from 'src/app/domains/accommodation-facade';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -15,13 +12,10 @@ import { AccommodationFacade } from 'src/app/domains/accommodation-facade';
   styleUrls: ['./admin-navbar.component.scss'],
   standalone: true,
   imports: [AdminHomeComponent, RouterLink, AdminDashboardComponent],
-  providers: [AccommodationFacade]
+  providers: []
 })
 
 export class AdminNavbarComponent {
-
-  constructor(private hotelService: HotelService, private cookieService: CookieService) { }
-
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
 
@@ -37,11 +31,6 @@ export class AdminNavbarComponent {
       icon: 'list_alt'
     },
     {
-      name: 'Informations',
-      route: 'info',
-      icon: 'note_alt'
-    },
-    {
       name: 'Chambres',
       route: 'config',
       icon: 'key'
@@ -51,42 +40,39 @@ export class AdminNavbarComponent {
       route: 'carousel',
       icon: 'note_alt'
     },
+    {
+      name: 'Employé(e)s',
+      route: 'employee',
+      icon: 'person'
+    },
+    {
+      name: 'Mon établissement',
+      route: 'hotel',
+      icon: 'business'
+    }
   ]
 
-  ngOnInit(): void {
-    this.getHotels();
-  }
-
-  getHotels() {
-    const cookie = this.cookieService.get('jwt-token');
-    if (cookie !== '') {
-      this.hotelService.getHotel().subscribe({
-        next: response => {
-          this.hotel = response[0];
-          if (this.hotel !== undefined && this.hotel !== null) {
-            this.getHotelImage();
-          }
-        },
-        error: (error) => {
-          console.error(error);
-        }
-      });
-    }
-
-  }
-
-  getHotelImage(): void {
-    this.hotelService.getHotelImage().subscribe({
-      next: (response) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(response);
-        reader.onloadend = () => {
-          this.hotelImageUrl = reader.result as string;
-        };
-      },
-      error: error => {
-        console.error(error);
+  constructor(private hotelService: HotelService, private cookieService: CookieService) {
+    this.hotelService.getHotels().subscribe(() => {
+      this.hotel = this.hotelService.hotel;
+      if (this.hotel) {
+        this.hotelService.applyColors(this.hotel?.colors);
+        this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
+          this.hotelImageUrl = url;
+        });
+      } else {
+        this.hotelService.applyColors(["#FDFBF5"]);
       }
     });
   }
+
+  ngOnInit(): void {
+    this.hotelService.hotelUpdate$.subscribe({
+      next: (hotel) => {
+        this.hotel = hotel;
+        this.hotelService.getHotelImageSub();
+      }
+    });
+  }
+
 }

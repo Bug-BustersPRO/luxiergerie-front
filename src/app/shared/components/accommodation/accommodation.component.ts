@@ -9,4 +9,11 @@ import { Accommodation } from '../../models/accommodation.model';
 export class AccommodationComponent {
 
   @Input() accommodation!: Accommodation;
+
+  constructor(){}
+
+  ngOnInit() {
+    this.accommodation.quantity = 0;
+  }
+
 }

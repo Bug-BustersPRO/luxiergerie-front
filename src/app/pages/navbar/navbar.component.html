@@ -3,24 +3,24 @@
     <div class="hotel-infos-container">
       <div class="logo">
         @if (hotelImageUrl) {
-          <img [src]="hotelImageUrl"
+           <img [src]="hotelImageUrl"
              alt="{{hotel.name}}">
-        }
+            }
       </div>
       <div class="hotel-name">
         @if (hotel !== undefined && hotel !== null) {
-          <p>{{hotel.name}}</p>
+          <p>Hôtel - {{hotel.name}}</p>
         }
       </div>
     </div>
     <div class="guest-infos-container">
       <div class="guest-name">
         <p>Bienvenue</p>
-        <p>John Doe</p>
+        <p>{{currentClient.firstName}} {{currentClient.lastName}}</p>
       </div>
     </div>
     <div class="connection">
-      <a>Se déconnecter</a>
+      <span (click)="logout()">Se déconnecter</span>
     </div>
   </div>
   <div class="half-circle"></div>
@@ -41,7 +41,7 @@
     </div>
     <div class="btn">
       <i class="material-icons md-36"
-         (click)="navigateTo('/sections')">shopping_basket</i>
+         (click)="openCart()">shopping_basket</i>
     </div>
     <div class="btn">
       <i class="material-icons md-36"
@@ -49,3 +49,8 @@
     </div>
   </label>
 </div>
+<app-modal title="Mon Panier"
+           [showModal]="isModalOpen"
+           (closeModalEvent)="isModalOpen = false">
+  <app-cart></app-cart>
+</app-modal>

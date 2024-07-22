@@ -1,14 +1,23 @@
-<section id="hotel-information">
-  <div class="hotel-information-container">
-    <img src="https://hapi.mmcreation.com/media/1064/Logo_blanc_sans_fond.png?w=608&h=608&mode=ratio&coi=50%2C50&hash=3b282e14d161238" alt="logo-hotel" width="200px" height="200px">
-    <h1>Bienvenue à l'hotel</h1>
-    <h1>Sierra Monaco</h1>
-  </div>
-  <div class="login-container">
-    <app-login-modal *ngIf="openModal" [isOpen]="openModal"></app-login-modal>
+<section [style.background-image]="'url(' + hotelBackgroundImageUrl + ')'" id="hotel-container">
+  <div id="hotel-information">
+    <div class="hotel-information-container">
+      <img
+        [src]="hotelImageUrl"
+        alt="logo-hotel"
+        width="200px"
+        height="200px"
+      />
+      <h1>Bienvenue à l'hôtel</h1>
+      <h1 *ngIf="hotel">{{ hotel.name }}</h1>
+    </div>
+    <div class="login-container">
+      <app-login-modal *ngIf="openModal" [isOpen]="openModal" />
+    </div>
+    <div #arrow class="arrow" [ngClass]="arrowClass">
+      <div #arrow class="arrow" [ngClass]="arrowClass">
+        <h3>Decouvrez nos services</h3>
+        <span class="arrow-down">&raquo;</span>
+      </div>
+    </div>
   </div>
 </section>
-<div #arrow class="arrow" [ngClass]="arrowClass">
-  <h3>Decouvrez nos services</h3>
-  <span class="arrow-down">&raquo;</span>
-</div>

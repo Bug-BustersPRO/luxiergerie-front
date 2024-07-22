@@ -94,13 +94,15 @@
 
       .hotel-name {
         margin-top: 30px;
-        width: 495px;
+        width: 100%;
+        max-width: 495px;
         height: 57px;
       }
 
       .config-colors {
         display: flex;
-        width: 500px;
+        flex-wrap: wrap;
+        width: 100%;
         gap: 32px;
 
         .colors-container {
@@ -160,6 +162,11 @@
       }
     }
 
+
+    .config-image {
+      margin-top: 30px;
+    }
+
     .file-name {
       margin-top: 20px;
     }
@@ -178,6 +185,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        flex-wrap: wrap;
 
         .confirmation-colors {
           display: flex;

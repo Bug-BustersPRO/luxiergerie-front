@@ -1,0 +1,40 @@
+
+  <div class="cart">
+    <div class="columns golden-border">
+      <p>Produits/Services</p>
+      <p class="centerded-p">Quantité</p>
+      <p class="centerded-p">Prix</p>
+    </div>
+    <div class="scrollable">
+      <div class="golden-border" *ngFor="let category of categories">
+        <p class="bold"> {{category.category}}</p>
+        <div *ngFor="let item of items">
+          <div *ngIf="item.category == category.category" class="columns">
+            <p>{{item.name}} </p>
+            <div class="quantity">
+              <p class="right-p tertiary bold" (click)="removeItem(item)">-</p>
+              <p class="centerded-p">{{item.quantity}}</p>
+              <p class="tertiary bold" (click)="addQuantity(item)">+</p>
+            </div>
+            <p class="centerded-p">{{item.price*item.quantity | number: '1.2-2'}} €</p>
+          </div>
+        </div>
+        <div class="columns">
+          <p class="golden-text">Sous total</p>
+          <div class="grid-filler"></div>
+          <p class="golden-text centerded-p"> {{category.totalPricePerCat.round(2).getPrettyValue()}} €</p>
+        </div>
+      </div>
+    </div>
+    <div class="whitespace">
+      <div class="columns">
+        <div class="grid-filler"></div>
+        <p class="centerded-p bold">Prix total : </p>
+        <p class="golden-text centerded-p">{{totalPrice.getPrettyValue()}} €</p>
+      </div>
+      <div class="buttons">
+      <app-button action="Vider le panier" (click)="clearCart()"/>
+      <app-button action="commander"/>
+    </div>
+    </div>
+  </div>

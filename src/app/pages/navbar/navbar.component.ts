@@ -1,63 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { CartComponent } from 'src/app/shared/components/cart/cart.component';
+import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { Client } from 'src/app/shared/models/client.model';
 import { Hotel } from 'src/app/shared/models/hotel.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { CartService } from 'src/app/shared/services/cart.service';
 import { HotelService } from 'src/app/shared/services/hotel.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [],
+  imports: [ModalComponent, CartComponent, ButtonComponent],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
+  public isModalOpen: boolean = false;
+  public currentClient!: Client;
 
-  constructor(private router: Router, private hotelService: HotelService, private cookieService: CookieService) { }
-
-  ngOnInit(): void {
-    this.getHotels();
-  }
-
-  getHotels() {
-      this.hotelService.getHotel().subscribe({
-        next: response => {
-          this.hotel = response[0];
-          if (this.hotel !== undefined && this.hotel !== null) {
-            this.applyColors(this.hotel?.colors);
-            this.getHotelImage();
-          }
-        },
-        error: (error) => {
-          console.error(error);
-        }
-      });
-  }
-
-  getHotelImage(): void {
-    this.hotelService.getHotelImage().subscribe({
-      next: (response) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(response);
-        reader.onloadend = () => {
-          this.hotelImageUrl = reader.result as string;
-        };
-      },
-      error: error => {
-        console.error(error);
+  constructor(private router: Router, private hotelService: HotelService, private cartService: CartService, private authService: AuthService) {
+    this.hotelService.getHotels().subscribe(() => {
+      this.hotel = this.hotelService.hotel;
+      if (this.hotel) {
+        this.hotelService.applyColors(this.hotel?.colors);
+        this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
+          this.hotelImageUrl = url;
+        });
+      } else {
+        this.hotelService.applyColors(["#FDFBF5"]);
       }
     });
   }
 
-  applyColors(colors: string[]): void {
-    document.documentElement.style.setProperty('--primary-background-color', colors[0]);
-    document.documentElement.style.setProperty('--secondary-background-color', colors[1]);
-    document.documentElement.style.setProperty('--tertiary-background-color', colors[2]);
+  ngOnInit(): void {
+    this.currentClient = localStorage.getItem('client') ? JSON.parse(localStorage.getItem('client') as string) : {} as Client;
+    console.log(this.currentClient);
+  }
+
+  public openModal() {
+    this.isModalOpen = true;
   }
 
   navigateTo(route: string): void {
     this.router.navigate([route]);
   }
+
+  openCart(): void {
+    this.isModalOpen = true;
+    this.cartService.loadCart();
+  }
+
+  logout(): void {
+    this.authService.logOut(false);
+  }
+
 }
