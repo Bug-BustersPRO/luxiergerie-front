@@ -39,13 +39,14 @@ export class RegisterEmployeeComponent implements AfterViewInit {
             role.name !== 'ROLE_DIAMOND' && role.name !== 'ROLE_GOLD'
         );
       console.log('roles: ', this.roles);
-      
+      this.getEmployeeById();
+      console.log("@@@@@@@@@@@@@@@@@@@@"+this.employeeService.employeeById);
     });
     
   }
 
   ngAfterViewInit(): void {
-    // this.getEmployeeById();
+     //this.getEmployeeById();
   }
 
   getRoleName(role: string) {
@@ -61,10 +62,16 @@ export class RegisterEmployeeComponent implements AfterViewInit {
 
   public getEmployeeById(): void {
     if(this.isCreateEmployee === false) {
-     const employeeId = this.employeeService.employeeById;
-      this.model = this.employeeService.employeeById;
-      console.log('11111111111111111111' + employeeId);
-    } 
+     const employee = this.employeeService.employeeById();
+      this.model.id = employee.id;
+      this.model.firstName = employee.firstName;
+      this.model.lastName = employee.lastName;
+      this.model.password = employee.password;
+      this.model.roles = employee.roles;
+      console.log('11111111111111111111' + employee);
+    } else {
+      this.model = new Employee('', '', '', '', '', [{ name: '' }]);
+    }
   }
 
   getId(id: any) {

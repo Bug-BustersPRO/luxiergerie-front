@@ -19,7 +19,8 @@ export class EmployeeService {
   }
   private getAllEmployees$: WritableSignal<Employee[]> = signal([]);
   getAllEmployeesSig = computed(() => this.getAllEmployees$());
-  public employeeById!: Employee;
+  public employeeById$: WritableSignal<Employee> = signal(new Employee('', '', '', '', '', [{ name: '' }]));
+  public employeeById = computed(() => this.employeeById$());
 
   // Employee API - call vers le backend
 
@@ -34,7 +35,7 @@ export class EmployeeService {
   public getRolesByEmployeeId(id: number): void {
     this.http.get<Employee>(`${this.url}/employee/${id}`, { headers: this.getHeaders() })
       .subscribe({
-        next: employee => this.employeeById = employee,
+        next: employee => this.employeeById$.set(employee),
         error: error => console.log(error, "There was an error while fetching employee")
       });
   }
