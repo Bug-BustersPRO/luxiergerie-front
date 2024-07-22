@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges } from '@angular/core';
 import { Accommodation } from '../../models/accommodation.model';
 import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
@@ -13,8 +13,6 @@ import { Client } from '../../models/client.model';
 import { PurchaseService } from '../../services/purchase.service';
 import { AuthService } from '../../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ModalService } from '../../services/modal.service';
-
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -22,37 +20,50 @@ import { ModalService } from '../../services/modal.service';
   imports: [CommonModule, ButtonComponent],
   standalone: true
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnChanges {
   items: Accommodation[] = [];
   categories: { category: Category; totalPricePerCat: bigDecimal }[] = [];
   totalPrice: bigDecimal = this.cartService.getTotalPrice().round(2);
-  public hotel!: Hotel;
-  public hotelImageUrl!: string;
   currentClient!: Client;
   roomNumber!: string;
-  @Output() changeTitle: EventEmitter<string> = new EventEmitter();
-  orderConfirmed: boolean = false;
   purchase!: Purchase;
 
-  constructor(private cartService: CartService, private toastr: ToastrService,
-    private hotelService: HotelService, private cdr: ChangeDetectorRef,
-     private purchaseService: PurchaseService, private authService: AuthService,
-    private modalService: ModalService)
-  {this.hotelService.getHotels().subscribe(() => {
-    this.hotel = this.hotelService.hotel;
-    if (this.hotel) {
-      this.hotelService.applyColors(this.hotel?.colors);
-      this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
-        this.hotelImageUrl = url;
-      });
-    } else {
-      this.hotelService.applyColors(["#FDFBF5"]);
+  public hotel!: Hotel;
+  public hotelImageUrl!: string;
+
+  @Output() changeTitle: EventEmitter<string> = new EventEmitter();
+  @Output() closeModalEventButton: EventEmitter<void> = new EventEmitter();
+  @Input() orderConfirmed: boolean = false;
+  @Input() modalClosed!: boolean;
+
+  constructor(
+    private cartService: CartService,
+     private toastr: ToastrService,
+    private hotelService: HotelService,
+     private cdr: ChangeDetectorRef,
+     private purchaseService: PurchaseService
+    )
+    {
+      this.hotelService.getHotels().subscribe(() => {
+      this.hotel = this.hotelService.hotel;
+      if (this.hotel) {
+        this.hotelService.applyColors(this.hotel?.colors);
+        this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
+          this.hotelImageUrl = url;
+        });
+      } else {
+        this.hotelService.applyColors(["#FDFBF5"]);
     }
   });
   this.loadCart();
   }
 
   ngOnInit() {
+
+    this.cartService.changeTitle.subscribe((title) => {
+      this.changeTitle.emit(title);
+    });
+    this.closeConfirmation();
     this.cartService.cartItems.subscribe(items => {
       this.items = items;
       this.cdr.markForCheck();
@@ -70,6 +81,12 @@ export class CartComponent implements OnInit {
 
     this.getCurrentClientAndRoom();
   }
+
+  ngOnChanges() {
+    this.closeConfirmation();
+    this.cdr.detectChanges();
+  }
+
 
   getCurrentClientAndRoom() {
     const clientStored = localStorage.getItem('current_client');
@@ -109,6 +126,7 @@ export class CartComponent implements OnInit {
         console.log('Purchase created successfully', response);
         this.changeTitle.emit('Confirmation');
         this.orderConfirmed = true;
+        this.cdr.detectChanges();
       },
       error: (error: HttpErrorResponse) => {
         console.log('There was an error while creating purchase', error);
@@ -122,9 +140,17 @@ export class CartComponent implements OnInit {
     this.clearCart();
   }
 
-  closeConfirmation() {
-    this.modalService.closeModal();
-    this.orderConfirmed = false;
-    this.changeTitle.emit('Mon Panier');
+  closeModal() {
+    this.closeModalEventButton.emit();
   }
+
+  closeConfirmation() {
+    if (this.modalClosed && this.orderConfirmed) {
+    this.orderConfirmed = false;
+    this.cartService.changeTitle.emit('Mon Panier');
+    this.cdr.detectChanges();
+    }
+  }
+
+
 }

@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CartComponent } from '../cart/cart.component';
-import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-modal',
@@ -30,10 +28,7 @@ export class ModalComponent {
   //   </section>
   // </app-modal>
 
-  constructor(private modalService: ModalService) {
-    this.modalService.closeModal$.subscribe(() => {
-      this.closeModal();
-    });
+  constructor() {
   }
 
   @Input() public title: string = '';
