@@ -1,12 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    OnInit,
+    ViewChild,
+} from '@angular/core'
 import { AdminServicesGenericCardComponent } from '../admin-services-generic-card/admin-services-generic-card.component'
 import { CoreService } from 'src/app/shared/services/core.service'
 import { Section } from 'src/app/shared/models/section.model'
 import { Category } from 'src/app/shared/models/category.model'
 import { Accommodation } from 'src/app/shared/models/accommodation.model'
 import { ModalComponent } from '../../../shared/components/modal/modal.component'
-import { FormsModule } from '@angular/forms'
+import { FormsModule, NgForm } from '@angular/forms'
 import { CommonModule } from '@angular/common'
+import { AdminServiceFormComponent } from './admin-services-form/admin-service-form/admin-service-form.component'
 
 @Component({
     selector: 'app-admin-services',
@@ -17,125 +24,155 @@ import { CommonModule } from '@angular/common'
         AdminServicesGenericCardComponent,
         ModalComponent,
         FormsModule,
-        CommonModule
+        CommonModule,
+        AdminServiceFormComponent,
     ],
 })
 export class AdminAccomodationsComponent {
-    public sections: Section[] = []
-    public categories: Category[] = []
-    public accommodations: Accommodation[] = []
+    public sectionsWithImage: Section[] = []
+    public categoriesWithImage: Category[] = []
+    public accommodationsWithImages: Accommodation[] = []
     public reset: boolean = false
     public infos: any = []
+    public typeForChoice: string = ''
+    public typeForDisplay: string = ''
     public image: any
-
+    public imageUrl: string | ArrayBuffer | null = null
     public isModalOpen: boolean = false
-    public openModalSection: boolean = false
-    public openModalCategory: boolean = false
-    public openModalAccommodation: boolean = false
-    public typeSection: string = 'typeSection'
-    public typeCategory: string = 'typeCategory'
-    public typeAccommodation: string = 'typeAccommodation'
+    public openModalForCreation: boolean = false
 
-    constructor(private coreService: CoreService) {
+    constructor(
+        private coreService: CoreService,
+        private cdRef: ChangeDetectorRef
+    ) {
         this.getSections()
     }
 
     getSections() {
         this.coreService.getSections().subscribe((sections: Section[]) => {
-            this.sections = sections
+            sections.forEach((section: Section) => {
+                this.coreService
+                    .getSectionImageById(section.id)
+                    .subscribe((sectionImage) => {
+                        const reader = new FileReader()
+                        reader.readAsDataURL(sectionImage)
+                        reader.onloadend = () => {
+                            section.urlImage = reader.result as string
+                        }
+                    })
+                this.sectionsWithImage.push(section)
+            })
         })
     }
 
-    getCategoriesBySection(sectionID: string) {
-      this.coreService.getCategoriesBySection(sectionID).subscribe(async (categories: Category[]) => {
-          const promises = categories.map(category => {
-              return new Promise<void>((resolve) => {
-                  const reader = new FileReader();
-                  const img = new Blob([category.image], { type: 'image/jpg' });
-                  reader.readAsDataURL(img);
-                  reader.onloadend = () => {
-                      category.urlImage= reader.result as string;
-                      console.log('categories', category.image);
-                      resolve();
-                  };
-              });
-          });
-  
-          await Promise.all(promises);
-  
-          this.categories = categories;
-  
-          if (this.reset) {
-              this.accommodations = [];
-              this.reset = false;
-          }
-      });
-  }
-
-    getAccommodationsByCategory(categoryID: string) {
+    getCategoriesBySection(id: any) {
+        this.categoriesWithImage = []
         this.coreService
-            .getAccommodationsByCategory(categoryID)
+            .getCategoriesBySection(id)
+            .subscribe((categories: Category[]) => {
+                categories.forEach((category: Category) => {
+                    this.coreService
+                        .getCategoryImageById(category.id)
+                        .subscribe((categoryImage) => {
+                            const reader = new FileReader()
+                            reader.readAsDataURL(categoryImage)
+                            reader.onloadend = () => {
+                                category.urlImage = reader.result as string
+                            }
+                        })
+                    this.categoriesWithImage.push(category)
+                })
+            })
+        if (this.reset) {
+            this.accommodationsWithImages = []
+            this.reset = false
+        }
+    }
+
+    getAccommodationsByCategory(id: string) {
+        this.accommodationsWithImages = []
+        this.coreService
+            .getAccommodationsByCategory(id)
             .subscribe((accommodations: Accommodation[]) => {
-                this.accommodations = accommodations
+                accommodations.forEach((accommodation: Accommodation) => {
+                    this.coreService
+                        .getAccomodationImageById(accommodation.id)
+                        .subscribe((accommodationImage) => {
+                            const reader = new FileReader()
+                            reader.readAsDataURL(accommodationImage)
+                            reader.onloadend = () => {
+                                accommodation.urlImage = reader.result as string
+                            }
+                        })
+                    this.accommodationsWithImages.push(accommodation)
+                })
             })
         this.reset = true
     }
 
-    openModal(object: any, type: string) {
+    openModal(type: string, object: any) {
         this.isModalOpen = true
-        if (type === this.typeSection) {
-            this.openModalSection = true
+        switch (type) {
+            case 'updateSection':
+                this.infos = object
+                this.imageUrl = this.infos.urlImage
+                this.typeForDisplay = 'section'
+                break
+            case 'updateCategory':
+                // this.infos = infos;
+                this.typeForDisplay = 'catégorie'
+                break
+            case 'updateAccommodation':
+                //this.infos = infos;
+                this.typeForDisplay = 'produit'
+                break
+            case 'newSection':
+                this.openModalForCreation = true
+                this.resetInfos()
+                this.typeForDisplay = 'une section'
+                break
+            case 'newCategorie':
+                this.openModalForCreation = true
+                this.resetInfos()
+                this.typeForDisplay = 'une catégorie'
+                break
+            case 'newAccommodation':
+                this.openModalForCreation = true
+                this.resetInfos()
+                this.typeForDisplay = 'un produit'
+                break
+            default:
+                break
         }
-        if (type === this.typeCategory) {
-            this.openModalCategory = true
-            console.log('openModalCategory', this.openModalCategory)
-        }
-        if (type === this.typeAccommodation) {
-            this.openModalAccommodation = true
-        }
-        this.infos = object
+        this.typeForChoice = type
     }
 
-    updateInfos() {
-        if (this.openModalSection == true) {
-            this.coreService.updateSection(this.infos).subscribe(
-                (response) => {
-                    this.openModalSection = false
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
-        }
-        if (this.openModalCategory == true) {
-            console.log('updateInfos', this.infos)
-
-            this.coreService.updateCategory(this.infos as Category).subscribe(
-                (response) => {
-                    this.openModalCategory = false
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
-        }
-        if (this.openModalAccommodation == true) {
-            this.coreService.updateAccommodation(this.infos).subscribe(
-                (response) => {
-                    this.openModalAccommodation = false
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
-        }
+    closeModalOnSubmit() {
         this.isModalOpen = false
+        this.resetInfos()
+    }
+
+    closeModal() {
+        this.isModalOpen = false
+        this.openModalForCreation = false
+        this.resetInfos()
+    }
+
+    resetInfos() {
+        this.reset = true
+        this.sectionsWithImage = []
+        this.categoriesWithImage = []
+        this.infos = []
+        this.image = ''
+        this.imageUrl = ''
+        this.getSections()
+        
     }
 
     deleteSection(sectionID: any) {
         this.coreService.deleteSection(sectionID).subscribe(
             (response) => {
-                this.getSections()
+                this.resetInfos()
             },
             (error) => {
                 console.log(error)
@@ -165,20 +202,39 @@ export class AdminAccomodationsComponent {
         )
     }
 
-    getHotelImage(id: any): void {
-        this.coreService.getCategoryImage(id).subscribe({
-            next: (response) => {
-                const reader = new FileReader()
-                reader.readAsDataURL(response)
-                reader.onloadend = () => {
-                    this.image = reader.result as string
-                    console.log(this.image)
-                    console.log(response)
-                }
-            },
-            error: (error) => {
-                console.error(error)
-            },
-        })
-    }
+    // createSection(form: any) {
+    //     this.coreService.createSection(form).subscribe(
+    //         (response) => {
+    //             this.getSections()
+    //             this.openModalNewSection = false
+    //         },
+    //         (error) => {
+    //             console.log(error)
+    //         }
+    //     )
+    // }
+
+    // createCategory(){
+    //     this.coreService.createCategory(this.infos).subscribe(
+    //         (response) => {
+    //             this.getCategoriesBySection(this.infos.section_id)
+    //             this.openModalNewCategory = false
+    //         },
+    //         (error) => {
+    //             console.log(error)
+    //         }
+    //     )
+    // }
+
+    // createAccommodation(){
+    //     this.coreService.createAccommodation(this.infos).subscribe(
+    //         (response) => {
+    //             this.getAccommodationsByCategory(this.infos.category_id)
+    //             this.openModalNewAccommodation = false
+    //         },
+    //         (error) => {
+    //             console.log(error)
+    //         }
+    //     )
+    // }
 }

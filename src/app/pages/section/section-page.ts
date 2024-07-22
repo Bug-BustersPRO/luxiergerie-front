@@ -22,13 +22,13 @@ export class SectionPage {
     this.sectionFacade.getAllSections().subscribe((sections) => {
       this.sections = sections;
       this.carouselItems = [];
-      this.sections[0].image = 'assets/beach.jpg'
-      this.sections[1].image = 'assets/hotel.jpg'
+      this.sections[0].urlImage = 'assets/beach.jpg'
+      this.sections[1].urlImage = 'assets/hotel.jpg'
       for (let i = 0; i < this.sections.length; i++) {
         this.carouselItems.push({
           name: this.sections[i].name,
           description: this.sections[i].description,
-          image: this.sections[i].image
+          image: this.sections[i].urlImage
         });
       }
     });

@@ -4,14 +4,30 @@
             Sections
             <div class="layout">
                 <div>
-                    @for (section of sections; track $index) {
-                        <app-admin-services-generic-card [infos]="section" [image]="section.image">
+                    <button (click)="openModal('newSection', null)">
+                        Nouvelle section
+                    </button>
+                </div>
+                <div>
+                    @for (section of sectionsWithImage; track $index) {
+                        <app-admin-services-generic-card
+                            [infos]="section"
+                            [image]="section.urlImage"
+                        >
                         </app-admin-services-generic-card>
                         <div (click)="getCategoriesBySection(section.id)">
-                            <div>></div>
+                            <div class="chevron">></div>
                         </div>
-                        <span (click)="openModal(section, typeSection)" class="material-symbols-outlined">edit</span>
-                        <span (click)="deleteSection(section.id)" class="material-symbols-outlined">delete</span>  
+                        <span
+                            (click)="openModal('updateSection', section)"
+                            class="material-symbols-outlined"
+                            >edit</span
+                        >
+                        <span
+                            (click)="deleteSection(section.id)"
+                            class="material-symbols-outlined"
+                            >delete</span
+                        >
                     }
                 </div>
             </div>
@@ -19,72 +35,83 @@
         <div id="categories">
             Catégories
             <div class="layout">
+                <button (click)="openModal('newCategorie', null)">
+                    Nouvelle catégorie
+                </button>
                 <div>
-                    @for (category of categories; track $index) {                       
-                        <app-admin-services-generic-card [infos]="category" [image]="category.urlImage">
+                    @for (category of categoriesWithImage; track $index) {
+                        <app-admin-services-generic-card
+                            [infos]="category"
+                            [image]="category.urlImage"
+                        >
                         </app-admin-services-generic-card>
-                    
+
                         <div (click)="getAccommodationsByCategory(category.id)">
-                            <div>></div>
+                            <div class="chevron">></div>
                         </div>
-                        <span (click)="openModal(category, typeCategory)" class="material-symbols-outlined">edit</span>
-                        <span (click)="deleteCategory(category.id)" class="material-symbols-outlined">delete</span>
+                        <span
+                            (click)="openModal('updateCategory', category)"
+                            class="material-symbols-outlined"
+                            >edit</span
+                        >
+                        <span
+                            (click)="deleteCategory(category.id)"
+                            class="material-symbols-outlined"
+                            >delete</span
+                        >
                     }
                 </div>
             </div>
         </div>
         <div id="accommodations">
             Produits
-            @for (accommodation of accommodations; track $index) {
-                <app-admin-services-generic-card
-                    [infos]="accommodation"
-                     [image]="accommodation.image"
-                ></app-admin-services-generic-card>
-                <span (click)="openModal(accommodation, typeAccommodation)" class="material-symbols-outlined">edit</span>
-                <span (click)="deleteAccommodation(accommodation.id)" class="material-symbols-outlined">delete</span>
-            }
+            <div class="layout">
+                <button (click)="openModal('newAccommodation', null)">
+                    Nouveau produit
+                </button>
+                <div>
+                    @for (
+                        accommodation of accommodationsWithImages;
+                        track $index
+                    ) {
+                        <app-admin-services-generic-card
+                            [infos]="accommodation"
+                            [image]="accommodation.urlImage"
+                        ></app-admin-services-generic-card>
+                        <span
+                            (click)="
+                                openModal('updateAccommodation', accommodation)
+                            "
+                            class="material-symbols-outlined"
+                            >edit</span
+                        >
+                        <!--  <span
+                            (click)="deleteAccommodation(accommodation.id)"
+                            class="material-symbols-outlined"
+                            >delete</span
+                        >-->
+                    }
+                </div>
+            </div>
         </div>
+
+        <app-modal
+            title="{{
+                openModalForCreation
+                    ? 'Créer ' + typeForDisplay
+                    : 'Modifier les informations'
+            }}"
+            [showModal]="isModalOpen"
+            (closeModalEvent)="closeModal()"
+        >
+            <app-admin-service-form
+                [openModalForCreation]="openModalForCreation"
+                [infos]="infos"
+                [imageUrl]="imageUrl"
+                [typeForDisplay]="typeForDisplay"
+                [typeForChoice]="typeForChoice"
+                (closeModal)="closeModalOnSubmit()"
+            ></app-admin-service-form>
+        </app-modal>
     </div>
 </div>
-
-
-<app-modal
-title="Modifier les informations"
-[showModal]="isModalOpen"
-(closeModalEvent)="isModalOpen = false"
-> 
-<div>
-    <div>
-        <label for="name">Nom</label>
-        <input
-            type="text"
-            id="name"
-            [(ngModel)]="infos.name"
-        />
-    </div>
-    <div>
-        <label for="description">Description</label>
-        <textarea
-            id="description"
-            [(ngModel)]="infos.description"
-        ></textarea>
-    </div>
-    <div>
-        <label for="image">Image</label>
-        <input
-            type="text"
-            id="image"
-            [(ngModel)]="image"
-        />
-    </div>
-    <div *ngIf="infos.price">
-        <label for="price">Prix</label>
-        <input type="number" id="price" [(ngModel)]="infos.price">
-    </div>
-    <div>
-        <button (click)="updateInfos()">
-            Mettre à jour
-        </button>
-    </div>
-</div>
-</app-modal>

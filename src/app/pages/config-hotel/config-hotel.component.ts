@@ -85,11 +85,12 @@ export class ConfigHotelComponent implements OnInit {
       const file = input.files[0];
       this.isFileError = false;
       this.fileName = file.name;
+      
       this.hotel.image.push(file);
 
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.imageUrl = reader.result;
+        this.imageUrl = reader.result;        
       };
       reader.readAsDataURL(file);
     }

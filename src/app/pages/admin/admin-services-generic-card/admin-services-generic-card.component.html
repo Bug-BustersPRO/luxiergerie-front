@@ -2,6 +2,9 @@
     <div>
       <img [src]="image" alt="">
     </div>
+    <div *ngIf="infos.title">
+        Titre : {{infos.title}}
+    </div>
 
     <div>
         Nom : {{infos.name}}

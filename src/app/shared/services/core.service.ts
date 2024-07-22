@@ -32,14 +32,18 @@ export class CoreService {
     return this.httpClient.get<Category[]>(`${this.url}/sections/${id}/categories`, { headers: this.headers });
   }
 
+  public getSectionImageById(id: any): Observable<Blob> {
+    return this.httpClient.get(`${this.url}/sections/image/${id}`, { headers: this.headers, responseType: 'blob' });
+  }
+
   // CREATE
-  public createSection(section: Section): Observable<any> {
+  public createSection(section: FormData): Observable<any> {    
     return this.httpClient.post(`${this.url}/sections`, section, { headers: this.headers });
   }
 
   // UPDATE
-  public updateSection(section: Section): Observable<any> {
-    return this.httpClient.put(`${this.url}/sections/${section.id}`, section, { headers: this.headers });
+  public updateSection(section: FormData, id: any): Observable<any> {
+      return this.httpClient.put(`${this.url}/sections/${id}`, section, { headers: this.headers });
   }
 
   // DELETE
@@ -60,6 +64,10 @@ export class CoreService {
 
   public getAccommodationsByCategory(id: string): Observable<Accommodation[]> {
     return this.httpClient.get<Accommodation[]>(`${this.url}/categories/${id}/accommodations`, { headers: this.headers });
+  }
+
+  public getCategoryImageById(id: any): Observable<Blob> {
+    return this.httpClient.get(`${this.url}/categories/image/${id}`, { headers: this.headers, responseType: 'blob' });
   }
 
   // CREATE
@@ -89,9 +97,12 @@ export class CoreService {
     return this.httpClient.get(`${this.url}/accommodations`, { headers: this.headers });
   }
 
-
   public getAccommodationById(id: number): Observable<any> {
     return this.httpClient.get(`${this.url}/accommodations/${id}`, { headers: this.headers });
+  }
+
+  public getAccomodationImageById(id: any): Observable<Blob> {
+    return this.httpClient.get(`${this.url}/accommodations/image/${id}`, { headers: this.headers, responseType: 'blob' });
   }
 
   // CREATE

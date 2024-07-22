@@ -27,6 +27,8 @@ export class HotelService {
   }
 
   public createHotel(formData: any): Observable<any> {
+    console.log(formData);
+    
     return this.httpClient.post(`${this.url}`, formData, { headers: this.getHeaders() });
   }
 

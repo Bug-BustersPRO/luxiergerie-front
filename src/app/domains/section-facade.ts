@@ -24,13 +24,13 @@
       return this.coreService.getSectionById(id);
    }
 
-   createSection(section: Section): Observable<Section> {
-      return this.coreService.createSection(section);
-   }
+   // createSection(section: Section): Observable<Section> {
+   //    return this.coreService.createSection(section);
+   // }
 
-   updateSection(section: Section): Observable<Section> {
-      return this.coreService.updateSection(section);
-   }
+   // updateSection(section: Section): Observable<Section> {
+   //    return this.coreService.updateSection(section);
+   // }
 
    deleteSection(id: number): Observable<Section> {
       return this.coreService.deleteSection(id);
