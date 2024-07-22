@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterEmployeeComponent } from './register-employee.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('RegisterEmployeeComponent', () => {
   let component: RegisterEmployeeComponent;
@@ -8,10 +9,10 @@ describe('RegisterEmployeeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegisterEmployeeComponent]
+      imports: [RegisterEmployeeComponent, HttpClientTestingModule]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(RegisterEmployeeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
