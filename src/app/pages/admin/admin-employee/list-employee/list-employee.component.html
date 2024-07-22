@@ -17,7 +17,7 @@
           <td class="li-attribut">{{ employee.serialNumber }}</td>
           <td class="li-attribut">{{ getRoleName(employee.roles[0].name) }}</td>
           <td class="actions">
-            <span class="action-icon" title="Modifier l'employé(e)">✏️</span>
+            <span class="action-icon" (click)="modify(employee.id)" title="Modifier l'employé(e)">✏️</span>
             <span class="action-icon" title="Supprimer l'employé(e)">❌</span>
           </td>
         </tr>
@@ -25,3 +25,10 @@
     </table>
   </div>
 </section>
+<app-modal
+  title="Modification de l'employé(e)"
+  [showModal]="isModalOpen"
+  (closeModalEvent)="isModalOpen = false"
+>
+  <app-register-employee [isCreateEmployee]="false" (closeModal)="closeModal()"></app-register-employee>
+</app-modal>

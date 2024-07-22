@@ -2,16 +2,20 @@ import { AfterViewInit, Component, effect } from '@angular/core';
 import { Employee } from 'src/app/shared/models/employee.model';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { CommonModule } from '@angular/common';
+import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { RegisterEmployeeComponent } from 'src/app/shared/components/register-employee/register-employee.component';
 
 @Component({
   selector: 'app-list-employee',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModalComponent, RegisterEmployeeComponent],
   templateUrl: './list-employee.component.html',
   styleUrl: './list-employee.component.scss',
 })
 export class ListEmployeeComponent implements AfterViewInit {
+
   employees!: Employee[];
+  isModalOpen!: boolean;
 
   constructor(private employeeService: EmployeeService) {
     this.employeeService.getAll();
@@ -31,6 +35,21 @@ export class ListEmployeeComponent implements AfterViewInit {
         return;
     }
   }
+
+  closeModal() {
+this.isModalOpen = false;
+}
+
+ modify(employeeId: string | undefined) {
+this.isModalOpen = true;
+ this.employeeService.getEmployeeById(employeeId!).subscribe({
+next: employee => {
+this.employeeService.employeeById = employee;
+},
+error: error => console.log(error, 'There was an error while fetching employee'),
+ });
+
+}
 
   ngAfterViewInit(): void {
     this.employeeService.getAll();

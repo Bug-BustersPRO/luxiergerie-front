@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
-
+ 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
   private url: string = "http://localhost:8090/api";
   private getHeaders(): HttpHeaders {
@@ -38,16 +38,16 @@ export class EmployeeService {
         error: error => console.log(error, "There was an error while fetching employee")
       });
   }
-  public getEmployeeById(id: number): void {
-    this.http.get<Employee>(`${this.url}/employee/${id}`, { headers: this.getHeaders() })
-      .subscribe({
-        next: employee => this.employeeById = employee,
-        error: error => console.log(error, "There was an error while fetching employee")
-      });
+  public getEmployeeById(id: string): Observable<any> {
+    return this.http.get<Employee>(`${this.url}/employee/${id}`, { headers: this.getHeaders() })
   }
 
   public createEmployee(employee: Employee): Observable<any> {
     console.log('employee: ', employee);
     return this.http.post(`${this.url}/employee`, employee, {headers: this.getHeaders()});
   }
+
+   public updateEmployee(employeeId: string) : Observable<any> {
+    return this.http.put(`${this.url}/employee/${employeeId}`, {headers: this.getHeaders()});
+}
 }
