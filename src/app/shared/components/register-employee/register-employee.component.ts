@@ -1,14 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  effect,
-  EventEmitter,
-  OnInit,
-  Output,
-  output,
-  ViewChild,
-  viewChild,
-} from '@angular/core';
+import { Component, effect, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { Employee } from '../../models/employee.model';
@@ -47,14 +38,7 @@ export class RegisterEmployeeComponent {
         );
       console.log('roles: ', this.roles);
     });
-   
   }
-  // ngOnInit(): void {
-  //    this.roleService.getById("103111f6-d6f3-4587-98f2-fac7b9c55444");
-
-  //   this.roleService.getRoleById();
-  //   console.log("@@@@@@@@@@@@@@@@@@@@@" +this.roleService.getRoleById());
-  // }
 
   getRoleName(role: string) {
     switch (role) {
@@ -63,21 +47,19 @@ export class RegisterEmployeeComponent {
       case 'ROLE_EMPLOYEE':
         return 'Employé(e)';
       default:
-        return 'Employé(e)';
+        return;
     }
   }
 
   getId(id: any) {
-    console.log('3333333333333333333id: ', id);
+    console.log('3333333333333333333 id: ', id);
     return id;
   }
 
-  getRoleWithIdAndName(roleId: string): any {
-    console.log('11111111111111111111roleId: ', roleId);
-    const role = this.roles.find((role) => role.id === roleId);
-    this.model.roles[0] = role as Role;
-    console.log('2222222222222222222role: ', role);
-    return role;
+  getRoleWithIdAndName(roleId: Event): any {
+    console.log('2222222222222222222 roleId: ', roleId);
+    console.log('roles: ', this.roles);
+    return 'role';
   }
 
   togglePasswordVisibility() {
@@ -95,6 +77,7 @@ export class RegisterEmployeeComponent {
       console.log('model: ', this.model);
       this.employeeService.createEmployee(this.model).subscribe(
         (response) => {
+          this.employeeService.getAll();
           this.closeModal.emit();
           this.toastr.success('Employé(e) créé(e) avec succès');
           console.log('employee created succesfully: ', response);

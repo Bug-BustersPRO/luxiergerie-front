@@ -19,7 +19,7 @@
             class="error-length-required"
             *ngIf="lastName.errors?.['required']"
           >
-            Le nom est requis
+            Le nom est requis.
           </div>
           <div
             class="error-length-required"
@@ -48,7 +48,7 @@
             class="error-length-required"
             *ngIf="firstName.errors?.['required']"
           >
-            Le prénom est requis
+            Le prénom est requis.
           </div>
           <div
             class="error-length-required"
@@ -68,10 +68,10 @@
           required
         >
           @for (role of roles; track $index) {
-          <option (click)="getId($event)" [value]="role">{{ getRoleName(role.name) }}</option>
+          <option [ngValue]="role">{{ getRoleName(role.name) }}</option>
           }
         </select>
-        <!-- validation des roles -->
+
         <div
           *ngIf="roleList.invalid && (roleList.dirty || roleList.touched)"
         ></div>
@@ -79,7 +79,7 @@
           class="error-length-required"
           *ngIf="roleList.errors?.['required']"
         >
-          Le rôle est requis
+          Le rôle est requis.
         </div>
       </div>
 
@@ -110,7 +110,7 @@
               class="error-length-required"
               *ngIf="password.errors?.['required']"
             >
-              Le mot de passe est requis
+              Le mot de passe est requis.
             </div>
             <div
               class="error-length-required"
