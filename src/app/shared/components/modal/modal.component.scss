@@ -25,7 +25,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   overflow: scroll;
-  
+
 
   .modal-header {
     display: flex;
@@ -39,8 +39,11 @@
       justify-content: center;
 
       h2 {
-        color: var(--tertiary-background-color);
-        font-size: 24px;
+        color: var(--primary-background-color);
+        font-family: Satisfy;
+        font-size: 48px;
+        font-weight: lighter;
+        text-align: center;
       }
     }
 

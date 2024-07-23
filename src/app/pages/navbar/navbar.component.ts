@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { CartComponent } from 'src/app/shared/components/cart/cart.component';
@@ -21,8 +21,14 @@ export class NavbarComponent implements OnInit {
   public hotelImageUrl!: string;
   public isModalOpen: boolean = false;
   public currentClient!: Client;
+  public cartModalTitle: string = "Mon Panier";
 
-  constructor(private router: Router, private hotelService: HotelService, private cartService: CartService, private authService: AuthService) {
+  constructor(
+    private router: Router,
+    private hotelService: HotelService,
+    private cartService: CartService,
+    private authService: AuthService,
+    private cdr:ChangeDetectorRef) {
     this.hotelService.getHotels().subscribe(() => {
       this.hotel = this.hotelService.hotel;
       if (this.hotel) {
@@ -38,7 +44,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentClient = localStorage.getItem('client') ? JSON.parse(localStorage.getItem('client') as string) : {} as Client;
-    console.log(this.currentClient);
+    this.cartService.changeTitle.subscribe((newTitle: string) => {
+      this.cartModalTitle = newTitle;
+      this.cdr.detectChanges();
+    });
   }
 
   public openModal() {
@@ -57,5 +66,4 @@ export class NavbarComponent implements OnInit {
   logout(): void {
     this.authService.logOut(false);
   }
-
 }
