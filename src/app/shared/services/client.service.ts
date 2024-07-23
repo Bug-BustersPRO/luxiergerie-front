@@ -17,7 +17,7 @@ export class ClientService {
     });
   }
   private getAllClients$: WritableSignal<Client[]> = signal([]);
-  getAllClientsSig = computed(() => this.getAllClients$);
+  getAllClientsSig = computed(() => this.getAllClients$());
   public getClientById!: Client;
 
   // Clients API - call vers le backend
