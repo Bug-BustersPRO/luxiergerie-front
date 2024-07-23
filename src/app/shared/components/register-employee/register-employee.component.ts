@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, EventEmitter, Output, Input, OnInit, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, effect, EventEmitter, Output, Input, OnChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { Employee } from '../../models/employee.model';
@@ -7,7 +7,6 @@ import { Role } from '../../models/role.model';
 import { RoleService } from '../../services/role.service';
 import { EmployeeService } from '../../services/employee.service';
 import { ToastrService } from 'ngx-toastr';
-
 
 @Component({
   selector: 'app-register-employee',
@@ -23,7 +22,6 @@ export class RegisterEmployeeComponent implements OnChanges {
   roles!: Role[];
   @Input() isCreateEmployee: boolean = true;
   @Input() selectedEmployee!: Employee;
-
   model: Employee = new Employee('', '', '', '', '', [{ name: '' }]);
 
   constructor(
@@ -39,15 +37,11 @@ export class RegisterEmployeeComponent implements OnChanges {
           (role: Role) =>
             role.name !== 'ROLE_DIAMOND' && role.name !== 'ROLE_GOLD'
         );
-      console.log('roles: ', this.roles);
-      //this.getEmployeeById();
     });
-    
   }
 
   ngOnChanges(): void {
-      this.getEmployeeById();
-  
+    this.getEmployeeById();
   }
 
   getRoleName(role: string) {
@@ -63,34 +57,18 @@ export class RegisterEmployeeComponent implements OnChanges {
 
   public getEmployeeById(): void {
     console.log('selectedEmployee: ', this.selectedEmployee);
-    if(this.isCreateEmployee === false) {
-      
+    if (this.isCreateEmployee === false) {
       this.model.id = this.selectedEmployee.id;
       this.model.firstName = this.selectedEmployee.firstName;
       this.model.lastName = this.selectedEmployee.lastName;
-      
       this.model.roles = this.roles.filter((role: Role) => {
         return this.selectedEmployee.roles.find(
           (roleName: { name: string }) => roleName.name === role.name
         );
       });
-      
-      
-      console.log('11111111111111111111' + this.selectedEmployee);
     } else {
       this.model = new Employee('', '', '', '', '', [{ name: '' }]);
     }
-  }
-
-  getId(id: any) {
-    console.log('3333333333333333333 id: ', id);
-    return id;
-  }
-
-  getRoleWithIdAndName(roleId: Event): any {
-    console.log('2222222222222222222 roleId: ', roleId);
-    console.log('roles: ', this.roles);
-    return 'role';
   }
 
   togglePasswordVisibility() {
@@ -103,22 +81,21 @@ export class RegisterEmployeeComponent implements OnChanges {
   }
 
   onSubmit(form: { valid: any }) {
-    console.log('form: ', form);
     if (form.valid) {
-      if(this.isCreateEmployee) {
-      this.employeeService.createEmployee(this.model).subscribe(
-        (response) => {
-          this.employeeService.getAll();
-          this.closeModal.emit();
-          this.toastr.success('Employé(e) créé(e) avec succès');
-          console.log('employee created succesfully: ', response);
-        },
-        (error) => {
-          console.error('Error creating employees', error);
-        }
-      );
+      if (this.isCreateEmployee) {
+        this.employeeService.createEmployee(this.model).subscribe(
+          (response) => {
+            this.employeeService.getAll();
+            this.closeModal.emit();
+            this.toastr.success('Employé(e) créé(e) avec succès');
+            console.log('employee created succesfully: ', response);
+          },
+          (error) => {
+            console.error('Error creating employees', error);
+          }
+        );
       } else {
-        this.employeeService.updateEmployee(this.model.id!).subscribe(
+        this.employeeService.updateEmployee(this.model, this.model.id!).subscribe(
           (response) => {
             this.employeeService.getAll();
             this.closeModal.emit();
@@ -129,7 +106,8 @@ export class RegisterEmployeeComponent implements OnChanges {
             console.error('Error updating employees', error);
           }
         );
+      }
     }
   }
-}
+
 }

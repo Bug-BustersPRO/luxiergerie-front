@@ -8,8 +8,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
- 
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
   private url: string = "http://localhost:8090/api";
   private getHeaders(): HttpHeaders {
     const token = this.cookieService.get('jwt-token');
@@ -21,6 +19,8 @@ export class EmployeeService {
   getAllEmployeesSig = computed(() => this.getAllEmployees$());
   public employeeById$: WritableSignal<Employee> = signal(new Employee('', '', '', '', '', [{ name: '' }]));
   public employeeById = computed(() => this.employeeById$());
+
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   // Employee API - call vers le backend
 
@@ -44,11 +44,15 @@ export class EmployeeService {
   }
 
   public createEmployee(employee: Employee): Observable<any> {
-    console.log('employee: ', employee);
-    return this.http.post(`${this.url}/employee`, employee, {headers: this.getHeaders()});
+    return this.http.post(`${this.url}/employee`, employee, { headers: this.getHeaders() });
   }
 
-   public updateEmployee(employeeId: string) : Observable<any> {
-    return this.http.put(`${this.url}/employee/${employeeId}`, {headers: this.getHeaders()});
-}
+  public updateEmployee(data: any, employeeId: string): Observable<any> {
+    return this.http.put(`${this.url}/employee/${employeeId}`, data, { headers: this.getHeaders() });
+  }
+
+  public deleteEmployee(employeeId: string): Observable<any> {
+    return this.http.delete(`${this.url}/employee/${employeeId}`, { headers: this.getHeaders() });
+  }
+
 }

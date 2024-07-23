@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect, EventEmitter, Output } from '@angular/core';
+import { AfterViewInit, Component, effect } from '@angular/core';
 import { Employee } from 'src/app/shared/models/employee.model';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { CommonModule } from '@angular/common';
@@ -17,7 +17,7 @@ export class ListEmployeeComponent implements AfterViewInit {
   employees!: Employee[];
   isModalOpen!: boolean;
   selectedEmployee!: Employee;
-  
+
   constructor(private employeeService: EmployeeService) {
     this.employeeService.getAll();
     effect(() => {
@@ -38,24 +38,32 @@ export class ListEmployeeComponent implements AfterViewInit {
   }
 
   closeModal() {
-this.isModalOpen = false;
-}
+    this.isModalOpen = false;
+  }
 
- modify(employeeId: string | undefined) {
-this.isModalOpen = true;
- this.employeeService.getEmployeeById(employeeId!).subscribe({
-next: employee => {
-this.selectedEmployee = employee;
-console.log(employee, 'employee');
+  modify(employeeId: string | undefined) {
+    this.isModalOpen = true;
+    this.employeeService.getEmployeeById(employeeId!).subscribe({
+      next: employee => {
+        this.selectedEmployee = employee;
+        console.log(employee, 'employee');
+      },
+      error: error => console.log(error, 'There was an error while fetching employee'),
+    });
+  }
 
-
-},
-error: error => console.log(error, 'There was an error while fetching employee'),
- });
-
-}
+  deleteEmployee(employeeId: string | undefined) {
+    this.employeeService.deleteEmployee(employeeId!).subscribe({
+      next: () => {
+        this.employeeService.getAll();
+        console.log('Employee deleted successfully');
+      },
+      error: error => console.log(error, 'There was an error while deleting employee'),
+    });
+  }
 
   ngAfterViewInit(): void {
     this.employeeService.getAll();
   }
+
 }
