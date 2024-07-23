@@ -9,12 +9,12 @@
       <div class="golden-border" *ngFor="let category of categories">
         <p class="bold"> {{category.category}}</p>
         <div *ngFor="let item of items">
-          <div *ngIf="item.category == category.category" class="columns">
+          <div *ngIf="item.category === category.category" class="columns">
             <p>{{item.name}} </p>
             <div class="quantity">
-              <p class="right-p tertiary bold" (click)="removeItem(item)">-</p>
+              <p class="right-p tertiary bold" (click)="removeItem(item)" (keydown.enter)="removeItem(item)" role="button" tabIndex={0}>-</p>
               <p class="centerded-p">{{item.quantity}}</p>
-              <p class="tertiary bold" (click)="addQuantity(item)">+</p>
+              <p class="tertiary bold" (click)="addQuantity(item)" (keydown.enter)="addQuantity(item)" role="button" tabIndex={0}>+</p>
             </div>
             <p class="centerded-p">{{item.price*item.quantity | number: '1.2-2'}} €</p>
           </div>

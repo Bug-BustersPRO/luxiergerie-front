@@ -6,7 +6,9 @@
     <p class="price"> Total des commandes : {{ bill.totalPrice | currency: 'EUR' }} </p>
   </div>
   <div class="icons-container"
-       (click)="openDetail()">
+       (click)="openDetail()"
+       (keydown.enter)="openDetail()"
+       role="button" tabIndex={0}>
     <span class="material-symbols-outlined"> search <p> Voir </p>
     </span>
     <span class="material-symbols-outlined"> cancel <p> Annuler </p>

@@ -37,7 +37,7 @@
               {
                 "input": "src/styles.scss"
               },
-               "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -104,8 +104,22 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

@@ -11,7 +11,7 @@ import { AccommodationService } from 'src/app/shared/services/accommodation.serv
   templateUrl: './accommodation-page.component.html',
   styleUrls: ['./accommodation-page.component.scss']
 })
-export class AccommodationPage {
+export class AccommodationPageComponent {
   public accommodations: Accommodation[] = [];
   public accommodation!: Accommodation;
   @Input() category!: Category;

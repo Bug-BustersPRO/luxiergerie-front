@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfigHotelComponent } from './config-hotel.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('ConfigHotelComponent', () => {
   let component: ConfigHotelComponent;
@@ -9,7 +10,9 @@ describe('ConfigHotelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ConfigHotelComponent, HttpClientTestingModule]
+      imports: [ConfigHotelComponent,
+        HttpClientTestingModule,
+        ToastrModule.forRoot()]
     })
     .compileComponents();
 

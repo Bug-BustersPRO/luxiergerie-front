@@ -11,8 +11,8 @@ describe('ModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ModalComponent],
-      imports: [CommonModule, HttpClientTestingModule]
+      declarations: [],
+      imports: [CommonModule, HttpClientTestingModule, ModalComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ModalComponent);

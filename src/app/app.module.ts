@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { SectionPage } from './pages/section/section-page';
+import { SectionPageComponent } from './pages/section/section-page';
 import { LoginClientPageComponent } from './pages/security/room/login-client.page/login-client.page.component';
 import { AuthGuardService } from "./shared/services/Guard/auth-room.guard";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
@@ -16,33 +16,31 @@ import { HomePageComponent } from './pages/home/home-page.component';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { SectionComponent } from './shared/components/section/section.component';
-import { CategoryPage } from './pages/category/category-page';
+import { CategoryPageComponent } from './pages/category/category-page';
 import { CategoryComponent } from './shared/components/category/category.component';
 import { AccommodationCardComponent } from './shared/components/accommodation-card/accommodation-card.component';
-import { AccommodationPage } from './pages/accommodation-page/accommodation-page.component';
+import { AccommodationPageComponent } from './pages/accommodation-page/accommodation-page.component';
 import { AccommodationComponent } from './shared/components/accommodation/accommodation.component';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
 import { CartComponent } from './shared/components/cart/cart.component';
 import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
 import { ButtonComponent } from './shared/components/button/button.component';
-import { AdminEmployeeComponent } from './pages/admin/admin-employee/admin-employee.component';
-import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginClientPageComponent,
-    SectionPage,
+    SectionPageComponent,
     CardComponent,
     CarouselComponent,
     HomePageComponent,
     SectionComponent,
     CategoryComponent,
-    CategoryPage,
+    CategoryPageComponent,
     AccommodationComponent,
     LoginEmployeeComponent,
-    AccommodationPage
+    AccommodationPageComponent,
   ],
   imports: [
     BrowserModule,

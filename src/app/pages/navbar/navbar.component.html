@@ -41,11 +41,16 @@
     </div>
     <div class="btn">
       <i class="material-icons md-36"
-         (click)="openCart()">shopping_basket</i>
+        role="button" tabIndex={0}
+         (click)="openCart()"
+         (keydown.enter)="openCart()">shopping_basket</i>
     </div>
     <div class="btn">
       <i class="material-icons md-36"
-         (click)="navigateTo('/')">home</i>
+         (click)="navigateTo('/')"
+         role="button" tabIndex={0}
+          (keydown.enter)="navigateTo('/')"
+         >home</i>
     </div>
   </label>
 </div>

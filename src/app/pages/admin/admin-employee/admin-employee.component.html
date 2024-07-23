@@ -6,6 +6,8 @@
   <div
     class="add-button"
     (click)="openModal()"
+    (keydown.enter)="openModal()"
+    role="button" tabIndex={0}
     title="Ajouter un(e) employé(e)"
   >
     <span class="button-icon">+</span>

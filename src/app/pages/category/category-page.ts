@@ -8,7 +8,7 @@ import { SectionService } from 'src/app/shared/services/section.service';
   templateUrl: './category-page.html',
   styleUrls: ['./category-page.scss'],
 })
-export class CategoryPage implements OnInit {
+export class CategoryPageComponent implements OnInit {
   public categories: Category[] = [];
   public category!: Category;
   @Input() section!: Section;
