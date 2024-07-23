@@ -28,6 +28,8 @@ export class ModalComponent {
   //   </section>
   // </app-modal>
 
+  constructor() {
+  }
 
   @Input() public title: string = '';
   @Output() public closeModalEvent = new EventEmitter<void>();
