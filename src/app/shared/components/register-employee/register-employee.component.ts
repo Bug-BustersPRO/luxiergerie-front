@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, EventEmitter, Output, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, effect, EventEmitter, Output, Input, OnInit, AfterViewInit, OnChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { Employee } from '../../models/employee.model';
@@ -16,12 +16,13 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './register-employee.component.html',
   styleUrl: './register-employee.component.scss',
 })
-export class RegisterEmployeeComponent implements AfterViewInit {
+export class RegisterEmployeeComponent implements OnChanges {
   showPassword: boolean = false;
   text: string = 'visibility_off';
   @Output() closeModal = new EventEmitter<void>();
   roles!: Role[];
   @Input() isCreateEmployee: boolean = true;
+  @Input() selectedEmployee!: Employee;
 
   model: Employee = new Employee('', '', '', '', '', [{ name: '' }]);
 
@@ -39,14 +40,14 @@ export class RegisterEmployeeComponent implements AfterViewInit {
             role.name !== 'ROLE_DIAMOND' && role.name !== 'ROLE_GOLD'
         );
       console.log('roles: ', this.roles);
-      this.getEmployeeById();
-      console.log("@@@@@@@@@@@@@@@@@@@@"+this.employeeService.employeeById);
+      //this.getEmployeeById();
     });
     
   }
 
-  ngAfterViewInit(): void {
-     //this.getEmployeeById();
+  ngOnChanges(): void {
+      this.getEmployeeById();
+  
   }
 
   getRoleName(role: string) {
@@ -61,14 +62,21 @@ export class RegisterEmployeeComponent implements AfterViewInit {
   }
 
   public getEmployeeById(): void {
+    console.log('selectedEmployee: ', this.selectedEmployee);
     if(this.isCreateEmployee === false) {
-     const employee = this.employeeService.employeeById();
-      this.model.id = employee.id;
-      this.model.firstName = employee.firstName;
-      this.model.lastName = employee.lastName;
-      this.model.password = employee.password;
-      this.model.roles = employee.roles;
-      console.log('11111111111111111111' + employee);
+      
+      this.model.id = this.selectedEmployee.id;
+      this.model.firstName = this.selectedEmployee.firstName;
+      this.model.lastName = this.selectedEmployee.lastName;
+      
+      this.model.roles = this.roles.filter((role: Role) => {
+        return this.selectedEmployee.roles.find(
+          (roleName: { name: string }) => roleName.name === role.name
+        );
+      });
+      
+      
+      console.log('11111111111111111111' + this.selectedEmployee);
     } else {
       this.model = new Employee('', '', '', '', '', [{ name: '' }]);
     }

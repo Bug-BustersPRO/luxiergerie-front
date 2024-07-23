@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect } from '@angular/core';
+import { AfterViewInit, Component, effect, EventEmitter, Output } from '@angular/core';
 import { Employee } from 'src/app/shared/models/employee.model';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,8 @@ export class ListEmployeeComponent implements AfterViewInit {
 
   employees!: Employee[];
   isModalOpen!: boolean;
-
+  selectedEmployee!: Employee;
+  
   constructor(private employeeService: EmployeeService) {
     this.employeeService.getAll();
     effect(() => {
@@ -44,7 +45,10 @@ this.isModalOpen = false;
 this.isModalOpen = true;
  this.employeeService.getEmployeeById(employeeId!).subscribe({
 next: employee => {
-this.employeeService.employeeById = employee;
+this.selectedEmployee = employee;
+console.log(employee, 'employee');
+
+
 },
 error: error => console.log(error, 'There was an error while fetching employee'),
  });

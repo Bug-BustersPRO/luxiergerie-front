@@ -30,5 +30,5 @@
   [showModal]="isModalOpen"
   (closeModalEvent)="isModalOpen = false"
 >
-  <app-register-employee [isCreateEmployee]="false" (closeModal)="closeModal()"></app-register-employee>
+  <app-register-employee [selectedEmployee]="selectedEmployee" [isCreateEmployee]="false" (closeModal)="closeModal()"></app-register-employee>
 </app-modal>
