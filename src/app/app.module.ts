@@ -86,6 +86,11 @@ import { RoleGuard } from './shared/services/Guard/role.guard';
       useFactory: (service: RoleGuard) => service.roleGuard(),
       deps: [RoleGuard],
     },
+    {
+      provide: 'roleGuardAdmin',
+      useFactory: (service: RoleGuard) => service.roleGuardAdmin(),
+      deps: [RoleGuard],
+    },
   ],
   bootstrap: [AppComponent],
 })

@@ -36,4 +36,28 @@ export class RoleGuard {
     };
   }
 
+  public roleGuardAdmin(): CanActivateFn {
+    return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
+      return this.authService.isUserLoggedIn().pipe(
+        map(() => {
+
+          const employee = JSON.parse(localStorage.getItem('employee')!);
+          const employeeAdmin = employee.roles[0].name === 'ROLE_ADMIN';
+          const restrictedRoutes = ['/admin/employee', '/admin/hotel'];
+
+          if (employee && employeeAdmin) {
+            return true;
+          } else if (employee && restrictedRoutes) {
+            this.router.navigate(['/admin']);
+            return false;
+          } else if (!employee) {
+            this.router.navigate(['/admin']);
+            return false;
+          }
+          return true;
+        })
+      );
+    };
+  }
+
 }

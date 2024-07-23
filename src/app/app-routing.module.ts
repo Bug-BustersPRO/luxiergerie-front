@@ -26,12 +26,12 @@ const routes: Routes = [
       { path: 'purchases', component: AdminPurchasesComponent },
       { path: 'purchases/:id', component: AdminPurchaseDetailComponent },
       { path: 'accomodations', component: AdminAccomodationsComponent },
-      { path: 'employee', component: AdminEmployeeComponent },
-      { path: 'hotel', component: AdminHotelComponent },
+      { path: 'employee', component: AdminEmployeeComponent, canActivate: ['roleGuardAdmin'] },
+      { path: 'hotel', component: AdminHotelComponent, canActivate: ['roleGuardAdmin'] },
     ]
   },
   { path: 'login/employee', component: LoginEmployeeComponent, canActivate: ['authEmployee'] },
-  { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel', 'roleGuard'] },
+  { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel', 'roleGuard', 'roleGuardAdmin'] },
   { path: 'cart', component: CartComponent, canActivate: ['authRoom'] }
 ];
 
