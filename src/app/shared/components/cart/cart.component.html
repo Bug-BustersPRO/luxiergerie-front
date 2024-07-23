@@ -39,18 +39,19 @@
     </div>
   </div>
 
-  <div class="confirmation" *ngIf="orderConfirmed">
-    <div class="cart">
+  <div class="cart" *ngIf="orderConfirmed">
       <p class="centerded-p slim">Merci pour votre commande, vous recevrez ce récapitulatif par e-mail</p>
       <div class="columns">
         <p style="background-color: var(--primary-background-color);">NOM</p>
         <p class="centerded-p" style="background-color: var(--quaternary-background-color);">QUANTITE</p>
         <p class="centerded-p" style="background-color: var(--secondary-background-color);">PRIX</p>
       </div>
-      <div *ngFor="let item of purchase.accommodations" class = "columns">
-        <p>{{item.name}} </p>
-        <p class="centerded-p">{{item.quantity}}</p>
-        <p class="centerded-p">{{item.price*item.quantity | number: '1.2-2'}} €</p>
+      <div class="scrollable">
+        <div *ngFor="let item of purchase.accommodations" class = "columns">
+          <p>{{item.name}} </p>
+          <p class="centerded-p">{{item.quantity}}</p>
+          <p class="centerded-p">{{item.price*item.quantity | number: '1.2-2'}} €</p>
+        </div>
       </div>
       <div class="whitespace">
         <div class="columns">
@@ -61,5 +62,4 @@
         <div class="buttons">
          <app-button action="fermer" (click)="closeModal()"/>
       </div>
-    </div>
   </div>
