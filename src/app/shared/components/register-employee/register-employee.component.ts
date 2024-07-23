@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  effect,
+  EventEmitter,
+  Output,
+  Input,
+  OnChanges,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { Employee } from '../../models/employee.model';
@@ -15,18 +23,21 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './register-employee.component.html',
   styleUrl: './register-employee.component.scss',
 })
-export class RegisterEmployeeComponent {
+export class RegisterEmployeeComponent implements OnChanges {
   showPassword: boolean = false;
   text: string = 'visibility_off';
   @Output() closeModal = new EventEmitter<void>();
   roles!: Role[];
+  @Input() isCreateEmployee: boolean = true;
+  @Input() selectedEmployee!: Employee;
 
   model: Employee = new Employee('', '', '', '', '', [{ name: '' }]);
 
   constructor(
     private roleService: RoleService,
     private employeeService: EmployeeService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cdRef: ChangeDetectorRef
   ) {
     this.roleService.getRoles();
     effect(() => {
@@ -36,8 +47,11 @@ export class RegisterEmployeeComponent {
           (role: Role) =>
             role.name !== 'ROLE_DIAMOND' && role.name !== 'ROLE_GOLD'
         );
-      console.log('roles: ', this.roles);
     });
+  }
+
+  ngOnChanges(): void {
+    this.getEmployeeById();
   }
 
   getRoleName(role: string) {
@@ -51,15 +65,22 @@ export class RegisterEmployeeComponent {
     }
   }
 
-  getId(id: any) {
-    console.log('3333333333333333333 id: ', id);
-    return id;
-  }
+  public getEmployeeById(): void {
+    console.log('selectedEmployee: ', this.selectedEmployee);
+    if (this.isCreateEmployee === false) {
+      this.model.id = this.selectedEmployee.id;
+      this.model.firstName = this.selectedEmployee.firstName;
+      this.model.lastName = this.selectedEmployee.lastName;
 
-  getRoleWithIdAndName(roleId: Event): any {
-    console.log('2222222222222222222 roleId: ', roleId);
-    console.log('roles: ', this.roles);
-    return 'role';
+      this.model.roles = this.roles.filter((role: Role) => {
+        return this.selectedEmployee.roles.find(
+          (roleName: { name: string }) => roleName.name === role.name
+        );
+      });
+    } else {
+      this.model = new Employee('', '', '', '', '', [{ name: '' }]);
+    }
+    this.cdRef.detectChanges();
   }
 
   togglePasswordVisibility() {
@@ -74,18 +95,33 @@ export class RegisterEmployeeComponent {
   onSubmit(form: { valid: any }) {
     console.log('form: ', form);
     if (form.valid) {
-      console.log('model: ', this.model);
-      this.employeeService.createEmployee(this.model).subscribe(
-        (response) => {
-          this.employeeService.getAll();
-          this.closeModal.emit();
-          this.toastr.success('Employé(e) créé(e) avec succès');
-          console.log('employee created succesfully: ', response);
-        },
-        (error) => {
-          console.error('Error creating employees', error);
-        }
-      );
+      if (this.isCreateEmployee) {
+        this.employeeService.createEmployee(this.model).subscribe(
+          (response) => {
+            this.employeeService.getAll();
+            this.closeModal.emit();
+            this.toastr.success('Employé(e) créé(e) avec succès');
+            console.log('employee created succesfully: ', response);
+          },
+          (error) => {
+            console.error('Error creating employees', error);
+          }
+        );
+      } else {
+        this.employeeService
+          .updateEmployee(this.model, this.model.id!)
+          .subscribe(
+            (response) => {
+              this.employeeService.getAll();
+              this.closeModal.emit();
+              this.toastr.success('Employé(e) modifié(e) avec succès');
+              console.log('employee updated succesfully: ', response);
+            },
+            (error) => {
+              console.error('Error updating employees', error);
+            }
+          );
+      }
     }
   }
 }
