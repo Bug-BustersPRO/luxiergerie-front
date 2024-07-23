@@ -12,47 +12,68 @@ import { HotelService } from 'src/app/shared/services/hotel.service';
   styleUrls: ['./admin-navbar.component.scss'],
   standalone: true,
   imports: [AdminHomeComponent, RouterLink, AdminDashboardComponent],
-  providers: []
+  providers: [],
 })
-
 export class AdminNavbarComponent {
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
+  isAdmin!: boolean;
 
-  public navItems = [
+  public navItemsAdmin = [
     {
       name: 'Commandes',
       route: 'purchases',
-      icon: 'shopping_cart'
+      icon: 'shopping_cart',
     },
     {
       name: 'Services',
       route: 'accomodations',
-      icon: 'list_alt'
+      icon: 'list_alt',
     },
     {
       name: 'Chambres',
       route: 'config',
-      icon: 'key'
+      icon: 'key',
     },
     {
       name: 'Carousel',
       route: 'carousel',
-      icon: 'note_alt'
+      icon: 'note_alt',
     },
     {
       name: 'Employé(e)s',
       route: 'employee',
-      icon: 'person'
+      icon: 'person',
     },
     {
       name: 'Mon établissement',
       route: 'hotel',
-      icon: 'business'
-    }
-  ]
+      icon: 'business',
+    },
+  ];
 
-  constructor(private hotelService: HotelService, private cookieService: CookieService) {
+  public navItemsEmployee = [
+    {
+      name: 'Commandes',
+      route: 'purchases',
+      icon: 'shopping_cart',
+    },
+    {
+      name: 'Services',
+      route: 'accomodations',
+      icon: 'list_alt',
+    },
+    {
+      name: 'Chambres',
+      route: 'config',
+      icon: 'key',
+    },
+  ];
+
+  constructor(
+    private hotelService: HotelService,
+    private cookieService: CookieService
+  ) {
     this.hotelService.getHotels().subscribe(() => {
       this.hotel = this.hotelService.hotel;
       if (this.hotel) {
@@ -61,18 +82,22 @@ export class AdminNavbarComponent {
           this.hotelImageUrl = url;
         });
       } else {
-        this.hotelService.applyColors(["#FDFBF5"]);
+        this.hotelService.applyColors(['#FDFBF5']);
       }
     });
   }
 
   ngOnInit(): void {
+    const employee = JSON.parse(localStorage.getItem('employee')!);
+    if (employee.roles[0].name === 'ROLE_ADMIN') {
+      this.isAdmin = true;
+    }
+
     this.hotelService.hotelUpdate$.subscribe({
       next: (hotel) => {
         this.hotel = hotel;
         this.hotelService.getHotelImageSub();
-      }
+      },
     });
   }
-
 }
