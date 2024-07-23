@@ -23,9 +23,18 @@
       </div>
       <div class="btn-container">
         @if (hotel) {
-          <app-button action="valider" (click)="login()" [disabled]="!canValidate" [btnBackground]="hotel.colors[1]" [txtColor]="hotel.colors[0]"/>
+          <app-button action="valider"
+          (click)="login()"
+          (keydown.enter)="login()"
+          [disabled]="!canValidate"
+          [btnBackground]="hotel.colors[1]"
+          [txtColor]="hotel.colors[0]"/>
         }@else {
-          <app-button action="valider" (click)="login()" [disabled]="!canValidate"/>
+          <app-button
+          action="valider"
+          (click)="login()"
+          (keydown.enter)="login()"
+          [disabled]="!canValidate"/>
         }
       </div>
       <div *ngIf="isNotLoggedIn"

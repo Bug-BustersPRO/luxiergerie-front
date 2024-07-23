@@ -1,4 +1,4 @@
-import bigDecimal from "js-big-decimal";
+
 import { Accommodation } from "./accommodation.model";
 import { Client } from "./client.model";
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminHomeComponent } from '../admin-home/admin-home.component';
@@ -15,7 +15,7 @@ import { HotelService } from 'src/app/shared/services/hotel.service';
   providers: []
 })
 
-export class AdminNavbarComponent {
+export class AdminNavbarComponent implements OnInit {
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
 

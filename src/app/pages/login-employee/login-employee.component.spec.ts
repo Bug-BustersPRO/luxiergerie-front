@@ -27,4 +27,30 @@ describe('LoginEmployeeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('initial state', () => {
+    expect(component.serialNumber).toBeUndefined();
+    expect(component.password).toBeUndefined();
+    expect(component.isNotLoggedIn).toBeFalse();
+    expect(component.canValidate).toBeFalse();
+  });
+
+  describe('canValidate', () => {
+    it('should return false if serialNumber or password is missing', () => {
+      component.serialNumber = '';
+      component.password = 'password';
+      expect(component.canValidate).toBeFalse();
+
+      component.serialNumber = '123';
+      component.password = '';
+      expect(component.canValidate).toBeFalse();
+    });
+
+    it('should return true if both serialNumber and password are present', () => {
+      component.serialNumber = '123';
+      component.password = 'password';
+      expect(component.canValidate).toBeTrue();
+    });
+  });
+
 });

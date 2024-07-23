@@ -11,7 +11,7 @@
 
     <div class="price-button">
       <div class="price">{{ item.price | number: '1.2-2' }} €</div>
-      <div [ngClass]="{ 'only-more-button': item.quantity == 0 }" class="quantity-button">
+      <div [ngClass]="{ 'only-more-button': item.quantity === 0 }" class="quantity-button">
         <button *ngIf="item.quantity > 0" type="button" class="button-less" (click)="decreaseQuantity()">
           <p>-</p>
         </button>

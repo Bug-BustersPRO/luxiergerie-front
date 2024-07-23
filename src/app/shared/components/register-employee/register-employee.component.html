@@ -99,6 +99,8 @@
           <div
             class="material-symbols-outlined eye"
             (click)="togglePasswordVisibility()"
+            (keydown.enter)="togglePasswordVisibility()"
+            role="button" tabindex="0"
           >
             {{ text }}
           </div>

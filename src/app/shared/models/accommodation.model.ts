@@ -1,6 +1,3 @@
-import { Category } from "./category.model";
-import { Purchase } from "./purchase.model";
-
 export class Accommodation {
   public id: string;
   public name: string;

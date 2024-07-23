@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, EventEmitter, Output, Input, OnChanges } from '@angular/core';
 import { Accommodation } from '../../models/accommodation.model';
 import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
@@ -11,7 +11,6 @@ import { ButtonComponent } from '../button/button.component';
 import { Purchase } from '../../models/purchase.model';
 import { Client } from '../../models/client.model';
 import { PurchaseService } from '../../services/purchase.service';
-import { AuthService } from '../../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-cart',

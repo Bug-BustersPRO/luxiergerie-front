@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="connection">
-      <span (click)="logout()">Se déconnecter</span>
+      <span (click)="logout()" (keydown.enter)="logout()" role="button" tabIndex="0">Se déconnecter</span>
     </div>
   </div>
   <div class="half-circle"></div>
@@ -41,14 +41,14 @@
     </div>
     <div class="btn">
       <i class="material-icons md-36"
-        role="button" tabIndex={0}
+        role="button" tabindex="0"
          (click)="openCart()"
          (keydown.enter)="openCart()">shopping_basket</i>
     </div>
     <div class="btn">
       <i class="material-icons md-36"
          (click)="navigateTo('/')"
-         role="button" tabIndex={0}
+         role="button" tabindex="0"
           (keydown.enter)="navigateTo('/')"
          >home</i>
     </div>

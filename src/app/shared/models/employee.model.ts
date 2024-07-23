@@ -1,4 +1,3 @@
-import { Role } from "./role.model";
 
 export class Employee {
   public id?: string;
