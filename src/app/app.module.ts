@@ -6,10 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { SectionPage } from './pages/section/section-page';
 import { LoginClientPageComponent } from './pages/security/room/login-client.page/login-client.page.component';
-import { AuthGuardService } from "./shared/services/Guard/auth-room.guard";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { LoginModalComponent } from "./shared/components/login-modal/login-modal.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AuthGuardService } from './shared/services/Guard/auth-room.guard';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LoginModalComponent } from './shared/components/login-modal/login-modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardComponent } from './shared/components/card/card.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { HomePageComponent } from './pages/home/home-page.component';
@@ -25,9 +25,8 @@ import { LoginEmployeeComponent } from './pages/login-employee/login-employee.co
 import { CartComponent } from './shared/components/cart/cart.component';
 import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
 import { ButtonComponent } from './shared/components/button/button.component';
-import { AdminEmployeeComponent } from './pages/admin/admin-employee/admin-employee.component';
-import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { ToastrModule } from 'ngx-toastr';
+import { RoleGuard } from './shared/services/Guard/role.guard';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,7 @@ import { ToastrModule } from 'ngx-toastr';
     CategoryPage,
     AccommodationComponent,
     LoginEmployeeComponent,
-    AccommodationPage
+    AccommodationPage,
   ],
   imports: [
     BrowserModule,
@@ -64,25 +63,35 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    })
+    }),
   ],
   providers: [
     {
       provide: 'authRoom',
       useFactory: (service: AuthGuardService) => service.authRoom(),
-      deps: [AuthGuardService]
+      deps: [AuthGuardService],
     },
     {
       provide: 'authEmployee',
       useFactory: (service: AuthGuardService) => service.authEmployee(),
-      deps: [AuthGuardService]
+      deps: [AuthGuardService],
     },
     {
       provide: 'configHotel',
       useFactory: (service: ConfigHotelGuard) => service.configHotel(),
-      deps: [ConfigHotelGuard]
+      deps: [ConfigHotelGuard],
+    },
+    {
+      provide: 'roleGuard',
+      useFactory: (service: RoleGuard) => service.roleGuard(),
+      deps: [RoleGuard],
+    },
+    {
+      provide: 'roleGuardAdmin',
+      useFactory: (service: RoleGuard) => service.roleGuardAdmin(),
+      deps: [RoleGuard],
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
