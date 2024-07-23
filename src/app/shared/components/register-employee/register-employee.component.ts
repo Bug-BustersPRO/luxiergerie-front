@@ -5,8 +5,6 @@ import {
   EventEmitter,
   Output,
   Input,
-  OnInit,
-  AfterViewInit,
   OnChanges,
   ChangeDetectorRef,
 } from '@angular/core';
@@ -21,7 +19,6 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register-employee',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonComponent],
   imports: [CommonModule, FormsModule, ButtonComponent],
   templateUrl: './register-employee.component.html',
   styleUrl: './register-employee.component.scss',
@@ -58,7 +55,6 @@ export class RegisterEmployeeComponent implements OnChanges {
   }
 
   getRoleName(role: string) {
-    switch (role) {
     switch (role) {
       case 'ROLE_ADMIN':
         return 'Admin';
