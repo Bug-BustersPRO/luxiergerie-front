@@ -1,21 +1,17 @@
 <nav class="vertical-navbar">
-    <div class="hotel-infos-container">
-        <div class="logo">
-            <img [src]="hotelImageUrl" alt="Le logo de l'hotel">
-        </div>
-        <div class="hotel-name">
-           <p>Hôtel - {{ hotel.name }}</p>
-        </div>
+  <div class="hotel-infos-container">
+    <div class="logo">
+      <img [src]="hotelImageUrl"
+           alt="Le logo de l'hotel">
     </div>
-    <ul>
-        @for (navItem of navItems; track $index) {
-        <li>
-          <a [routerLink]="navItem.route">
-            <span class="material-symbols-outlined">{{ navItem.icon }}</span>
-            <span class="nav-text">{{ navItem.name }}</span>
-          </a>
-        </li>
-        }
-      </ul>
-
+    <div class="hotel-name">
+      <p>Hôtel - {{ hotel.name }}</p>
+    </div>
+  </div>
+  <ul> @for (navItem of navItems; track $index) { <li>
+      <a [routerLink]="navItem.route">
+        <span class="material-symbols-outlined">{{ navItem.icon }}</span>
+        <span class="nav-text">{{ navItem.name }}</span>
+      </a>
+    </li> } </ul>
 </nav>
