@@ -54,8 +54,13 @@
     </div>
   </label>
 </div>
-<app-modal title="Mon Panier"
-           [showModal]="isModalOpen"
-           (closeModalEvent)="isModalOpen = false">
-  <app-cart></app-cart>
+
+   <app-modal
+ title={{cartModalTitle}}
+  [showModal]="isModalOpen"
+  (closeModalEvent)="isModalOpen = false">
+    <app-cart
+    (changeTitle)="cartModalTitle = $event"
+    [modalClosed]="!isModalOpen"
+    (closeModalEventButton) ="isModalOpen = false"></app-cart>
 </app-modal>

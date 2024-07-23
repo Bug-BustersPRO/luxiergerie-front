@@ -1,4 +1,4 @@
-import {  Injectable } from '@angular/core';
+import {  EventEmitter, Injectable } from '@angular/core';
 import { Accommodation } from '../models/accommodation.model';
 import { Category } from '../models/category.model';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -16,6 +16,7 @@ export class CartService {
   public cartItems = new BehaviorSubject<Accommodation[]>([]);
   public categoriesSubject = new BehaviorSubject<{ category: Category, totalPricePerCat: bigDecimal }[]>([]);
   public totalPriceSubject = new BehaviorSubject<bigDecimal>(new bigDecimal(0));
+  public changeTitle: EventEmitter<string> = new EventEmitter();
 
   constructor(private accomodationService: AccommodationService) {
     this.loadCart();
@@ -79,6 +80,12 @@ export class CartService {
     this.updateCategoriesAndTotalPrice();
   }
 
+  private saveCart(): void {
+    localStorage.setItem('cart_items', JSON.stringify(this.items));
+    localStorage.setItem('cart_categories', JSON.stringify(this.categories));
+    localStorage.setItem('total_price', JSON.stringify(this.totalPrice));
+  }
+
   private updateCategoriesAndTotalPrice(): void {
     this.categoriesSubject.next(this.categories);
     this.totalPriceSubject.next(this.totalPrice);
@@ -94,12 +101,6 @@ export class CartService {
 
   getTotalPrice(): bigDecimal {
     return this.totalPrice;
-  }
-
-  private saveCart(): void {
-    localStorage.setItem('cart_items', JSON.stringify(this.items));
-    localStorage.setItem('cart_categories', JSON.stringify(this.categories));
-    localStorage.setItem('total_price', JSON.stringify(this.totalPrice));
   }
 
   loadCart(): void {
@@ -146,5 +147,9 @@ export class CartService {
           complete: () => observer.complete()
         });
     });
+  }
+
+  changingTitle(newTitle: string) {
+    this.changeTitle.emit(newTitle);
   }
 }

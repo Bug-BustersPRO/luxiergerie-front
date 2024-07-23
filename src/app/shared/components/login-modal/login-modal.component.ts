@@ -85,6 +85,8 @@ export class LoginModalComponent {
         })
       ).subscribe(response => {
         if (response.status === 200) {
+          localStorage.setItem('current_client', JSON.stringify(response.body));
+          localStorage.setItem('room_number', JSON.stringify(this.loginForm.value.roomNumber));
           this.toastr.success('Connexion réussie');
           this.router.navigate(['/'])
         }
