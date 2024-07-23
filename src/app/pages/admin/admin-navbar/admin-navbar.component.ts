@@ -32,7 +32,7 @@ export class AdminNavbarComponent {
     },
     {
       name: 'Chambres',
-      route: 'config',
+      route: 'room',
       icon: 'key',
     },
     {

@@ -13,6 +13,7 @@ import { AdminPurchaseDetailComponent } from './pages/admin/admin-purchase-detai
 import { CartComponent } from './shared/components/cart/cart.component';
 import { AdminHotelComponent } from './pages/admin/admin-hotel/admin-hotel.component';
 import { AdminEmployeeComponent } from './pages/admin/admin-employee/admin-employee.component';
+import { AdminRoomComponent } from './pages/admin/admin-room/admin-room.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sections', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'accomodations', component: AdminAccomodationsComponent },
       { path: 'employee', component: AdminEmployeeComponent, canActivate: ['roleGuardAdmin'] },
       { path: 'hotel', component: AdminHotelComponent, canActivate: ['roleGuardAdmin'] },
+      { path: 'room', component: AdminRoomComponent, canActivate: ['roleGuard'] }
     ]
   },
   { path: 'login/employee', component: LoginEmployeeComponent, canActivate: ['authEmployee'] },
