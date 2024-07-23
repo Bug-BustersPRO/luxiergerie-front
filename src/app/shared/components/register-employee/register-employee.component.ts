@@ -1,5 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, EventEmitter, Output, Input, OnChanges } from '@angular/core';
+import {
+  Component,
+  effect,
+  EventEmitter,
+  Output,
+  Input,
+  OnInit,
+  AfterViewInit,
+  OnChanges,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { Employee } from '../../models/employee.model';
@@ -22,12 +32,14 @@ export class RegisterEmployeeComponent implements OnChanges {
   roles!: Role[];
   @Input() isCreateEmployee: boolean = true;
   @Input() selectedEmployee!: Employee;
+
   model: Employee = new Employee('', '', '', '', '', [{ name: '' }]);
 
   constructor(
     private roleService: RoleService,
     private employeeService: EmployeeService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cdRef: ChangeDetectorRef
   ) {
     this.roleService.getRoles();
     effect(() => {
@@ -61,6 +73,7 @@ export class RegisterEmployeeComponent implements OnChanges {
       this.model.id = this.selectedEmployee.id;
       this.model.firstName = this.selectedEmployee.firstName;
       this.model.lastName = this.selectedEmployee.lastName;
+
       this.model.roles = this.roles.filter((role: Role) => {
         return this.selectedEmployee.roles.find(
           (roleName: { name: string }) => roleName.name === role.name
@@ -69,6 +82,7 @@ export class RegisterEmployeeComponent implements OnChanges {
     } else {
       this.model = new Employee('', '', '', '', '', [{ name: '' }]);
     }
+    this.cdRef.detectChanges();
   }
 
   togglePasswordVisibility() {
@@ -81,6 +95,7 @@ export class RegisterEmployeeComponent implements OnChanges {
   }
 
   onSubmit(form: { valid: any }) {
+    console.log('form: ', form);
     if (form.valid) {
       if (this.isCreateEmployee) {
         this.employeeService.createEmployee(this.model).subscribe(
@@ -95,19 +110,20 @@ export class RegisterEmployeeComponent implements OnChanges {
           }
         );
       } else {
-        this.employeeService.updateEmployee(this.model, this.model.id!).subscribe(
-          (response) => {
-            this.employeeService.getAll();
-            this.closeModal.emit();
-            this.toastr.success('Employé(e) modifié(e) avec succès');
-            console.log('employee updated succesfully: ', response);
-          },
-          (error) => {
-            console.error('Error updating employees', error);
-          }
-        );
+        this.employeeService
+          .updateEmployee(this.model, this.model.id!)
+          .subscribe(
+            (response) => {
+              this.employeeService.getAll();
+              this.closeModal.emit();
+              this.toastr.success('Employé(e) modifié(e) avec succès');
+              console.log('employee updated succesfully: ', response);
+            },
+            (error) => {
+              console.error('Error updating employees', error);
+            }
+          );
       }
     }
   }
-
 }

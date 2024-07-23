@@ -13,7 +13,6 @@ import { RegisterEmployeeComponent } from 'src/app/shared/components/register-em
   styleUrl: './list-employee.component.scss',
 })
 export class ListEmployeeComponent implements AfterViewInit {
-
   employees!: Employee[];
   isModalOpen!: boolean;
   selectedEmployee!: Employee;
@@ -44,11 +43,11 @@ export class ListEmployeeComponent implements AfterViewInit {
   modify(employeeId: string | undefined) {
     this.isModalOpen = true;
     this.employeeService.getEmployeeById(employeeId!).subscribe({
-      next: employee => {
+      next: (employee) => {
         this.selectedEmployee = employee;
-        console.log(employee, 'employee');
       },
-      error: error => console.log(error, 'There was an error while fetching employee'),
+      error: (error) =>
+        console.log(error, 'There was an error while fetching employee'),
     });
   }
 
@@ -58,12 +57,12 @@ export class ListEmployeeComponent implements AfterViewInit {
         this.employeeService.getAll();
         console.log('Employee deleted successfully');
       },
-      error: error => console.log(error, 'There was an error while deleting employee'),
+      error: (error) =>
+        console.log(error, 'There was an error while deleting employee'),
     });
   }
 
   ngAfterViewInit(): void {
     this.employeeService.getAll();
   }
-
 }
