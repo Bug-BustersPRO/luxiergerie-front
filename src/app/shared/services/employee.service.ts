@@ -18,7 +18,7 @@ export class EmployeeService {
     });
   }
   private getAllEmployees$: WritableSignal<Employee[]> = signal([]);
-  getAllEmployeesSig = computed(() => this.getAllEmployees$);
+  getAllEmployeesSig = computed(() => this.getAllEmployees$());
   public employeeById!: Employee;
 
   // Employee API - call vers le backend

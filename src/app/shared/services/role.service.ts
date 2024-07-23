@@ -18,7 +18,8 @@ export class RoleService {
   }
   private getAllRoles$: WritableSignal<Role[]> = signal([]);
   getAllRolesSig = computed(() => this.getAllRoles$());
-  public getRoleById!: Role;
+  private getRoleById$: WritableSignal<Role> = signal<any>({"role.id": "", "role.name": ""});
+  public getRoleById = computed(() => this.getRoleById$());
 
   // Roles API - call vers le backend
 
@@ -31,10 +32,10 @@ export class RoleService {
       );
   }
 
-  public getById(id: number): void {
+  public getById(id: string): void {
     this.http.get<Role>(`${this.url}/role/${id}`, { headers: this.getHeaders() })
       .subscribe({
-        next: role => this.getRoleById = role,
+        next: role => this.getRoleById$.set(role),
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching role")
       });
   }
