@@ -1,11 +1,11 @@
 
   <div class="cart" *ngIf="!orderConfirmed">
-    <div class="columns colored-border">
-      <p>Produits/Services</p>
-      <p class="centerded-p">Quantité</p>
-      <p class="centerded-p">Prix</p>
-    </div>
-    <div class="scrollable">
+    <div class="scrollable-cart">
+      <div class="columns colored-border">
+        <p>Produits/Services</p>
+        <p class="centerded-p">Quantité</p>
+        <p class="centerded-p">Prix</p>
+      </div>
       <div class="colored-border" *ngFor="let category of categories">
         <p class="bold"> {{category.category}}</p>
         <div *ngFor="let item of items">
@@ -35,18 +35,18 @@
       <div class="buttons">
       <app-button action="Vider le panier" (click)="clearCart()"/>
       <app-button action="commander" (click)="order()"/>
-    </div>
+      </div>
     </div>
   </div>
 
   <div class="cart" *ngIf="orderConfirmed">
       <p class="centerded-p slim">Merci pour votre commande, vous recevrez ce récapitulatif par e-mail</p>
-      <div class="columns">
-        <p style="background-color: var(--primary-background-color);">NOM</p>
-        <p class="centerded-p" style="background-color: var(--quaternary-background-color);">QUANTITE</p>
-        <p class="centerded-p" style="background-color: var(--secondary-background-color);">PRIX</p>
-      </div>
-      <div class="scrollable">
+      <div class="scrollable-confirmation">
+        <div class="columns">
+          <p style="background-color: var(--primary-background-color);">NOM</p>
+          <p class="centerded-p" style="background-color: var(--quaternary-background-color);">QUANTITE</p>
+          <p class="centerded-p" style="background-color: var(--secondary-background-color);">PRIX</p>
+        </div>
         <div *ngFor="let item of purchase.accommodations" class = "columns">
           <p>{{item.name}} </p>
           <p class="centerded-p">{{item.quantity}}</p>
