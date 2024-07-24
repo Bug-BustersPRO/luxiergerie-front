@@ -10,24 +10,35 @@
                 </div>
                 <div>
                     @for (section of sectionsWithImage; track $index) {
-                        <app-admin-services-generic-card
-                            [infos]="section"
-                            [image]="section.urlImage"
-                        >
-                        </app-admin-services-generic-card>
-                        <div (click)="getCategoriesBySection(section.id)">
-                            <div class="chevron">></div>
-                        </div>
-                        <span
-                            (click)="openModal('updateSection', section)"
-                            class="material-symbols-outlined"
-                            >edit</span
-                        >
-                        <span
-                            (click)="deleteSection(section.id)"
-                            class="material-symbols-outlined"
-                            >delete</span
-                        >
+                        <section class="one_card" [ngClass]="{'selected-card': selectedSectionId === section.id}">
+                            <div class="main_card_container">
+                                <app-admin-services-generic-card
+                                    [infos]="section"
+                                    [image]="section.urlImage"
+                                >
+                                </app-admin-services-generic-card>
+                                <div
+                                    class="chevron material-symbols-outlined"
+                                    (click)="getCategoriesBySection(section.id)"
+                                >
+                                    <span> arrow_forward_ios </span>
+                                </div>
+                            </div>
+                            <div class="edit_and_delete">
+                                <span
+                                    (click)="
+                                        openModal('updateSection', section)
+                                    "
+                                    class="material-symbols-outlined"
+                                    >edit</span
+                                >
+                                <span
+                                    (click)="deleteSection(section.id)"
+                                    class="material-symbols-outlined"
+                                    >delete</span
+                                >
+                            </div>
+                        </section>
                     }
                 </div>
             </div>
@@ -35,61 +46,86 @@
         <div id="categories">
             Catégories
             <div class="layout">
-                <button (click)="openModal('newCategorie', null)">
+                <button (click)="openModal('newCategory', null)">
                     Nouvelle catégorie
                 </button>
                 <div>
                     @for (category of categoriesWithImage; track $index) {
-                        <app-admin-services-generic-card
-                            [infos]="category"
-                            [image]="category.urlImage"
-                        >
-                        </app-admin-services-generic-card>
+                        <section class="one_card" [ngClass]="{'selected-card': selectedCategoryId === category.id}">
+                            <div class="main_card_container">
+                                <app-admin-services-generic-card
+                                    [infos]="category"
+                                    [image]="category.urlImage"
+                                >
+                                </app-admin-services-generic-card>
 
-                        <div (click)="getAccommodationsByCategory(category.id)">
-                            <div class="chevron">></div>
-                        </div>
-                        <span
-                            (click)="openModal('updateCategory', category)"
-                            class="material-symbols-outlined"
-                            >edit</span
-                        >
-                        <span
-                            (click)="deleteCategory(category.id)"
-                            class="material-symbols-outlined"
-                            >delete</span
-                        >
+                                <div
+                                    class="chevron material-symbols-outlined"
+                                    (click)="
+                                        getAccommodationsByCategory(category.id)
+                                    "
+                                >
+                                    <span> arrow_forward_ios </span>
+                                </div>
+                            </div>
+                            <div class="edit_and_delete">
+                                <span
+                                    (click)="
+                                        openModal('updateCategory', category)
+                                    "
+                                    class="material-symbols-outlined"
+                                    >edit</span
+                                >
+                                <span
+                                    (click)="deleteCategory(category.id)"
+                                    class="material-symbols-outlined"
+                                    >delete</span
+                                >
+                            </div>
+                        </section>
                     }
                 </div>
             </div>
         </div>
         <div id="accommodations">
-            Produits
+            Produits/Services
             <div class="layout">
                 <button (click)="openModal('newAccommodation', null)">
-                    Nouveau produit
+                    Nouveau produit/service
                 </button>
                 <div>
                     @for (
                         accommodation of accommodationsWithImages;
                         track $index
                     ) {
-                        <app-admin-services-generic-card
-                            [infos]="accommodation"
-                            [image]="accommodation.urlImage"
-                        ></app-admin-services-generic-card>
-                        <span
-                            (click)="
-                                openModal('updateAccommodation', accommodation)
-                            "
-                            class="material-symbols-outlined"
-                            >edit</span
-                        >
-                        <!--  <span
-                            (click)="deleteAccommodation(accommodation.id)"
-                            class="material-symbols-outlined"
-                            >delete</span
-                        >-->
+                        <section class="one_card">
+                            <div class="main_card_container">
+                                <app-admin-services-generic-card
+                                    [infos]="accommodation"
+                                    [image]="accommodation.urlImage"
+                                ></app-admin-services-generic-card>
+                            </div>
+                            <div class="edit_and_delete">
+                                <span
+                                    (click)="
+                                        openModal(
+                                            'updateAccommodation',
+                                            accommodation
+                                        )
+                                    "
+                                    class="material-symbols-outlined"
+                                    >edit</span
+                                >
+
+                                <span
+                                    (click)="
+                                        deleteAccommodation(accommodation.id)
+                                    "
+                                    class="material-symbols-outlined"
+                                    >delete</span
+                                >
+                            </div>
+                        </section>
                     }
                 </div>
             </div>
@@ -111,6 +147,8 @@
                 [typeForDisplay]="typeForDisplay"
                 [typeForChoice]="typeForChoice"
                 (closeModal)="closeModalOnSubmit()"
+                [isACategory]="isACategory"
+                [isAnAccommodation]="isAnAccommodation"
             ></app-admin-service-form>
         </app-modal>
     </div>

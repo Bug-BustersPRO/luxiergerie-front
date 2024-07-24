@@ -1,22 +1,16 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    effect,
-    ElementRef,
-    OnInit,
-    ViewChild,
-} from '@angular/core'
+import { Component, effect } from '@angular/core'
 import { AdminServicesGenericCardComponent } from '../admin-services-generic-card/admin-services-generic-card.component'
 import { Section } from 'src/app/shared/models/section.model'
 import { Category } from 'src/app/shared/models/category.model'
 import { Accommodation } from 'src/app/shared/models/accommodation.model'
 import { ModalComponent } from '../../../shared/components/modal/modal.component'
-import { FormsModule, NgForm } from '@angular/forms'
+import { FormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { AdminServiceFormComponent } from './admin-services-form/admin-service-form/admin-service-form.component'
 import { SectionService } from 'src/app/shared/services/section.service'
 import { CategoryService } from 'src/app/shared/services/category.service'
 import { AccommodationService } from 'src/app/shared/services/accommodation.service'
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
     selector: 'app-admin-services',
@@ -35,6 +29,8 @@ export class AdminAccomodationsComponent {
     public sectionsWithImage: Section[] = []
     public categoriesWithImage: Category[] = []
     public accommodationsWithImages: Accommodation[] = []
+    public isACategory: boolean = false
+    public isAnAccommodation: boolean = false
     public reset: boolean = false
     public infos: any = []
     public typeForChoice: string = ''
@@ -43,12 +39,14 @@ export class AdminAccomodationsComponent {
     public imageUrl: string | ArrayBuffer | null = null
     public isModalOpen: boolean = false
     public openModalForCreation: boolean = false
+    public selectedSectionId: string | null = null
+    public selectedCategoryId: string | null = null
 
     constructor(
         private sectionService: SectionService,
         private categoryService: CategoryService,
         private accommodationService: AccommodationService,
-        private cdRef: ChangeDetectorRef
+        private toaster: ToastrService
     ) {
         this.sectionService.getSections()
         this.categoryService.getAll()
@@ -76,6 +74,9 @@ export class AdminAccomodationsComponent {
 
     getCategoriesBySection(id: any) {
         this.categoriesWithImage = []
+        this.selectedSectionId = id
+        console.log(this.selectedSectionId)
+
         this.categoryService
             .getCategoriesBySection(id)
             .subscribe((categories: Category[]) => {
@@ -88,6 +89,11 @@ export class AdminAccomodationsComponent {
                             reader.onloadend = () => {
                                 category.urlImage = reader.result as string
                             }
+                            this.categoryService
+                                .getById(category.id)
+                                .subscribe((response) => {
+                                    category.section = response.section
+                                })
                         })
                     this.categoriesWithImage.push(category)
                 })
@@ -100,6 +106,7 @@ export class AdminAccomodationsComponent {
 
     getAccommodationsByCategory(id: string) {
         this.accommodationsWithImages = []
+        this.selectedCategoryId = id
 
         this.accommodationService
             .getAccommodationsByCategory(id)
@@ -113,6 +120,15 @@ export class AdminAccomodationsComponent {
                             reader.onloadend = () => {
                                 accommodation.urlImage = reader.result as string
                             }
+                            this.accommodationService
+                                .getById(accommodation.id)
+                                .subscribe((response) => {
+                                    this.categoryService
+                                        .getById(response.category)
+                                        .subscribe((response) => {
+                                            accommodation.category = response
+                                        })
+                                })
                         })
                     this.accommodationsWithImages.push(accommodation)
                 })
@@ -129,11 +145,15 @@ export class AdminAccomodationsComponent {
                 this.typeForDisplay = 'section'
                 break
             case 'updateCategory':
-                // this.infos = infos;
+                this.infos = object
+                this.imageUrl = this.infos.urlImage
+                this.isACategory = true
                 this.typeForDisplay = 'catégorie'
                 break
             case 'updateAccommodation':
-                //this.infos = infos;
+                this.infos = object
+                this.imageUrl = this.infos.urlImage
+                this.isAnAccommodation = true
                 this.typeForDisplay = 'produit'
                 break
             case 'newSection':
@@ -141,13 +161,15 @@ export class AdminAccomodationsComponent {
                 this.resetInfos()
                 this.typeForDisplay = 'une section'
                 break
-            case 'newCategorie':
+            case 'newCategory':
                 this.openModalForCreation = true
+                this.isACategory = true
                 this.resetInfos()
                 this.typeForDisplay = 'une catégorie'
                 break
             case 'newAccommodation':
                 this.openModalForCreation = true
+                this.isAnAccommodation = true
                 this.resetInfos()
                 this.typeForDisplay = 'un produit'
                 break
@@ -159,13 +181,17 @@ export class AdminAccomodationsComponent {
 
     closeModalOnSubmit() {
         this.isModalOpen = false
+        this.isACategory = false
+        this.isAnAccommodation = false
+        this.openModalForCreation = false
         this.resetInfos()
-      
     }
 
     closeModal() {
         this.isModalOpen = false
         this.openModalForCreation = false
+        this.isACategory = false
+        this.isAnAccommodation = false
         this.resetInfos()
     }
 
@@ -173,30 +199,41 @@ export class AdminAccomodationsComponent {
         this.reset = true
         this.sectionsWithImage = []
         this.categoriesWithImage = []
+        this.accommodationsWithImages = []
         this.infos = []
         this.image = ''
         this.imageUrl = ''
+        this.selectedSectionId = null
+        this.selectedCategoryId = null
         this.sectionService.getSections()
     }
 
     deleteSection(sectionID: any) {
         this.sectionService.deleteSection(sectionID).subscribe(
-            (response) => {
+            () => {
                 this.resetInfos()
+                this.toaster.success('La section a bien été supprimée')
             },
             (error) => {
                 console.log(error)
+                this.toaster.error(
+                    'Une erreur est survenue lors de la suppression de la section'
+                )
             }
         )
     }
 
     deleteCategory(categoryID: any) {
         this.categoryService.deleteCategory(categoryID).subscribe(
-            (response) => {
-                this.getCategoriesBySection(this.infos.section_id)
+            () => {
+                this.resetInfos()
+                this.toaster.success('La catégorie a bien été supprimée')
             },
             (error) => {
                 console.log(error)
+                this.toaster.error(
+                    'Une erreur est survenue lors de la suppression de la catégorie'
+                )
             }
         )
     }
@@ -205,48 +242,18 @@ export class AdminAccomodationsComponent {
         this.accommodationService
             .deleteAccommodation(accommodationID)
             .subscribe(
-                (response) => {
-                    this.getAccommodationsByCategory(this.infos.category_id)
+                () => {
+                    this.resetInfos()
+                    this.toaster.success(
+                        'Le produit/service a bien été supprimé'
+                    )
                 },
                 (error) => {
                     console.log(error)
+                    this.toaster.error(
+                        'Une erreur est survenue lors de la suppression du produit/service'
+                    )
                 }
             )
     }
-
-    // createSection(form: any) {
-    //     this.coreService.createSection(form).subscribe(
-    //         (response) => {
-    //             this.getSections()
-    //             this.openModalNewSection = false
-    //         },
-    //         (error) => {
-    //             console.log(error)
-    //         }
-    //     )
-    // }
-
-    // createCategory(){
-    //     this.coreService.createCategory(this.infos).subscribe(
-    //         (response) => {
-    //             this.getCategoriesBySection(this.infos.section_id)
-    //             this.openModalNewCategory = false
-    //         },
-    //         (error) => {
-    //             console.log(error)
-    //         }
-    //     )
-    // }
-
-    // createAccommodation(){
-    //     this.coreService.createAccommodation(this.infos).subscribe(
-    //         (response) => {
-    //             this.getAccommodationsByCategory(this.infos.category_id)
-    //             this.openModalNewAccommodation = false
-    //         },
-    //         (error) => {
-    //             console.log(error)
-    //         }
-    //     )
-    // }
 }

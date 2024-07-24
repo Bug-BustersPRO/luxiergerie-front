@@ -33,12 +33,8 @@ export class CategoryService {
       });
   }
 
-  public getById(id: number): void {
-    this.http.get<Category>(`${this.url}/categories/${id}`, { headers: this.getHeaders() })
-      .subscribe({
-        next: category => this.getCategoryById = category,
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching category whith id: " + id)
-      });
+  public getById(id: any): Observable<Category> {
+   return this.http.get<Category>(`${this.url}/categories/${id}`, { headers: this.getHeaders() })
   }
 
   public getAccommodationsByCategory(id: number): void {
@@ -58,17 +54,15 @@ export class CategoryService {
   }
 
   // CREATE
-  public createCategory(category: Category, section: Section): void {
-    this.http.post(`${this.url}/sections/${section.id}/categories`, category, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Category created successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while creating category")
-      });
+  public createCategory(category: FormData, sectionId: any): Observable<any> {    
+    return this.http.post(`${this.url}/categories/sections/${sectionId}/categories`, category, { headers: this.getHeaders() });
   }
 
 //   // UPDATE
-  public updateCategory(category: Category): Observable<any> {
-    return this.http.put(`${this.url}/categories/categories/${category.id}`, category, { headers: this.getHeaders() });
+  public updateCategory(category: FormData, sectionId: any, categoryId: any): Observable<any> {
+    console.log(category, sectionId, categoryId);
+    
+    return this.http.put(`${this.url}/categories/sections/${sectionId}/categories/${categoryId}`, category, { headers: this.getHeaders() });
   }
 
 

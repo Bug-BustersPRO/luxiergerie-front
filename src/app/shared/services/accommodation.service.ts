@@ -38,12 +38,8 @@ export class AccommodationService {
     return this.http.get(`${this.url}/categories/accommodations/${accommodationId}/category`, { headers: this.getHeaders(), observe: "response", responseType: 'text' });
   }
 
-  public getById(id: number): void {
-    this.http.get<Accommodation>(`${this.url}/accommodations/${id}`, { headers: this.getHeaders() })
-      .subscribe({
-        next: accommodation => this.getAccommodationById = accommodation,
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching accommodation whith id: " + id)
-      });
+  public getById(id: any): Observable<Accommodation> {
+    return this.http.get<Accommodation>(`${this.url}/accommodations/${id}`, { headers: this.getHeaders() })
   }
 
   public getAccommodationsByCategory(id: string): Observable<Accommodation[]> {
@@ -55,18 +51,15 @@ export class AccommodationService {
   }
 
   // CREATE
-  public createAccommodation(accommodation: Accommodation, category: Category): void {
-    this.http.post(`${this.url}/categories/${category.id}/accommodations`, accommodation, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Accommodation created successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while creating accommodation")
-      });
+  public createAccommodation(accommodation: FormData, categoryId: Category): Observable<any> {
+   return this.http.post(`${this.url}/categories/${categoryId}/accommodations`, accommodation, { headers: this.getHeaders() })
+    
   }
 
 
 //   // UPDATE
-  public updateAccommodation(accommodation: Accommodation): Observable<any> {
-    return this.http.put(`${this.url}/accommodations/${accommodation.id}`, accommodation, { headers: this.getHeaders() });
+  public updateAccommodation(accommodation: FormData, categoryId:any, accommodationId: any): Observable<any> {
+    return this.http.put(`${this.url}/accommodations/${accommodationId}/${categoryId}`, accommodation, { headers: this.getHeaders() });
   }
 
   // DELETE

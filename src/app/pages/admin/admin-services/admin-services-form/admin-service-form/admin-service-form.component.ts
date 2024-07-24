@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import {
     Component,
+    effect,
     ElementRef,
     EventEmitter,
     Input,
@@ -8,6 +9,7 @@ import {
     ViewChild,
 } from '@angular/core'
 import { FormsModule, NgForm } from '@angular/forms'
+import { ToastrService } from 'ngx-toastr'
 import { Category } from 'src/app/shared/models/category.model'
 import { Section } from 'src/app/shared/models/section.model'
 import { AccommodationService } from 'src/app/shared/services/accommodation.service'
@@ -34,15 +36,39 @@ export class AdminServiceFormComponent {
     public errorMessage!: string
     public fileName!: string
     public newImage: File[] = [] as File[]
+    public sectionsForNewCategory: Section[] = []
+    public categoriesForNewAccommodation: Category[] = []
 
     @Input() infos: any
     @Input() imageUrl: string | ArrayBuffer | null = null
     @Input() typeForChoice!: string
     @Input() typeForDisplay: string = ''
     @Input() openModalForCreation!: boolean
+    @Input() isACategory!: boolean
+    @Input() isAnAccommodation!: boolean
+
     @Output() closeModal = new EventEmitter<void>()
 
-    constructor(private sectionService: SectionService, private categoryService: CategoryService, private accommodationService: AccommodationService) {}
+    constructor(
+        private sectionService: SectionService,
+        private categoryService: CategoryService,
+        private accommodationService: AccommodationService,
+        private toaster: ToastrService
+    ) {
+        effect(() => {
+            this.getAllSections()
+            this.getAllCategories()
+        })
+    }
+
+    getAllSections() {
+        this.sectionsForNewCategory = this.sectionService.getAllSectionsSig()
+    }
+
+    getAllCategories() {
+        this.categoriesForNewAccommodation =
+            this.categoryService.getAllCategoriesSig()
+    }
 
     onSubmit() {
         if (this.typeForChoice === 'newSection') {
@@ -54,22 +80,74 @@ export class AdminServiceFormComponent {
             this.sectionService.createSection(formData).subscribe(
                 (response) => {
                     formData
-                    this.openModalForCreation = false
                     this.closeModal.emit()
                     this.imageUrl = ''
                     this.newImage = []
                     this.sectionService.getAllSectionsSig()
+                    this.toaster.success('Section créée avec succès')
                 },
                 (error) => {
                     console.log(error)
+                    this.toaster.error('Erreur lors de la création de la section')
                 }
             )
         }
         if (this.typeForChoice === 'newCategory') {
-            //this.createCategory()
+            const formData = new FormData()
+            formData.append('name', this.genericForm.value.name)
+            formData.append('description', this.genericForm.value.description)
+            formData.append('image', this.newImage[0])
+            formData.append('section', this.genericForm.value.section)
+            const sectionId = this.genericForm.value.section
+
+            this.categoryService.createCategory(formData, sectionId).subscribe(
+                (response) => {
+                    formData
+                    this.closeModal.emit()
+                    this.imageUrl = ''
+                    this.newImage = []
+                    this.categoryService.getAll()
+                    this.toaster.success('Catégorie créée avec succès')
+                },
+                (error) => {
+                    console.log(error)
+                    this.toaster.error('Erreur lors de la création de la catégorie')
+                }
+            )
         }
         if (this.typeForChoice === 'newAccommodation') {
-            // this.createAccommodation()
+            const formData = new FormData()
+            formData.append('name', this.genericForm.value.name)
+            formData.append('description', this.genericForm.value.description)
+            formData.append('image', this.newImage[0])
+            formData.append('price', this.genericForm.value.price)
+            if (typeof this.genericForm.value.isReservable === 'undefined') {
+                formData.append('isReservable', 'false')
+            } else {
+                formData.append(
+                    'isReservable',
+                    this.genericForm.value.isReservable.toString()
+                )
+            }
+            formData.append('category', this.genericForm.value.category)
+            const categoryId = this.genericForm.value.category
+
+            this.accommodationService
+                .createAccommodation(formData, categoryId)
+                .subscribe(
+                    (response) => {
+                        formData
+                        this.closeModal.emit()
+                        this.imageUrl = ''
+                        this.newImage = []
+                        this.accommodationService.getAll()
+                        this.toaster.success('Produit/service créé avec succès')
+                    },
+                    (error) => {
+                        console.log(error)
+                        this.toaster.error('Erreur lors de la création du produit/service')
+                    }
+                )
         }
         if (this.typeForChoice === 'updateSection') {
             const formData = new FormData()
@@ -78,37 +156,81 @@ export class AdminServiceFormComponent {
             formData.append('title', this.genericForm.value.title)
             formData.append('image', this.newImage[0])
 
-            this.sectionService.updateSection(formData, this.infos.id).subscribe(
-                (response) => {
-                    formData
-                    this.openModalForCreation = false
-                    this.closeModal.emit()
-                    this.newImage = []
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
+            this.sectionService
+                .updateSection(formData, this.infos.id)
+                .subscribe(
+                    (response) => {
+                        formData
+                        this.openModalForCreation = false
+                        this.closeModal.emit()
+                        this.newImage = []
+                        this.toaster.success('Section modifiée avec succès')
+                    },
+                    (error) => {
+                        console.log(error)
+                        this.toaster.error('Erreur lors de la modification de la section')
+                    }
+                )
         }
         if (this.typeForChoice === 'updateCategory') {
-            this.categoryService.updateCategory(this.infos as Category).subscribe(
-                (response) => {
-                    this.closeModal.emit()
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
+            const formData = new FormData()
+            formData.append('name', this.genericForm.value.name)
+            formData.append('description', this.genericForm.value.description)
+            formData.append('image', this.newImage[0])
+            formData.append('section', this.genericForm.value.section)
+            const sectionId = this.genericForm.value.section
+
+            this.categoryService
+                .updateCategory(formData, sectionId, this.infos.id)
+                .subscribe(
+                    (response) => {
+                        formData
+                        this.openModalForCreation = false
+                        this.closeModal.emit()
+                        this.newImage = []
+                        this.categoryService.getAll()
+                        this.toaster.success('Catégorie modifiée avec succès')
+                    },
+                    (error) => {
+                        console.log(error)
+                        this.toaster.error('Erreur lors de la modification de la catégorie')
+                    }
+                )
         }
         if (this.typeForChoice === 'updateAccommodation') {
-            this.accommodationService.updateAccommodation(this.infos).subscribe(
-                (response) => {
-                    this.closeModal.emit()
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
+            const formData = new FormData()
+            formData.append('name', this.genericForm.value.name)
+            formData.append('description', this.genericForm.value.description)
+            formData.append('image', this.newImage[0])
+            formData.append('price', this.genericForm.value.price)
+            if (this.genericForm.value.isReservable === 'undefined') {
+                formData.append('isReservable', 'false')
+            } else {
+                formData.append(
+                    'isReservable',
+                    this.genericForm.value.isReservable
+                )
+            }
+
+            formData.append('category', this.genericForm.value.category)
+            const categoryId = this.genericForm.value.category
+
+            this.accommodationService
+                .updateAccommodation(formData, categoryId, this.infos.id)
+                .subscribe(
+                    (response) => {
+                        formData
+                        this.openModalForCreation = false
+                        this.closeModal.emit()
+                        this.newImage = []
+                        this.categoryService.getAll()
+                        this.toaster.success('Produit/service modifié avec succès')
+                    },
+                    (error) => {
+                        console.log(error)
+                        this.toaster.error('Erreur lors de la modification du produit/service')
+                    }
+                )
         }
         return null
     }

@@ -1,9 +1,22 @@
 #main_container {
-    margin: 2rem auto ; 
+    display: flex;
+}
+
+#image_container {
+    align-self: center;
 }
 
 img {
-    width: 100px;
-    height: 100%;
-    object-fit: cover;
+    min-width: 100px;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+#infos_container {
+    margin: 0 10px;
+    font-size: small;
+}
+
+.name {
+    font-weight: bold;
 }

@@ -38,7 +38,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentClient = localStorage.getItem('client') ? JSON.parse(localStorage.getItem('client') as string) : {} as Client;
-    console.log(this.currentClient);
   }
 
   public openModal() {
