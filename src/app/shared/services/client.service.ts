@@ -19,6 +19,7 @@ export class ClientService {
   }
   private getAllClients$: WritableSignal<Client[]> = signal([]);
   getAllClientsSig = computed(() => this.getAllClients$());
+  getClientsWithNoRoom$ = computed(() => this.getAllClients$().filter(client => client.room === null));
 
   // Clients API - call vers le backend
 

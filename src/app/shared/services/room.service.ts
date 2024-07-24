@@ -21,6 +21,7 @@ export class RoomService {
   getAllRoomsSig = computed(() => this.getAllRooms$());
   private getAllAvailableRooms$: WritableSignal<Room[]> = signal([]);
   getAllAvailableRoomsSig = computed(() => this.getAllAvailableRooms$());
+  getOccupiedRoomsSig = computed(() => this.getAllRooms$().filter(room => room.client !== null && room.sojourns.length > 0));
 
   // Room API - call vers le backend
 

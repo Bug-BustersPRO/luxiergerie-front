@@ -1,4 +1,9 @@
-<section class="section">
+<section class="head-section">
+  <div>
+    <button (click)="addSojourn()">Ajouter un séjour</button>
+  </div>
+</section>
+<section class="list-section">
   @for (room of rooms; track $index) {
   <div class="card-container">
       <h4 class="title">Chambre : {{room.roomNumber}}</h4>
@@ -10,3 +15,12 @@
   </div>
 }
 </section>
+
+<app-modal
+title="Ajouter un séjour"
+[showModal]="isModalOpen"
+(closeModalEvent)="isModalOpen = false">
+<section>
+  <app-add-sojourn  (closeModal)="closeModal()"/>
+</section>
+</app-modal>

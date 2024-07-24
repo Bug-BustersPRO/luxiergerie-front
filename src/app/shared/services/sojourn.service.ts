@@ -36,12 +36,8 @@ export class SojournService {
   }
 
   // CREATE
-  public createSojourn(sojourn: Sojourn): void {
-    this.http.post(this.url, sojourn, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Sojourn created successfully"),
-        error: error => console.log(error, "There was an error while creating sojourn")
-      });
+  public createSojourn(sojourn: Sojourn): Observable<any> {
+    return this.http.post(this.url, sojourn, { headers: this.getHeaders() });
   }
 
   // UPDATE
