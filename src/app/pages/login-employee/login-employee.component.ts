@@ -56,7 +56,8 @@ export class LoginEmployeeComponent {
   }
 
   public get canValidate() {
-    return this.password !== "" && this.serialNumber != "";
+    if (this.password == "" || (this.serialNumber == null || undefined || '')) return false;
+    return true;
   }
 
 }
