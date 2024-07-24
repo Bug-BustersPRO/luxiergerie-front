@@ -18,11 +18,8 @@ import { SojournService } from 'src/app/shared/services/sojourn.service';
   styleUrl: './add-sojourn.component.scss',
 })
 export class AddSojournComponent implements OnInit {
-  public clientById!: Client;
-  public roomById!: Room;
-  public sojourn: Sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.RESERVED, this.clientById, this.roomById);
+  public sojourn: Sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.RESERVED, '', '');
   public clients: Client[] = [];
-  public rooms: Room[] = [];
   public availableRooms: Room[] = [];
   @Output() closeModal = new EventEmitter<void>();
 
@@ -60,4 +57,5 @@ export class AddSojournComponent implements OnInit {
     });
     this.closeModal.emit();
   }
+
 }

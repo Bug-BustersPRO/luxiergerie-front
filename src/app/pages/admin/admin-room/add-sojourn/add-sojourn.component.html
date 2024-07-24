@@ -44,11 +44,11 @@
       <div class="label-and-input">
         <label for="client">Client</label>
         <select name="client"
-                [(ngModel)]="sojourn.client"
+                [(ngModel)]="sojourn.clientId"
                 #client="ngModel"
                 required>
           <option *ngFor="let client of clients"
-                  [ngValue]="client">{{client.firstName}} {{client.lastName}}</option>
+                  [ngValue]="client.id">{{client.firstName}} {{client.lastName}}</option>
         </select>
         <div *ngIf="client.invalid && (client.dirty || client.touched)">
           <div class="error-length-required"
@@ -58,11 +58,11 @@
       <div class="label-and-input">
         <label for="room">Chambre</label>
         <select name="room"
-                [(ngModel)]="sojourn.room"
+                [(ngModel)]="sojourn.roomId"
                 #room="ngModel"
                 required>
           <option *ngFor="let room of availableRooms"
-                  [ngValue]="room">{{room.roomNumber}}</option>
+                  [ngValue]="room.id">{{room.roomNumber}}</option>
         </select>
         <div *ngIf="room.invalid && (room.dirty || room.touched)">
           <div class="error-length-required"

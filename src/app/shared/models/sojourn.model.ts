@@ -1,5 +1,3 @@
-import { Client } from "./client.model";
-import { Room } from "./room.model";
 
 export enum SojournStatus {
   RESERVED = 'RESERVED',
@@ -14,16 +12,16 @@ export class Sojourn {
   public entryDate: Date;
   public exitDate: Date;
   public status: SojournStatus;
-  public client: Client;
-  public room: Room;
+  public clientId: string;
+  public roomId: string;
 
-  constructor(id: string, entryDate: Date, exitDate: Date, status: SojournStatus, client: Client, room: Room) {
+  constructor(id: string, entryDate: Date, exitDate: Date, status: SojournStatus, clientId: string, roomId: string) {
     this.id = id;
     this.entryDate = entryDate;
     this.exitDate = exitDate;
     this.status = status;
-    this.client = client;
-    this.room = room;
+    this.clientId = clientId;
+    this.roomId = roomId;
   }
 
 }
