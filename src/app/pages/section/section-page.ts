@@ -19,13 +19,13 @@ export class SectionPage implements OnInit {
       this.sections = sections;
       if (this.sections.length > 0) {
         this.carouselItems = [];
-        //this.sections[0].image = 'assets/beach.jpg';
-       // this.sections[1].image = 'assets/hotel.jpg';
+        this.sections[0].urlImage = 'assets/beach.jpg';
+        this.sections[1].urlImage = 'assets/hotel.jpg';
         for (const element of this.sections) {
           this.carouselItems.push({
             title: element.title,
             description: element.description,
-            image: element.image,
+            image: element.urlImage,
           });
         }
       }
