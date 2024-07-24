@@ -1,22 +1,24 @@
+import bigDecimal from "js-big-decimal";
 import { Accommodation } from "./accommodation.model";
 import { Client } from "./client.model";
 
 export class Purchase {
-  public id: string;
+  public id?: string;
   public date: Date;
   public client: Client;
   public status: string;
   public accommodations: Accommodation[];
-  public roomNumber: number;
-  public totalPrice: number;
+  public roomNumber: string;
+  public totalPrice: string;
 
-  constructor(id: string,
+  constructor(
     date: Date,
     client: Client,
     status: string,
     accommodations: Accommodation[],
-    roomNumber: number,
-    totalPrice: number) {
+    roomNumber: string,
+    totalPrice: string,
+    id?: string) {
     this.id = id;
     this.date = date;
     this.client = client;

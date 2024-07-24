@@ -44,12 +44,8 @@ export class PurchaseService {
 
 
   // CREATE
-  public createPurchase(purchase: Purchase): void {
-    this.http.post(`${this.url}/purchases`, purchase, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Purchase created successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while creating purchase")
-      });
+  public createPurchase(purchase: Purchase): Observable<Purchase> {
+    return this.http.post<Purchase>(`${this.url}/purchases`, purchase, { headers: this.getHeaders() });
   }
 
   // UPDATE

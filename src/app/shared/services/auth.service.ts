@@ -20,8 +20,8 @@ export class AuthService {
   constructor(
     private cookieService: CookieService,
     private http: HttpClient,
-    private router: Router
-  ) {}
+    private router: Router,
+  ) { }
 
   // faire une vérification différente quand on est connecté via le serial number de l'employée, la solution est pour le moment uniquement via le client room
   public clientLogin(loginClient: LoginClient): Observable<HttpResponse<any>> {
@@ -32,8 +32,10 @@ export class AuthService {
       })
       .pipe(
         tap((response: HttpResponse<any>) => {
-          if (response.status === 200) this.client$.set(response.body);
-          localStorage.setItem('client', JSON.stringify(response.body));
+          if (response.status === 200) {
+            this.client$.set(response.body);
+            localStorage.setItem('client', JSON.stringify(response.body));
+          }
         })
       );
   }
@@ -76,8 +78,10 @@ export class AuthService {
       })
       .pipe(
         tap((response: HttpResponse<any>) => {
-          if (response.status === 200) this.employee$.set(response.body);
-          localStorage.setItem('employee', JSON.stringify(response.body));
+          if (response.status === 200) {
+            this.employee$.set(response.body);
+            localStorage.setItem('employee', JSON.stringify(response.body));
+          }
         })
       );
   }
@@ -106,4 +110,5 @@ export class AuthService {
         },
       });
   }
+
 }

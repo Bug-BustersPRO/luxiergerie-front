@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, EventEmitter, Output, output, ViewChild, viewChild } from '@angular/core';
+import {
+  Component,
+  effect,
+  EventEmitter,
+  Output,
+  Input,
+  OnChanges,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { Employee } from '../../models/employee.model';
@@ -11,45 +19,68 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register-employee',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonComponent,],
+  imports: [CommonModule, FormsModule, ButtonComponent],
   templateUrl: './register-employee.component.html',
   styleUrl: './register-employee.component.scss',
 })
-export class RegisterEmployeeComponent {
-
+export class RegisterEmployeeComponent implements OnChanges {
   showPassword: boolean = false;
   text: string = 'visibility_off';
   @Output() closeModal = new EventEmitter<void>();
   roles!: Role[];
-  
-   model: Employee = new Employee(
-    "",
-    "",
-    "",
-    '',
-    '',
-    [{ name: '' }],
-  );
+  @Input() isCreateEmployee: boolean = true;
+  @Input() selectedEmployee!: Employee;
 
-  constructor(private roleService: RoleService, private employeeService: EmployeeService, private toastr: ToastrService) {
-        this.roleService.getRoles();
-        effect(() => {
-          this.roles = this.roleService.getAllRolesSig().filter((role: Role) => role.name !== 'ROLE_DIAMOND' && role.name !== 'ROLE_GOLD');
-          console.log('roles: ', this.roles);
-        });
-        
+  model: Employee = new Employee('', '', '', '', '', [{ name: '' }]);
+
+  constructor(
+    private roleService: RoleService,
+    private employeeService: EmployeeService,
+    private toastr: ToastrService,
+    private cdRef: ChangeDetectorRef
+  ) {
+    this.roleService.getRoles();
+    effect(() => {
+      this.roles = this.roleService
+        .getAllRolesSig()
+        .filter(
+          (role: Role) =>
+            role.name !== 'ROLE_DIAMOND' && role.name !== 'ROLE_GOLD'
+        );
+    });
   }
- 
+
+  ngOnChanges(): void {
+    this.getEmployeeById();
+  }
 
   getRoleName(role: string) {
-    switch(role) {
+    switch (role) {
       case 'ROLE_ADMIN':
         return 'Admin';
       case 'ROLE_EMPLOYEE':
         return 'Employé(e)';
       default:
-        return 'Employé(e)';
+        return;
     }
+  }
+
+  public getEmployeeById(): void {
+    console.log('selectedEmployee: ', this.selectedEmployee);
+    if (this.isCreateEmployee === false) {
+      this.model.id = this.selectedEmployee.id;
+      this.model.firstName = this.selectedEmployee.firstName;
+      this.model.lastName = this.selectedEmployee.lastName;
+
+      this.model.roles = this.roles.filter((role: Role) => {
+        return this.selectedEmployee.roles.find(
+          (roleName: { name: string }) => roleName.name === role.name
+        );
+      });
+    } else {
+      this.model = new Employee('', '', '', '', '', [{ name: '' }]);
+    }
+    this.cdRef.detectChanges();
   }
 
   togglePasswordVisibility() {
@@ -61,22 +92,36 @@ export class RegisterEmployeeComponent {
     }
   }
 
-  onSubmit(form: { valid: any; }) {
+  onSubmit(form: { valid: any }) {
     console.log('form: ', form);
-    if(form.valid) {
-      console.log('model: ', this.model);-+
-      this.employeeService.createEmployee(this.model).subscribe(
-        response => {
-          this.closeModal.emit();
-          this.toastr.success('Employé(e) créé(e) avec succès');
-          console.log('employee created succesfully: ', response);
-        },
-        error => {
-          console.error('Error creating employees' ,error)
-        }
-      );  
+    if (form.valid) {
+      if (this.isCreateEmployee) {
+        this.employeeService.createEmployee(this.model).subscribe(
+          (response) => {
+            this.employeeService.getAll();
+            this.closeModal.emit();
+            this.toastr.success('Employé(e) créé(e) avec succès');
+            console.log('employee created succesfully: ', response);
+          },
+          (error) => {
+            console.error('Error creating employees', error);
+          }
+        );
+      } else {
+        this.employeeService
+          .updateEmployee(this.model, this.model.id!)
+          .subscribe(
+            (response) => {
+              this.employeeService.getAll();
+              this.closeModal.emit();
+              this.toastr.success('Employé(e) modifié(e) avec succès');
+              console.log('employee updated succesfully: ', response);
+            },
+            (error) => {
+              console.error('Error updating employees', error);
+            }
+          );
+      }
     }
-    
   }
-
 }
