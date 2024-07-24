@@ -1,1 +1,12 @@
-<p>admin-room works!</p>
+<section class="section">
+  @for (room of rooms; track $index) {
+  <div class="card-container">
+      <h4 class="title">Chambre : {{room.roomNumber}}</h4>
+      <p class="name">{{room.client.firstName}} {{room.client.lastName}}</p>
+      <div class="date-container">
+        <p class="date">{{room.sojourns[0].entryDate | date: 'dd/MM/yyyy'}}</p>
+        <p class="date">{{room.sojourns[0].exitDate | date: 'dd/MM/yyyy'}}</p>
+      </div>
+  </div>
+}
+</section>
