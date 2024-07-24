@@ -3,18 +3,21 @@
 }
 
 #image_container {
-    align-self: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 img {
     min-width: 100px;
     max-width: 100px;
-    max-height: 100px;
+    height: 100px;
+    border-radius: 5px;
 }
 
 #infos_container {
-    margin: 0 10px;
-    font-size: small;
+    margin-left: 10px;
+    font-size: smaller;
 }
 
 .name {

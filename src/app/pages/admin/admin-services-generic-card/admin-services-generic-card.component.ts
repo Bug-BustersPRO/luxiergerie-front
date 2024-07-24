@@ -1,8 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { AdminHomeComponent } from '../admin-home/admin-home.component'
-import { Accommodation } from 'src/app/shared/models/accommodation.model'
-import { Section } from 'src/app/shared/models/section.model'
-import { Category } from 'src/app/shared/models/category.model'
 import { CommonModule, CurrencyPipe } from '@angular/common'
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component'
 import { FormsModule } from '@angular/forms'

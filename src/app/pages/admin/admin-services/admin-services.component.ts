@@ -202,7 +202,7 @@ export class AdminAccomodationsComponent {
         this.accommodationsWithImages = []
         this.infos = []
         this.image = ''
-        this.imageUrl = ''
+        this.imageUrl = ''        
         this.selectedSectionId = null
         this.selectedCategoryId = null
         this.sectionService.getSections()
