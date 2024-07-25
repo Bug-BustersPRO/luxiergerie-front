@@ -29,6 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RoleGuard } from './shared/services/Guard/role.guard';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import {MatBadgeModule} from '@angular/material/badge';
       useFactory: (service: RoleGuard) => service.roleGuardAdmin(),
       deps: [RoleGuard],
     },
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })

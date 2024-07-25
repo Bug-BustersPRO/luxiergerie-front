@@ -10,11 +10,12 @@ import { CartService } from 'src/app/shared/services/cart.service';
 import { HotelService } from 'src/app/shared/services/hotel.service';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [ModalComponent, CartComponent, ButtonComponent, MatBadgeModule, MatButtonModule],
+  imports: [ModalComponent, CartComponent, ButtonComponent, MatBadgeModule, MatButtonModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
@@ -24,11 +25,12 @@ export class NavbarComponent implements OnInit {
   public isModalOpen: boolean = false;
   public currentClient!: Client;
   public cartModalTitle: string = "Mon Panier";
+  public notification: number = 0;
 
   constructor(
     private router: Router,
     private hotelService: HotelService,
-    private cartService: CartService,
+    protected cartService: CartService,
     private authService: AuthService,
     private cdr:ChangeDetectorRef) {
     this.hotelService.getHotels().subscribe(() => {
@@ -50,10 +52,16 @@ export class NavbarComponent implements OnInit {
       this.cartModalTitle = newTitle;
       this.cdr.detectChanges();
     });
+
+    this.cartService.getCartItems().subscribe((items) => {
+      this.notification = items.length;
+      this.cdr.detectChanges();
+    });
   }
 
   public openModal() {
     this.isModalOpen = true;
+    this.cdr.detectChanges();
   }
 
   navigateTo(route: string): void {
@@ -63,9 +71,11 @@ export class NavbarComponent implements OnInit {
   openCart(): void {
     this.isModalOpen = true;
     this.cartService.loadCart();
+    this.cdr.detectChanges();
   }
 
   logout(): void {
     this.authService.logOut(false);
   }
+
 }

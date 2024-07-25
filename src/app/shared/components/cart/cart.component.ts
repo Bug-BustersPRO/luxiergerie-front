@@ -53,10 +53,12 @@ export class CartComponent implements OnInit, OnChanges {
         this.hotelService.applyColors(this.hotel?.colors);
         this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
           this.hotelImageUrl = url;
+          this.cdr.detectChanges();
         });
       } else {
         this.hotelService.applyColors(["#FDFBF5"]);
     }
+    this.cdr.detectChanges();
   });
   this.loadCart();
   }
@@ -65,6 +67,7 @@ export class CartComponent implements OnInit, OnChanges {
 
     this.cartService.changeTitle.subscribe((title) => {
       this.changeTitle.emit(title);
+      this.cdr.detectChanges();
     });
     this.closeConfirmation();
     this.cartService.cartItems.subscribe(items => {
@@ -137,6 +140,7 @@ export class CartComponent implements OnInit, OnChanges {
         this.orderConfirmed = true;
         this.cdr.detectChanges();
         this.toastr.success('Votre commande a été validée avec succès');
+        this.clearCart(false);
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error("Une erreur est survenue, n'hésitez pas à contacter l'accueil");
@@ -148,7 +152,6 @@ export class CartComponent implements OnInit, OnChanges {
    order(){
     this.purchase = new Purchase(new Date(), this.currentClient, "Validée", this.cartService.items, this.roomNumber, this.cartService.getTotalPrice().getValue());
     this.createNewPurchase(this.purchase);
-    this.clearCart(false);
     this.router.navigate(['/']);
   }
 

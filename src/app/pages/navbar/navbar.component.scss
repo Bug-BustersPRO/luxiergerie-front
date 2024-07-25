@@ -101,7 +101,7 @@ input {
 .menu {
   margin: 0;
   position: absolute;
-  top: -2.5%;
+  top: -3.4%;
   right: 68px;
   height: 95px;
   z-index: 3;
@@ -130,6 +130,12 @@ input {
   justify-content: center;
   align-items: center;
   transition: all 0s cubic-bezier(.25, .8, .25, 1);
+}
+
+.mat-badge-content {
+  //background-color: var(--primary-background-color) !important;
+  background-color: pink !important;
+  transform: translate(6px, 6px) !important;
 }
 
 .btn:not(:first-child) {
