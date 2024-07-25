@@ -1,5 +1,16 @@
+:host {
+    overflow-x: scroll;
+    overflow-y: unset;
+    scrollbar-width: none;
+}
+
+:host::-webkit-scrollbar {
+    display: none;
+  }
+
 #main_container {
     display: flex;
+    overflow: auto;
 }
 
 #image_container {

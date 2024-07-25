@@ -41,6 +41,7 @@ export class AdminAccomodationsComponent {
     public openModalForCreation: boolean = false
     public selectedSectionId: string | null = null
     public selectedCategoryId: string | null = null
+    public isFileError!: boolean
 
     constructor(
         private sectionService: SectionService,
@@ -136,6 +137,7 @@ export class AdminAccomodationsComponent {
 
     openModal(type: string, object: any) {
         this.isModalOpen = true
+                
         switch (type) {
             case 'updateSection':
                 this.infos = object
@@ -193,7 +195,8 @@ export class AdminAccomodationsComponent {
         this.resetInfos()
     }
 
-    resetInfos() {
+    resetInfos() {       
+        this.isFileError = false        
         this.reset = true
         this.sectionsWithImage = []
         this.categoriesWithImage = []

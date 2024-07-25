@@ -27,7 +27,7 @@ import { SectionService } from 'src/app/shared/services/section.service'
 export class AdminServiceFormComponent {
     @ViewChild('genericForm') genericForm!: NgForm
     @ViewChild('fileInput', { static: false }) fileInput!: ElementRef
-    public isFileError: boolean = false
+    @Input() isFileError!: boolean
     public filesExtension = [
         'image/png',
         'image/jpeg',
@@ -49,6 +49,7 @@ export class AdminServiceFormComponent {
     @Input() isAnAccommodation!: boolean
 
     @Output() closeModal = new EventEmitter<void>()
+    @Output() isFileErrorOutput = new EventEmitter<boolean>(this.isFileError)
 
     constructor(
         private sectionService: SectionService,
@@ -59,7 +60,7 @@ export class AdminServiceFormComponent {
         effect(() => {
             this.getAllSections()
             this.getAllCategories()
-        })        
+        })          
     }
 
     getAllSections() {
@@ -242,18 +243,21 @@ export class AdminServiceFormComponent {
 
     onFileSelected(event: Event): void {
         const input = event.target as HTMLInputElement
+console.log(input.files);
 
         if (input.files && input.files.length > 0) {
             if (input.files[0].size > 1000000) {
-                this.isFileError = true
+                this.isFileError = true              
                 this.errorMessage =
                     'La taille du fichier doit être inférieure à 1 Mo'
+                this.isFileErrorOutput.emit()
                 return
             }
             if (!this.filesExtension.includes(input.files[0].type)) {
+                this.isFileError = true
                 this.errorMessage =
                     'Le format du fichier doit être de type: png, jpg, jpeg ou gif'
-                this.isFileError = true
+                this.isFileErrorOutput.emit()
                 return
             }
             if (input.files) {

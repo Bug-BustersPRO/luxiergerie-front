@@ -97,8 +97,16 @@
                     required
                 />
                 <div class="label-and-input" id="image">
-                    <div>
-                        <label for="image">Image</label>
+                    <div class="image-and-add">
+                        <label for="image">Image</label> 
+                        <div
+                            class="add-button"
+                            (click)="selectFile()"
+                            title="Ajouter"
+                        >       
+                        <span class="button-icon"> + </span>
+                            
+                        </div>
                         <div *ngIf="image.invalid">
                             <div
                                 class="error-length-required"
@@ -107,12 +115,8 @@
                                 L'image est requise.
                             </div>
                         </div>
-                        <div
-                            class="add-button"
-                            (click)="selectFile()"
-                            title="Ajouter"
-                        >
-                            <span class="button-icon"> + </span>
+                        <div *ngIf="isFileError">
+                            <p class="error">{{errorMessage}}</p>
                         </div>
                     </div>
                     <img [src]="imageUrl" alt="" />
@@ -129,8 +133,15 @@
                     #image="ngModel"
                 />
                 <div class="label-and-input" id="image">
-                    <div>
+                    <div class="image-and-add">
                         <label for="image">Image</label>
+                        <div
+                        class="edit-button"
+                        (click)="selectFile()"
+                        title="Editer"
+                        >
+                        <span class="material-symbols-outlined">edit_document</span>
+                    </div>
                         <div *ngIf="image.invalid">
                             <div
                                 class="error-length-required"
@@ -139,15 +150,12 @@
                                 L'image est requise.
                             </div>
                         </div>
-                        <div
-                            class="add-button"
-                            (click)="selectFile()"
-                            title="Editer"
-                        >
-                            <span class="material-symbols-outlined">edit</span>
+                        <div *ngIf="isFileError">
+                            <p class="error">{{errorMessage}}</p>
                         </div>
                     </div>
-                    <img [src]="imageUrl" alt="" />
+                    <img (click)="selectFile()"
+                    title="Editer" [src]="imageUrl" alt="" />
                 </div>
             </ng-template>
         </div>
@@ -311,7 +319,7 @@
             <button
                 class="button"
                 type="submit"
-                [disabled]="!genericForm.valid"
+                [disabled]="!genericForm.valid || isFileError"
             >
                 @if (openModalForCreation) {
                     Créer {{ typeForDisplay }}

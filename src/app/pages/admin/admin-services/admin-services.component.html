@@ -144,7 +144,6 @@
             </div>
         </div>
     </div>
-
     <app-modal
         title="{{
             openModalForCreation
@@ -154,6 +153,7 @@
         [showModal]="isModalOpen"
         (closeModalEvent)="closeModal()"
     >
+ 
         <app-admin-service-form
             [openModalForCreation]="openModalForCreation"
             [infos]="infos"
@@ -161,8 +161,10 @@
             [typeForDisplay]="typeForDisplay"
             [typeForChoice]="typeForChoice"
             (closeModal)="closeModalOnSubmit()"
+            (isFileErrorOutput)="isFileError = $event"
             [isACategory]="isACategory"
             [isAnAccommodation]="isAnAccommodation"
+            [isFileError]="isFileError"
         ></app-admin-service-form>
     </app-modal>
 </div>
