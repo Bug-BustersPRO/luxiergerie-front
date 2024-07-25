@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core'
+import { AfterContentInit, AfterViewInit, Component, effect, OnChanges, OnDestroy, OnInit } from '@angular/core'
 import { AdminServicesGenericCardComponent } from '../admin-services-generic-card/admin-services-generic-card.component'
 import { Section } from 'src/app/shared/models/section.model'
 import { Category } from 'src/app/shared/models/category.model'
@@ -48,7 +48,7 @@ export class AdminAccomodationsComponent {
         private accommodationService: AccommodationService,
         private toaster: ToastrService
     ) {
-        this.sectionService.getSections()
+        this.sectionService.getSections()  
         this.categoryService.getAll()
         this.accommodationService.getAll()
         effect(() => {
@@ -56,26 +56,24 @@ export class AdminAccomodationsComponent {
         })
     }
 
-    getSections() {
-        const sections = this.sectionService.getAllSectionsSig()
-        sections.forEach((section: Section) => {
-            this.sectionService
-                .getSectionImageById(section.id)
-                .subscribe((sectionImage) => {
-                    const reader = new FileReader()
-                    reader.readAsDataURL(sectionImage)
-                    reader.onloadend = () => {
-                        section.urlImage = reader.result as string
-                    }
-                })
-            this.sectionsWithImage.push(section)
+     getSections() {        
+        this.sectionsWithImage = this.sectionService.getAllSectionsSig()
+        this.sectionsWithImage.forEach((section: Section) => {
+        this.sectionService
+            .getSectionImageById(section.id)
+            .subscribe((sectionImage) => {
+                const reader = new FileReader()
+                reader.readAsDataURL(sectionImage)
+                reader.onloadend = () => {
+                    section.urlImage = reader.result as string
+                }
+            })            
         })
-    }
+     }
 
     getCategoriesBySection(id: any) {
         this.categoriesWithImage = []
         this.selectedSectionId = id
-        console.log(this.selectedSectionId)
 
         this.categoryService
             .getCategoriesBySection(id)

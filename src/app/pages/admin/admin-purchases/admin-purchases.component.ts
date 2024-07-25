@@ -24,7 +24,6 @@ export class AdminPurchasesComponent {
             .pipe(take(1))
             .subscribe((bills: Bill[]) => {
                 this.bills = bills
-                console.log(this.bills)
             })
     }
 }
