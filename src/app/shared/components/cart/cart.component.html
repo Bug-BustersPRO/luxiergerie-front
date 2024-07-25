@@ -6,6 +6,9 @@
         <p class="centerded-p">Quantité</p>
         <p class="centerded-p">Prix</p>
       </div>
+      <div *ngIf="!this.items?.length">
+        <p>Votre panier est vide</p>
+      </div>
       <div class="colored-border" *ngFor="let category of categories">
         <p class="bold"> {{category.category}}</p>
         <div *ngFor="let item of items">
@@ -16,13 +19,13 @@
               <p class="centerded-p">{{item.quantity}}</p>
               <p class="tertiary bold" (click)="addQuantity(item)">+</p>
             </div>
-            <p class="centerded-p">{{item.price*item.quantity | number: '1.2-2'}} €</p>
+            <p class="centerded-p">{{item.price*item.quantity | currency: 'EUR'}}</p>
           </div>
         </div>
         <div class="columns">
           <p class="colored-text">Sous total</p>
           <div class="grid-filler"></div>
-          <p class="colored-text centerded-p"> {{category.totalPricePerCat.round(2).getPrettyValue()}} €</p>
+          <p class="colored-text centerded-p"> {{ formatPrice(category.totalPricePerCat) }}</p>
         </div>
       </div>
     </div>
@@ -30,11 +33,11 @@
       <div class="columns">
         <div class="grid-filler"></div>
         <p class="centerded-p bold">Prix total : </p>
-        <p class="colored-text centerded-p">{{totalPrice.getPrettyValue()}} €</p>
+        <p class="colored-text centerded-p">{{formatPrice(totalPrice)}} </p>
       </div>
       <div class="buttons">
-      <app-button action="Vider le panier" (click)="clearCart()"/>
-      <app-button action="commander" (click)="order()"/>
+      <app-button *ngIf="this.items?.length" action="Vider le panier" (click)="clearCart()"/>
+      <app-button *ngIf="this.items?.length" action="commander" (click)="order()"/>
       </div>
     </div>
   </div>
@@ -50,14 +53,14 @@
         <div *ngFor="let item of purchase.accommodations" class = "columns">
           <p>{{item.name}} </p>
           <p class="centerded-p">{{item.quantity}}</p>
-          <p class="centerded-p">{{item.price*item.quantity | number: '1.2-2'}} €</p>
+          <p class="centerded-p">{{item.price*item.quantity | currency: 'EUR'}}</p>
         </div>
       </div>
       <div class="whitespace">
         <div class="columns">
           <div class="grid-filler"></div>
           <p class="centerded-p bold">Prix total : </p>
-          <p class="colored-text centerded-p">{{purchase.totalPrice}} €</p>
+          <p class="colored-text centerded-p">{{purchase.totalPrice | currency: 'EUR'}} </p>
         </div>
         <div class="buttons">
          <app-button action="fermer" (click)="closeModal()"/>

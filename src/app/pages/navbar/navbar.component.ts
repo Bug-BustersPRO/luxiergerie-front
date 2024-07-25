@@ -8,11 +8,13 @@ import { Hotel } from 'src/app/shared/models/hotel.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { HotelService } from 'src/app/shared/services/hotel.service';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [ModalComponent, CartComponent, ButtonComponent],
+  imports: [ModalComponent, CartComponent, ButtonComponent, MatBadgeModule, MatButtonModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
