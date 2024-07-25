@@ -101,6 +101,7 @@ export class RegisterEmployeeComponent implements OnChanges {
             this.employeeService.getAll();
             this.closeModal.emit();
             this.toastr.success('Employé(e) créé(e) avec succès');
+            this.model = new Employee('', '', '', '', '', [{ name: '' }]);
             console.log('employee created succesfully: ', response);
           },
           (error) => {
@@ -124,4 +125,5 @@ export class RegisterEmployeeComponent implements OnChanges {
       }
     }
   }
+  
 }
