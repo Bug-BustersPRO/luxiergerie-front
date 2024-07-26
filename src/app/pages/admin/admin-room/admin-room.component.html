@@ -1,26 +1,38 @@
-<section class="head-section">
-  <div>
-    <button (click)="addSojourn()">Ajouter un séjour</button>
-  </div>
-</section>
-<section class="list-section">
-  @for (room of rooms; track $index) {
-  <div class="card-container">
+<section class="global-section">
+  <section class="head-section">
+    <div class="add-sojourn-container">
+      <div>
+        <h3>Ajouter un séjour</h3>
+      </div>
+      <div class="add-button"
+           (click)="addSojourn()"
+           title="Ajouter un(e) employé(e)">
+        <span class="button-icon">+</span>
+      </div>
+    </div>
+    <div>
+      <h3>Séjours en cours</h3>
+    </div>
+    <div>
+    </div>
+  </section>
+  <section class="list-section">
+    @for (room of rooms; track $index) {
+      <div class="card-container">
       <h4 class="title">Chambre : {{room.roomNumber}}</h4>
       <p class="name">{{room.client.firstName}} {{room.client.lastName}}</p>
       <div class="date-container">
         <p class="date">{{room.sojourns[0].entryDate | date: 'dd/MM/yyyy'}}</p>
         <p class="date">{{room.sojourns[0].exitDate | date: 'dd/MM/yyyy'}}</p>
       </div>
-  </div>
-}
+    </div>
+    }
+  </section>
 </section>
-
-<app-modal
-title="Ajouter un séjour"
-[showModal]="isModalOpen"
-(closeModalEvent)="isModalOpen = false">
-<section>
-  <app-add-sojourn  (closeModal)="closeModal()"/>
-</section>
+<app-modal title="Ajouter un séjour"
+           [showModal]="isModalOpen"
+           (closeModalEvent)="isModalOpen = false">
+  <section>
+    <app-add-sojourn (closeModal)="closeModal()" />
+  </section>
 </app-modal>

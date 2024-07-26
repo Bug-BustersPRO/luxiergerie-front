@@ -89,4 +89,5 @@ export class RoomService {
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while deleting all rooms")
       });
   }
+
 }

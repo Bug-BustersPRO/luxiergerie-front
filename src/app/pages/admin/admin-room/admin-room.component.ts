@@ -30,10 +30,8 @@ export class AdminRoomComponent implements OnInit {
     this.roomService.getRooms();
     effect(() => {
       this.sojourns = this.sojournService.getAllSojournsSig();
-      console.log(this.sojourns);
       this.clients = this.clientService.getAllClientsSig();
       this.rooms = this.roomService.getOccupiedRoomsSig();
-      console.log(this.rooms);
     });
   }
 
@@ -47,4 +45,5 @@ export class AdminRoomComponent implements OnInit {
   closeModal() {
     this.isModalOpen = false;
   }
+
 }

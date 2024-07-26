@@ -18,7 +18,7 @@ import { SojournService } from 'src/app/shared/services/sojourn.service';
   styleUrl: './add-sojourn.component.scss',
 })
 export class AddSojournComponent implements OnInit {
-  public sojourn: Sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.RESERVED, "", "", "", "", [{ name: '' }]);
+  public sojourn: Sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.IN_PROGRESS, "", "", "", "", [{ name: '' }]);
   public clients: Client[] = [];
   public availableRooms: Room[] = [];
   @Output() closeModal = new EventEmitter<void>();
