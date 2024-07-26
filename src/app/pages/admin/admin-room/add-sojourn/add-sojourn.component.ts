@@ -18,7 +18,7 @@ import { SojournService } from 'src/app/shared/services/sojourn.service';
   styleUrl: './add-sojourn.component.scss',
 })
 export class AddSojournComponent implements OnInit {
-  public sojourn: Sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.RESERVED, "", "", "", "");
+  public sojourn: Sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.RESERVED, "", "", "", "", [{ name: '' }]);
   public clients: Client[] = [];
   public availableRooms: Room[] = [];
   @Output() closeModal = new EventEmitter<void>();
@@ -61,7 +61,7 @@ export class AddSojournComponent implements OnInit {
 
   clearForm() {
     console.log('hey');
-    this.sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.RESERVED, "", "", "", "");
+    this.sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.RESERVED, "", "", "", "", [{ name: '' }]);
     this.cdRef.detectChanges();
   }
 

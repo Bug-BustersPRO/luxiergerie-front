@@ -8,16 +8,26 @@ export enum SojournStatus {
 }
 
 export class Sojourn {
-  public id: string;
+  public id?: string;
   public entryDate: Date;
   public exitDate: Date;
   public status: SojournStatus;
-  public sojournIdentifier: string;
-  public password: string;
+  public sojournIdentifier?: string;
+  public password?: string;
   public clientId: string;
   public roomId: string;
+  public roomRole: { name: string }[];
 
-  constructor(id: string, entryDate: Date, exitDate: Date, status: SojournStatus, sojournIdentifier: string, password: string, clientId: string, roomId: string) {
+  constructor(
+    id: string,
+    entryDate: Date,
+    exitDate: Date,
+    status: SojournStatus,
+    sojournIdentifier: string,
+    password: string,
+    clientId: string,
+    roomId: string,
+    roomRole: { name: string }[]) {
     this.id = id;
     this.entryDate = entryDate;
     this.exitDate = exitDate;
@@ -26,6 +36,7 @@ export class Sojourn {
     this.password = password;
     this.clientId = clientId;
     this.roomId = roomId;
+    this.roomRole = roomRole;
   }
 
 }

@@ -58,11 +58,11 @@
       <div class="label-and-input">
         <label for="room">Chambre</label>
         <select name="room"
-                [(ngModel)]="sojourn.roomId"
+                [(ngModel)]="sojourn.roomRole"
                 #room="ngModel"
                 required>
           <option *ngFor="let room of availableRooms"
-                  [ngValue]="room.id">{{room.roomNumber}}</option>
+                  [ngValue]="room.role">{{room.roomNumber}}</option>
         </select>
         <div *ngIf="room.invalid && (room.dirty || room.touched)">
           <div class="error-length-required"
