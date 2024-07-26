@@ -17,15 +17,18 @@ export class CartService {
   public categoriesSubject = new BehaviorSubject<{ category: Category, totalPricePerCat: bigDecimal }[]>([]);
   public totalPriceSubject = new BehaviorSubject<bigDecimal>(new bigDecimal(0));
   public changeTitle: EventEmitter<string> = new EventEmitter();
+  public countItems: number = 0;
 
   constructor(private accomodationService: AccommodationService) {
     this.loadCart();
+    this.updateCount();
   }
 
   getCartItems(): Observable<Accommodation[]> {
     const cartItems = localStorage.getItem('cart_items');
     this.items = cartItems ? JSON.parse(cartItems) : [];
     this.cartItems.next(this.items);
+    this.updateCount();
     return this.cartItems.asObservable();
   }
 
@@ -46,6 +49,7 @@ export class CartService {
         this.saveCart();
         this.cartItems.next(this.items);
         this.totalPriceSubject.next(this.totalPrice);
+        this.updateCount();
       },
       error: () => {},
       complete: () => this.updateCategoriesAndTotalPrice()
@@ -78,6 +82,7 @@ export class CartService {
     }
     this.cartItems.next(this.items);
     this.updateCategoriesAndTotalPrice();
+    this.updateCount();
   }
 
   private saveCart(): void {
@@ -119,6 +124,7 @@ export class CartService {
     const price = savedTotalPrice ? JSON.parse(savedTotalPrice) : null;
     const priceNum = new bigDecimal(price?.value);
     this.totalPrice = priceNum || new bigDecimal(0);
+    this.updateCount();
   }
 
   saveTotalPrice(item: Accommodation) {
@@ -151,5 +157,14 @@ export class CartService {
 
   changingTitle(newTitle: string) {
     this.changeTitle.emit(newTitle);
+  }
+
+  private getTotalQuantity(): number {
+    return this.items.reduce((total, item) => total + item.quantity, 0);
+  }
+
+  // New method to update notification
+  private updateCount(): void {
+    this.countItems = this.getTotalQuantity();
   }
 }
