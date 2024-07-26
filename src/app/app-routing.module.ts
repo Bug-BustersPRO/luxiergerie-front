@@ -6,7 +6,7 @@ import { AccommodationPage } from './pages/accommodation-page/accommodation-page
 import { LoginClientPageComponent } from "./pages/security/room/login-client.page/login-client.page.component";
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { AdminPurchasesComponent } from './pages/admin/admin-purchases/admin-purchases.component';
-import { AdminAccomodationsComponent } from './pages/admin/admin-accomodations/admin-accomodations.component';
+import { AdminAccomodationsComponent } from './pages/admin/admin-services/admin-services.component';
 import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
 import { ConfigHotelComponent } from './pages/config-hotel/config-hotel.component';
 import { AdminPurchaseDetailComponent } from './pages/admin/admin-purchase-detail/admin-purchase-detail.component';

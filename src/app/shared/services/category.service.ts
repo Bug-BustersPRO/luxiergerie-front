@@ -3,6 +3,7 @@ import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Category } from '../models/category.model';
 import { Section } from '../models/section.model';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +33,8 @@ export class CategoryService {
       });
   }
 
-  public getById(id: number): void {
-    this.http.get<Category>(`${this.url}/categories/${id}`, { headers: this.getHeaders() })
-      .subscribe({
-        next: category => this.getCategoryById = category,
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching category whith id: " + id)
-      });
+  public getById(id: any): Observable<Category> {
+   return this.http.get<Category>(`${this.url}/categories/${id}`, { headers: this.getHeaders() })
   }
 
   public getAccommodationsByCategory(id: number): void {
@@ -48,30 +45,27 @@ export class CategoryService {
       });
   }
 
-  // CREATE
-  public createCategory(category: Category, section: Section): void {
-    this.http.post(`${this.url}/sections/${section.id}/categories`, category, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Category created successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while creating category")
-      });
+    public getCategoriesBySection(id: string): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.url}/sections/${id}/categories`, { headers: this.getHeaders() });
   }
 
-  // UPDATE
-  public updateCategory(category: Category): void {
-    this.http.put(`${this.url}/categories/${category.id}`, category, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Category updated successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while updating category with id: " + category.id)
-      });
+  public getCategoryImageById(id: any): Observable<Blob> {
+    return this.http.get(`${this.url}/categories/image/${id}`, { headers: this.getHeaders(), responseType: 'blob' });
   }
+
+  // CREATE
+  public createCategory(category: FormData, sectionId: any): Observable<any> {    
+    return this.http.post(`${this.url}/categories/sections/${sectionId}/categories`, category, { headers: this.getHeaders() });
+  }
+
+//   // UPDATE
+  public updateCategory(category: FormData, sectionId: any, categoryId: any): Observable<any> {
+    return this.http.put(`${this.url}/categories/sections/${sectionId}/categories/${categoryId}`, category, { headers: this.getHeaders() });
+  }
+
 
   // DELETE
-  public deleteCategory(id: number): void {
-    this.http.delete(`${this.url}/categories/${id}`, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Category deleted successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while deleting category with id: " + id)
-      });
+  public deleteCategory(id: number): Observable<any> {
+    return this.http.delete(`${this.url}/categories/categories/${id}`, { headers: this.getHeaders() });
   }
 }
