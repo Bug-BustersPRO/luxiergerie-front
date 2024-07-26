@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
     private hotelService: HotelService,
     private cartService: CartService,
     private authService: AuthService,
-    private cdr:ChangeDetectorRef) {
+    private cdRef: ChangeDetectorRef) {
     this.hotelService.getHotels().subscribe(() => {
       this.hotel = this.hotelService.hotel;
       if (this.hotel) {
@@ -43,10 +43,10 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentClient = localStorage.getItem('client') ? JSON.parse(localStorage.getItem('client') as string) : {} as Client;
+    this.currentClient = localStorage.getItem('current_client') ? JSON.parse(localStorage.getItem('current_client') as string) : {} as Client;
     this.cartService.changeTitle.subscribe((newTitle: string) => {
       this.cartModalTitle = newTitle;
-      this.cdr.detectChanges();
+      this.cdRef.detectChanges();
     });
   }
 
@@ -66,4 +66,5 @@ export class NavbarComponent implements OnInit {
   logout(): void {
     this.authService.logOut(false);
   }
+
 }

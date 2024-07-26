@@ -1,19 +1,19 @@
 <div class="form-modal-container" *ngIf="isOpen" [@fadeInOut]>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div *ngIf="step === 1" class="first-step-container">
-      <label for="roomNumber">Indiquez votre numéro de chambre</label>
-      <input id="roomNumber" type="number" formControlName="roomNumber" placeholder="Room Number">
-      <button class="button-next-step" (click)="onSubmit()" [disabled]="!loginForm.get('roomNumber')?.value">
+      <label for="sojournIdentifier">Indiquez votre identifiant</label>
+      <input id="sojournIdentifier" type="text" formControlName="sojournIdentifier" placeholder="Identifiant">
+      <button class="button-next-step" (click)="onSubmit()" [disabled]="!loginForm.get('sojournIdentifier')?.value">
         <p>Suivant</p>
       </button>
     </div>
     <div *ngIf="step === 2" class="second-step-container">
       <label for="password">
-        Entrez le mot de passe pour la chambre {{loginForm.get('roomNumber')?.value}}
-        <span class="edit-icon" (click)="onEditRoomNumber()">&#9998;</span>
+        Entrez le mot de passe pour la chambre {{loginForm.get('sojournIdentifier')?.value}}
+        <span class="edit-icon" (click)="onEditsojournIdentifier()">&#9998;</span>
       </label>
       <div *ngIf="invalidLogin" class="error-message">
-        Numéro de chambre ou mot de passe ne correspondent pas.
+        Numéro d'identifiant ou mot de passe ne correspondent pas.
       </div>
       <div id="password" class="password-container">
         <div class="password-dot" *ngFor="let i of [0, 1, 2, 3]">

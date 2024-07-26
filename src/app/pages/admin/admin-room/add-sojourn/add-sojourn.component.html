@@ -70,8 +70,10 @@
         </div>
       </div>
       <!-- <button type="submit" [disabled]="!sojournForm.valid">Enregistrer le séjour</button> -->
-      <app-button #submitBtn
-                  action="annuler" />
+       <!-- Rajouter type sur le compo BTN ou sortir le btn du form -->
+      <app-button #cancelBtn
+                  action="annuler"
+                  click="clearForm()" />
       <app-button #submitBtn
                   action="valider"
                   [hidden]="sojournForm.invalid"

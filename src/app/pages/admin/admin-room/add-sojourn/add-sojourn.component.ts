@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
@@ -18,7 +18,7 @@ import { SojournService } from 'src/app/shared/services/sojourn.service';
   styleUrl: './add-sojourn.component.scss',
 })
 export class AddSojournComponent implements OnInit {
-  public sojourn: Sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.RESERVED, '', '');
+  public sojourn: Sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.RESERVED, "", "", "", "");
   public clients: Client[] = [];
   public availableRooms: Room[] = [];
   @Output() closeModal = new EventEmitter<void>();
@@ -27,7 +27,8 @@ export class AddSojournComponent implements OnInit {
     private sojournService: SojournService,
     private roomService: RoomService,
     private clientService: ClientService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private cdRef: ChangeDetectorRef) {
     this.roomService.getAvailableRooms();
     this.clientService.getAll();
     effect(() => {
@@ -56,6 +57,12 @@ export class AddSojournComponent implements OnInit {
       }
     });
     this.closeModal.emit();
+  }
+
+  clearForm() {
+    console.log('hey');
+    this.sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.RESERVED, "", "", "", "");
+    this.cdRef.detectChanges();
   }
 
 }
