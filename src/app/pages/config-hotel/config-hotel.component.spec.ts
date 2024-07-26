@@ -61,6 +61,7 @@ describe('ConfigHotelComponent', () => {
     spyOn(component, 'getHotelImage');
     spyOn(component, 'getBackgroundHotelImage');
 
+    component.isCreateHotel = false;
     component.getCurrentHotelConfig();
 
     expect(component.getHotelImage).toHaveBeenCalled();
