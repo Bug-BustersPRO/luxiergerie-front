@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
     private hotelService: HotelService,
     protected cartService: CartService,
     private authService: AuthService,
-    private cdr:ChangeDetectorRef) {
+    private cdRef: ChangeDetectorRef) {
     this.hotelService.getHotels().subscribe(() => {
       this.hotel = this.hotelService.hotel;
       if (this.hotel) {
@@ -47,21 +47,26 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentClient = localStorage.getItem('client') ? JSON.parse(localStorage.getItem('client') as string) : {} as Client;
+    this.currentClient = localStorage.getItem('current_client') ? JSON.parse(localStorage.getItem('current_client') as string) : {} as Client;
     this.cartService.changeTitle.subscribe((newTitle: string) => {
       this.cartModalTitle = newTitle;
-      this.cdr.detectChanges();
+      this.cdRef.detectChanges();
     });
 
     this.cartService.getCartItems().subscribe((items) => {
       this.notification = items.length;
-      this.cdr.detectChanges();
+      this.cdRef.detectChanges();
+    });
+
+    this.cartService.getCartItems().subscribe((items) => {
+      this.notification = items.length;
+      this.cdRef.detectChanges();
     });
   }
 
   public openModal() {
     this.isModalOpen = true;
-    this.cdr.detectChanges();
+    this.cdRef.detectChanges();
   }
 
   navigateTo(route: string): void {
@@ -71,7 +76,7 @@ export class NavbarComponent implements OnInit {
   openCart(): void {
     this.isModalOpen = true;
     this.cartService.loadCart();
-    this.cdr.detectChanges();
+    this.cdRef.detectChanges();
   }
 
   logout(): void {

@@ -50,7 +50,7 @@ export class LoginModalComponent {
     private hotelService: HotelService,
     private toastr: ToastrService) {
     this.loginForm = this.formBuilder.group({
-      roomNumber: ['', Validators.required],
+      sojournIdentifier: ['', Validators.required],
       password: ['', Validators.required]
     });
     this.hotelService.getHotels().subscribe(() => {
@@ -75,7 +75,7 @@ export class LoginModalComponent {
     if (this.step === 1) {
       this.step++;
     } else if (this.loginForm.valid) {
-      this.loginClient = new LoginClient(this.loginForm.value.roomNumber, this.loginForm.value.password)
+      this.loginClient = new LoginClient(this.loginForm.value.sojournIdentifier, this.loginForm.value.password)
       this.authService.clientLogin(this.loginClient).pipe(
         catchError((error) => {
           this.invalidLogin = true
@@ -86,7 +86,6 @@ export class LoginModalComponent {
       ).subscribe(response => {
         if (response.status === 200) {
           localStorage.setItem('current_client', JSON.stringify(response.body));
-          localStorage.setItem('room_number', JSON.stringify(this.loginForm.value.roomNumber));
           this.toastr.success('Connexion réussie');
           this.router.navigate(['/'])
         }
@@ -108,7 +107,7 @@ export class LoginModalComponent {
     return key.type === 'number' ? key.value : key.symbol
   }
 
-  onEditRoomNumber() {
+  onEditsojournIdentifier() {
     this.step = 1
   }
 
