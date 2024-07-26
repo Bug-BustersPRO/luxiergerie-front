@@ -58,7 +58,6 @@ import { RoleGuard } from './shared/services/Guard/role.guard';
     AccommodationCardComponent,
     ButtonComponent,
     ModalComponent,
-    BrowserAnimationsModule,
     CartComponent,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',

@@ -21,7 +21,6 @@ export class ListEmployeeComponent implements AfterViewInit {
     this.employeeService.getAll();
     effect(() => {
       this.employees = this.employeeService.getAllEmployeesSig();
-      console.log(this.employees);
     });
   }
 
@@ -65,4 +64,5 @@ export class ListEmployeeComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.employeeService.getAll();
   }
+  
 }

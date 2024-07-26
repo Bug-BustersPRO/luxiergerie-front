@@ -33,13 +33,10 @@ export class PurchaseService {
       });
   }
 
-  public getById(id: number): void {
-    this.http.get<Purchase>(`${this.url}/purchases/${id}`, { headers: this.getHeaders() })
-      .subscribe({
-        next: purchase => this.getPurchaseById = purchase,
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching purchase")
-      });
+  public getById(id: number): Observable<any> {
+    return this.http.get(`${this.url}/purchases/${id}`, { headers: this.getHeaders() });
   }
+
 
   public getBillByClient(): Observable<any> {
     return this.http.get<Bill>(`${this.url}/purchases/billByClient`, { headers: this.getHeaders() });
