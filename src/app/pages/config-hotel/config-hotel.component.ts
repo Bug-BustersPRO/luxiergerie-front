@@ -167,7 +167,7 @@ export class ConfigHotelComponent implements OnInit {
 
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.imageUrl = reader.result;
+        this.imageUrl = reader.result;        
       };
       reader.readAsDataURL(file);
     }
@@ -258,7 +258,6 @@ export class ConfigHotelComponent implements OnInit {
   submitHotel() {
     this.createUpdateHotel().subscribe({
       next: (response) => {
-        console.log(response);
         this.router.navigate(['/admin']);
         this.hotelService.emitHotelUpdate(this.hotel);
         this.toastr.success('Hôtel configuré avec succès');

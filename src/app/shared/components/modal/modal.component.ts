@@ -6,10 +6,9 @@ import { Observable } from 'rxjs';
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
-  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true
-
+  standalone: true,
+  imports: [CommonModule],
 })
 export class ModalComponent {
 

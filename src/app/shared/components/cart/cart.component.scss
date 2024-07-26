@@ -9,7 +9,6 @@
 .cart {
   max-width: 100%;
   height: 100%;
-  padding: 1rem;
   overflow: hidden;
 
   p {
@@ -55,13 +54,19 @@
     border-bottom: 3px solid var(--secondary-background-color);
   }
 
-  .scrollable {
+  .scrollable-cart {
     overflow-y: auto;
-    height: 70%;
     scrollbar-color: $primary-background-color white;
+    height: 62%;
+  }
+
+  .scrollable-confirmation {
+    overflow-y: auto;
+    scrollbar-color: $primary-background-color white;
+    height: 44%;
   }
   .buttons {
-    margin-top: 3rem;
+    margin-top: 1rem;
     display: flex;
     justify-content: space-around;
   }

@@ -1,0 +1,16 @@
+<section id="main_container">
+    <div id="image_container">
+        <img id="image" [src]="image" alt="" />
+    </div>
+    <div id="infos_container">
+        <div *ngIf="infos.title">Titre : {{ infos.title }}</div>
+
+        <div class="name">Nom : {{ infos.name }}</div>
+        <div>Description : {{ infos.description }}</div>
+        <div *ngIf="infos.price">
+            Prix : {{ infos.price | currency: 'EUR' }}
+            {{ infos.isReservable }}
+        </div>
+        <div *ngIf="infos.reservable">Produit soumis à réservation : Oui</div>
+    </div>
+</section>

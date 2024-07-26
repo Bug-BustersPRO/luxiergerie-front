@@ -27,6 +27,9 @@ import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RoleGuard } from './shared/services/Guard/role.guard';
+import {MatButtonModule} from '@angular/material/button';
+import {MatBadgeModule} from '@angular/material/badge';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -58,12 +61,13 @@ import { RoleGuard } from './shared/services/Guard/role.guard';
     AccommodationCardComponent,
     ButtonComponent,
     ModalComponent,
-    BrowserAnimationsModule,
     CartComponent,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    MatButtonModule,
+    MatBadgeModule
   ],
   providers: [
     {
@@ -91,6 +95,7 @@ import { RoleGuard } from './shared/services/Guard/role.guard';
       useFactory: (service: RoleGuard) => service.roleGuardAdmin(),
       deps: [RoleGuard],
     },
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })

@@ -8,12 +8,5 @@
   </div>
   <div class="buttons">
     <app-button action='précédent' />
-    @if (hotel) {
-      <app-button action='confirmer'
-                [btnBackground]="hotel.colors[0]"
-                [txtColor]="hotel.colors[1]" />
-    } @else {
-      <app-button action='confirmer' />
-    }
   </div>
 </section>

@@ -4,20 +4,21 @@ import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
 import bigDecimal from 'js-big-decimal';
 import { ToastrService } from 'ngx-toastr';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { HotelService } from '../../services/hotel.service';
 import { Hotel } from '../../models/hotel.model';
 import { ButtonComponent } from '../button/button.component';
 import { Purchase } from '../../models/purchase.model';
 import { Client } from '../../models/client.model';
 import { PurchaseService } from '../../services/purchase.service';
-import { AuthService } from '../../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
   imports: [CommonModule, ButtonComponent],
+  providers: [CurrencyPipe],
   standalone: true
 })
 export class CartComponent implements OnInit, OnChanges {
@@ -41,7 +42,9 @@ export class CartComponent implements OnInit, OnChanges {
      private toastr: ToastrService,
     private hotelService: HotelService,
      private cdr: ChangeDetectorRef,
-     private purchaseService: PurchaseService
+     private purchaseService: PurchaseService,
+     private currencyPipe: CurrencyPipe,
+     private router: Router
     )
     {
       this.hotelService.getHotels().subscribe(() => {
@@ -50,10 +53,12 @@ export class CartComponent implements OnInit, OnChanges {
         this.hotelService.applyColors(this.hotel?.colors);
         this.hotelService.hotelImageUrlUpdate$.subscribe((url) => {
           this.hotelImageUrl = url;
+          this.cdr.detectChanges();
         });
       } else {
         this.hotelService.applyColors(["#FDFBF5"]);
     }
+    this.cdr.detectChanges();
   });
   this.loadCart();
   }
@@ -62,6 +67,7 @@ export class CartComponent implements OnInit, OnChanges {
 
     this.cartService.changeTitle.subscribe((title) => {
       this.changeTitle.emit(title);
+      this.cdr.detectChanges();
     });
     this.closeConfirmation();
     this.cartService.cartItems.subscribe(items => {
@@ -87,12 +93,17 @@ export class CartComponent implements OnInit, OnChanges {
     this.cdr.detectChanges();
   }
 
+  formatPrice(price: bigDecimal): string {
+    const formattedPrice = this.currencyPipe.transform(price.getValue(), 'EUR', 'symbol', '1.2-2');
+    return formattedPrice ?? '';
+  }
+
 
   getCurrentClientAndRoom() {
     const clientStored = localStorage.getItem('current_client');
-    this.currentClient = clientStored? JSON.parse(clientStored) : null;
+    this.currentClient = clientStored? JSON.parse(clientStored)! : '';
     const roomStored = localStorage.getItem('room_number');
-    this.roomNumber = roomStored? JSON.parse(roomStored) : null;
+    this.roomNumber = roomStored? JSON.parse(roomStored)! : '';
   }
 
   loadCart(): void {
@@ -100,14 +111,16 @@ export class CartComponent implements OnInit, OnChanges {
     this.categories = (this.cartService.getCategories());
   }
 
-  clearCart(): void {
+  clearCart(showToast: boolean = true): void {
     this.items = [];
     this.categories = [];
     this.totalPrice = new bigDecimal(0);
     localStorage.removeItem("cart_items");
     localStorage.removeItem("total_price");
     localStorage.removeItem("cart_categories");
+    if (showToast) {
     this.toastr.info('Votre panier a été vidé avec succès');
+    }
   }
 
   removeItem(item: Accommodation) {
@@ -123,13 +136,15 @@ export class CartComponent implements OnInit, OnChanges {
   createNewPurchase(purchase: Purchase) {
     this.purchaseService.createPurchase(purchase).subscribe({
       next: (response: Purchase) => {
-        console.log('Purchase created successfully', response);
         this.changeTitle.emit('Confirmation');
         this.orderConfirmed = true;
         this.cdr.detectChanges();
+        this.toastr.success('Votre commande a été validée avec succès');
+        this.clearCart(false);
       },
       error: (error: HttpErrorResponse) => {
-        console.log('There was an error while creating purchase', error);
+        this.toastr.error("Une erreur est survenue, n'hésitez pas à contacter l'accueil");
+
       }
     });
   }
@@ -137,7 +152,7 @@ export class CartComponent implements OnInit, OnChanges {
    order(){
     this.purchase = new Purchase(new Date(), this.currentClient, "Validée", this.cartService.items, this.roomNumber, this.cartService.getTotalPrice().getValue());
     this.createNewPurchase(this.purchase);
-    this.clearCart();
+    this.router.navigate(['/']);
   }
 
   closeModal() {

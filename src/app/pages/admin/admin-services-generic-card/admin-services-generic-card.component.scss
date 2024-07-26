@@ -1,0 +1,36 @@
+:host {
+    overflow-x: scroll;
+    overflow-y: unset;
+    scrollbar-width: none;
+}
+
+:host::-webkit-scrollbar {
+    display: none;
+  }
+
+#main_container {
+    display: flex;
+    overflow: auto;
+}
+
+#image_container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+img {
+    min-width: 100px;
+    max-width: 100px;
+    height: 100px;
+    border-radius: 5px;
+}
+
+#infos_container {
+    margin-left: 10px;
+    font-size: smaller;
+}
+
+.name {
+    font-weight: bold;
+}
