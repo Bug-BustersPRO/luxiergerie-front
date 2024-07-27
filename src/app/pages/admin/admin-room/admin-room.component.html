@@ -5,7 +5,7 @@
         <h3>Ajouter un séjour</h3>
       </div>
       <div class="add-button"
-           (click)="addSojourn()"
+           (click)="openSojournModal()"
            title="Ajouter un(e) employé(e)">
         <span class="button-icon">+</span>
       </div>
@@ -18,14 +18,22 @@
   </section>
   <section class="list-section">
     @for (room of rooms; track $index) {
-      <div class="card-container">
-      <h4 class="title">Chambre : {{room.roomNumber}}</h4>
-      <p class="name">{{room.client.firstName}} {{room.client.lastName}}</p>
-      <div class="date-container">
-        <p class="date">{{room.sojourns[0].entryDate | date: 'dd/MM/yyyy'}}</p>
-        <p class="date">{{room.sojourns[0].exitDate | date: 'dd/MM/yyyy'}}</p>
+      <div class="container">
+        <div class="card-container">
+          <h4 class="title">Chambre : {{room.roomNumber}}</h4>
+          <p class="name">{{room.client.firstName}} {{room.client.lastName}}</p>
+          <div class="date-container">
+            <p class="date">{{room.sojourns[0].entryDate | date: 'dd/MM/yyyy'}}</p>
+            <p class="date">{{room.sojourns[0].exitDate | date: 'dd/MM/yyyy'}}</p>
+          </div>
+        </div>
+        <div class="button-container">
+          <span class="button material-symbols-outlined"
+                (click)="openEditModal(room.sojourns[0])">edit</span>
+          <span class="button material-symbols-outlined"
+                (click)="deleteSojourn(room.sojourns[0])">delete</span>
+        </div>
       </div>
-    </div>
     }
   </section>
 </section>
@@ -33,6 +41,17 @@
            [showModal]="isModalOpen"
            (closeModalEvent)="isModalOpen = false">
   <section>
-    <app-add-sojourn (closeModal)="closeModal()" />
+    <app-sojourn-form (closeModal)="closeModal()"
+                      [isCreateSojourn]="true" />
+  </section>
+</app-modal>
+
+<app-modal title="Modifier un séjour"
+           [showModal]="isUpdateModalOpen"
+           (closeModalEvent)="isUpdateModalOpen = false">
+  <section>
+    <app-sojourn-form (closeModal)="closeModal()"
+                      [isCreateSojourn]="false"
+                      [sojournToUpdate]="selectedSojourn"/>
   </section>
 </app-modal>

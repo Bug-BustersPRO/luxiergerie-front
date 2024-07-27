@@ -3,6 +3,7 @@
   margin: 0 auto;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 p {
@@ -64,29 +65,39 @@ p {
     flex-direction: column;
     margin: auto;
     border-radius: 5px;
-    height: 80%;
+    height: 75%;
     margin-top: 30px;
-    overflow: hidden;
+    overflow: auto;
 
-    .card-container {
+    .container {
       display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-top: 24px;
-      margin-left: 30px;
-      border-bottom: white 1px solid;
 
-      .title {
-        margin: 0;
-        margin-top: 10px;
+      .card-container {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 24px;
+        margin-left: 30px;
+        border-bottom: white 1px solid;
+
+        .title {
+          margin: 0;
+          margin-top: 10px;
+        }
+
+        .date-container {
+          margin: 0;
+          display: flex;
+          gap: 12px;
+          padding-bottom: 24px;
+        }
       }
 
-      .date-container {
-        margin: 0;
+      .button-container {
         display: flex;
-        gap: 12px;
-        padding-bottom: 24px;
       }
     }
+
+
   }
 }

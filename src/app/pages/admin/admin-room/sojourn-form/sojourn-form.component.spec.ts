@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddSojournComponent } from './add-sojourn.component';
+import { SojournFormComponent } from './sojourn-form.component';
 
 describe('AddSojournComponent', () => {
-  let component: AddSojournComponent;
-  let fixture: ComponentFixture<AddSojournComponent>;
+  let component: SojournFormComponent;
+  let fixture: ComponentFixture<SojournFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddSojournComponent]
+      imports: [SojournFormComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(AddSojournComponent);
+
+    fixture = TestBed.createComponent(SojournFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
