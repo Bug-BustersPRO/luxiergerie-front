@@ -71,6 +71,8 @@ p {
 
     .container {
       display: flex;
+      width: 100%;
+      justify-content: space-between;
 
       .card-container {
         display: flex;
@@ -95,9 +97,12 @@ p {
 
       .button-container {
         display: flex;
+        cursor: pointer;
+        align-items: center;
+        margin-right: 30px;
+        gap: 20px;
       }
     }
-
 
   }
 }

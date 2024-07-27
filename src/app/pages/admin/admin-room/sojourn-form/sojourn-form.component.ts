@@ -31,8 +31,7 @@ export class SojournFormComponent implements OnChanges {
     private clientService: ClientService,
     private toastr: ToastrService,
     private cdRef: ChangeDetectorRef) {
-    this.roomService.getAvailableRooms();
-    this.clientService.getAll();
+    this.refreshData();
     effect(() => {
       this.availableRooms = this.roomService.getAllAvailableRoomsSig();
       this.clients = this.clientService.getClientsWithNoRoom$();
@@ -46,13 +45,19 @@ export class SojournFormComponent implements OnChanges {
     }
   }
 
+  refreshData() {
+    this.roomService.getAvailableRooms();
+    this.clientService.getAll();
+    this.roomService.getRooms();
+  }
+
   onSubmit() {
     console.log(this.sojourn);
     if (this.isCreateSojourn) {
       this.sojournService.createSojourn(this.sojourn).subscribe({
         next: (response) => {
           console.log("Sojourn created successfully", response);
-          this.roomService.getRooms();
+          this.refreshData();
           this.toastr.success("Séjour créé avec succès");
         },
         error: (error) => {
@@ -65,7 +70,7 @@ export class SojournFormComponent implements OnChanges {
       this.sojournService.updateSojourn(this.sojourn).subscribe({
         next: (response) => {
           console.log("Sojourn updated successfully", response);
-          this.roomService.getRooms();
+          this.refreshData();
           this.toastr.success("Séjour mis à jour avec succès");
         },
         error: (error) => {

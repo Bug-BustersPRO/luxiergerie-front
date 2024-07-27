@@ -32,9 +32,7 @@ export class AdminRoomComponent implements OnInit {
     private roomService: RoomService,
     private cdRef: ChangeDetectorRef,
     private toastr: ToastrService) {
-    this.sojournService.getSojourns();
-    this.clientService.getAll();
-    this.roomService.getRooms();
+    this.refreshData();
     effect(() => {
       this.sojourns = this.sojournService.getAllSojournsSig();
       this.clients = this.clientService.getAllClientsSig();
@@ -43,6 +41,12 @@ export class AdminRoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  refreshData() {
+    this.sojournService.getSojourns();
+    this.clientService.getAll();
+    this.roomService.getRooms();
   }
 
   openSojournModal() {
@@ -64,7 +68,8 @@ export class AdminRoomComponent implements OnInit {
     this.sojournService.deleteSojourn(sojourn.id!).subscribe({
       next: (response) => {
         console.log("Sojourn deleted successfully", response);
-        this.roomService.getRooms();
+        this.refreshData();
+        this.roomService.getAvailableRooms();
         this.toastr.success("Séjour supprimé avec succès");
       },
       error: (error) => {
