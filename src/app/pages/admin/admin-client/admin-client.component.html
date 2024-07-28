@@ -1,0 +1,55 @@
+<section class="global-section">
+  <section class="head-section">
+    <div class="add-client-container">
+      <div>
+        <h3>Ajouter un client</h3>
+      </div>
+      <div class="add-button"
+           (click)="openClientModal()"
+           title="Ajouter un(e) client(e)">
+        <span class="button-icon">+</span>
+      </div>
+    </div>
+    <div>
+      <h3>Clients</h3>
+    </div>
+    <div>
+    </div>
+  </section>
+  <section class="list-section">
+    @for (client of clients; track $index) {
+      <div class="container">
+        <div class="card-container">
+          <h4 class="title">{{client.firstName}} {{client.lastName}}</h4>
+          <p class="name">Email : {{client.email}}</p>
+          <p class="name">Téléphone : {{client.phoneNumber}}</p>
+          <p class="name">Chambre : {{getRoomByClientId(client.id)?.roomNumber}}</p>
+        </div>
+        <div class="button-container">
+          <span class="button material-symbols-outlined"
+                (click)="openEditModal(client)">edit</span>
+          <span class="button material-symbols-outlined"
+                (click)="deleteClient(client)">delete</span>
+        </div>
+      </div>
+    }
+  </section>
+</section>
+<app-modal title="Ajouter un client"
+           [showModal]="isModalOpen"
+           (closeModalEvent)="closeCreateModal()">
+  <!-- <section>
+    <app-sojourn-form (closeModal)="closeCreateModal()"
+                      [isCreateSojourn]="true" />
+  </section> -->
+</app-modal>
+
+<app-modal title="Modifier un client"
+           [showModal]="isUpdateModalOpen"
+           (closeModalEvent)="closeUpdateModal()">
+  <!-- <section>
+    <app-sojourn-form (closeModal)="closeUpdateModal()"
+                      [isCreateSojourn]="false"
+                      [sojournToUpdate]="selectedSojourn"/>
+  </section> -->
+</app-modal>

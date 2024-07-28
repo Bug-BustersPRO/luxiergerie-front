@@ -13,7 +13,9 @@ import { AdminPurchaseDetailComponent } from './pages/admin/admin-purchase-detai
 import { CartComponent } from './shared/components/cart/cart.component';
 import { AdminHotelComponent } from './pages/admin/admin-hotel/admin-hotel.component';
 import { AdminEmployeeComponent } from './pages/admin/admin-employee/admin-employee.component';
+import { AdminSojournComponent } from './pages/admin/admin-sojourn/admin-sojourn.component';
 import { AdminRoomComponent } from './pages/admin/admin-room/admin-room.component';
+import { AdminClientComponent } from './pages/admin/admin-client/admin-client.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sections', pathMatch: 'full' },
@@ -29,7 +31,9 @@ const routes: Routes = [
       { path: 'accomodations', component: AdminAccomodationsComponent },
       { path: 'employee', component: AdminEmployeeComponent, canActivate: ['roleGuardAdmin'] },
       { path: 'hotel', component: AdminHotelComponent, canActivate: ['roleGuardAdmin'] },
-      { path: 'room', component: AdminRoomComponent, canActivate: ['roleGuard'] }
+      { path: 'sojourn', component: AdminSojournComponent, canActivate: ['roleGuard'] },
+      { path: 'room', component: AdminRoomComponent, canActivate: ['roleGuard'] },
+      { path: 'client', component: AdminClientComponent, canActivate: ['roleGuard'] }
     ]
   },
   { path: 'login/employee', component: LoginEmployeeComponent, canActivate: ['authEmployee'] },

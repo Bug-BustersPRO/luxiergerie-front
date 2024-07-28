@@ -54,4 +54,9 @@ export class ClientService {
       });
   }
 
+  // Delete
+  public deleteClient(client: Client): Observable<any> {
+    return this.http.delete(`${this.url}/${client.id}`, { headers: this.getHeaders() })
+  }
+
 }

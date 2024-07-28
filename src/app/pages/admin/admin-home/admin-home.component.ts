@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminNavbarComponent } from '../admin-navbar/admin-navbar.component';
-import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { Employee } from 'src/app/shared/models/employee.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -12,7 +11,6 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   standalone: true,
   imports: [
     AdminNavbarComponent,
-    AdminDashboardComponent,
     RouterOutlet,
     RouterLink,
   ],
