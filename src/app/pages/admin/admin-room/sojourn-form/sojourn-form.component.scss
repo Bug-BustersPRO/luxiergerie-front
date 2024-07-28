@@ -44,6 +44,14 @@
       }
     }
   }
+
+  .button-container {
+    display: flex;
+    width: 100%;
+    gap: 50px;
+    justify-content: center;
+    margin-top: 10px;
+  }
 }
 
 .button-alignement {

@@ -9,25 +9,25 @@ export enum SojournStatus {
 
 export class Sojourn {
   public id?: string;
-  public entryDate: Date;
-  public exitDate: Date;
+  public entryDate: Date | null;
+  public exitDate: Date | null;
   public status: SojournStatus;
   public sojournIdentifier?: string;
   public password?: string;
   public clientId: string;
   public roomId: string;
-  public roomRole: { name: string }[];
+  public roomRole: { name: string }[] | null;
 
   constructor(
     id: string,
-    entryDate: Date,
-    exitDate: Date,
+    entryDate: Date | null,
+    exitDate: Date | null,
     status: SojournStatus,
     sojournIdentifier: string,
     password: string,
     clientId: string,
     roomId: string,
-    roomRole: { name: string }[]) {
+    roomRole: { name: string }[] | null) {
     this.id = id;
     this.entryDate = entryDate;
     this.exitDate = exitDate;

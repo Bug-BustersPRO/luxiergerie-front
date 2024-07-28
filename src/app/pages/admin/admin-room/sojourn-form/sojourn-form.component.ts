@@ -18,7 +18,7 @@ import { SojournService } from 'src/app/shared/services/sojourn.service';
   styleUrl: './sojourn-form.component.scss',
 })
 export class SojournFormComponent implements OnChanges {
-  public sojourn: Sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.IN_PROGRESS, "", "", "", "", [{ name: '' }]);
+  public sojourn: Sojourn = new Sojourn("", null, null, SojournStatus.IN_PROGRESS, "", "", "", "", null);
   public clients: Client[] = [];
   public availableRooms: Room[] = [];
   @Output() closeModal = new EventEmitter<void>();
@@ -52,11 +52,13 @@ export class SojournFormComponent implements OnChanges {
   }
 
   onSubmit() {
-    console.log(this.sojourn);
     if (this.isCreateSojourn) {
+      if (!this.sojourn.clientId || !this.sojourn.roomRole || !this.sojourn.entryDate || !this.sojourn.exitDate) {
+        this.toastr.error("Veuillez remplir tous les champs obligatoires");
+        return;
+      }
       this.sojournService.createSojourn(this.sojourn).subscribe({
-        next: (response) => {
-          console.log("Sojourn created successfully", response);
+        next: () => {
           this.refreshData();
           this.toastr.success("Séjour créé avec succès");
         },
@@ -65,11 +67,9 @@ export class SojournFormComponent implements OnChanges {
           this.toastr.error("Il y a eu une erreur lors de la création du séjour");
         }
       });
-      this.sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.IN_PROGRESS, "", "", "", "", [{ name: '' }]);
     } else {
       this.sojournService.updateSojourn(this.sojourn).subscribe({
-        next: (response) => {
-          console.log("Sojourn updated successfully", response);
+        next: () => {
           this.refreshData();
           this.toastr.success("Séjour mis à jour avec succès");
         },
@@ -79,13 +79,12 @@ export class SojournFormComponent implements OnChanges {
         }
       });
     }
-
+    this.clearForm();
     this.closeModal.emit();
   }
 
   clearForm() {
-    console.log('hey');
-    this.sojourn = new Sojourn("", new Date(), new Date(), SojournStatus.RESERVED, "", "", "", "", [{ name: '' }]);
+    this.sojourn = new Sojourn("", null, null, SojournStatus.IN_PROGRESS, "", "", "", "", null);
     this.cdRef.detectChanges();
   }
 

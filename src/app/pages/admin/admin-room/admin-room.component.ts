@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, effect, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, OnInit, ViewChild } from '@angular/core';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { Client } from 'src/app/shared/models/client.model';
 import { Room } from 'src/app/shared/models/room.model';
-import { Sojourn } from 'src/app/shared/models/sojourn.model';
+import { Sojourn, SojournStatus } from 'src/app/shared/models/sojourn.model';
 import { ClientService } from 'src/app/shared/services/client.service';
 import { RoomService } from 'src/app/shared/services/room.service';
 import { SojournService } from 'src/app/shared/services/sojourn.service';
@@ -18,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './admin-room.component.scss',
 })
 export class AdminRoomComponent implements OnInit {
-
+  @ViewChild(SojournFormComponent) sojournForm!: SojournFormComponent;
   public sojourns: Sojourn[] = [];
   public selectedSojourn!: Sojourn;
   public clients: Client[] = [];
@@ -53,9 +53,14 @@ export class AdminRoomComponent implements OnInit {
     this.isModalOpen = true;
   }
 
-  closeModal() {
+  closeCreateModal() {
     this.isModalOpen = false;
+    this.sojournForm.clearForm();
+  }
+
+  closeUpdateModal() {
     this.isUpdateModalOpen = false;
+    this.sojournForm.clearForm();
   }
 
   openEditModal(sojourn: Sojourn) {
@@ -66,8 +71,7 @@ export class AdminRoomComponent implements OnInit {
 
   deleteSojourn(sojourn: Sojourn) {
     this.sojournService.deleteSojourn(sojourn.id!).subscribe({
-      next: (response) => {
-        console.log("Sojourn deleted successfully", response);
+      next: () => {
         this.refreshData();
         this.roomService.getAvailableRooms();
         this.toastr.success("Séjour supprimé avec succès");

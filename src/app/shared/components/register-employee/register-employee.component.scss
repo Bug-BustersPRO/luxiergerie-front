@@ -13,6 +13,7 @@
   background-color: #fdfbf5;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 8.8px;
   border-radius: 5px;
+
   .forms {
     min-width: 318px;
     max-width: 400px;
@@ -24,6 +25,7 @@
     justify-content: center;
     height: 100%;
     overflow: hidden;
+
     .label-and-input {
       display: flex;
       flex-direction: column;
@@ -46,7 +48,10 @@
 
 .button-alignement {
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  gap: 50px;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .forms {
@@ -65,6 +70,7 @@
 .password-input-wrapper {
   position: relative;
 }
+
 .password-input {
   display: flex;
   position: relative;

@@ -7,6 +7,7 @@ import {
   Input,
   OnChanges,
   ChangeDetectorRef,
+  SimpleChanges,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
@@ -50,8 +51,10 @@ export class RegisterEmployeeComponent implements OnChanges {
     });
   }
 
-  ngOnChanges(): void {
-    this.getEmployeeById();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selectedEmployee'] && changes['selectedEmployee'].currentValue) {
+      this.getEmployeeById();
+    }
   }
 
   getRoleName(role: string) {
@@ -66,7 +69,6 @@ export class RegisterEmployeeComponent implements OnChanges {
   }
 
   public getEmployeeById(): void {
-    console.log('selectedEmployee: ', this.selectedEmployee);
     if (this.isCreateEmployee === false) {
       this.model.id = this.selectedEmployee.id;
       this.model.firstName = this.selectedEmployee.firstName;
@@ -93,16 +95,18 @@ export class RegisterEmployeeComponent implements OnChanges {
   }
 
   onSubmit(form: { valid: any }) {
-    console.log('form: ', form);
+    if (!this.model.lastName || !this.model.firstName || !this.model.roles[0].name || !this.model.password) {
+      this.toastr.error('Veuillez remplir tous les champs obligatoires');
+      return;
+    }
     if (form.valid) {
       if (this.isCreateEmployee) {
         this.employeeService.createEmployee(this.model).subscribe(
-          (response) => {
+          () => {
             this.employeeService.getAll();
             this.closeModal.emit();
             this.toastr.success('Employé(e) créé(e) avec succès');
             this.model = new Employee('', '', '', '', '', [{ name: '' }]);
-            console.log('employee created succesfully: ', response);
           },
           (error) => {
             console.error('Error creating employees', error);
@@ -112,11 +116,10 @@ export class RegisterEmployeeComponent implements OnChanges {
         this.employeeService
           .updateEmployee(this.model, this.model.id!)
           .subscribe(
-            (response) => {
+            () => {
               this.employeeService.getAll();
               this.closeModal.emit();
               this.toastr.success('Employé(e) modifié(e) avec succès');
-              console.log('employee updated succesfully: ', response);
             },
             (error) => {
               console.error('Error updating employees', error);
@@ -125,5 +128,9 @@ export class RegisterEmployeeComponent implements OnChanges {
       }
     }
   }
-  
+
+  resetForm() {
+    this.model = new Employee('', '', '', '', '', [{ name: '' }]);
+    this.cdRef.detectChanges();
+  }
 }

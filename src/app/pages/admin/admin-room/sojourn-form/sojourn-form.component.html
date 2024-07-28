@@ -33,6 +33,7 @@
                   [(ngModel)]="sojourn.clientId"
                   #client="ngModel"
                   required>
+            <option ngValue="" disabled selected>Choisir un client</option>
             <option *ngFor="let client of clients"
                     [ngValue]="client.id">{{client.firstName}} {{client.lastName}}</option>
           </select>
@@ -47,6 +48,7 @@
                   [(ngModel)]="sojourn.roomRole"
                   #room="ngModel"
                   required>
+            <option ngValue="" disabled selected>Choisir une chambre</option>
             <option *ngFor="let room of availableRooms"
                     [ngValue]="room.role">{{room.roomNumber}}</option>
           </select>
@@ -56,15 +58,15 @@
           </div>
         </div>
       }
-      <!-- <button type="submit" [disabled]="!sojournForm.valid">Enregistrer le séjour</button> -->
-       <!-- Rajouter type sur le compo BTN ou sortir le btn du form -->
-      <app-button #cancelBtn
-                  action="annuler"
-                  click="clearForm()" />
-      <app-button #submitBtn
-                  action="valider"
-                  [hidden]="sojournForm.invalid"
-                  click="onSubmit()" />
+
     </div>
   </form>
+  <div class="button-container">
+    <app-button #cancelBtn
+                action="annuler"
+                (click)="closeModal.emit()" />
+    <app-button #submitBtn
+                action="valider"
+                (click)="onSubmit()"/>
+  </div>
 </section>

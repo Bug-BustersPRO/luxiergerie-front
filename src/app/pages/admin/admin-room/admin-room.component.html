@@ -39,18 +39,18 @@
 </section>
 <app-modal title="Ajouter un séjour"
            [showModal]="isModalOpen"
-           (closeModalEvent)="isModalOpen = false">
+           (closeModalEvent)="closeCreateModal()">
   <section>
-    <app-sojourn-form (closeModal)="closeModal()"
+    <app-sojourn-form (closeModal)="closeCreateModal()"
                       [isCreateSojourn]="true" />
   </section>
 </app-modal>
 
 <app-modal title="Modifier un séjour"
            [showModal]="isUpdateModalOpen"
-           (closeModalEvent)="isUpdateModalOpen = false">
+           (closeModalEvent)="closeUpdateModal()">
   <section>
-    <app-sojourn-form (closeModal)="closeModal()"
+    <app-sojourn-form (closeModal)="closeUpdateModal()"
                       [isCreateSojourn]="false"
                       [sojournToUpdate]="selectedSojourn"/>
   </section>
