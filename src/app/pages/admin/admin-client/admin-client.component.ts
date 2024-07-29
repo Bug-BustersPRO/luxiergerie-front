@@ -1,20 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, effect, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { Client } from 'src/app/shared/models/client.model';
 import { Room } from 'src/app/shared/models/room.model';
 import { ClientService } from 'src/app/shared/services/client.service';
 import { RoomService } from 'src/app/shared/services/room.service';
+import { ClientFormComponent } from './client-form/client-form.component';
 
 @Component({
   selector: 'app-admin-client',
   standalone: true,
-  imports: [ModalComponent, CommonModule],
+  imports: [ModalComponent, CommonModule, ClientFormComponent],
   templateUrl: './admin-client.component.html',
   styleUrl: './admin-client.component.scss'
 })
 export class AdminClientComponent implements OnInit {
+  @ViewChild(ClientFormComponent) clientForm!: ClientFormComponent;
   public isModalOpen: boolean = false;
   public isUpdateModalOpen: boolean = false;
   public clients: Client[] = [];
@@ -45,12 +47,12 @@ export class AdminClientComponent implements OnInit {
 
   closeUpdateModal() {
     this.isUpdateModalOpen = false;
-    //this.clientForm.clearForm();
+    this.clientForm.clearForm();
   }
 
   closeCreateModal() {
     this.isModalOpen = false;
-    //this.clientForm.clearForm();
+    this.clientForm.clearForm();
   }
 
   openEditModal(client: Client) {

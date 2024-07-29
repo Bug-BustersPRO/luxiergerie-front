@@ -1,1 +1,63 @@
-<p>client-form works!</p>
+<section class="global-container">
+  <form #clientForm="ngForm"
+        (ngSubmit)="onSubmit()">
+    <div class="forms">
+      <div class="label-and-input">
+        <label for="firstName">Prénom</label>
+        <input name="firstName"
+               [(ngModel)]="client.firstName"
+               type="text"
+               #firstName="ngModel"
+               required />
+        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+          <div class="error-length-required"
+               *ngIf="firstName.errors?.['required']"> Le prénom est requis. </div>
+        </div>
+      </div>
+      <div class="label-and-input">
+        <label for="lastName">Nom</label>
+        <input name="lastName"
+               [(ngModel)]="client.lastName"
+               type="text"
+               #lastName="ngModel"
+               required />
+        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+          <div class="error-length-required"
+               *ngIf="lastName.errors?.['required']"> Le nom est requis. </div>
+        </div>
+      </div>
+      <div class="label-and-input">
+        <label for="email">Email</label>
+        <input name="email"
+               [(ngModel)]="client.email"
+               type="email"
+               #email="ngModel"
+               required />
+        <div *ngIf="email.invalid && (email.dirty || email.touched)">
+          <div class="error-length-required"
+               *ngIf="email.errors?.['required']"> L'email est requis. </div>
+        </div>
+      </div>
+      <div class="label-and-input">
+        <label for="phone">Téléphone</label>
+        <input name="phone"
+               [(ngModel)]="client.phoneNumber"
+               type="tel"
+               #phoneNumber="ngModel"
+               required />
+        <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+          <div class="error-length-required"
+               *ngIf="phoneNumber.errors?.['required']"> Le téléphone est requis. </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="button-container">
+    <app-button #cancelBtn
+                action="annuler"
+                (click)="closeModal.emit()" />
+    <app-button #submitBtn
+                action="valider"
+                (click)="onSubmit()" />
+  </div>
+</section>

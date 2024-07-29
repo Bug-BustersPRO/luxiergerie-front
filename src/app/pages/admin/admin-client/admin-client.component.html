@@ -38,18 +38,18 @@
 <app-modal title="Ajouter un client"
            [showModal]="isModalOpen"
            (closeModalEvent)="closeCreateModal()">
-  <!-- <section>
-    <app-sojourn-form (closeModal)="closeCreateModal()"
-                      [isCreateSojourn]="true" />
-  </section> -->
+  <section>
+    <app-client-form (closeModal)="closeCreateModal()"
+                      [isCreateClient]="true" />
+  </section>
 </app-modal>
 
 <app-modal title="Modifier un client"
            [showModal]="isUpdateModalOpen"
            (closeModalEvent)="closeUpdateModal()">
-  <!-- <section>
-    <app-sojourn-form (closeModal)="closeUpdateModal()"
-                      [isCreateSojourn]="false"
-                      [sojournToUpdate]="selectedSojourn"/>
-  </section> -->
+  <section>
+    <app-client-form (closeModal)="closeUpdateModal()"
+                      [isCreateClient]="false"
+                      [clientToUpdate]="selectedClient"/>
+  </section>
 </app-modal>
