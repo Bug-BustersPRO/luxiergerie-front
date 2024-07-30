@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, effect, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { Client } from 'src/app/shared/models/client.model';
@@ -15,7 +15,7 @@ import { ClientFormComponent } from './client-form/client-form.component';
   templateUrl: './admin-client.component.html',
   styleUrl: './admin-client.component.scss'
 })
-export class AdminClientComponent implements OnInit {
+export class AdminClientComponent {
   @ViewChild(ClientFormComponent) clientForm!: ClientFormComponent;
   public isModalOpen: boolean = false;
   public isUpdateModalOpen: boolean = false;
@@ -33,12 +33,7 @@ export class AdminClientComponent implements OnInit {
     effect(() => {
       this.clients = this.clientService.getAllClientsSig();
       this.rooms = this.roomService.getAllRoomsSig();
-      console.log(this.rooms);
-
     });
-  }
-
-  ngOnInit(): void {
   }
 
   openClientModal() {
@@ -74,8 +69,10 @@ export class AdminClientComponent implements OnInit {
     });
   }
 
-  getRoomByClientId(clientId: string): Room {
-    return this.rooms.find(room => room.client?.id === clientId)!;
+  getRoomByClientId(clientId: string): any {
+    if (clientId) {
+      return this.rooms.find(room => room.client?.id === clientId)?.roomNumber || 'Aucune chambre attribué';
+    }
   }
 
 }

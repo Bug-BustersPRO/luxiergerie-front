@@ -7,12 +7,19 @@ export class Room {
   public id: string;
   public roomNumber: number;
   public floor: number;
-  public role: Role;
-  public client: Client;
-  public purchases: Purchase[];
-  public sojourns: Sojourn[];
+  public role: { name: string }[];;
+  public client: Client | null;
+  public purchases: Purchase[] | null;
+  public sojourns: Sojourn[] | null;
 
-  constructor(id: string, roomNumber: number, floor: number, role: Role, client: Client, purchases: Purchase[], sojourns: Sojourn[]) {
+  constructor(
+    id: string,
+    roomNumber: number,
+    floor: number,
+    role: { name: string }[],
+    client: Client | null,
+    purchases: Purchase[] | null,
+    sojourns: Sojourn[] | null) {
     this.id = id;
     this.roomNumber = roomNumber;
     this.floor = floor;

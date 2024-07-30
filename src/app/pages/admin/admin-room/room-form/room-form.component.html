@@ -1,1 +1,79 @@
-<p>room-form works!</p>
+<section class="global-container">
+  <form #roomForm="ngForm"
+        (ngSubmit)="onSubmit()">
+    <div class="forms">
+      <div class="label-and-input">
+        <label for="roomNumber">Numéro de chambre</label>
+        <input name="roomNumber"
+               [(ngModel)]="room.roomNumber"
+               type="number"
+               #roomNumber="ngModel"
+               required />
+        <div *ngIf="roomNumber.invalid && (roomNumber.dirty || roomNumber.touched)">
+          <div class="error-length-required"
+               *ngIf="roomNumber.errors?.['required']"> Le numéro de chambre est requis. </div>
+        </div>
+      </div>
+      <div class="label-and-input">
+        <label for="floor">Étage</label>
+        <input name="floor"
+               [(ngModel)]="room.floor"
+               type="number"
+               #floor="ngModel"
+               required />
+        <div *ngIf="floor.invalid && (floor.dirty || floor.touched)">
+          <div class="error-length-required"
+               *ngIf="floor.errors?.['required']"> L'étage est requis. </div>
+        </div>
+      </div>
+      <div class="label-and-input">
+        <label for="role">Gamme de chambre</label>
+        <select name="role"
+               [(ngModel)]="room.role"
+               type="text"
+               #role="ngModel"
+               required >
+          @for (role of roles; track $index) {
+                <option [ngValue]="role" required >{{ getRoleName(role.name) }}</option>
+              }
+        </select>
+        <div *ngIf="role.invalid && (role.dirty || role.touched)">
+          <div class="error-length-required"
+               *ngIf="role.errors?.['required']"> Le rôle est requis. </div>
+        </div>
+      </div>
+      <!-- <div class="label-and-input">
+        <label for="client">Client</label>
+        <input name="client"
+               [(ngModel)]="room.client"
+               type="text"
+               #client="ngModel"
+               required />
+        <div *ngIf="client.invalid && (client.dirty || client.touched)">
+          <div class="error-length-required"
+               *ngIf="client.errors?.['required']"> Le client est requis. </div>
+        </div>
+      </div> -->
+      <!-- <div class="label-and-input">
+        <label for="sojourns">Séjours</label>
+        <input name="sojourns"
+               [(ngModel)]="room.sojourns"
+               type="text"
+               #sojourns="ngModel"
+               required />
+        <div *ngIf="sojourns.invalid && (sojourns.dirty || sojourns.touched)">
+          <div class="error-length-required"
+               *ngIf="sojourns.errors?.['required']"> Les séjours sont requis. </div>
+        </div>
+      </div> -->
+    </div>
+  </form>
+  <div class="button-container">
+    <app-button #cancelBtn
+                action="annuler"
+                (click)="closeModal.emit()" />
+    <app-button #submitBtn
+                action="valider"
+                (click)="onSubmit()" />
+  </div>
+</section>

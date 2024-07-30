@@ -21,13 +21,13 @@
       <div class="container">
         <div class="card-container">
           <h4 class="title">Chambre : {{room.roomNumber}}</h4>
-          <p class="name">{{room.client.firstName}} {{room.client.lastName}}</p>
-          <div class="date-container">
+          <p class="name">{{room.client?.firstName}} {{room.client?.lastName}}</p>
+          <div class="date-container" *ngIf="room.sojourns">
             <p class="date">{{room.sojourns[0].entryDate | date: 'dd/MM/yyyy'}}</p>
             <p class="date">{{room.sojourns[0].exitDate | date: 'dd/MM/yyyy'}}</p>
           </div>
         </div>
-        <div class="button-container">
+        <div class="button-container" *ngIf="room.sojourns">
           <span class="button material-symbols-outlined"
                 (click)="openEditModal(room.sojourns[0])">edit</span>
           <span class="button material-symbols-outlined"
