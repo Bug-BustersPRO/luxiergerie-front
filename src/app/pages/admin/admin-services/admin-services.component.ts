@@ -59,6 +59,7 @@ export class AdminAccomodationsComponent {
 
      getSections() {        
         this.sectionsWithImage = this.sectionService.getAllSectionsSig()
+        
         this.sectionsWithImage.forEach((section: Section) => {
         this.sectionService
             .getSectionImageById(section.id)
