@@ -16,7 +16,7 @@ import { RoomService } from 'src/app/shared/services/room.service';
   styleUrl: './room-form.component.scss'
 })
 export class RoomFormComponent implements OnChanges {
-  public room: Room = new Room("", 0, 0, [{ name: '' }], null, null, null);
+  public room: Room = new Room("", null, null, new Role('', '', null, null), null, null, null);
   public roles!: Role[];
   @Output() closeModal = new EventEmitter<void>();
   @Input() isCreateRoom: boolean = true;
@@ -94,7 +94,7 @@ export class RoomFormComponent implements OnChanges {
   }
 
   clearForm() {
-    this.room = new Room("", 0, 0, [{ name: '' }], null, null, null);
+    this.room = new Room("", null, null, new Role('', '', null, null), null, null, null);
     this.cdRef.detectChanges();
   }
 

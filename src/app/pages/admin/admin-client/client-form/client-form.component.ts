@@ -62,7 +62,7 @@ export class ClientFormComponent implements OnChanges {
           this.toastr.success("Client modifié avec succès");
           this.closeModal.emit();
         },
-        error: (err) => {
+        error: () => {
           this.toastr.error("Erreur lors de la modification du client");
         }
       });

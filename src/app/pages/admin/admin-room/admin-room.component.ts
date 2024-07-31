@@ -39,14 +39,15 @@ export class AdminRoomComponent {
     });
   }
 
-  getRoleName(role: string) {
-    switch (role) {
+  getRoleName(roleName: string) {
+    if (!roleName) return;
+    switch (roleName) {
       case 'ROLE_GOLD':
         return 'Chambre Gold';
       case 'ROLE_DIAMOND':
         return 'Chambre Diamant';
       default:
-        return;
+        return 'Chambre Standard';
     }
   }
 
@@ -89,6 +90,5 @@ export class AdminRoomComponent {
       }
     });
   }
-
 
 }

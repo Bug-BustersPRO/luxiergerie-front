@@ -33,6 +33,7 @@
                type="text"
                #role="ngModel"
                required >
+               <option [value]="role" disabled selected>Choisissez une gamme</option>
           @for (role of roles; track $index) {
                 <option [ngValue]="role" required >{{ getRoleName(role.name) }}</option>
               }
@@ -42,30 +43,6 @@
                *ngIf="role.errors?.['required']"> Le rôle est requis. </div>
         </div>
       </div>
-      <!-- <div class="label-and-input">
-        <label for="client">Client</label>
-        <input name="client"
-               [(ngModel)]="room.client"
-               type="text"
-               #client="ngModel"
-               required />
-        <div *ngIf="client.invalid && (client.dirty || client.touched)">
-          <div class="error-length-required"
-               *ngIf="client.errors?.['required']"> Le client est requis. </div>
-        </div>
-      </div> -->
-      <!-- <div class="label-and-input">
-        <label for="sojourns">Séjours</label>
-        <input name="sojourns"
-               [(ngModel)]="room.sojourns"
-               type="text"
-               #sojourns="ngModel"
-               required />
-        <div *ngIf="sojourns.invalid && (sojourns.dirty || sojourns.touched)">
-          <div class="error-length-required"
-               *ngIf="sojourns.errors?.['required']"> Les séjours sont requis. </div>
-        </div>
-      </div> -->
     </div>
   </form>
   <div class="button-container">

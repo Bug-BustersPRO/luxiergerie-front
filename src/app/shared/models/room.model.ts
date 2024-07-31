@@ -5,18 +5,18 @@ import { Sojourn } from "./sojourn.model";
 
 export class Room {
   public id: string;
-  public roomNumber: number;
-  public floor: number;
-  public role: { name: string }[];;
+  public roomNumber: number | null;
+  public floor: number | null;
+  public role: Role;
   public client: Client | null;
   public purchases: Purchase[] | null;
   public sojourns: Sojourn[] | null;
 
   constructor(
     id: string,
-    roomNumber: number,
-    floor: number,
-    role: { name: string }[],
+    roomNumber: number | null,
+    floor: number | null,
+    role: Role,
     client: Client | null,
     purchases: Purchase[] | null,
     sojourns: Sojourn[] | null) {

@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Category } from '../models/category.model';
-import { Section } from '../models/section.model';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
@@ -34,18 +33,18 @@ export class CategoryService {
   }
 
   public getById(id: any): Observable<Category> {
-   return this.http.get<Category>(`${this.url}/categories/${id}`, { headers: this.getHeaders() })
+    return this.http.get<Category>(`${this.url}/categories/${id}`, { headers: this.getHeaders() })
   }
 
   public getAccommodationsByCategory(id: number): void {
     this.http.get(`${this.url}/categories/${id}/accommodations`, { headers: this.getHeaders() })
       .subscribe({
         next: accommodations => console.log(accommodations),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching accommodations")
+        error: (error: HttpErrorResponse) => console.error(error, "There was an error while fetching accommodations")
       });
   }
 
-    public getCategoriesBySection(id: string): Observable<Category[]> {
+  public getCategoriesBySection(id: string): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.url}/sections/${id}/categories`, { headers: this.getHeaders() });
   }
 
@@ -54,11 +53,11 @@ export class CategoryService {
   }
 
   // CREATE
-  public createCategory(category: FormData, sectionId: any): Observable<any> {    
+  public createCategory(category: FormData, sectionId: any): Observable<any> {
     return this.http.post(`${this.url}/categories/sections/${sectionId}/categories`, category, { headers: this.getHeaders() });
   }
 
-//   // UPDATE
+  //   // UPDATE
   public updateCategory(category: FormData, sectionId: any, categoryId: any): Observable<any> {
     return this.http.put(`${this.url}/categories/sections/${sectionId}/categories/${categoryId}`, category, { headers: this.getHeaders() });
   }
@@ -66,6 +65,7 @@ export class CategoryService {
 
   // DELETE
   public deleteCategory(id: number): Observable<any> {
-    return this.http.delete(`${this.url}/categories/categories/${id}`, { headers: this.getHeaders() });
+    return this.http.delete(`${this.url}/categories/${id}`, { headers: this.getHeaders() });
   }
+
 }

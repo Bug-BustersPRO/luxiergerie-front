@@ -22,19 +22,18 @@
         <div class="card-container">
           <h4 class="title">Chambre : {{room.roomNumber}}</h4>
           <p class="name">Etage : {{room.floor}}</p>
-          <p class="name" *ngIf="room.role[0]">Gamme : {{getRoleName(room.role[0].name)}}</p>
+          <p class="name" *ngIf="room.role"> Gamme : {{getRoleName(room.role.name)}}</p>
           @if (room.client !== null) {
-            <p class="name">{{room.client.firstName}} {{room.client.lastName}}</p>
+            <p class="name">Occupé par : {{room.client.firstName}} {{room.client.lastName}}</p>
           }@else {
-            <p class="name">Pas de client</p>
+            <p class="name">Chambre disponible</p>
           }
           @if (room.sojourns) {
             <div class="date-container" *ngIf="room.sojourns[0]">
-              <p class="date">{{room.sojourns[0].entryDate | date: 'dd/MM/yyyy'}}</p>
+              <p class="date">Séjour du :</p>
+              <p class="date">{{room.sojourns[0].entryDate | date: 'dd/MM/yyyy'}}</p> au
               <p class="date">{{room.sojourns[0].exitDate | date: 'dd/MM/yyyy'}}</p>
             </div>
-          }@else {
-            <p class="name">Chambre disponible</p>
           }
         </div>
         <div class="button-container">
