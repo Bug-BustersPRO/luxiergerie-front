@@ -1,10 +1,9 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { AdminPurchasesComponent } from '../admin-purchases/admin-purchases.component';
 import { AdminPurchaseDetailComponent } from '../admin-purchase-detail/admin-purchase-detail.component';
 import { Bill } from 'src/app/shared/models/bill.model';
+import { AdminPurchasesComponent } from '../admin-purchases.component';
 
 
 @Component({
@@ -17,11 +16,11 @@ import { Bill } from 'src/app/shared/models/bill.model';
 export class AdminPurchaseCardComponent {
   @Input() bill!: Bill;
   openDetailSwitch: boolean = false;
-  
+
   constructor(private router: Router) { }
 
   navigateTo(route: string): void {
-    this.router.navigate([route]);   
+    this.router.navigate([route]);
   }
 
   openDetail(): void {
