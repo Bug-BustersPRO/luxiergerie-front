@@ -133,4 +133,5 @@ export class RegisterEmployeeComponent implements OnChanges {
     this.model = new Employee('', '', '', '', '', [{ name: '' }]);
     this.cdRef.detectChanges();
   }
+
 }

@@ -4,6 +4,7 @@ import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { RegisterEmployeeComponent } from 'src/app/shared/components/register-employee/register-employee.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-employee',
@@ -17,7 +18,7 @@ export class ListEmployeeComponent implements AfterViewInit {
   isModalOpen!: boolean;
   selectedEmployee!: Employee;
 
-  constructor(private employeeService: EmployeeService) {
+  constructor(private employeeService: EmployeeService, private toastr: ToastrService) {
     this.employeeService.getAll();
     effect(() => {
       this.employees = this.employeeService.getAllEmployeesSig();
@@ -45,8 +46,8 @@ export class ListEmployeeComponent implements AfterViewInit {
       next: (employee) => {
         this.selectedEmployee = employee;
       },
-      error: (error) =>
-        console.log(error, 'There was an error while fetching employee'),
+      error: () =>
+        this.toastr.error('Il y a eu une erreur lors de la récupération de l\'employé'),
     });
   }
 
@@ -54,15 +55,15 @@ export class ListEmployeeComponent implements AfterViewInit {
     this.employeeService.deleteEmployee(employeeId!).subscribe({
       next: () => {
         this.employeeService.getAll();
-        console.log('Employee deleted successfully');
+        this.toastr.success('Employé supprimé avec succès');
       },
-      error: (error) =>
-        console.log(error, 'There was an error while deleting employee'),
+      error: () =>
+        this.toastr.error('Il y a eu une erreur lors de la suppression de l\'employé'),
     });
   }
 
   ngAfterViewInit(): void {
     this.employeeService.getAll();
   }
-  
+
 }
