@@ -3,7 +3,8 @@
     "tabWidth": 2,
     "tabs": false,
     "singleQuote": true,
-    "semicolon": true,
+    "semi": true,
     "quoteProps": "preserve",
-    "bracketSpacing": false
+    "bracketSpacing": false,
+    "trailingComma": "all"
 }
