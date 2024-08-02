@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdminSojournComponent } from './admin-sojourn.component';
 
 describe('AdminRoomComponent', () => {
@@ -10,7 +9,7 @@ describe('AdminRoomComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AdminSojournComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AdminSojournComponent);
     component = fixture.componentInstance;
@@ -20,4 +19,5 @@ describe('AdminRoomComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

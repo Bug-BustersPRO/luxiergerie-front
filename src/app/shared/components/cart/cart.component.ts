@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, EventEmitter, Output, Input, OnChanges } from '@angular/core';
 import { Accommodation } from '../../models/accommodation.model';
 import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
@@ -39,15 +39,14 @@ export class CartComponent implements OnInit, OnChanges {
 
   constructor(
     private cartService: CartService,
-     private toastr: ToastrService,
+    private toastr: ToastrService,
     private hotelService: HotelService,
-     private cdr: ChangeDetectorRef,
-     private purchaseService: PurchaseService,
-     private currencyPipe: CurrencyPipe,
-     private router: Router
-    )
-    {
-      this.hotelService.getHotels().subscribe(() => {
+    private cdr: ChangeDetectorRef,
+    private purchaseService: PurchaseService,
+    private currencyPipe: CurrencyPipe,
+    private router: Router
+  ) {
+    this.hotelService.getHotels().subscribe(() => {
       this.hotel = this.hotelService.hotel;
       if (this.hotel) {
         this.hotelService.applyColors(this.hotel?.colors);
@@ -57,10 +56,10 @@ export class CartComponent implements OnInit, OnChanges {
         });
       } else {
         this.hotelService.applyColors(["#FDFBF5"]);
-    }
-    this.cdr.detectChanges();
-  });
-  this.loadCart();
+      }
+      this.cdr.detectChanges();
+    });
+    this.loadCart();
   }
 
   ngOnInit() {
@@ -98,12 +97,11 @@ export class CartComponent implements OnInit, OnChanges {
     return formattedPrice ?? '';
   }
 
-
   getCurrentClientAndRoom() {
     const clientStored = localStorage.getItem('current_client');
-    this.currentClient = clientStored? JSON.parse(clientStored)! : '';
+    this.currentClient = clientStored ? JSON.parse(clientStored)! : '';
     const roomStored = localStorage.getItem('room_number');
-    this.roomNumber = roomStored? JSON.parse(roomStored)! : '';
+    this.roomNumber = roomStored ? JSON.parse(roomStored)! : '';
   }
 
   loadCart(): void {
@@ -119,7 +117,7 @@ export class CartComponent implements OnInit, OnChanges {
     localStorage.removeItem("total_price");
     localStorage.removeItem("cart_categories");
     if (showToast) {
-    this.toastr.info('Votre panier a été vidé avec succès');
+      this.toastr.info('Votre panier a été vidé avec succès');
     }
   }
 
@@ -149,7 +147,7 @@ export class CartComponent implements OnInit, OnChanges {
     });
   }
 
-   order(){
+  order() {
     this.purchase = new Purchase(new Date(), this.currentClient, "Validée", this.cartService.items, this.roomNumber, this.cartService.getTotalPrice().getValue());
     this.createNewPurchase(this.purchase);
     this.router.navigate(['/']);
@@ -161,11 +159,10 @@ export class CartComponent implements OnInit, OnChanges {
 
   closeConfirmation() {
     if (this.modalClosed && this.orderConfirmed) {
-    this.orderConfirmed = false;
-    this.cartService.changeTitle.emit('Mon Panier');
-    this.cdr.detectChanges();
+      this.orderConfirmed = false;
+      this.cartService.changeTitle.emit('Mon Panier');
+      this.cdr.detectChanges();
     }
   }
-
 
 }

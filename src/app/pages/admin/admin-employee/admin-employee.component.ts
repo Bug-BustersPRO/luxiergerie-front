@@ -19,4 +19,5 @@ export class AdminEmployeeComponent {
   closeModal() {
     this.isModalOpen = false;
   }
+
 }

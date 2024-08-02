@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdminServicesGenericCardComponent } from './admin-services-generic-card.component';
 
 describe('AdminServicesGenericCardComponent', () => {
@@ -18,4 +17,5 @@ describe('AdminServicesGenericCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

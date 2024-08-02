@@ -84,10 +84,7 @@ export class AdminNavbarComponent {
     },
   ];
 
-  constructor(
-    private hotelService: HotelService,
-    private cookieService: CookieService
-  ) {
+  constructor(private hotelService: HotelService, private cookieService: CookieService) {
     this.hotelService.getHotels().subscribe(() => {
       this.hotel = this.hotelService.hotel;
       if (this.hotel) {
@@ -114,4 +111,5 @@ export class AdminNavbarComponent {
       },
     });
   }
+
 }

@@ -1,14 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  effect,
-  EventEmitter,
-  Output,
-  Input,
-  OnChanges,
-  ChangeDetectorRef,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, effect, EventEmitter, Output, Input, OnChanges, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { Employee } from '../../models/employee.model';
@@ -27,12 +18,12 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterEmployeeComponent implements OnChanges {
   showPassword: boolean = false;
   text: string = 'visibility_off';
-  @Output() closeModal = new EventEmitter<void>();
   roles!: Role[];
+  model: Employee = new Employee('', '', '', '', '', [{ name: '' }]);
+
   @Input() isCreateEmployee: boolean = true;
   @Input() selectedEmployee!: Employee;
-
-  model: Employee = new Employee('', '', '', '', '', [{ name: '' }]);
+  @Output() closeModal = new EventEmitter<void>();
 
   constructor(
     private roleService: RoleService,

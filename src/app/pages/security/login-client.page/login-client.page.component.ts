@@ -1,7 +1,7 @@
-import { Component, OnDestroy, Renderer2, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import * as Hammer from 'hammerjs';
-import { Hotel } from 'src/app/shared/models/hotel.model';
-import { HotelService } from 'src/app/shared/services/hotel.service';
+import { Component, OnDestroy, AfterViewInit, ViewChild, ElementRef, Renderer2 } from "@angular/core";
+import { Hotel } from "src/app/shared/models/hotel.model";
+import { HotelService } from "src/app/shared/services/hotel.service";
+
 
 @Component({
   selector: 'app-login-client.page',

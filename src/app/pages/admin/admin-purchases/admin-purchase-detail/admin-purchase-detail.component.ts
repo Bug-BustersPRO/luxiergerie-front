@@ -1,6 +1,5 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
-
 import { AccommodationCardComponent } from 'src/app/shared/components/accommodation-card/accommodation-card.component';
 import { Purchase } from 'src/app/shared/models/purchase.model';
 

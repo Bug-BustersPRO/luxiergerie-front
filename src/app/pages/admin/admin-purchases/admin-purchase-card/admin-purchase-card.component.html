@@ -1,30 +1,16 @@
 <section class="main-container">
-    <div class="infos-container">
-     <p>
-        Facture n° {{ bill.id }}
-        
-     </p>
-     <p>
-        du {{ bill.date| date: 'dd/MM/yyyy'}}   --   Chambre {{ bill.roomNumber }}
-     </p>
-     <p class="price">
-       Total des commandes : {{ bill.totalPrice | currency: 'EUR' }}
-     </p>
-    </div>
-    <div class="icons-container" (click)="openDetail()">
-            <span class="material-symbols-outlined">
-                search      
-                <p>
-                    Voir
-                </p>
-            </span>
-        <span class="material-symbols-outlined">
-            cancel
-            <p>
-                Annuler
-            </p>
-        </span>
-    </div>
+  <div class="infos-container">
+    <p> Facture n° {{ bill.id }} </p>
+    <p> du {{ bill.date| date: 'dd/MM/yyyy'}} -- Chambre {{ bill.roomNumber }} </p>
+    <p class="price"> Total des commandes : {{ bill.totalPrice | currency: 'EUR' }} </p>
+  </div>
+  <div class="icons-container"
+       (click)="openDetail()">
+    <span class="material-symbols-outlined"> search <p> Voir </p>
+    </span>
+    <span class="material-symbols-outlined"> cancel <p> Annuler </p>
+    </span>
+  </div>
 </section>
 <section id="purchases-main-container"
          *ngIf="openDetailSwitch">
@@ -36,7 +22,7 @@
   </div>
   <div id="purchases-container">
     @for (purchase of bill.purchasesForBillDTO; track $index) {
-      <app-admin-purchase-detail [purchase]="purchase"></app-admin-purchase-detail>
+      <app-admin-purchase-detail [purchase]="purchase"/>
     }
   </div>
 </section>

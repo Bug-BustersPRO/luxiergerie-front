@@ -1,111 +1,119 @@
 .open {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top: 1px solid white;
-    height: 40px;
-    span {
-        padding-right: 5px;
-    }
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid white;
+  height: 40px;
+
+  span {
+    padding-right: 5px;
+  }
 }
 
 .layout {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: 0 5px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 5px;
 }
 
 #sections,
 #categories {
-    border-right: 1px solid white;
+  border-right: 1px solid white;
 }
 
-#sections, #categories, #accommodations {
-    height: calc(100% - 60px);
+#sections,
+#categories,
+#accommodations {
+  height: calc(100% - 60px);
 }
 
-.one_card_container{
-    height: 100%;
+.one_card_container {
+  height: 100%;
 }
+
 .one_card {
-    margin-bottom: 2rem;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    background-color: #d9d9d9;
-    border-radius: 5px;
-    height: 150px;
+  margin-bottom: 2rem;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: #d9d9d9;
+  border-radius: 5px;
+  height: 150px;
 }
-#main-container {
-    width: 100%;
-    height: calc(100vh - 120px);
-    padding-top: 1rem;
 
-    #container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-column-gap: 10px;
-        grid-row-gap: 10px;
-        height: 100%;
-        background-color: #f6f6f6;
-        border-bottom: 5px solid white;
-        border-right: 1px solid white;
-        width: 90%;
-        margin: auto;
-        border-radius: 5px;
-        overflow: auto;
-        p {
-            margin: 0;
-            text-align: center;
-            padding: 1rem;
-            font-size: large;
-        }
+#main-container {
+  width: 100%;
+  height: calc(100vh - 120px);
+  padding-top: 1rem;
+
+  #container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    height: 100%;
+    background-color: #f6f6f6;
+    border-bottom: 5px solid white;
+    border-right: 1px solid white;
+    width: 90%;
+    margin: auto;
+    border-radius: 5px;
+    overflow: auto;
+
+    p {
+      margin: 0;
+      text-align: center;
+      padding: 1rem;
+      font-size: large;
     }
+  }
 }
+
 .material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24;
-    cursor: pointer;
+  font-variation-settings:
+    'FILL'0,
+    'wght'400,
+    'GRAD'0,
+    'opsz'24;
+  cursor: pointer;
 }
 
 .main_card_container {
-    display: flex;
-    justify-content: space-around;
-    overflow: auto;
-    height: 100%;
+  display: flex;
+  justify-content: space-around;
+  overflow: auto;
+  height: 100%;
 }
 
 #accommodation {
-justify-content: unset ;
+  justify-content: unset;
 }
 
 .chevron {
-    position: relative;
-    height: 100%;
-    max-width: 40px;
-    min-width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
+  position: relative;
+  height: 100%;
+  max-width: 40px;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
 }
 
 .chevron:hover {
-    background-color: #7ad7f0;
-    border-radius: 5px;
+  background-color: #7ad7f0;
+  border-radius: 5px;
 }
 
 .selected-card {
-    background-color: #7ad7f0; /* Changez cette couleur selon vos besoins */
+  background-color: #7ad7f0;
+  /* Changez cette couleur selon vos besoins */
 }
 
 .edit_and_delete {
-    display: flex;
-    justify-content: space-around;
-    width: 100px;
+  display: flex;
+  justify-content: space-around;
+  width: 100px;
 }

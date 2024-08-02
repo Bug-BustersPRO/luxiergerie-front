@@ -28,4 +28,5 @@ export class Room {
     this.purchases = purchases;
     this.sojourns = sojourns;
   }
+
 }

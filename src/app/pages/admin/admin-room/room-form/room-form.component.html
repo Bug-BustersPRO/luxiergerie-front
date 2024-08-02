@@ -29,14 +29,16 @@
       <div class="label-and-input">
         <label for="role">Gamme de chambre</label>
         <select name="role"
-               [(ngModel)]="room.role"
-               type="text"
-               #role="ngModel"
-               required >
-               <option [value]="role" disabled selected>Choisissez une gamme</option>
+                [(ngModel)]="room.role"
+                type="text"
+                #role="ngModel"
+                required>
+          <option [value]="role"
+                  disabled
+                  selected>Choisissez une gamme</option>
           @for (role of roles; track $index) {
-                <option [ngValue]="role" required >{{ getRoleName(role.name) }}</option>
-              }
+            <option [ngValue]="role" required>{{ getRoleName(role.name) }}</option>
+          }
         </select>
         <div *ngIf="role.invalid && (role.dirty || role.touched)">
           <div class="error-length-required"

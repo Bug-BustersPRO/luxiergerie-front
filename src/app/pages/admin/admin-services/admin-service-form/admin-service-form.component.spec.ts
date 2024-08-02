@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdminServiceFormComponent } from './admin-service-form.component';
 
 describe('AdminServiceFormComponent', () => {
@@ -10,8 +9,8 @@ describe('AdminServiceFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AdminServiceFormComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(AdminServiceFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +19,5 @@ describe('AdminServiceFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

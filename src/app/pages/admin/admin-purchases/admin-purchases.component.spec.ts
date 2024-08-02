@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdminPurchasesComponent } from './admin-purchases.component';
 
 describe('AdminOrdersComponent', () => {
@@ -18,4 +17,5 @@ describe('AdminOrdersComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

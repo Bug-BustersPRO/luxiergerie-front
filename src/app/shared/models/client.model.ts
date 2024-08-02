@@ -9,7 +9,14 @@ export class Client {
   public pin: number;
   public room: Room | null;
 
-  constructor(id: string, firstName: string, lastName: string, email: string, phoneNumber: string, pin: number, room: Room | null) {
+  constructor(
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string,
+    pin: number,
+    room: Room | null) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -18,4 +25,5 @@ export class Client {
     this.pin = pin;
     this.room = room;
   }
+
 }

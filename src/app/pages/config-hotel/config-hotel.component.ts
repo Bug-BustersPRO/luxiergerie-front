@@ -48,7 +48,7 @@ export class ConfigHotelComponent implements OnInit {
     private hotelService: HotelService,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.hotel.name = '';
@@ -167,7 +167,7 @@ export class ConfigHotelComponent implements OnInit {
 
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.imageUrl = reader.result;        
+        this.imageUrl = reader.result;
       };
       reader.readAsDataURL(file);
     }
@@ -275,4 +275,5 @@ export class ConfigHotelComponent implements OnInit {
     });
     this.cdRef.detectChanges();
   }
+
 }

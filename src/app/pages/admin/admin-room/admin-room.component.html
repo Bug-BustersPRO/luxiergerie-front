@@ -22,45 +22,42 @@
         <div class="card-container">
           <h4 class="title">Chambre : {{room.roomNumber}}</h4>
           <p class="name">Etage : {{room.floor}}</p>
-          <p class="name" *ngIf="room.role"> Gamme : {{getRoleName(room.role.name)}}</p>
-          @if (room.client !== null) {
-            <p class="name">Occupé par : {{room.client.firstName}} {{room.client.lastName}}</p>
-          }@else {
-            <p class="name">Chambre disponible</p>
-          }
-          @if (room.sojourns) {
-            <div class="date-container" *ngIf="room.sojourns[0]">
-              <p class="date">Séjour du :</p>
-              <p class="date">{{room.sojourns[0].entryDate | date: 'dd/MM/yyyy'}}</p> au
-              <p class="date">{{room.sojourns[0].exitDate | date: 'dd/MM/yyyy'}}</p>
-            </div>
-          }
+          <p class="name"
+            *ngIf="room.role"> Gamme : {{getRoleName(room.role.name)}}</p>
+            @if (room.client !== null) {
+              <p class="name">Occupé par : {{room.client.firstName}} {{room.client.lastName}}</p>
+            }@else {
+              <p class="name">Chambre disponible</p>
+            } @if (room.sojourns) {
+              <div class="date-container" *ngIf="room.sojourns[0]">
+                <p class="date">Séjour du :</p>
+                <p class="date">{{room.sojourns[0].entryDate | date: 'dd/MM/yyyy'}}</p> au
+                <p class="date">{{room.sojourns[0].exitDate | date: 'dd/MM/yyyy'}}</p>
+              </div>
+            }
         </div>
-        <div class="button-container">
-          <span class="button material-symbols-outlined"
-                (click)="openEditModal(room)">edit</span>
-          <span class="button material-symbols-outlined"
-                (click)="deleteRoom(room.id)">delete</span>
-        </div>
+      <div class="button-container">
+        <span class="button material-symbols-outlined" (click)="openEditModal(room)">edit</span>
+        <span class="button material-symbols-outlined" (click)="deleteRoom(room.id)">delete</span>
+      </div>
       </div>
     }
-  </section>
+</section>
 </section>
 <app-modal title="Créer un séjour"
            [showModal]="isModalOpen"
            (closeModalEvent)="closeCreateModal()">
   <section>
     <app-room-form (closeModal)="closeCreateModal()"
-                      [isCreateRoom]="true" />
+                   [isCreateRoom]="true" />
   </section>
 </app-modal>
-
 <app-modal title="Modifier un séjour"
            [showModal]="isUpdateModalOpen"
            (closeModalEvent)="closeUpdateModal()">
   <section>
     <app-room-form (closeModal)="closeUpdateModal()"
-                      [isCreateRoom]="false"
-                      [roomToUpdate]="selectedRoom"/>
+                   [isCreateRoom]="false"
+                   [roomToUpdate]="selectedRoom" />
   </section>
 </app-modal>

@@ -52,13 +52,13 @@ export class AccommodationService {
 
   // CREATE
   public createAccommodation(accommodation: FormData, categoryId: Category): Observable<any> {
-   return this.http.post(`${this.url}/categories/${categoryId}/accommodations`, accommodation, { headers: this.getHeaders() })
-    
+    return this.http.post(`${this.url}/categories/${categoryId}/accommodations`, accommodation, { headers: this.getHeaders() })
+
   }
 
 
-//   // UPDATE
-  public updateAccommodation(accommodation: FormData, categoryId:any, accommodationId: any): Observable<any> {
+  // UPDATE
+  public updateAccommodation(accommodation: FormData, categoryId: any, accommodationId: any): Observable<any> {
     return this.http.put(`${this.url}/accommodations/${accommodationId}/${categoryId}`, accommodation, { headers: this.getHeaders() });
   }
 

@@ -57,7 +57,7 @@ export class CategoryService {
     return this.http.post(`${this.url}/categories/sections/${sectionId}/categories`, category, { headers: this.getHeaders() });
   }
 
-  //   // UPDATE
+  // UPDATE
   public updateCategory(category: FormData, sectionId: any, categoryId: any): Observable<any> {
     return this.http.put(`${this.url}/categories/sections/${sectionId}/categories/${categoryId}`, category, { headers: this.getHeaders() });
   }

@@ -30,35 +30,31 @@
         <div class="label-and-input">
           <label for="client">Client</label>
           <select name="client"
-                  [(ngModel)]="sojourn.clientId"
-                  #client="ngModel"
-                  required>
+                [(ngModel)]="sojourn.clientId"
+                #client="ngModel"
+                required>
             <option ngValue="" disabled selected>Choisir un client</option>
-            <option *ngFor="let client of clients"
-                    [ngValue]="client.id">{{client.firstName}} {{client.lastName}}</option>
+            <option *ngFor="let client of clients" [ngValue]="client.id">
+                  {{client.firstName}} {{client.lastName}}
+            </option>
           </select>
-          <div *ngIf="client.invalid && (client.dirty || client.touched)">
-            <div class="error-length-required"
-                 *ngIf="client.errors?.['required']"> Un client est requis. </div>
-          </div>
+        <div *ngIf="client.invalid && (client.dirty || client.touched)">
+          <div class="error-length-required" *ngIf="client.errors?.['required']"> Un client est requis.</div>
         </div>
-        <div class="label-and-input">
-          <label for="room">Chambre</label>
-          <select name="room"
-                  [(ngModel)]="sojourn.roomRole"
-                  #room="ngModel"
-                  required>
-            <option ngValue="" disabled selected>Choisir une chambre</option>
-            <option *ngFor="let room of availableRooms"
-                    [ngValue]="room.role">{{room.roomNumber}}</option>
-          </select>
-          <div *ngIf="room.invalid && (room.dirty || room.touched)">
-            <div class="error-length-required"
-                 *ngIf="room.errors?.['required']"> Une chambre est requise. </div>
-          </div>
+      </div>
+      <div class="label-and-input">
+        <label for="room">Chambre</label>
+        <select name="room" [(ngModel)]="sojourn.roomRole" #room="ngModel" required>
+          <option ngValue="" disabled selected>Choisir une chambre</option>
+          <option *ngFor="let room of availableRooms"
+                  [ngValue]="room.role">
+                  {{room.roomNumber}}
+          </option>
+        </select>
+        <div *ngIf="room.invalid && (room.dirty || room.touched)">
+          <div class="error-length-required" *ngIf="room.errors?.['required']"> Une chambre est requise.</div>
         </div>
-      }
-
+      </div> }
     </div>
   </form>
   <div class="button-container">
@@ -67,6 +63,6 @@
                 (click)="closeModal.emit()" />
     <app-button #submitBtn
                 action="valider"
-                (click)="onSubmit()"/>
+                (click)="onSubmit()" />
   </div>
 </section>

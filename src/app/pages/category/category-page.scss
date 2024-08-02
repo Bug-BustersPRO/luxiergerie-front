@@ -1,10 +1,10 @@
 .section-global {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: auto;
-    max-width: 628px;
-    padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: 628px;
+  padding-top: 100px;
 
   .buttons {
     justify-content: space-between;
@@ -21,5 +21,5 @@
     gap: 3rem;
     width: 105%;
     justify-content: center;
-}
+  }
 }

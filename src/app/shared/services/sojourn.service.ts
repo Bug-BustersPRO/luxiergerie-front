@@ -49,4 +49,5 @@ export class SojournService {
   public deleteSojourn(id: string): Observable<Sojourn> {
     return this.http.delete<Sojourn>(`${this.url}/${id}`, { headers: this.getHeaders() });
   }
+
 }

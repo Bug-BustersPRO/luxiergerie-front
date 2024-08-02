@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RoomFormComponent } from './room-form.component';
 
 describe('RoomFormComponent', () => {
@@ -10,8 +9,8 @@ describe('RoomFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RoomFormComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(RoomFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +19,5 @@ describe('RoomFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

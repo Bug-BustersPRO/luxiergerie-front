@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ListEmployeeComponent } from './list-employee.component';
 
 describe('ListEmployeeComponent', () => {
@@ -10,8 +9,8 @@ describe('ListEmployeeComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ListEmployeeComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ListEmployeeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +19,5 @@ describe('ListEmployeeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

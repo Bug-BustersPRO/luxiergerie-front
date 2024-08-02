@@ -9,11 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './admin-home.component.html',
   styleUrls: ['./admin-home.component.scss'],
   standalone: true,
-  imports: [
-    AdminNavbarComponent,
-    RouterOutlet,
-    RouterLink,
-  ],
+  imports: [AdminNavbarComponent, RouterOutlet, RouterLink],
 })
 export class AdminHomeComponent implements OnInit {
   public currentEmployee!: Employee;

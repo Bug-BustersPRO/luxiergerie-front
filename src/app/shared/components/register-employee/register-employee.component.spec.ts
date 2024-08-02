@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RegisterEmployeeComponent } from './register-employee.component';
 
 describe('RegisterEmployeeComponent', () => {
@@ -10,8 +9,8 @@ describe('RegisterEmployeeComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RegisterEmployeeComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(RegisterEmployeeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +19,5 @@ describe('RegisterEmployeeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

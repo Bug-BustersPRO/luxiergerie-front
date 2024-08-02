@@ -14,9 +14,9 @@ import { AccommodationService } from 'src/app/shared/services/accommodation.serv
 export class AccommodationPage {
   public accommodations: Accommodation[] = [];
   public accommodation!: Accommodation;
-  @Input() category!: Category;
   public hotel!: Hotel;
   public hotelImageUrl!: string;
+  @Input() category!: Category;
 
   constructor(
     private route: ActivatedRoute,

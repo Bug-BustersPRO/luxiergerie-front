@@ -39,17 +39,15 @@
         <select name="roles"
                 #roleList="ngModel"
                 [(ngModel)]="model.roles[0]"
-                required
-                >
-
-                @for (role of roles; track $index) {
-                  <option [ngValue]="role" required >{{ getRoleName(role.name) }}</option>
-                }
+                required>
+          @for (role of roles; track $index) {
+            <option [ngValue]="role" required>{{ getRoleName(role.name) }}</option>
+          }
         </select>
-        <div class="error-length-required" *ngIf="roleList.invalid && (roleList.dirty || roleList.touched)"></div>
+        <div class="error-length-required"
+             *ngIf="roleList.invalid && (roleList.dirty || roleList.touched)"></div>
         <div class="error-length-required"
              *ngIf="roleList.errors?.['required']"> Le rôle est requis. </div>
-
       </div>
       <div class="password-input label-and-input">
         <label for="password"> Mot de passe </label>
@@ -77,9 +75,8 @@
   </form>
   <div class="button-alignement">
     <app-button action="annuler"
-                (click)="resetForm()"/>
+                (click)="resetForm()" />
     <app-button action="valider"
-                (click)="onSubmit(form)"
-                />
+                (click)="onSubmit(form)" />
   </div>
 </section>

@@ -1,4 +1,3 @@
-import bigDecimal from "js-big-decimal";
 import { Accommodation } from "./accommodation.model";
 import { Client } from "./client.model";
 
@@ -27,4 +26,5 @@ export class Purchase {
     this.roomNumber = roomNumber;
     this.totalPrice = totalPrice;
   }
+
 }

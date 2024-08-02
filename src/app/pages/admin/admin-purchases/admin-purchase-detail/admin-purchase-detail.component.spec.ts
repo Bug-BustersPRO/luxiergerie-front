@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdminPurchaseDetailComponent } from './admin-purchase-detail.component';
 
 describe('AdminPurchaseDetailComponent', () => {
@@ -10,8 +9,8 @@ describe('AdminPurchaseDetailComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AdminPurchaseDetailComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(AdminPurchaseDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +19,5 @@ describe('AdminPurchaseDetailComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

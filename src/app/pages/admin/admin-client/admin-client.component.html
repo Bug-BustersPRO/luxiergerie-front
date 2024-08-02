@@ -32,7 +32,7 @@
                 (click)="deleteClient(client)">delete</span>
         </div>
       </div>
-    }
+  }
   </section>
 </section>
 <app-modal title="Ajouter un client"
@@ -40,16 +40,15 @@
            (closeModalEvent)="closeCreateModal()">
   <section>
     <app-client-form (closeModal)="closeCreateModal()"
-                      [isCreateClient]="true" />
+                     [isCreateClient]="true" />
   </section>
 </app-modal>
-
 <app-modal title="Modifier un client"
            [showModal]="isUpdateModalOpen"
            (closeModalEvent)="closeUpdateModal()">
   <section>
     <app-client-form (closeModal)="closeUpdateModal()"
-                      [isCreateClient]="false"
-                      [clientToUpdate]="selectedClient"/>
+                     [isCreateClient]="false"
+                     [clientToUpdate]="selectedClient" />
   </section>
 </app-modal>

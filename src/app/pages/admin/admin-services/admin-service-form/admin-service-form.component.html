@@ -1,0 +1,229 @@
+<section class="global-container">
+  <form #genericForm="ngForm"
+        class="forms"
+        (ngSubmit)="onSubmit()">
+    <div class="label-and-input"
+         *ngIf="!isACategory && !isAnAccommodation">
+      <label for="title">Titre</label>
+      <input type="text"
+             id="title"
+             name="title"
+             [(ngModel)]="infos.title"
+             #title="ngModel"
+             required
+             minlength="2" />
+      <div *ngIf="title.invalid && (title.pristine || title.touched)">
+        <div class="error-length-required"
+             *ngIf="title.errors?.['required']"> Le titre est requis. </div>
+        <div class="error-length-required"
+             *ngIf="title.errors?.['minlength']"> Le titre doit contenir plus de 2 caractères. </div>
+      </div>
+    </div>
+    <div class="label-and-input">
+      <label for="name">Nom</label>
+      <input type="text"
+             id="name"
+             name="name"
+             [(ngModel)]="infos.name"
+             #name="ngModel"
+             required
+             minlength="2" />
+      <div class="error-length-required"
+           *ngIf="name.errors?.['required']"> Le nom est requis. </div>
+      <div class="error-length-required"
+           *ngIf="name.errors?.['minlength']"> Le nom doit contenir plus de 2 caractères. </div>
+    </div>
+    <div class="label-and-input">
+      <label for="description">Description</label>
+      <textarea id="description"
+                name="description"
+                [(ngModel)]="infos.description"
+                #description="ngModel"
+                required
+                minlength="10"></textarea>
+      <div *ngIf="description.invalid && (description.pristine || description.touched)">
+        <div class="error-length-required"
+             *ngIf="description.errors?.['required']"> La description est requise. </div>
+        <div class="error-length-required"
+             *ngIf="description.errors?.['minlength']"> La description doit contenir plus de 10 caractères. </div>
+      </div>
+    </div>
+    <div class="image-container label-and-input">
+      <div *ngIf="openModalForCreation; then imageCreate; else imageUpdate"></div>
+      <ng-template #imageCreate>
+        <input #imageCreate
+               type="file"
+               #fileInput
+               name="image"
+               (change)="onFileSelected($event)"
+               (ngModel)="(infos.image)"
+               style="display: none"
+               #image="ngModel"
+               required />
+        <div class="label-and-input"
+             id="image">
+          <div class="image-and-add">
+            <label for="image">Image</label>
+            <div class="add-button"
+                 (click)="selectFile()"
+                 title="Ajouter">
+              <span class="button-icon"> + </span>
+            </div>
+            <div *ngIf="image.invalid">
+              <div class="error-length-required"
+                   *ngIf="image.errors?.['required']"> L'image est requise. </div>
+            </div>
+            <div *ngIf="isFileError">
+              <p class="error">{{errorMessage}}</p>
+            </div>
+          </div>
+          <img [src]="imageUrl"
+               alt="" />
+        </div>
+      </ng-template>
+      <ng-template #imageUpdate>
+        <input type="file"
+               #fileInput
+               name="image"
+               (change)="onFileSelected($event)"
+               (ngModel)="(infos.image)"
+               style="display: none"
+               #image="ngModel" />
+        <div class="label-and-input"
+             id="image">
+          <div class="image-and-add">
+            <label for="image">Image</label>
+            <div class="edit-button"
+                 (click)="selectFile()"
+                 title="Editer">
+              <span class="material-symbols-outlined">edit_document</span>
+            </div>
+            <div *ngIf="image.invalid">
+              <div class="error-length-required"
+                   *ngIf="image.errors?.['required']"> L'image est requise. </div>
+            </div>
+            <div *ngIf="isFileError">
+              <p class="error">{{errorMessage}}</p>
+            </div>
+          </div>
+          <img (click)="selectFile()"
+               title="Editer"
+               [src]="imageUrl"
+               alt="" />
+        </div>
+      </ng-template>
+    </div>
+    <div class="label-and-input"
+         *ngIf="isAnAccommodation">
+      <label for="price">Prix</label>
+      <input type="number"
+             id="price"
+             name="price"
+             [(ngModel)]="infos.price"
+             #price="ngModel"
+             required />
+      <div *ngIf="price.invalid && (price.pristine || price.touched)">
+        <div class="error-length-required"
+             *ngIf="price.errors?.['required']"> Le prix est requis. </div>
+      </div>
+    </div>
+    <div class="label-and-input"
+         *ngIf="isACategory">
+      <div *ngIf="!openModalForCreation">
+        <p> Actuellement rattaché à la section : <b>{{ infos.section.name }}</b>
+        </p>
+        <label for="section">Si besoin, vous pouvez changer le rattachement à une des sections suivantes :</label>
+        <select id="section"
+                [(ngModel)]="infos.section.id"
+                name="section"
+                #section="ngModel"
+                required>
+          <option value="infos.section"
+                  *ngFor="let section of sectionsForNewCategory"
+                  [ngValue]="section.id"> {{ section.name }} </option>
+        </select>
+      </div>
+      <div class="label-and-input"
+           *ngIf="openModalForCreation">
+        <label for="section">Choisir une section de rattachement :</label>
+        <select id="section"
+                ngModel
+                name="section"
+                #section="ngModel"
+                required>
+          <option value=""
+                  disabled
+                  selected>-- --</option>
+          <option value="infos.section"
+                  *ngFor="let section of sectionsForNewCategory"
+                  [ngValue]="section.id"> {{ section.name }} </option>
+        </select>
+        <div *ngIf="
+                        section.invalid && (section.pristine || section.touched)
+                    ">
+          <div class="error-length-required"
+               *ngIf="section.errors?.['required']"> Le choix de la section est requis. </div>
+        </div>
+      </div>
+    </div>
+    <div class="label-and-input"
+         *ngIf="isAnAccommodation">
+      <div *ngIf="!openModalForCreation">
+        <p> Actuellement rattaché à la catégorie : <b>{{ infos.category.name }}</b>
+        </p>
+        <label for="category">Si besoin, vous pouvez changer le rattachement à une des catégories suivantes :</label>
+        <select id="category"
+                [(ngModel)]="infos.category.id"
+                name="category"
+                #category="ngModel"
+                required>
+          <option value="infos.category"
+                  *ngFor="let category of categoriesForNewAccommodation"
+                  [ngValue]="category.id"> {{ category.name }} </option>
+        </select>
+      </div>
+      <div class="label-and-input"
+           *ngIf="openModalForCreation">
+        <label for="category">Choisir une catégorie de rattachement :</label>
+        <select id="category"
+                ngModel
+                name="category"
+                #category="ngModel"
+                required>
+          <option value=""
+                  disabled
+                  selected>-- --</option>
+          <option value="infos.category"
+                  *ngFor="let category of categoriesForNewAccommodation"
+                  [ngValue]="category.id"> {{ category.name }} </option>
+        </select>
+        <div *ngIf="
+                        category.invalid &&
+                        (category.pristine || category.touched)
+                    ">
+          <div class="error-length-required"
+               *ngIf="category.errors?.['required']"> Le choix de la catégorie est requis. </div>
+        </div>
+      </div>
+    </div>
+    <div class="label-and-input"
+         *ngIf="isAnAccommodation">
+      <label for="isReservable">Est-ce que ce produit est soumis à réservation?</label>
+      <input class="checkbox"
+             type="checkbox"
+             id="isReservable"
+             name="isReservable"
+             [(ngModel)]="infos.reservable"
+             #isReservable="ngModel" />
+    </div>
+    <div>
+      <button class="button"
+              type="submit"
+              [disabled]="!genericForm.valid || isFileError">
+              @if (openModalForCreation) {
+                Créer {{ typeForDisplay }}
+              } @else { Mettre à jour }
+      </button>
+    </div>
+  </form>
+</section>

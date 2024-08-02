@@ -27,17 +27,14 @@ export class ModalComponent {
   //   </section>
   // </app-modal>
 
-  constructor() {
-  }
-
   @Input() public title: string = '';
   @Output() public closeModalEvent = new EventEmitter<void>();
   @Input() public toggleModal!: Observable<void>;
   @Input() public showModal: boolean = false;
 
-
   closeModal() {
     this.showModal = false;
     this.closeModalEvent.emit();
   }
+
 }
