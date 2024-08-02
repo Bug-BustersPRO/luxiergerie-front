@@ -64,6 +64,13 @@ export class RoomFormComponent implements OnChanges {
         this.toastr.error("Veuillez remplir tous les champs obligatoires");
         return;
       }
+      if (this.roomService.getAllRoomsSig().find(
+        (room: Room) =>
+          room.roomNumber === this.room.roomNumber && room.floor === this.room.floor
+      )) {
+        this.toastr.error("Cette chambre existe déjà");
+        return;
+      }
       this.roomService.createSpecificRoom(this.room).subscribe({
         next: () => {
           this.roomService.getRooms();

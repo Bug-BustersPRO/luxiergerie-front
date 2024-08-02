@@ -33,7 +33,7 @@
                 [(ngModel)]="sojourn.clientId"
                 #client="ngModel"
                 required>
-            <option ngValue="" disabled selected>Choisir un client</option>
+            <option [value]="sojourn.clientId" disabled selected>Choisir un client</option>
             <option *ngFor="let client of clients" [ngValue]="client.id">
                   {{client.firstName}} {{client.lastName}}
             </option>
@@ -45,7 +45,7 @@
       <div class="label-and-input">
         <label for="room">Chambre</label>
         <select name="room" [(ngModel)]="sojourn.roomRole" #room="ngModel" required>
-          <option ngValue="" disabled selected>Choisir une chambre</option>
+          <option [value]="sojourn.roomRole" disabled selected>Choisir une chambre</option>
           <option *ngFor="let room of availableRooms"
                   [ngValue]="room.role">
                   {{room.roomNumber}}

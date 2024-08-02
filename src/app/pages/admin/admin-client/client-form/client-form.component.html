@@ -55,7 +55,7 @@
   <div class="button-container">
     <app-button #cancelBtn
                 action="annuler"
-                (click)="closeModal.emit()" />
+                (click)="clearForm()" />
     <app-button #submitBtn
                 action="valider"
                 (click)="onSubmit()" />
