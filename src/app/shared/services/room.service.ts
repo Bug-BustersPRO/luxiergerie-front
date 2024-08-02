@@ -11,6 +11,7 @@ export class RoomService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
   private url: string = "http://localhost:8090/api/rooms";
+  private url: string = "http://localhost:8090/api/rooms";
   private getHeaders(): HttpHeaders {
     const token = this.cookieService.get('jwt-token');
     return new HttpHeaders({

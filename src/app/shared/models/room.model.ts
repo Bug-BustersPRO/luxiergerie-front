@@ -2,6 +2,7 @@ import { Client } from "./client.model";
 import { Purchase } from "./purchase.model";
 import { Role } from "./role.model";
 import { Sojourn } from "./sojourn.model";
+import { Sojourn } from "./sojourn.model";
 
 export class Room {
   public id: string;
