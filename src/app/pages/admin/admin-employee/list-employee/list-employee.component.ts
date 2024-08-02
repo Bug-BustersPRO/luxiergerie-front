@@ -3,8 +3,8 @@ import { Employee } from 'src/app/shared/models/employee.model';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { RegisterEmployeeComponent } from 'src/app/shared/components/register-employee/register-employee.component';
 import { ToastrService } from 'ngx-toastr';
+import { RegisterEmployeeComponent } from '../register-employee/register-employee.component';
 
 @Component({
   selector: 'app-list-employee',
