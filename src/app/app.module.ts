@@ -30,6 +30,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LoginClientPageComponent } from './pages/security/login-client.page/login-client.page.component';
 import { LoginEmployeeComponent } from './pages/security/login-employee/login-employee.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { LoginEmployeeComponent } from './pages/security/login-employee/login-em
     ButtonComponent,
     ModalComponent,
     CartComponent,
+    FooterComponent,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,

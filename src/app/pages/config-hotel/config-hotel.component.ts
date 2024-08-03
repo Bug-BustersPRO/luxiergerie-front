@@ -35,9 +35,9 @@ export class ConfigHotelComponent implements OnInit {
   public secondSelectedColor: string = '#000000';
   public thirdSelectedColor: string = '#000000';
   public recommandedColors: any = [
-    { name: 'Option 1', value: ['#F8F8F8', '#D4AF37', '#2C3E50'] },
-    { name: 'Option 2', value: ['#F5F5DC', '#FFFFFF', '#2ECC71'] },
-    { name: 'Option 3', value: ['#34495E', '#ECF0F1', '#AED6F1'] },
+    { name: 'Option 1', value: ['#F8F8F8', '#BD9E56', '#2C3E50'] },
+    { name: 'Option 2', value: ['#FFFFFF', '#2ECC71', '#F5F5DC'] },
+    { name: 'Option 3', value: ['#ECF0F1', '#34495E', '#AED6F1'] },
   ];
   public isFileError: boolean = false;
   public filesExtension = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];

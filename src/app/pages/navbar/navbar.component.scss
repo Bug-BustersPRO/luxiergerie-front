@@ -2,7 +2,7 @@
 
 nav {
   height: 130px;
-  background: var(--primary-background-color);
+  background: var(--secondary-background-color);
   position: relative;
   z-index: 2;
 }
@@ -40,7 +40,7 @@ nav {
     justify-content: space-evenly;
     height: 160px;
     width: 220px;
-    background-color: var(--primary-background-color);
+    background-color: var(--secondary-background-color);
     align-items: center;
     font-size: 32px;
     font-family: Italianno;

@@ -23,7 +23,7 @@
       </div>
       <div class="btn-container">
         @if (hotel) {
-          <app-button action="valider" (click)="login()" [disabled]="!canValidate" [btnBackground]="hotel.colors[1]" [txtColor]="hotel.colors[0]"/>
+          <app-button action="valider" (click)="login()" [disabled]="!canValidate" [btnBackground]="hotel.colors[0]" [txtColor]="hotel.colors[1]"/>
         }@else {
           <app-button action="valider" (click)="login()" [disabled]="!canValidate"/>
         }
