@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Hotel } from '../../models/hotel.model';
 import { HotelService } from '../../services/hotel.service';
 import { CommonModule } from '@angular/common';
@@ -11,8 +11,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss'
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   public hotel: Hotel = {} as Hotel;
+  public isHome: boolean = false;
   constructor(
     private router: Router,
     private hotelService: HotelService) {
@@ -26,7 +27,16 @@ export class FooterComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isHome = event.url === '/' || event.url === '/sections';
+      }
+    });
+  }
+
   navigateTo(route: string): void {
+    this.isHome = true;
     this.router.navigate([route]);
     window.scrollTo(0, 0);
   }

@@ -19,7 +19,7 @@ export class AccommodationService {
     });
   }
   private getAllAccomodations$: WritableSignal<Accommodation[]> = signal([]);
-  getAllAccomodations = computed(this.getAllAccomodations$);
+  getAllAccomodations = computed(() => this.getAllAccomodations$());
   public getAccommodationById!: Accommodation;
 
 
@@ -55,7 +55,6 @@ export class AccommodationService {
     return this.http.post(`${this.url}/categories/${categoryId}/accommodations`, accommodation, { headers: this.getHeaders() })
 
   }
-
 
   // UPDATE
   public updateAccommodation(accommodation: FormData, categoryId: any, accommodationId: any): Observable<any> {

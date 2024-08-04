@@ -2,7 +2,7 @@
   <div class="infos-container">
     <div class="footer-infos-container">
       <div class="name">
-        <p (click)="navigateTo('/')">Accueil</p>
+        <p (click)="navigateTo('/')" *ngIf="!isHome">Accueil</p>
       </div>
     </div>
   </div>
