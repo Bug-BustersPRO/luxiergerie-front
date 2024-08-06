@@ -50,7 +50,7 @@
   }
 
   .colored-text {
-    color: var(--primary-background-color);
+    color: var(--tertiary-background-color);
   }
 
   .colored-border {
@@ -59,13 +59,13 @@
 
   .scrollable-cart {
     overflow-y: auto;
-    scrollbar-color: $primary-background-color white;
+    scrollbar-color: $secondary-background-color white;
     height: 62%;
   }
 
   .scrollable-confirmation {
     overflow-y: auto;
-    scrollbar-color: $primary-background-color white;
+    scrollbar-color: $secondary-background-color white;
     height: 44%;
   }
 

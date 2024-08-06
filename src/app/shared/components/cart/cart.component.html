@@ -40,12 +40,18 @@
       <p class="colored-text centerded-p">{{formatPrice(totalPrice)}} </p>
     </div>
     <div class="buttons">
-      <app-button *ngIf="this.items?.length"
+      @if (hotel) {
+        <app-button *ngIf="this.items?.length"
                   action="Vider le panier"
-                  (click)="clearCart()" />
-      <app-button *ngIf="this.items?.length"
+                  (click)="clearCart()"
+                  [txtColor]="hotel.colors[0]"
+                  [btnBackground]="hotel.colors[1]"/>
+        <app-button *ngIf="this.items?.length"
                   action="commander"
-                  (click)="order()" />
+                  (click)="order()"
+                  [txtColor]="hotel.colors[0]"
+                  [btnBackground]="hotel.colors[1]"/>
+      }
     </div>
   </div>
 </div>

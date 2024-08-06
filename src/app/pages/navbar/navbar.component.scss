@@ -120,7 +120,7 @@ input {
 
 .material-icons.md-36 {
   font-size: 30px;
-  color: var(--tertiary-background-color);
+  color: var(--secondary-background-color);
   padding: 1px;
 }
 
@@ -133,7 +133,7 @@ input {
 }
 
 .mat-badge-content {
-  background-color: var(--secondary-background-color) !important;
+  background-color: var(--tertiary-background-color) !important;
   transform: translate(6px, 6px) !important;
 }
 
@@ -149,7 +149,7 @@ input {
   height: 40px;
 
   .material-icons.md-36 {
-    color: black;
+    color: var(--secondary-background-color);
     font-size: 20px;
   }
 }
