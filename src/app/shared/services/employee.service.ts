@@ -43,8 +43,8 @@ export class EmployeeService {
     return this.http.get<Employee>(`${this.url}/employee/${id}`, { headers: this.getHeaders() })
   }
 
-  public createEmployee(employee: Employee): Observable<any> {
-    return this.http.post(`${this.url}/employee`, employee, { headers: this.getHeaders() });
+  public createEmployee(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(`${this.url}/employee`, employee, { headers: this.getHeaders() });
   }
 
   public updateEmployee(data: any, employeeId: string): Observable<any> {

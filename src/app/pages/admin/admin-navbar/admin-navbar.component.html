@@ -1,33 +1,30 @@
 <nav class="vertical-navbar">
   <div class="hotel-infos-container">
     <div class="logo">
-      <img [src]="hotelImageUrl" alt="Le logo de l'hotel" />
+      <img [src]="hotelImageUrl"
+           alt="Le logo de l'hotel" />
     </div>
     <div class="hotel-name">
       <p>Hôtel - {{ hotel.name }}</p>
     </div>
   </div>
   @if (isAdmin) {
-  <ul>
-    @for (navItem of navItemsAdmin; track $index) {
-    <li>
+    <ul> @for (navItem of navItemsAdmin; track $index) {
+      <li>
       <a [routerLink]="navItem.route">
         <span class="material-symbols-outlined">{{ navItem.icon }}</span>
         <span class="nav-text">{{ navItem.name }}</span>
       </a>
     </li>
-    }
-  </ul>
+  } </ul>
   } @else {
-  <ul>
-    @for (navItem of navItemsEmployee; track $index) {
-    <li>
-      <a [routerLink]="navItem.route">
-        <span class="material-symbols-outlined">{{ navItem.icon }}</span>
-        <span class="nav-text">{{ navItem.name }}</span>
-      </a>
-    </li>
-    }
-  </ul>
+    <ul> @for (navItem of navItemsEmployee; track $index) {
+      <li>
+        <a [routerLink]="navItem.route">
+          <span class="material-symbols-outlined">{{ navItem.icon }}</span>
+          <span class="nav-text">{{ navItem.name }}</span>
+        </a>
+      </li>
+    } </ul>
   }
 </nav>

@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./section.component.scss']
 })
 export class SectionComponent {
-
   @Input() section!: Section;
 
   constructor(private router: Router) { }
@@ -16,4 +15,5 @@ export class SectionComponent {
   navigateToCategories() {
     this.router.navigate([`sections/${this.section.id}/categories`]);
   }
+
 }

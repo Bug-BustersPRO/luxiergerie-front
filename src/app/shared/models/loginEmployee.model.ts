@@ -6,4 +6,5 @@ export class LoginEmployee {
     this.serialNumber = serialNumber;
     this.password = password;
   }
+
 }

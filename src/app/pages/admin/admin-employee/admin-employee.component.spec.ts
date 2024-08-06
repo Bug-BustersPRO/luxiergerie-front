@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdminEmployeeComponent } from './admin-employee.component';
 
 describe('AdminEmployeeComponent', () => {
@@ -10,8 +9,8 @@ describe('AdminEmployeeComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AdminEmployeeComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(AdminEmployeeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +19,5 @@ describe('AdminEmployeeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

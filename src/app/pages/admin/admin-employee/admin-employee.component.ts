@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { RegisterEmployeeComponent } from 'src/app/shared/components/register-employee/register-employee.component';
 import { ListEmployeeComponent } from "./list-employee/list-employee.component";
+import { RegisterEmployeeComponent } from './register-employee/register-employee.component';
 
 @Component({
   selector: 'app-admin-employee',
@@ -19,4 +19,5 @@ export class AdminEmployeeComponent {
   closeModal() {
     this.isModalOpen = false;
   }
+
 }

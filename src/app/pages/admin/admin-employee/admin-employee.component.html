@@ -1,27 +1,23 @@
 <section class="global-container">
   <div class="add-employee-container">
-  <div>
-    <h3>AJOUTER UN(E) EMPLOYE(E)</h3>
-  </div>
-  <div
-    class="add-button"
-    (click)="openModal()"
-    title="Ajouter un(e) employé(e)"
-  >
-    <span class="button-icon">+</span>
-  </div>
+    <div>
+      <h3>AJOUTER UN(E) EMPLOYE(E)</h3>
+    </div>
+    <div class="add-button"
+         (click)="openModal()"
+         title="Ajouter un(e) employé(e)">
+      <span class="button-icon">+</span>
+    </div>
   </div>
   <div>
     <h3>LISTE D'EMPLOYE(E)S</h3>
   </div>
   <div>
-  <app-list-employee></app-list-employee>
+    <app-list-employee></app-list-employee>
   </div>
 </section>
-<app-modal
-  title="Ajout d'un employé"
-  [showModal]="isModalOpen"
-  (closeModalEvent)="isModalOpen = false"
->
-  <app-register-employee (closeModal)="closeModal()"></app-register-employee>
+<app-modal title="Ajout d'un employé"
+           [showModal]="isModalOpen"
+           (closeModalEvent)="isModalOpen = false">
+  <app-register-employee (closeModal)="closeModal()" />
 </app-modal>

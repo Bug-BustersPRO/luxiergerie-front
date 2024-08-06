@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LoginModalComponent } from './login-modal.component';
 
 describe('LoginModalComponent', () => {
@@ -10,8 +9,8 @@ describe('LoginModalComponent', () => {
     await TestBed.configureTestingModule({
       imports: [LoginModalComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(LoginModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +19,5 @@ describe('LoginModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

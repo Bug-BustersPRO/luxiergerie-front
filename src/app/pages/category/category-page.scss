@@ -1,10 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .section-global {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: auto;
-    max-width: 628px;
-    padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: 628px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 
   .buttons {
     justify-content: space-between;
@@ -21,5 +28,5 @@
     gap: 3rem;
     width: 105%;
     justify-content: center;
-}
+  }
 }

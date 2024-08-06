@@ -1,4 +1,4 @@
-import {  EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Accommodation } from '../models/accommodation.model';
 import { Category } from '../models/category.model';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -40,7 +40,7 @@ export class CartService {
 
         const itemInCart = this.items.find(item => item.id === addedItem.id);
         if (!itemInCart) {
-          this.items.push({...addedItem, quantity: 1});
+          this.items.push({ ...addedItem, quantity: 1 });
           this.totalPrice = this.totalPrice.add(new bigDecimal(addedItem.price));
         } else {
           itemInCart.quantity++;
@@ -51,7 +51,7 @@ export class CartService {
         this.totalPriceSubject.next(this.totalPrice);
         this.updateCount();
       },
-      error: () => {},
+      error: () => { },
       complete: () => this.updateCategoriesAndTotalPrice()
     });
 
@@ -167,4 +167,5 @@ export class CartService {
   private updateCount(): void {
     this.countItems = this.getTotalQuantity();
   }
+
 }

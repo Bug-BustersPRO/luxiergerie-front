@@ -9,8 +9,8 @@ describe('ButtonComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ButtonComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -19,4 +19,5 @@ describe('ButtonComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

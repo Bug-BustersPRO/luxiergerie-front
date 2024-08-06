@@ -16,8 +16,10 @@ export class AccommodationCardComponent implements OnInit, OnDestroy {
   @Input() item!: Accommodation;
   private subscription: Subscription = EMPTY.subscribe();
 
-  constructor(private cartService: CartService, private cdr: ChangeDetectorRef, private toastr: ToastrService) {
-  }
+  constructor(
+    private cartService: CartService,
+    private cdr: ChangeDetectorRef,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.updateQuantity();
@@ -48,4 +50,5 @@ export class AccommodationCardComponent implements OnInit, OnDestroy {
     this.cartService.removeItem(this.item);
     this.toastr.info('Article retiré du panier');
   }
+
 }
