@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class FooterComponent implements OnInit {
   public hotel: Hotel = {} as Hotel;
-  public isHome: boolean = false;
+  public isHome: boolean = true;
   constructor(
     private router: Router,
     private hotelService: HotelService) {
