@@ -1,5 +1,13 @@
 @import "../../../../styles.scss";
 
+:host {
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  right: 0;
+  left: 0;
+}
+
 nav {
   height: 130px;
   background: var(--secondary-background-color);
