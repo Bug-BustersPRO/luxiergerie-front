@@ -81,6 +81,9 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.logOut(false);
+    localStorage.removeItem('cart_categories');
+    localStorage.removeItem('cart_items');
+    localStorage.removeItem('total_price');
   }
 
 }

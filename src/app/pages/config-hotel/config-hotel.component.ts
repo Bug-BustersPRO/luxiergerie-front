@@ -249,6 +249,9 @@ export class ConfigHotelComponent implements OnInit {
     });
 
     if (this.isCreateHotel) {
+      localStorage.removeItem('cart_categories');
+      localStorage.removeItem('cart_items');
+      localStorage.removeItem('total_price');
       return this.hotelService.createHotel(formData);
     } else {
       return this.hotelService.updateHotel(formData, this.hotel.id);
@@ -257,7 +260,7 @@ export class ConfigHotelComponent implements OnInit {
 
   submitHotel() {
     this.createUpdateHotel().subscribe({
-      next: (response) => {
+      next: () => {
         this.router.navigate(['/admin']);
         this.hotelService.emitHotelUpdate(this.hotel);
         this.toastr.success('Hôtel configuré avec succès');

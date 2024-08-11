@@ -42,8 +42,8 @@ export class RoomService {
       });
   }
 
-  public getRoomById(id: string): Observable<Room> {
-    return this.http.get<Room>(`${this.url}/${id}`, { headers: this.getHeaders() });
+  public getRoomById(id: Room | null): Observable<Room> {
+    return this.http.get<Room>(`${this.url}/${id}`, { headers: this.getHeaders() })
   }
 
   // Create
