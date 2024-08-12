@@ -8,10 +8,9 @@
          [style.transform]="getTransform()">
       <div class="carousel-item"
            *ngFor="let item of items">
-        <img [src]="item.urlImage"
-             alt="Slide">    
+        <img [src]="item.image"
+             alt="Slide">
       </div>
-  
     </div>
   </div>
   <div class="carousel-indicators">

@@ -1,5 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Section } from '../../models/section.model';
+
+interface CarouselItem {
+  title: string;
+  description: string;
+  image: string;
+}
 
 @Component({
   selector: 'app-carousel',
@@ -7,7 +12,7 @@ import { Section } from '../../models/section.model';
   styleUrls: ['./carousel.component.scss'],
 })
 export class CarouselComponent implements OnInit, OnDestroy {
-  @Input() public items: Section[] = [];
+  @Input() public items: CarouselItem[] = [];
   public currentIndex: number = 0;
   public interval: any;
 
