@@ -25,12 +25,12 @@ export class SectionPage implements OnInit {
             reader.readAsDataURL(sectionImage);
             reader.onloadend = () => {
               element.urlImage = reader.result as string;
+              this.carouselItems.push({
+                title: element.title,
+                description: element.description,
+                image: element.urlImage,
+              });
             };
-          });
-          this.carouselItems.push({
-            title: element.title,
-            description: element.description,
-            urlImage: element.urlImage,
           });
         }
       }
