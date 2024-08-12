@@ -1,0 +1,56 @@
+<section class="global-section">
+  <section class="head-section">
+    <div class="add-sojourn-container">
+      <div>
+        <h3>Créer un séjour</h3>
+      </div>
+      <div class="add-button"
+           (click)="openSojournModal()"
+           title="Ajouter un séjour">
+        <span class="button-icon">+</span>
+      </div>
+    </div>
+    <div>
+      <h3>Séjours en cours</h3>
+    </div>
+    <div>
+    </div>
+  </section>
+  <section class="list-section">
+    @for (room of rooms; track $index) {
+      <div class="container">
+        <div class="card-container">
+          <h4 class="title">Chambre : {{room.roomNumber}}</h4>
+          <p class="name">{{room.client?.firstName}} {{room.client?.lastName}}</p>
+          <div class="date-container"*ngIf="room.sojourns">
+            <p class="date">{{room.sojourns[0].entryDate | date: 'dd/MM/yyyy'}}</p>
+            <p class="date">{{room.sojourns[0].exitDate | date: 'dd/MM/yyyy'}}</p>
+          </div>
+        </div>
+        <div class="button-container" *ngIf="room.sojourns">
+          <span class="button material-symbols-outlined"
+              (click)="openEditModal(room.sojourns[0])">edit</span>
+          <span class="button material-symbols-outlined"
+              (click)="deleteSojourn(room.sojourns[0])">delete</span>
+        </div>
+      </div>
+  }
+</section>
+</section>
+<app-modal title="Ajout d'un séjour"
+           [showModal]="isModalOpen"
+           (closeModalEvent)="closeCreateModal()">
+  <section>
+    <app-sojourn-form (closeModal)="closeCreateModal()"
+                      [isCreateSojourn]="true" />
+  </section>
+</app-modal>
+<app-modal title="Modification du séjour"
+           [showModal]="isUpdateModalOpen"
+           (closeModalEvent)="closeUpdateModal()">
+  <section>
+    <app-sojourn-form (closeModal)="closeUpdateModal()"
+                      [isCreateSojourn]="false"
+                      [sojournToUpdate]="selectedSojourn" />
+  </section>
+</app-modal>

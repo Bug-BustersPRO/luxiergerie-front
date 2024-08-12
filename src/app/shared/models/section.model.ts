@@ -1,4 +1,3 @@
-
 import { Category } from "./category.model";
 
 export class Section {
@@ -10,7 +9,14 @@ export class Section {
   public title: string;
   public categories: Category[];
 
-  constructor(id: string, name: string, urlImage: string, image: File[], description: string, title:string, categories: Category[]) {
+  constructor(
+    id: string,
+    name: string,
+    urlImage: string,
+    image: File[],
+    description: string,
+    title: string,
+    categories: Category[]) {
     this.id = id;
     this.name = name;
     this.urlImage = urlImage;

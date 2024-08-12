@@ -18,7 +18,7 @@ export class RoleService {
   }
   private getAllRoles$: WritableSignal<Role[]> = signal([]);
   getAllRolesSig = computed(() => this.getAllRoles$());
-  private getRoleById$: WritableSignal<Role> = signal<any>({"role.id": "", "role.name": ""});
+  private getRoleById$: WritableSignal<Role> = signal<any>({ "role.id": "", "role.name": "" });
   public getRoleById = computed(() => this.getRoleById$());
 
   // Roles API - call vers le backend

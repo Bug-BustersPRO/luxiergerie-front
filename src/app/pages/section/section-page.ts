@@ -1,19 +1,18 @@
-import { Component, OnInit, effect, inject } from '@angular/core';
+import { Component, OnInit, effect } from '@angular/core';
 import { Section } from 'src/app/shared/models/section.model';
 import { SectionService } from 'src/app/shared/services/section.service';
 @Component({
-    selector: 'app-section-page',
-    templateUrl: './section-page.html',
-    styleUrls: ['./section-page.scss', '../../../styles.scss'],
+  selector: 'app-section-page',
+  templateUrl: './section-page.html',
+  styleUrls: ['./section-page.scss', '../../../styles.scss'],
 })
 export class SectionPage implements OnInit {
-  public isModalOpen: boolean = false; // to use the modal, we need this variable
+  public isModalOpen: boolean = false;
   public section!: Section;
   public sections: Section[] = [];
   public carouselItems: any[] = [];
-  public sectionService = inject(SectionService);
 
-  constructor() {
+  constructor(private sectionService: SectionService) {
     effect(() => {
       const sections = this.sectionService.getAllSectionsSig();
       this.sections = sections;
@@ -36,8 +35,8 @@ export class SectionPage implements OnInit {
     this.sectionService.getSections();
   }
 
-  // this function allows us to open the modal
   openModal() {
     this.isModalOpen = true;
   }
+
 }

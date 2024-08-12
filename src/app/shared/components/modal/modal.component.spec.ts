@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ModalComponent } from './modal.component';
 
 describe('ModalComponent', () => {
@@ -18,4 +17,5 @@ describe('ModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

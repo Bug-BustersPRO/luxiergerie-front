@@ -21,7 +21,7 @@ export class RoomService {
   getAllRoomsSig = computed(() => this.getAllRooms$());
   private getAllAvailableRooms$: WritableSignal<Room[]> = signal([]);
   getAllAvailableRoomsSig = computed(() => this.getAllAvailableRooms$());
-  getOccupiedRoomsSig = computed(() => this.getAllRooms$().filter(room => room.client !== null && room.sojourns.length > 0));
+  getOccupiedRoomsSig = computed(() => this.getAllRooms$().filter(room => room.client !== null && room.sojourns?.length !== 0));
 
   // Room API - call vers le backend
 
@@ -42,8 +42,8 @@ export class RoomService {
       });
   }
 
-  public getRoomById(id: string): Observable<Room> {
-    return this.http.get<Room>(`${this.url}/${id}`, { headers: this.getHeaders() });
+  public getRoomById(id: Room | null): Observable<Room> {
+    return this.http.get<Room>(`${this.url}/${id}`, { headers: this.getHeaders() })
   }
 
   // Create
@@ -55,31 +55,19 @@ export class RoomService {
       });
   }
 
-  public createSpecificRoom(room: Room): void {
-    this.http.post(`${this.url}`, room, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Room created successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while creating room")
-      });
+  public createSpecificRoom(room: Room): Observable<Room> {
+    return this.http.post<Room>(`${this.url}`, room, { headers: this.getHeaders() })
   }
 
   // Update
-  public updateRoom(room: Room): void {
-    this.http.put(`${this.url}/${room.id}`, room, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Room updated successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while updating room with id: " + room.id)
-      });
+  public updateRoom(room: Room): Observable<Room> {
+    return this.http.put<Room>(`${this.url}/${room.id}`, room, { headers: this.getHeaders() })
   }
 
   // Delete
 
-  public deleteRoom(id: number): void {
-    this.http.delete(`${this.url}/${id}`, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Room deleted successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while deleting room with id: " + id)
-      });
+  public deleteRoom(id: string): Observable<Room> {
+    return this.http.delete<Room>(`${this.url}/${id}`, { headers: this.getHeaders() })
   }
 
   public deleteAllRooms(): void {
@@ -89,4 +77,5 @@ export class RoomService {
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while deleting all rooms")
       });
   }
+
 }

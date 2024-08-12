@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { SectionPage } from './pages/section/section-page';
-import { LoginClientPageComponent } from './pages/security/room/login-client.page/login-client.page.component';
 import { AuthGuardService } from './shared/services/Guard/auth-room.guard';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginModalComponent } from './shared/components/login-modal/login-modal.component';
@@ -21,20 +20,21 @@ import { CategoryComponent } from './shared/components/category/category.compone
 import { AccommodationCardComponent } from './shared/components/accommodation-card/accommodation-card.component';
 import { AccommodationPage } from './pages/accommodation-page/accommodation-page.component';
 import { AccommodationComponent } from './shared/components/accommodation/accommodation.component';
-import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
 import { CartComponent } from './shared/components/cart/cart.component';
 import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RoleGuard } from './shared/services/Guard/role.guard';
-import {MatButtonModule} from '@angular/material/button';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { LoginClientPageComponent } from './pages/security/login-client.page/login-client.page.component';
+import { LoginEmployeeComponent } from './pages/security/login-employee/login-employee.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginClientPageComponent,
     SectionPage,
     CardComponent,
     CarouselComponent,
@@ -45,6 +45,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     AccommodationComponent,
     LoginEmployeeComponent,
     AccommodationPage,
+    LoginClientPageComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +63,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     ButtonComponent,
     ModalComponent,
     CartComponent,
+    FooterComponent,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,

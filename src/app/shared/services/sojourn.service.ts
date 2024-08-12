@@ -36,25 +36,18 @@ export class SojournService {
   }
 
   // CREATE
-  public createSojourn(sojourn: Sojourn): Observable<any> {
-    return this.http.post(this.url, sojourn, { headers: this.getHeaders() });
+  public createSojourn(sojourn: Sojourn): Observable<Sojourn> {
+    return this.http.post<Sojourn>(this.url, sojourn, { headers: this.getHeaders() });
   }
 
   // UPDATE
-  public updateSojourn(sojourn: Sojourn): void {
-    this.http.put(`${this.url}/${sojourn.id}`, sojourn, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Sojourn updated successfully"),
-        error: error => console.log(error, "There was an error while updating sojourn")
-      });
+  public updateSojourn(sojourn: Sojourn): Observable<Sojourn> {
+    return this.http.put<Sojourn>(`${this.url}/${sojourn.id}`, sojourn, { headers: this.getHeaders() });
   }
 
   // DELETE
-  public deleteSojourn(id: string): void {
-    this.http.delete(`${this.url}/${id}`, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Sojourn deleted successfully"),
-        error: error => console.log(error, "There was an error while deleting sojourn")
-      });
+  public deleteSojourn(id: string): Observable<Sojourn> {
+    return this.http.delete<Sojourn>(`${this.url}/${id}`, { headers: this.getHeaders() });
   }
+
 }

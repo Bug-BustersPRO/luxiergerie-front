@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminHomeComponent } from '../admin-home/admin-home.component';
-import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-navbar',
   templateUrl: './admin-navbar.component.html',
   styleUrls: ['./admin-navbar.component.scss'],
   standalone: true,
-  imports: [AdminHomeComponent, RouterLink, AdminDashboardComponent],
+  imports: [AdminHomeComponent, RouterLink, CommonModule],
   providers: [],
 })
 export class AdminNavbarComponent {
@@ -31,14 +31,19 @@ export class AdminNavbarComponent {
       icon: 'list_alt',
     },
     {
+      name: 'Séjours',
+      route: 'sojourn',
+      icon: 'check_box',
+    },
+    {
       name: 'Chambres',
       route: 'room',
       icon: 'key',
     },
     {
-      name: 'Carousel',
-      route: 'carousel',
-      icon: 'note_alt',
+      name: 'Clients',
+      route: 'client',
+      icon: 'person',
     },
     {
       name: 'Employé(e)s',
@@ -64,16 +69,23 @@ export class AdminNavbarComponent {
       icon: 'list_alt',
     },
     {
+      name: 'Séjours',
+      route: 'sojourn',
+      icon: 'check_box',
+    },
+    {
       name: 'Chambres',
       route: 'config',
       icon: 'key',
     },
+    {
+      name: 'Clients',
+      route: 'client',
+      icon: 'person',
+    },
   ];
 
-  constructor(
-    private hotelService: HotelService,
-    private cookieService: CookieService
-  ) {
+  constructor(private hotelService: HotelService, private cookieService: CookieService, private router: Router) {
     this.hotelService.getHotels().subscribe(() => {
       this.hotel = this.hotelService.hotel;
       if (this.hotel) {
@@ -100,4 +112,12 @@ export class AdminNavbarComponent {
       },
     });
   }
+
+  isActive(route: string): boolean {
+    switch (route) {
+      default:
+        return this.router.url.includes(route);
+    }
+  }
+
 }

@@ -38,12 +38,8 @@ export class ClientService {
   }
 
   // Create
-  public createClient(client: Client): void {
-    this.http.post(`${this.url}`, client, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Client created successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while creating client")
-      });
+  public createClient(client: Client): Observable<Client> {
+    return this.http.post<Client>(`${this.url}`, client, { headers: this.getHeaders() })
   }
 
   public addClientToRoom(clientId: number, roleName: string): void {
@@ -52,6 +48,16 @@ export class ClientService {
         next: () => console.log("Client added to room successfully"),
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while adding client to room")
       });
+  }
+
+  //Update
+  public updateClient(client: Client): Observable<Client> {
+    return this.http.put<Client>(`${this.url}/${client.id}`, client, { headers: this.getHeaders() })
+  }
+
+  // Delete
+  public deleteClient(client: Client): Observable<any> {
+    return this.http.delete(`${this.url}/${client.id}`, { headers: this.getHeaders() })
   }
 
 }

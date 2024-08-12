@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AccommodationCardComponent } from './accommodation-card.component';
 
 describe('AccommodationCardComponent', () => {
@@ -18,4 +17,5 @@ describe('AccommodationCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

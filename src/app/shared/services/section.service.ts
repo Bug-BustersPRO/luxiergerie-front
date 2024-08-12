@@ -52,14 +52,14 @@ export class SectionService {
 
 
   // CREATE
-  public createSection(section: FormData): Observable<any> {    
-        return this.http.post(`${this.url}/sections`, section, { headers: this.getHeaders() });
-      }
+  public createSection(section: FormData): Observable<any> {
+    return this.http.post(`${this.url}/sections`, section, { headers: this.getHeaders() });
+  }
 
-//   // UPDATE
-   public updateSection(section: FormData, id: any): Observable<any> {
-       return this.http.put(`${this.url}/sections/${id}`, section, { headers: this.getHeaders() });
-   }
+  //   // UPDATE
+  public updateSection(section: FormData, id: any): Observable<any> {
+    return this.http.put(`${this.url}/sections/${id}`, section, { headers: this.getHeaders() });
+  }
 
   // DELETE
   public deleteSection(id: number): Observable<any> {
