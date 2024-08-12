@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common'
-import { Component, effect, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core'
-import { FormsModule, NgForm } from '@angular/forms'
-import { ToastrService } from 'ngx-toastr'
-import { ButtonComponent } from 'src/app/shared/components/button/button.component'
-import { Category } from 'src/app/shared/models/category.model'
-import { Section } from 'src/app/shared/models/section.model'
-import { AccommodationService } from 'src/app/shared/services/accommodation.service'
-import { CategoryService } from 'src/app/shared/services/category.service'
-import { SectionService } from 'src/app/shared/services/section.service'
+import { CommonModule } from '@angular/common';
+import { Component, effect, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { Category } from 'src/app/shared/models/category.model';
+import { Section } from 'src/app/shared/models/section.model';
+import { AccommodationService } from 'src/app/shared/services/accommodation.service';
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { SectionService } from 'src/app/shared/services/section.service';
 
 @Component({
   selector: 'app-admin-service-form',
