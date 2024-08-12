@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Accommodation } from '../../models/accommodation.model';
 
 @Component({
@@ -6,11 +6,11 @@ import { Accommodation } from '../../models/accommodation.model';
   templateUrl: './accommodation.component.html',
   styleUrls: ['./accommodation.component.scss']
 })
-export class AccommodationComponent {
+export class AccommodationComponent implements OnInit {
 
   @Input() accommodation!: Accommodation;
 
-  constructor(){}
+  constructor() { }
 
   ngOnInit() {
     this.accommodation.quantity = 0;

@@ -22,7 +22,7 @@
     font-weight: bold;
   }
 
-  .slim{
+  .slim {
     font-weight: 300;
   }
 
@@ -34,20 +34,23 @@
     .centerded-p {
       text-align: center;
     }
+
     .right-p {
       text-align: end;
     }
+
     .quantity {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
     }
+
     .tertiary {
       color: var(--tertiary-background-color);
     }
   }
 
   .colored-text {
-    color: var(--primary-background-color);
+    color: var(--tertiary-background-color);
   }
 
   .colored-border {
@@ -56,15 +59,16 @@
 
   .scrollable-cart {
     overflow-y: auto;
-    scrollbar-color: $primary-background-color white;
+    scrollbar-color: $secondary-background-color white;
     height: 62%;
   }
 
   .scrollable-confirmation {
     overflow-y: auto;
-    scrollbar-color: $primary-background-color white;
+    scrollbar-color: $secondary-background-color white;
     height: 44%;
   }
+
   .buttons {
     margin-top: 1rem;
     display: flex;

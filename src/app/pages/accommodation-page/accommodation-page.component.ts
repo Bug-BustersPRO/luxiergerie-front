@@ -15,9 +15,10 @@ import {CategoryService} from 'src/app/shared/services/category.service';
 export class AccommodationPage {
   public accommodations: Accommodation[] = [];
   public accommodation!: Accommodation;
-  @Input() category!: Category;
   public hotel!: Hotel;
   public hotelImageUrl!: string;
+  public carouselItems: any[] = [];
+  @Input() category!: Category;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,22 +47,32 @@ export class AccommodationPage {
   }
 
   getAccommodationsByCategory(categoryId: string) {
-    this.accommodationService.getAccommodationsByCategory(categoryId).subscribe((accommodations) =>
+    this.accommodationService.getAccommodationsByCategory(categoryId).subscribe((accommodations) => {
+      let accommodationsProcessed = 0;
+      const totalAccommodations = accommodations.length;
       accommodations.forEach((accommodation: Accommodation) => {
         this.accommodationService.getAccomodationImageById(accommodation.id).subscribe((accommodationImage) => {
           const reader = new FileReader();
           reader.readAsDataURL(accommodationImage);
           reader.onloadend = () => {
             accommodation.urlImage = reader.result as string;
+            accommodationsProcessed++;
+            if (accommodationsProcessed === totalAccommodations) {
+              this.accommodations = accommodations;
+              this.setCarouselImg();
+            }
           };
-          this.accommodationService.getById(accommodation.id).subscribe((response) => {
-            this.categoryService.getById(response.category).subscribe((response) => {
-              accommodation.category = response;
-            });
-          });
         });
-        this.accommodations.push(accommodation);
-      }),
-    );
+      });
+    });
   }
+
+  setCarouselImg() {
+    this.carouselItems = this.accommodations.map((element) => ({
+      title: element.name,
+      description: element.description,
+      image: element.urlImage,
+    }));
+  }
+
 }

@@ -65,4 +65,5 @@ export class PurchaseService {
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while deleting purchase with id: " + id)
       });
   }
+
 }

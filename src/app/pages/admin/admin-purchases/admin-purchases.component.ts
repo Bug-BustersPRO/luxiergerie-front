@@ -1,9 +1,8 @@
-import {Component} from '@angular/core';
-import {AdminPurchaseCardComponent} from '../admin-purchase-card/admin-purchase-card.component';
-import {Purchase} from 'src/app/shared/models/purchase.model';
-import {map, take, pipe} from 'rxjs';
-import {Bill} from 'src/app/shared/models/bill.model';
-import {PurchaseService} from 'src/app/shared/services/purchase.service';
+import { Component } from '@angular/core'
+import { take } from 'rxjs'
+import { Bill } from 'src/app/shared/models/bill.model'
+import { PurchaseService } from 'src/app/shared/services/purchase.service'
+import { AdminPurchaseCardComponent } from './admin-purchase-card/admin-purchase-card.component'
 
 @Component({
   selector: 'app-admin-purchases',

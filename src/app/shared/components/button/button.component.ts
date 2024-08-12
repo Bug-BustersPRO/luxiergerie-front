@@ -76,11 +76,11 @@ export class ButtonComponent implements OnInit {
         this.txtColor = this.txtColor === '' ? '#ffffff' : this.txtColor;
         break;
 
-        case 'Vider le panier':
-          this.text = 'Vider le panier';
-          this.background = this.btnBackground === '' ? this.backgroundPrimary : this.btnBackground;
-          this.txtColor = this.txtColor === '' ? '#ffffff' : this.txtColor;
-          break;
+      case 'Vider le panier':
+        this.text = 'Vider le panier';
+        this.background = this.btnBackground === '' ? this.backgroundPrimary : this.btnBackground;
+        this.txtColor = this.txtColor === '' ? '#ffffff' : this.txtColor;
+        break;
 
       default:
         this.text = 'Confirmer';
@@ -100,4 +100,5 @@ export class ButtonComponent implements OnInit {
         break;
     }
   }
+
 }

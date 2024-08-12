@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdminNavbarComponent } from './admin-navbar.component';
 
 describe('DashboardComponent', () => {
@@ -18,4 +17,5 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

@@ -98,7 +98,7 @@ export class HotelService {
     return this.httpClient.get(`${this.url}/background-image`, { responseType: 'blob' });
   }
 
-  public createHotel(formData: any): Observable<any> {    
+  public createHotel(formData: any): Observable<any> {
     return this.httpClient.post(`${this.url}`, formData, { headers: this.getHeaders() });
   }
 

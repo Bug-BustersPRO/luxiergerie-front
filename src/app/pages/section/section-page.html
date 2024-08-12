@@ -1,6 +1,8 @@
-<app-carousel [items]="sections"></app-carousel>
-<!-- App-carousel to remove, it's a test bro -->
-<div class = "cards">
-<li *ngFor="let section of sections">
-<app-section [section]="section" ></app-section>
-</li>
+<section class="section-container">
+  <app-carousel [items]="carouselItems" />
+  <div class="cards">
+    <li *ngFor="let section of sections">
+      <app-section [section]="section" />
+    </li>
+  </div>
+</section>

@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { SojournService } from './sojourn.service';
 
 describe('SojournService', () => {

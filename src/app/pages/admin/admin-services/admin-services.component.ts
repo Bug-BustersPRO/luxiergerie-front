@@ -1,23 +1,24 @@
-import {AfterContentInit, AfterViewInit, Component, effect, OnChanges, OnDestroy, OnInit} from '@angular/core';
-import {AdminServicesGenericCardComponent} from '../admin-services-generic-card/admin-services-generic-card.component';
-import {Section} from 'src/app/shared/models/section.model';
-import {Category} from 'src/app/shared/models/category.model';
-import {Accommodation} from 'src/app/shared/models/accommodation.model';
-import {ModalComponent} from '../../../shared/components/modal/modal.component';
-import {FormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
-import {AdminServiceFormComponent} from './admin-services-form/admin-service-form/admin-service-form.component';
-import {SectionService} from 'src/app/shared/services/section.service';
-import {CategoryService} from 'src/app/shared/services/category.service';
-import {AccommodationService} from 'src/app/shared/services/accommodation.service';
-import {ToastrService} from 'ngx-toastr';
+import { Component, effect } from '@angular/core'
+import { Section } from 'src/app/shared/models/section.model'
+import { Category } from 'src/app/shared/models/category.model'
+import { Accommodation } from 'src/app/shared/models/accommodation.model'
+import { ModalComponent } from '../../../shared/components/modal/modal.component'
+import { FormsModule } from '@angular/forms'
+import { CommonModule } from '@angular/common'
+import { SectionService } from 'src/app/shared/services/section.service'
+import { CategoryService } from 'src/app/shared/services/category.service'
+import { AccommodationService } from 'src/app/shared/services/accommodation.service'
+import { ToastrService } from 'ngx-toastr'
+import { AdminServicesGenericCardComponent } from './admin-services-generic-card/admin-services-generic-card.component'
+import { AdminServiceFormComponent } from './admin-service-form/admin-service-form.component'
 
 @Component({
   selector: 'app-admin-services',
   templateUrl: './admin-services.component.html',
   styleUrls: ['./admin-services.component.scss'],
   standalone: true,
-  imports: [AdminServicesGenericCardComponent, ModalComponent, FormsModule, CommonModule, AdminServiceFormComponent],
+  imports: [AdminServicesGenericCardComponent, ModalComponent, FormsModule, CommonModule, AdminServiceFormComponent,
+  ],
 })
 export class AdminAccomodationsComponent {
   public sectionsWithImage: Section[] = [];
@@ -66,57 +67,70 @@ export class AdminAccomodationsComponent {
   }
 
   getCategoriesBySection(id: any) {
-    this.categoriesWithImage = [];
-    this.selectedSectionId = id;
+    this.categoriesWithImage = []
+    this.selectedSectionId = id
 
-    this.categoryService.getCategoriesBySection(id).subscribe((categories: Category[]) => {
-      categories.forEach((category: Category) => {
-        this.categoryService.getCategoryImageById(category.id).subscribe((categoryImage) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(categoryImage);
-          reader.onloadend = () => {
-            category.urlImage = reader.result as string;
-          };
-          this.categoryService.getById(category.id).subscribe((response) => {
-            category.section = response.section;
-          });
-        });
-        this.categoriesWithImage.push(category);
-      });
-    });
+    this.categoryService
+      .getCategoriesBySection(id)
+      .subscribe((categories: Category[]) => {
+        categories.forEach((category: Category) => {
+          this.categoryService
+            .getCategoryImageById(category.id)
+            .subscribe((categoryImage) => {
+              const reader = new FileReader()
+              reader.readAsDataURL(categoryImage)
+              reader.onloadend = () => {
+                category.urlImage = reader.result as string
+              }
+              this.categoryService
+                .getById(category.id)
+                .subscribe((response) => {
+                  category.section = response.section
+                })
+            })
+          this.categoriesWithImage.push(category)
+        })
+      })
     if (this.reset) {
-      this.accommodationsWithImages = [];
-      this.reset = false;
+      this.accommodationsWithImages = []
+      this.reset = false
     }
   }
 
   getAccommodationsByCategory(id: string) {
-    this.accommodationsWithImages = [];
-    this.selectedCategoryId = id;
+    this.accommodationsWithImages = []
+    this.selectedCategoryId = id
 
-    this.accommodationService.getAccommodationsByCategory(id).subscribe((accommodations: Accommodation[]) => {
-      accommodations.forEach((accommodation: Accommodation) => {
-        this.accommodationService.getAccomodationImageById(accommodation.id).subscribe((accommodationImage) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(accommodationImage);
-          reader.onloadend = () => {
-            accommodation.urlImage = reader.result as string;
-          };
-          this.accommodationService.getById(accommodation.id).subscribe((response) => {
-            this.categoryService.getById(response.category).subscribe((response) => {
-              accommodation.category = response;
-            });
-          });
-        });
-        this.accommodationsWithImages.push(accommodation);
-      });
-    });
-    this.reset = true;
+    this.accommodationService
+      .getAccommodationsByCategory(id)
+      .subscribe((accommodations: Accommodation[]) => {
+        accommodations.forEach((accommodation: Accommodation) => {
+          this.accommodationService
+            .getAccomodationImageById(accommodation.id)
+            .subscribe((accommodationImage) => {
+              const reader = new FileReader()
+              reader.readAsDataURL(accommodationImage)
+              reader.onloadend = () => {
+                accommodation.urlImage = reader.result as string
+              }
+              this.accommodationService
+                .getById(accommodation.id)
+                .subscribe((response) => {
+                  this.categoryService
+                    .getById(response.category)
+                    .subscribe((response) => {
+                      accommodation.category = response
+                    })
+                })
+            })
+          this.accommodationsWithImages.push(accommodation)
+        })
+      })
+    this.reset = true
   }
 
   openModal(type: string, object: any) {
     this.isModalOpen = true;
-
     switch (type) {
       case 'updateSection':
         this.infos = object;
@@ -153,7 +167,7 @@ export class AdminAccomodationsComponent {
         this.typeForDisplay = 'un produit';
         break;
       default:
-        break;
+        break
     }
     this.typeForChoice = type;
   }
@@ -197,8 +211,8 @@ export class AdminAccomodationsComponent {
       (error) => {
         console.log(error);
         this.toaster.error('Une erreur est survenue lors de la suppression de la section');
-      },
-    );
+      }
+    )
   }
 
   deleteCategory(categoryID: any) {
