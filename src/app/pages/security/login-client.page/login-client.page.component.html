@@ -1,20 +1,23 @@
-<section [style.background-image]="'url(' + hotelBackgroundImageUrl + ')'" id="hotel-container">
+<section [style.background-image]="'url(' + hotelBackgroundImageUrl + ')'"
+         id="hotel-container">
+  <div class="hotel-information-container">
+    <img [src]="hotelImageUrl"
+         alt="logo-hotel"
+         width="200px"
+         height="200px" />
+    <h1>Bienvenue à l'hôtel <span *ngIf="hotel">{{ hotel.name }}</span></h1>
+  </div>
   <div id="hotel-information">
-    <div class="hotel-information-container">
-      <img
-        [src]="hotelImageUrl"
-        alt="logo-hotel"
-        width="200px"
-        height="200px"
-      />
-      <h1>Bienvenue à l'hôtel</h1>
-      <h1 *ngIf="hotel">{{ hotel.name }}</h1>
-    </div>
     <div class="login-container">
-      <app-login-modal *ngIf="openModal" [isOpen]="openModal" />
+      <app-login-modal *ngIf="openModal"
+                       [isOpen]="openModal" />
     </div>
-    <div #arrow class="arrow" [ngClass]="arrowClass">
-      <div #arrow class="arrow" [ngClass]="arrowClass">
+    <div #arrow
+         class="arrow"
+         [ngClass]="arrowClass">
+      <div #arrow
+           class="arrow"
+           [ngClass]="arrowClass">
         <h3>Decouvrez nos services</h3>
         <span class="arrow-down">&raquo;</span>
       </div>

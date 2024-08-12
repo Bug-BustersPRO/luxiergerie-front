@@ -7,6 +7,7 @@
         <input name="entryDate"
                [(ngModel)]="sojourn.entryDate"
                type="date"
+               [min]="getCurrentDate()"
                #entryDate="ngModel"
                required />
         <div *ngIf="entryDate.invalid && (entryDate.dirty || entryDate.touched)">
@@ -19,6 +20,8 @@
         <input name="exitDate"
                [(ngModel)]="sojourn.exitDate"
                type="date"
+               [min]="getMinExitDate()"
+               [disabled]="!sojourn.entryDate"
                #exitDate="ngModel"
                required />
         <div *ngIf="exitDate.invalid && (exitDate.dirty || exitDate.touched)">

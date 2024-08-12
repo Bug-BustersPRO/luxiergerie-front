@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminHomeComponent } from '../admin-home/admin-home.component';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-navbar',
   templateUrl: './admin-navbar.component.html',
   styleUrls: ['./admin-navbar.component.scss'],
   standalone: true,
-  imports: [AdminHomeComponent, RouterLink],
+  imports: [AdminHomeComponent, RouterLink, CommonModule],
   providers: [],
 })
 export class AdminNavbarComponent {
@@ -84,7 +85,7 @@ export class AdminNavbarComponent {
     },
   ];
 
-  constructor(private hotelService: HotelService, private cookieService: CookieService) {
+  constructor(private hotelService: HotelService, private cookieService: CookieService, private router: Router) {
     this.hotelService.getHotels().subscribe(() => {
       this.hotel = this.hotelService.hotel;
       if (this.hotel) {
@@ -110,6 +111,13 @@ export class AdminNavbarComponent {
         this.hotelService.getHotelImageSub();
       },
     });
+  }
+
+  isActive(route: string): boolean {
+    switch (route) {
+      default:
+        return this.router.url.includes(route);
+    }
   }
 
 }

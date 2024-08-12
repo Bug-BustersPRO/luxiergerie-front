@@ -11,7 +11,7 @@
   @if (isAdmin) {
     <ul> @for (navItem of navItemsAdmin; track $index) {
       <li>
-      <a [routerLink]="navItem.route">
+      <a [routerLink]="navItem.route" [ngClass]="{'active-link': isActive(navItem.route)}">
         <span class="material-symbols-outlined">{{ navItem.icon }}</span>
         <span class="nav-text">{{ navItem.name }}</span>
       </a>
@@ -20,7 +20,7 @@
   } @else {
     <ul> @for (navItem of navItemsEmployee; track $index) {
       <li>
-        <a [routerLink]="navItem.route">
+        <a [routerLink]="navItem.route" [ngClass]="{'active-link': isActive(navItem.route)}">
           <span class="material-symbols-outlined">{{ navItem.icon }}</span>
           <span class="nav-text">{{ navItem.name }}</span>
         </a>

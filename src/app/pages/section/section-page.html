@@ -1,6 +1,8 @@
-<app-carousel [items]="carouselItems" />
-<div class="cards">
-  <li *ngFor="let section of sections">
-    <app-section [section]="section" />
-  </li>
-</div>
+<section class="section-container">
+  <app-carousel [items]="carouselItems" />
+  <div class="cards">
+    <li *ngFor="let section of sections">
+      <app-section [section]="section" />
+    </li>
+  </div>
+</section>

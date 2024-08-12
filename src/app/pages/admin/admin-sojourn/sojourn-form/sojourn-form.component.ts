@@ -51,6 +51,23 @@ export class SojournFormComponent implements OnChanges {
     this.roomService.getRooms();
   }
 
+  getCurrentDate(): string {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  getMinExitDate(): string {
+    if (this.sojourn.entryDate) {
+      const entryDate = new Date(this.sojourn.entryDate);
+      entryDate.setDate(entryDate.getDate() + 1);
+      return entryDate.toISOString().split('T')[0];
+    }
+    return this.getCurrentDate();
+  }
+
   onSubmit() {
     if (this.isCreateSojourn) {
       if (!this.sojourn.clientId || !this.sojourn.roomRole || !this.sojourn.entryDate || !this.sojourn.exitDate) {
@@ -63,8 +80,12 @@ export class SojournFormComponent implements OnChanges {
           this.toastr.success("Séjour créé avec succès");
         },
         error: (error) => {
-          console.log(error, "There was an error while creating sojourn");
-          this.toastr.error("Il y a eu une erreur lors de la création du séjour");
+          if (error.status === 406) {
+            this.toastr.error("La date d'entrée doit être antérieure à la date de sortie");
+          } else {
+            console.log(error, "There was an error while creating sojourn");
+            this.toastr.error("Il y a eu une erreur lors de la création du séjour");
+          }
         }
       });
     } else {

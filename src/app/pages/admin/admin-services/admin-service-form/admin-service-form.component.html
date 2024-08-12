@@ -217,13 +217,9 @@
              #isReservable="ngModel" />
     </div>
     <div>
-      <button class="button"
-              type="submit"
-              [disabled]="!genericForm.valid || isFileError">
-              @if (openModalForCreation) {
-                Créer {{ typeForDisplay }}
-              } @else { Mettre à jour }
-      </button>
     </div>
   </form>
+  <app-button action="valider"
+              (click)="onSubmit()"
+              class="button" />
 </section>
