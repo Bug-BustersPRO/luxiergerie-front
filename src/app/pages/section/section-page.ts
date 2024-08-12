@@ -16,15 +16,21 @@ export class SectionPage implements OnInit {
     effect(() => {
       const sections = this.sectionService.getAllSectionsSig();
       this.sections = sections;
+
       if (this.sections.length > 0) {
         this.carouselItems = [];
-        this.sections[0].urlImage = 'assets/beach.jpg';
-        this.sections[1].urlImage = 'assets/hotel.jpg';
         for (const element of this.sections) {
+          this.sectionService.getSectionImageById(element.id).subscribe((sectionImage) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(sectionImage);
+            reader.onloadend = () => {
+              element.urlImage = reader.result as string;
+            };
+          });
           this.carouselItems.push({
             title: element.title,
             description: element.description,
-            image: element.urlImage,
+            urlImage: element.urlImage,
           });
         }
       }

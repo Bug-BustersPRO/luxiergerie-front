@@ -21,50 +21,49 @@ import { AdminServiceFormComponent } from './admin-service-form/admin-service-fo
   ],
 })
 export class AdminAccomodationsComponent {
-  public sectionsWithImage: Section[] = []
-  public categoriesWithImage: Category[] = []
-  public accommodationsWithImages: Accommodation[] = []
-  public isACategory: boolean = false
-  public isAnAccommodation: boolean = false
-  public reset: boolean = false
-  public infos: any = []
-  public typeForChoice: string = ''
-  public typeForDisplay: string = ''
-  public image: any
-  public imageUrl: string | ArrayBuffer | null = null
-  public isModalOpen: boolean = false
-  public openModalForCreation: boolean = false
-  public selectedSectionId: string | null = null
-  public selectedCategoryId: string | null = null
-  public isFileError!: boolean
+  public sectionsWithImage: Section[] = [];
+  public categoriesWithImage: Category[] = [];
+  public accommodationsWithImages: Accommodation[] = [];
+  public isACategory: boolean = false;
+  public isAnAccommodation: boolean = false;
+  public reset: boolean = false;
+  public infos: any = [];
+  public typeForChoice: string = '';
+  public typeForDisplay: string = '';
+  public image: any;
+  public imageUrl: string | ArrayBuffer | null = null;
+  public isModalOpen: boolean = false;
+  public openModalForCreation: boolean = false;
+  public selectedSectionId: string | null = null;
+  public selectedCategoryId: string | null = null;
+  public isFileError!: boolean;
 
   constructor(
     private sectionService: SectionService,
     private categoryService: CategoryService,
     private accommodationService: AccommodationService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
   ) {
-    this.sectionService.getSections()
-    this.categoryService.getAll()
-    this.accommodationService.getAll()
+    this.sectionService.getSections();
+    this.categoryService.getAll();
+    this.accommodationService.getAll();
     effect(() => {
-      this.getSections()
-    })
+      this.getSections();
+    });
   }
 
   getSections() {
-    this.sectionsWithImage = this.sectionService.getAllSectionsSig()
+    this.sectionsWithImage = this.sectionService.getAllSectionsSig();
+
     this.sectionsWithImage.forEach((section: Section) => {
-      this.sectionService
-        .getSectionImageById(section.id)
-        .subscribe((sectionImage) => {
-          const reader = new FileReader()
-          reader.readAsDataURL(sectionImage)
-          reader.onloadend = () => {
-            section.urlImage = reader.result as string
-          }
-        })
-    })
+      this.sectionService.getSectionImageById(section.id).subscribe((sectionImage) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(sectionImage);
+        reader.onloadend = () => {
+          section.urlImage = reader.result as string;
+        };
+      });
+    });
   }
 
   getCategoriesBySection(id: any) {
@@ -222,10 +221,11 @@ export class AdminAccomodationsComponent {
         this.resetInfos();
         this.toaster.success('La catégorie a bien été supprimée');
       },
-      () => {
+      (error) => {
+        console.log(error);
         this.toaster.error('Une erreur est survenue lors de la suppression de la catégorie');
-      }
-    )
+      },
+    );
   }
 
   deleteAccommodation(accommodationID: any) {
@@ -234,10 +234,10 @@ export class AdminAccomodationsComponent {
         this.resetInfos();
         this.toaster.success('Le produit/service a bien été supprimé');
       },
-      () => {
+      (error) => {
+        console.log(error);
         this.toaster.error('Une erreur est survenue lors de la suppression du produit/service');
-      }
-    )
+      },
+    );
   }
-
 }

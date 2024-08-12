@@ -1,15 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Accommodation } from 'src/app/shared/models/accommodation.model';
-import { Category } from 'src/app/shared/models/category.model';
-import { HotelService } from 'src/app/shared/services/hotel.service';
-import { Hotel } from 'src/app/shared/models/hotel.model';
-import { AccommodationService } from 'src/app/shared/services/accommodation.service';
+import {Component, Input} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Accommodation} from 'src/app/shared/models/accommodation.model';
+import {Category} from 'src/app/shared/models/category.model';
+import {HotelService} from 'src/app/shared/services/hotel.service';
+import {Hotel} from 'src/app/shared/models/hotel.model';
+import {AccommodationService} from 'src/app/shared/services/accommodation.service';
+import {CategoryService} from 'src/app/shared/services/category.service';
 
 @Component({
   selector: 'app-accommodation-page',
   templateUrl: './accommodation-page.component.html',
-  styleUrls: ['./accommodation-page.component.scss']
+  styleUrls: ['./accommodation-page.component.scss'],
 })
 export class AccommodationPage {
   public accommodations: Accommodation[] = [];
@@ -22,7 +23,9 @@ export class AccommodationPage {
   constructor(
     private route: ActivatedRoute,
     private accommodationService: AccommodationService,
-    private hotelService: HotelService) {
+    private hotelService: HotelService,
+    private categoryService: CategoryService,
+  ) {
     this.hotelService.getHotels().subscribe(() => {
       this.hotel = this.hotelService.hotel;
       if (this.hotel) {
@@ -31,7 +34,7 @@ export class AccommodationPage {
           this.hotelImageUrl = url;
         });
       } else {
-        this.hotelService.applyColors(["#FDFBF5"]);
+        this.hotelService.applyColors(['#FDFBF5']);
       }
     });
   }

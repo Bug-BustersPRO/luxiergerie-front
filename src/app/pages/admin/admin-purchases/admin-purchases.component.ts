@@ -12,9 +12,9 @@ import { AdminPurchaseCardComponent } from './admin-purchase-card/admin-purchase
   imports: [AdminPurchaseCardComponent],
 })
 export class AdminPurchasesComponent {
-  public bills: Bill[] = []
+  public bills: Bill[] = [];
   constructor(private purchasesService: PurchaseService) {
-    this.getBillByClient()
+    this.getBillByClient();
   }
 
   getBillByClient() {
@@ -22,8 +22,7 @@ export class AdminPurchasesComponent {
       .getBillByClient()
       .pipe(take(1))
       .subscribe((bills: Bill[]) => {
-        this.bills = bills
-      })
+        this.bills = bills;
+      });
   }
-
 }
