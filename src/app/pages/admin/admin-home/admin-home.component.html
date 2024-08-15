@@ -1,0 +1,13 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="dashboard-container">
+  <nav class="horizontal-navbar">
+    <h1>Dashboard</h1>
+    <div class="user-infos">
+      <h2>{{currentEmployee.firstName}} {{currentEmployee.lastName}}</h2>
+      <p>{{getRoleName(roles[0])}}</p>
+      <p (click)="logout()"
+         class="logoutBtn">Se déconnecter</p>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

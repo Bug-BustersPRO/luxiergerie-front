@@ -1,0 +1,83 @@
+@import "../../../../styles.scss";
+
+:host {
+  z-index: 1000;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+nav {
+  height: 65px;
+  background: var(--secondary-background-color);
+  position: relative;
+  z-index: 2;
+}
+
+.infos-container {
+  height: 100%;
+  font-weight: 500;
+  color: $primary-text-color;
+  p {
+    margin: 0;
+  }
+}
+
+.cgu {
+  width: calc(100% - 140px);
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+  align-items: center;
+}
+
+.footer-infos-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 90px;
+  width: 140px;
+  background-color: var(--secondary-background-color);
+  align-items: center;
+  font-size: 32px;
+  font-family: Italianno;
+  padding: 1rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  filter: drop-shadow(4px 4px 7.3px rgba(0, 0, 0, 0.25));
+
+  @media screen and (max-width: 600px) {
+    height: 145px;
+    width: 170px;
+  }
+
+  .name {
+    text-align: center;
+    font-size: 32px;
+    line-height: 85%;
+    color: var(--tertiary-background-color);
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+  }
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .infos-container {
+    .guest-infos-container {
+      .guest-name {
+        font-size: 16px;
+        padding-left: 9rem;
+      }
+
+    }
+
+    .connection {
+      font-size: 10px;
+      top: 100px;
+    }
+  }
+
+}

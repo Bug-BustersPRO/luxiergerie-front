@@ -1,0 +1,13 @@
+<nav>
+  <div class="infos-container">
+    <div class="cgu">
+      <p>©Luxiergerie</p>
+      <p (click)="navigateTo('/cgu')">Mentions légales</p>
+    </div>
+    <div class="footer-infos-container">
+      <div class="name">
+        <p (click)="navigateTo('/')" *ngIf="!isHome">Accueil</p>
+      </div>
+    </div>
+  </div>
+</nav>

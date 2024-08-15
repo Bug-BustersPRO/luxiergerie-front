@@ -1,0 +1,188 @@
+<section class="config-section">
+  <div class="config-header" *ngIf="isCreateHotel">
+    <h2>Bienvenue sur le configurateur d'Hôtel</h2>
+    <p>Veuillez suivre les étapes de la création de l'hôtel</p>
+  </div>
+  <div class="config-container">
+    @switch (currentStep) {
+      @case ('name') {
+        <div class="steps">
+          <div class="step-round-checked"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
+        </div>
+        <div class="config-body">
+          <h2>Veuillez choisir un nom pour l'hôtel :</h2>
+          <input type="text" [(ngModel)]="hotel.name" class="hotel-name" placeholder="Veuillez saisir un nom" required>
+        </div>
+        <div class="config-button" *ngIf="hotel.name !== ''">
+          <app-button (click)="goToStep('image')" [disabled]="hotel.name === ''" action="suivant"/>
+        </div>
+      }
+      @case ('image') {
+        <div class="steps">
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
+        </div>
+        <div class="config-body">
+          <h2>Ajoutez le logo de l'hôtel :</h2>
+          <div class="add-button" (click)="selectFile()" title="Ajouter" >
+            <span class="button-icon">+</span>
+          </div>
+          <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;"/>
+        </div>
+        <div *ngIf="fileName" class="file-name">
+          Fichier ajouté : {{fileName}}
+        </div>
+        <div *ngIf="isFileError">
+          <p class="error">{{errorMessage}}</p>
+        </div>
+        <div *ngIf="hotel.image.length > 0" class="config-image">
+          <img [src]="imageUrl" alt="" width="115px">
+        </div>
+        <div class="config-button">
+          <app-button (click)="goToStep('name')" action="retour"/>
+          <app-button (click)="goToStep('backgroundImage')" [disabled]="hotel.image.length === 0" *ngIf="hotel.image.length" action="suivant"/>
+        </div>
+      }
+      @case ('backgroundImage') {
+        <div class="steps">
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
+        </div>
+        <div class="config-body">
+          <h2>Ajoutez l'image de fond de l'hôtel :</h2>
+          <div class="add-button" (click)="selectBackgroundFile()" title="Ajouter" >
+            <span class="button-icon">+</span>
+          </div>
+          <input type="file" #fileInput (change)="onBackgroundFileSelected($event)" style="display: none;"/>
+        </div>
+        <div *ngIf="backgroundFileName" class="file-name">
+          Fichier ajouté : {{backgroundFileName}}
+        </div>
+        <div *ngIf="isFileError">
+          <p class="error">{{errorMessage}}</p>
+        </div>
+        <div *ngIf="hotel.image.length > 0" class="config-image">
+          <img [src]="backgroundImageUrl" alt="" width="115px">
+        </div>
+        <div class="config-button">
+          <app-button (click)="goToStep('image')" action="retour"/>
+          <app-button (click)="goToStep('colors')" [disabled]="hotel.backgroundImage.length === 0" *ngIf="hotel.backgroundImage.length" action="suivant"/>
+        </div>
+      }
+      @case ('colors') {
+        <div class="steps">
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+          <div class="step-line"></div>
+          <div class="step-round"></div>
+        </div>
+        <div class="config-body">
+          <h2>Veuillez choisir les couleurs de l'hôtel :</h2>
+          <div class="config-colors">
+            <div class="colors-container">
+              <p>Couleur principale</p>
+              <div class="color-hex">
+                <input type="color" [(ngModel)]="firstSelectedColor" (change)="onColorSelectedFirst($event)" class="color-input" />
+                <input type="text" [(ngModel)]="firstSelectedColor" class="text-input" disabled>
+              </div>
+            </div>
+            <div class="colors-container">
+              <p>Couleur secondaire</p>
+              <div class="color-hex">
+                <input type="color" [(ngModel)]="secondSelectedColor" (change)="onColorSelectedSecond($event)" class="color-input" />
+                <input type="text" [(ngModel)]="secondSelectedColor" class="text-input" disabled>
+              </div>
+            </div>
+            <div class="colors-container">
+              <p>Couleur tertiaire</p>
+              <div class="color-hex">
+                <input type="color" [(ngModel)]="thirdSelectedColor" (change)="onColorSelectedThird($event)" class="color-input" />
+                <input type="text" [(ngModel)]="thirdSelectedColor" class="text-input" disabled>
+              </div>
+            </div>
+          </div>
+          <div class="recommanded-colors">
+            <div class="colors-choice">
+              <p>Couleurs prédéfinis</p>
+              <div class="colors-btn">
+                @for (colors of recommandedColors; track $index) {
+                <button (click)="setRecommandedColors($index)">{{colors.name}}</button>
+              }
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="config-button">
+          <app-button (click)="goToStep('backgroundImage')" action="retour"/>
+          <app-button (click)="goToStep('confirmation')" [disabled]="hotel.colors.length === 0" *ngIf="hotel.colors.length " action="suivant"/>
+        </div>
+      }
+      @case ('confirmation') {
+        <div class="steps">
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+          <div class="step-line-checked"></div>
+          <div class="step-round-checked"></div>
+        </div>
+        <div class="config-body">
+          <h2>Voici le compte rendu de configuration : </h2>
+        </div>
+        <div class="config-confirmation">
+          <div class="confirmation-text">
+            <h5>Nom : </h5>  {{hotel.name}}
+          </div>
+          <div class="confirmation-text">
+            <h5>Logo : </h5>
+            <img [src]="imageUrl" alt="" width="115px">
+          </div>
+          <div class="confirmation-text">
+            <h5>Image de fond : </h5>
+            <img [src]="backgroundImageUrl" alt="" width="115px">
+          </div>
+          <div class="confirmation-text">
+            <h5>Couleurs choisies : </h5>
+            <div *ngFor="let color of hotel.colors" class="confirmation-colors">
+              <input type="color" [ngModel]="([color])" disabled class="color-input">  {{color}}
+            </div>
+          </div>
+        </div>
+        <div class="config-button">
+          <app-button (click)="goToStep('colors')" action="retour"/>
+          <app-button (click)="submitHotel()" action="valider"/>
+        </div>
+      }
+    }
+  </div>
+</section>

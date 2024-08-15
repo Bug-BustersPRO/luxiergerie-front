@@ -1,18 +1,27 @@
 import { Accommodation } from "./accommodation.model";
-import { Room } from "./room.model";
+import { Client } from "./client.model";
 
 export class Purchase {
-  public id: string;
+  public id?: string;
   public date: Date;
-  public room: Room;
+  public client: Client;
   public status: string;
   public accommodations: Accommodation[];
+  public totalPrice: string;
 
-  constructor(id: string, date: Date, room: Room, status: string, accommodations: Accommodation[]) {
+  constructor(
+    date: Date,
+    client: Client,
+    status: string,
+    accommodations: Accommodation[],
+    totalPrice: string,
+    id?: string) {
     this.id = id;
     this.date = date;
-    this.room = room;
+    this.client = client;
     this.status = status;
     this.accommodations = accommodations;
+    this.totalPrice = totalPrice;
   }
+
 }

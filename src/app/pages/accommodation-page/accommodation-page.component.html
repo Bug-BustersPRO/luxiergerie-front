@@ -1,0 +1,13 @@
+<section class="section-global">
+  <app-carousel [items]="carouselItems"/>
+  <div class="cards">
+    <li *ngFor="let accommodation of accommodations">
+      <app-accommodation [accommodation]="accommodation">
+        <p>{{accommodation.reservable}}</p>
+      </app-accommodation>
+    </li>
+  </div>
+  <div class="buttons">
+    <app-button action='précédent' />
+  </div>
+</section>

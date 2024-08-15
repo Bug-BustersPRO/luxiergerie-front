@@ -1,0 +1,93 @@
+<div id="main-container">
+  <div id="container">
+    <div id="sections">
+      <p>Sections</p>
+      <div class="layout">
+        <div class="one_card_container">
+          @for (section of sectionsWithImage; track $index) {
+            <section class="one_card" [ngClass]="{'selected-card': selectedSectionId === section.id}">
+              <div class="main_card_container">
+                <app-admin-services-generic-card [infos]="section" [image]="section.urlImage"/>
+                <div class="chevron material-symbols-outlined" (click)="getCategoriesBySection(section.id)">
+                  <span> arrow_forward_ios </span>
+                </div>
+              </div>
+              <div class="edit_and_delete">
+                <span (click)="openModal('updateSection', section)" class="material-symbols-outlined">edit</span>
+                <span (click)="deleteSection(section.id)" class="material-symbols-outlined">delete</span>
+              </div>
+            </section>
+          }
+        </div>
+        <div class="open" (click)="openModal('newSection', null)">
+          <span class="material-symbols-outlined"> add_circle </span> Nouvelle section
+        </div>
+      </div>
+    </div>
+    <div id="categories">
+      <p>Catégories</p>
+      <div class="layout">
+        <div class="one_card_container">
+          @for (category of categoriesWithImage; track $index) {
+            <section class="one_card" [ngClass]="{'selected-card' : selectedCategoryId === category.id}">
+              <div class="main_card_container">
+                <app-admin-services-generic-card [infos]="category" [image]="category.urlImage"/>
+                <div class="chevron material-symbols-outlined" (click)="getAccommodationsByCategory(category.id)">
+                  <span> arrow_forward_ios </span>
+                </div>
+              </div>
+              <div class="edit_and_delete">
+                <span (click)="openModal('updateCategory', category)" class="material-symbols-outlined">edit</span>
+                <span (click)="deleteCategory(category.id)" class="material-symbols-outlined">delete</span>
+              </div>
+            </section>
+          }
+        </div>
+      <div class="open" (click)="openModal('newCategory', null)">
+        <span class="material-symbols-outlined"> add_circle </span> Nouvelle catégorie
+      </div>
+      </div>
+    </div>
+    <div id="accommodations">
+      <p>Produits/Services</p>
+      <div class="layout">
+        <div class="one_card_container">
+          @for ( accommodation of accommodationsWithImages; track $index ) {
+            <section class="one_card">
+              <div class="main_card_container" id="accommodation">
+                <app-admin-services-generic-card [infos]="accommodation" [image]="accommodation.urlImage"/>
+              </div>
+              <div class="edit_and_delete">
+                <span (click)="openModal('updateAccommodation', accommodation)"
+                    class="material-symbols-outlined">
+                    edit
+                </span>
+                <span (click)="deleteAccommodation(accommodation.id)"
+                    class="material-symbols-outlined">
+                    delete
+                </span>
+              </div>
+            </section>
+          }
+        </div>
+        <div class="open" (click)="openModal('newAccommodation', null)">
+          <span class="material-symbols-outlined"> add_circle </span> Nouveau produit/service
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-modal title="{{openModalForCreation? 'Créer ' + typeForDisplay : 'Modifier les informations'}}"
+             [showModal]="isModalOpen"
+             (closeModalEvent)="closeModal()">
+    <app-admin-service-form [openModalForCreation]="openModalForCreation"
+                            [infos]="infos"
+                            [imageUrl]="imageUrl"
+                            [typeForDisplay]="typeForDisplay"
+                            [typeForChoice]="typeForChoice"
+                            (closeModal)="closeModalOnSubmit()"
+                            (isFileErrorOutput)="isFileError = $event"
+                            [isACategory]="isACategory"
+                            [isAnAccommodation]="isAnAccommodation"
+                            [isFileError]="isFileError"/>
+    </app-modal>
+</div>

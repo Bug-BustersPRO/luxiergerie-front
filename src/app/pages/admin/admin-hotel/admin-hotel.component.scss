@@ -1,0 +1,24 @@
+body {
+  overflow: hidden;
+}
+
+.hotel-container {
+  background-color: #fdfbf5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 8.8px;
+  border-radius: 5px;
+  width: 90%;
+  display: block;
+  margin: auto;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 0;
+  overflow: auto;
+  display: block;
+  height: 80vh;
+
+  .container-title {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+  }
+}

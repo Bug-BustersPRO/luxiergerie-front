@@ -6,10 +6,17 @@ export class Client {
   public lastName: string;
   public email: string;
   public phoneNumber: string;
-  public pin: Number;
-  public room: Room;
+  public pin: number;
+  public room: Room | null;
 
-  constructor(id: string, firstName: string, lastName: string, email: string, phoneNumber: string, pin: Number, room: Room) {
+  constructor(
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string,
+    pin: number,
+    room: Room | null) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -18,4 +25,5 @@ export class Client {
     this.pin = pin;
     this.room = room;
   }
+
 }
