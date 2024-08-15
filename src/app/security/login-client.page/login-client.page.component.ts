@@ -1,6 +1,7 @@
 import { Component, OnDestroy, AfterViewInit, ViewChild, ElementRef, Renderer2 } from "@angular/core";
 import { Hotel } from "src/app/shared/models/hotel.model";
 import { HotelService } from "src/app/shared/services/hotel.service";
+import * as Hammer from 'hammerjs';
 
 
 @Component({

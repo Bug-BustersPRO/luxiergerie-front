@@ -9,8 +9,8 @@ import { Section } from '../../models/section.model';
 describe('AccommodationComponent', () => {
   let component: AccommodationComponent;
   let fixture: ComponentFixture<AccommodationComponent>;
-  const mockSection = new Section('1', 'Test Section', 'Description of Test Section', 'test-section.jpg', 'Test Title', []);
-  const mockCategory = new Category('cat1', 'Test Category', 'Description of Test Category', 'test-category.jpg', [], mockSection);
+  const mockSection = new Section('1', 'Test Section', 'image', [], 'test-section.jpg', 'Test Title', []);
+  const mockCategory = new Category('cat1', 'Test Category', 'image', [],'Description of Test Category',[], mockSection);
 
   const mockAccommodation = {
     id: '1',

@@ -55,7 +55,7 @@ export class AccommodationPageComponent {
           const reader = new FileReader();
           reader.readAsDataURL(accommodationImage);
           reader.onloadend = () => {
-            accommodation.urlImage = reader.result as string;
+            accommodation.image = reader.result as string;
             accommodationsProcessed++;
             if (accommodationsProcessed === totalAccommodations) {
               this.accommodations = accommodations;
@@ -71,7 +71,7 @@ export class AccommodationPageComponent {
     this.carouselItems = this.accommodations.map((element) => ({
       title: element.name,
       description: element.description,
-      image: element.urlImage,
+      image: element.image,
     }));
   }
 

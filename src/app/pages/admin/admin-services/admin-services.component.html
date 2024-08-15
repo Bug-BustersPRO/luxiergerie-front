@@ -55,7 +55,7 @@
           @for ( accommodation of accommodationsWithImages; track $index ) {
             <section class="one_card">
               <div class="main_card_container" id="accommodation">
-                <app-admin-services-generic-card [infos]="accommodation" [image]="accommodation.urlImage"/>
+                <app-admin-services-generic-card [infos]="accommodation" [image]="accommodation.image"/>
               </div>
               <div class="edit_and_delete">
                 <span (click)="openModal('updateAccommodation', accommodation)"

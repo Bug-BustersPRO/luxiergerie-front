@@ -4,7 +4,7 @@ import { SectionPageComponent } from './pages/section/section-page';
 import { HomePageComponent } from './pages/home/home-page.component';
 import { CategoryPageComponent } from './pages/category/category-page';
 import { AccommodationPageComponent } from './pages/accommodation-page/accommodation-page.component';
-import { LoginClientPageComponent } from './pages/security/login-client.page/login-client.page.component';
+import { LoginClientPageComponent } from './security/login-client.page/login-client.page.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { AdminPurchasesComponent } from './pages/admin/admin-purchases/admin-purchases.component';
 import { AdminAccomodationsComponent } from './pages/admin/admin-services/admin-services.component';
@@ -16,7 +16,7 @@ import { AdminSojournComponent } from './pages/admin/admin-sojourn/admin-sojourn
 import { AdminRoomComponent } from './pages/admin/admin-room/admin-room.component';
 import { AdminClientComponent } from './pages/admin/admin-client/admin-client.component';
 import { AdminPurchaseDetailComponent } from './pages/admin/admin-purchases/admin-purchase-detail/admin-purchase-detail.component';
-import { LoginEmployeeComponent } from './pages/security/login-employee/login-employee.component';
+import { LoginEmployeeComponent } from './security/login-employee/login-employee.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sections', pathMatch: 'full' },
