@@ -9,28 +9,35 @@
 }
 
 nav {
-  height: 130px;
+  height: 65px;
   background: var(--secondary-background-color);
   position: relative;
   z-index: 2;
 }
 
 .infos-container {
+  height: 100%;
   font-weight: 500;
   color: $primary-text-color;
-
   p {
     margin: 0;
   }
+}
 
+.cgu {
+  width: calc(100% - 140px);
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+  align-items: center;
 }
 
 .footer-infos-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 160px;
-  width: 220px;
+  height: 90px;
+  width: 140px;
   background-color: var(--secondary-background-color);
   align-items: center;
   font-size: 32px;

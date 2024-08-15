@@ -36,7 +36,11 @@ export class FooterComponent implements OnInit {
   }
 
   navigateTo(route: string): void {
-    this.isHome = true;
+    if(route === '/cgu'){
+      this.isHome = false;
+    } else {
+      this.isHome = true;
+    }
     this.router.navigate([route]);
     window.scrollTo(0, 0);
   }
