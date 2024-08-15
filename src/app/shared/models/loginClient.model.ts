@@ -1,9 +1,10 @@
 export class LoginClient {
-  public roomNumber: string;
+  public sojournIdentifier: string;
   public password: string;
 
-  constructor(roomNumber: string, password: string) {
-    this.roomNumber = roomNumber;
+  constructor(sojournIdentifier: string, password: string) {
+    this.sojournIdentifier = sojournIdentifier;
     this.password = password;
   }
+
 }

@@ -12,4 +12,5 @@ export class Hotel {
     this.colors = colors;
     this.backgroundImage = backgroundImage;
   }
+
 }

@@ -5,11 +5,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { SectionPageComponent } from './pages/section/section-page';
-import { LoginClientPageComponent } from './pages/security/room/login-client.page/login-client.page.component';
-import { AuthGuardService } from "./shared/services/Guard/auth-room.guard";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { LoginModalComponent } from "./shared/components/login-modal/login-modal.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AuthGuardService } from './shared/services/Guard/auth-room.guard';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LoginModalComponent } from './shared/components/login-modal/login-modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardComponent } from './shared/components/card/card.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { HomePageComponent } from './pages/home/home-page.component';
@@ -21,11 +20,17 @@ import { CategoryComponent } from './shared/components/category/category.compone
 import { AccommodationCardComponent } from './shared/components/accommodation-card/accommodation-card.component';
 import { AccommodationPageComponent } from './pages/accommodation-page/accommodation-page.component';
 import { AccommodationComponent } from './shared/components/accommodation/accommodation.component';
-import { LoginEmployeeComponent } from './pages/login-employee/login-employee.component';
 import { CartComponent } from './shared/components/cart/cart.component';
 import { ConfigHotelGuard } from './shared/services/Guard/config-hotel.guard';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { ToastrModule } from 'ngx-toastr';
+import { RoleGuard } from './shared/services/Guard/role.guard';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { LoginClientPageComponent } from './pages/security/login-client.page/login-client.page.component';
+import { LoginEmployeeComponent } from './pages/security/login-employee/login-employee.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +46,7 @@ import { ToastrModule } from 'ngx-toastr';
     AccommodationComponent,
     LoginEmployeeComponent,
     AccommodationPageComponent,
+    LoginClientPageComponent
   ],
   imports: [
     BrowserModule,
@@ -57,30 +63,43 @@ import { ToastrModule } from 'ngx-toastr';
     AccommodationCardComponent,
     ButtonComponent,
     ModalComponent,
-    BrowserAnimationsModule,
     CartComponent,
+    FooterComponent,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    })
+    }),
+    MatButtonModule,
+    MatBadgeModule
   ],
   providers: [
     {
       provide: 'authRoom',
       useFactory: (service: AuthGuardService) => service.authRoom(),
-      deps: [AuthGuardService]
+      deps: [AuthGuardService],
     },
     {
       provide: 'authEmployee',
       useFactory: (service: AuthGuardService) => service.authEmployee(),
-      deps: [AuthGuardService]
+      deps: [AuthGuardService],
     },
     {
       provide: 'configHotel',
       useFactory: (service: ConfigHotelGuard) => service.configHotel(),
-      deps: [ConfigHotelGuard]
+      deps: [ConfigHotelGuard],
     },
+    {
+      provide: 'roleGuard',
+      useFactory: (service: RoleGuard) => service.roleGuard(),
+      deps: [RoleGuard],
+    },
+    {
+      provide: 'roleGuardAdmin',
+      useFactory: (service: RoleGuard) => service.roleGuardAdmin(),
+      deps: [RoleGuard],
+    },
+    provideAnimationsAsync(),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -6,11 +6,11 @@ import { Accommodation } from '../../models/accommodation.model';
   templateUrl: './accommodation.component.html',
   styleUrls: ['./accommodation.component.scss']
 })
-export class AccommodationComponent implements OnInit{
+export class AccommodationComponent implements OnInit {
 
   @Input() accommodation!: Accommodation;
 
-  constructor(){}
+  constructor() { }
 
   ngOnInit() {
     this.accommodation.quantity = 0;

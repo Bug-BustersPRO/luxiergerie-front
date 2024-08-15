@@ -20,8 +20,8 @@ export class AuthService {
   constructor(
     private cookieService: CookieService,
     private http: HttpClient,
-    private router: Router
-  ) {}
+    private router: Router,
+  ) { }
 
   // faire une vérification différente quand on est connecté via le serial number de l'employée, la solution est pour le moment uniquement via le client room
   public clientLogin(loginClient: LoginClient): Observable<HttpResponse<any>> {
@@ -32,8 +32,9 @@ export class AuthService {
       })
       .pipe(
         tap((response: HttpResponse<any>) => {
-          if (response.status === 200) this.client$.set(response.body);
-          localStorage.setItem('client', JSON.stringify(response.body));
+          if (response.status === 200) {
+            this.client$.set(response.body);
+          }
         })
       );
   }
@@ -76,21 +77,25 @@ export class AuthService {
       })
       .pipe(
         tap((response: HttpResponse<any>) => {
-          if (response.status === 200) this.employee$.set(response.body);
-          localStorage.setItem('employee', JSON.stringify(response.body));
+          if (response.status === 200) {
+            this.employee$.set(response.body);
+            localStorage.setItem('employee', JSON.stringify(response.body));
+          }
         })
       );
   }
 
-  public logOut(isEmployee: boolean): void {
+  public logOut(isEmployee: boolean) {
     if (isEmployee === true) {
       localStorage.removeItem('employee');
-      this.router.navigate(['/login/employee']);
     } else {
-      localStorage.removeItem('client');
-      this.router.navigate(['/login/room']);
+      localStorage.removeItem('current_client');
+      localStorage.removeItem('cart_items');
+      localStorage.removeItem('cart_categories');
+      localStorage.removeItem('total_price');
     }
-    this.cookieService.delete('jwt-token');
+    // A modifier avec un .env lors du déploiement
+    this.cookieService.delete('jwt-token', '/', 'localhost');
     this.http
       .get('http://localhost:8090/api/auth/logout', {
         withCredentials: true,
@@ -100,10 +105,16 @@ export class AuthService {
       .subscribe({
         next: (response) => {
           console.log(response);
+          if (isEmployee === true) {
+            this.router.navigate(['/login/employee']);
+          } else {
+            this.router.navigate(['/login/room']);
+          }
         },
         error: (error) => {
           console.error('Error while logging out: ', error);
         },
       });
   }
+
 }

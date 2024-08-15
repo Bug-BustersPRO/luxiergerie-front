@@ -8,9 +8,7 @@ import { HttpResponse, HttpStatusCode } from "@angular/common/http";
   providedIn: 'root'
 })
 export class AuthGuardService {
-  private status: any
-  constructor(private authService: AuthService, private router: Router) {
-  }
+  constructor(private authService: AuthService, private router: Router) { }
 
   public authRoom(): CanActivateFn {
     return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
@@ -41,7 +39,7 @@ export class AuthGuardService {
             this.router.navigate(['/login/employee'])
             return false
           } else if (status === HttpStatusCode.Ok && isLoginEmployeePage) {
-            this.router.navigate(['/sections'])
+            this.router.navigate(['/admin'])
             return false
           }
           return true

@@ -1,58 +1,92 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminHomeComponent } from '../admin-home/admin-home.component';
-import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { HotelService } from 'src/app/shared/services/hotel.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-navbar',
   templateUrl: './admin-navbar.component.html',
   styleUrls: ['./admin-navbar.component.scss'],
   standalone: true,
-  imports: [AdminHomeComponent, RouterLink, AdminDashboardComponent],
-  providers: []
+  imports: [AdminHomeComponent, RouterLink, CommonModule],
+  providers: [],
 })
 
 export class AdminNavbarComponent implements OnInit {
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
+  isAdmin!: boolean;
 
-  public navItems = [
+  public navItemsAdmin = [
     {
       name: 'Commandes',
       route: 'purchases',
-      icon: 'shopping_cart'
+      icon: 'shopping_cart',
     },
     {
       name: 'Services',
       route: 'accomodations',
-      icon: 'list_alt'
+      icon: 'list_alt',
+    },
+    {
+      name: 'Séjours',
+      route: 'sojourn',
+      icon: 'check_box',
     },
     {
       name: 'Chambres',
-      route: 'config',
-      icon: 'key'
+      route: 'room',
+      icon: 'key',
     },
     {
-      name: 'Carousel',
-      route: 'carousel',
-      icon: 'note_alt'
+      name: 'Clients',
+      route: 'client',
+      icon: 'person',
     },
     {
       name: 'Employé(e)s',
       route: 'employee',
-      icon: 'person'
+      icon: 'person',
     },
     {
       name: 'Mon établissement',
       route: 'hotel',
-      icon: 'business'
-    }
-  ]
+      icon: 'business',
+    },
+  ];
 
-  constructor(private hotelService: HotelService, private cookieService: CookieService) {
+  public navItemsEmployee = [
+    {
+      name: 'Commandes',
+      route: 'purchases',
+      icon: 'shopping_cart',
+    },
+    {
+      name: 'Services',
+      route: 'accomodations',
+      icon: 'list_alt',
+    },
+    {
+      name: 'Séjours',
+      route: 'sojourn',
+      icon: 'check_box',
+    },
+    {
+      name: 'Chambres',
+      route: 'config',
+      icon: 'key',
+    },
+    {
+      name: 'Clients',
+      route: 'client',
+      icon: 'person',
+    },
+  ];
+
+  constructor(private hotelService: HotelService, private cookieService: CookieService, private router: Router) {
     this.hotelService.getHotels().subscribe(() => {
       this.hotel = this.hotelService.hotel;
       if (this.hotel) {
@@ -61,18 +95,29 @@ export class AdminNavbarComponent implements OnInit {
           this.hotelImageUrl = url;
         });
       } else {
-        this.hotelService.applyColors(["#FDFBF5"]);
+        this.hotelService.applyColors(['#FDFBF5']);
       }
     });
   }
 
   ngOnInit(): void {
+    const employee = JSON.parse(localStorage.getItem('employee')!);
+    if (employee.roles[0].name === 'ROLE_ADMIN') {
+      this.isAdmin = true;
+    }
+
     this.hotelService.hotelUpdate$.subscribe({
       next: (hotel) => {
         this.hotel = hotel;
         this.hotelService.getHotelImageSub();
-      }
+      },
     });
   }
 
+  isActive(route: string): boolean {
+    switch (route) {
+      default:
+        return this.router.url.includes(route);
+    }
+  }
 }

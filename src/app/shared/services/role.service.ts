@@ -18,14 +18,14 @@ export class RoleService {
   }
   private getAllRoles$: WritableSignal<Role[]> = signal([]);
   getAllRolesSig = computed(() => this.getAllRoles$());
-  private getRoleById$: WritableSignal<Role> = signal<any>({"role.id": "", "role.name": ""});
+  private getRoleById$: WritableSignal<Role> = signal<any>({ "role.id": "", "role.name": "" });
   public getRoleById = computed(() => this.getRoleById$());
 
   // Roles API - call vers le backend
 
   public getRoles(): void {
     this.http.get<Role[]>(`${this.url}/role`, { headers: this.getHeaders() })
-      .subscribe({ 
+      .subscribe({
         next: roles => this.getAllRoles$.set(roles),
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while fetching roles")
       }
@@ -63,4 +63,5 @@ export class RoleService {
         error: (error: HttpErrorResponse) => console.log(error, "There was an error while deleting role with id: " + id)
       });
   }
+
 }

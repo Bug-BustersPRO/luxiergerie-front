@@ -6,10 +6,9 @@ import { Observable } from 'rxjs';
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
-  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true
-
+  standalone: true,
+  imports: [CommonModule],
 })
 export class ModalComponent {
 
@@ -28,17 +27,14 @@ export class ModalComponent {
   //   </section>
   // </app-modal>
 
-  constructor() {
-  }
-
   @Input() public title: string = '';
   @Output() public closeModalEvent = new EventEmitter<void>();
   @Input() public toggleModal!: Observable<void>;
   @Input() public showModal: boolean = false;
 
-
   closeModal() {
     this.showModal = false;
     this.closeModalEvent.emit();
   }
+
 }

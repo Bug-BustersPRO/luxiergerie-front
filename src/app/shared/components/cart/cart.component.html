@@ -1,71 +1,92 @@
-
-  <div class="cart" *ngIf="!orderConfirmed">
+<div class="cart"
+     *ngIf="!orderConfirmed">
+  <div class="scrollable-cart">
     <div class="columns colored-border">
       <p>Produits/Services</p>
       <p class="centerded-p">Quantité</p>
       <p class="centerded-p">Prix</p>
     </div>
-    <div class="scrollable">
-      <div class="colored-border" *ngFor="let category of categories">
-        <p class="bold"> {{category.category}}</p>
-        <div *ngFor="let item of items">
-          <div *ngIf="item.category === category.category" class="columns">
-            <p>{{item.name}} </p>
-            <div class="quantity">
-              <p class="right-p tertiary bold"
+    <div *ngIf="!this.items?.length">
+      <p>Votre panier est vide</p>
+    </div>
+    <div class="colored-border"
+         *ngFor="let category of categories">
+      <p class="bold"> {{category.category}}</p>
+      <div *ngFor="let item of items">
+        <div *ngIf="item.category === category.category"
+             class="columns">
+          <p>{{item.name}} </p>
+          <div class="quantity">
+            <p class="right-p tertiary bold"
+
               (click)="removeItem(item)"
               (keydown.enter)="removeItem(item)"
               role="button" tabindex="0">-</p>
-              <p class="centerded-p">{{item.quantity}}</p>
-              <p class="tertiary bold"
+            <p class="centerded-p">{{item.quantity}}</p>
+            <p class="tertiary bold"
+
               (click)="addQuantity(item)"
               (keydown.enter)="addQuantity(item)"
               role="button" tabindex="0">+</p>
-            </div>
-            <p class="centerded-p">{{item.price*item.quantity | number: '1.2-2'}} €</p>
           </div>
-        </div>
-        <div class="columns">
-          <p class="colored-text">Sous total</p>
-          <div class="grid-filler"></div>
-          <p class="colored-text centerded-p"> {{category.totalPricePerCat.round(2).getPrettyValue()}} €</p>
+          <p class="centerded-p">{{item.price*item.quantity | currency: 'EUR'}}</p>
         </div>
       </div>
-    </div>
-    <div class="whitespace">
       <div class="columns">
+        <p class="colored-text">Sous total</p>
         <div class="grid-filler"></div>
-        <p class="centerded-p bold">Prix total : </p>
-        <p class="colored-text centerded-p">{{totalPrice.getPrettyValue()}} €</p>
+        <p class="colored-text centerded-p"> {{ formatPrice(category.totalPricePerCat) }}</p>
       </div>
-      <div class="buttons">
-      <app-button action="Vider le panier" (click)="clearCart()" (keydown.enter)="clearCart()"/>
-      <app-button action="commander" (click)="order()" (keydown.enter)="order()"/>
-    </div>
     </div>
   </div>
-
-  <div class="cart" *ngIf="orderConfirmed">
-      <p class="centerded-p slim">Merci pour votre commande, vous recevrez ce récapitulatif par e-mail</p>
-      <div class="columns">
-        <p style="background-color: var(--primary-background-color);">NOM</p>
-        <p class="centerded-p" style="background-color: var(--quaternary-background-color);">QUANTITE</p>
-        <p class="centerded-p" style="background-color: var(--secondary-background-color);">PRIX</p>
-      </div>
-      <div class="scrollable">
-        <div *ngFor="let item of purchase.accommodations" class = "columns">
-          <p>{{item.name}} </p>
-          <p class="centerded-p">{{item.quantity}}</p>
-          <p class="centerded-p">{{item.price*item.quantity | number: '1.2-2'}} €</p>
-        </div>
-      </div>
-      <div class="whitespace">
-        <div class="columns">
-          <div class="grid-filler"></div>
-          <p class="centerded-p bold">Prix total : </p>
-          <p class="colored-text centerded-p">{{purchase.totalPrice}} €</p>
-        </div>
-        <div class="buttons">
-         <app-button action="fermer" (click)="closeModal()" (keydown.enter)="closeModal()"/>
-      </div>
+  <div class="whitespace">
+    <div class="columns">
+      <div class="grid-filler"></div>
+      <p class="centerded-p bold">Prix total : </p>
+      <p class="colored-text centerded-p">{{formatPrice(totalPrice)}} </p>
+    </div>
+    <div class="buttons">
+      @if (hotel) {
+        <app-button *ngIf="this.items?.length"
+                  action="Vider le panier"
+                  (click)="clearCart()" (keydown.enter)="clearCart()"
+                  [txtColor]="hotel.colors[0]"
+                  [btnBackground]="hotel.colors[1]"/>
+        <app-button *ngIf="this.items?.length"
+                  action="commander"
+                  (click)="order()" (keydown.enter)="order()"
+                  [txtColor]="hotel.colors[0]"
+                  [btnBackground]="hotel.colors[1]"/>
+      }
+    </div>
+  </div>
+</div>
+<div class="cart"
+     *ngIf="orderConfirmed">
+  <p class="centerded-p slim">Merci pour votre commande, vous recevrez ce récapitulatif par e-mail</p>
+  <div class="scrollable-confirmation">
+    <div class="columns">
+      <p style="background-color: var(--primary-background-color);">NOM</p>
+      <p class="centerded-p"
+         style="background-color: var(--quaternary-background-color);">QUANTITE</p>
+      <p class="centerded-p"
+         style="background-color: var(--secondary-background-color);">PRIX</p>
+    </div>
+    <div *ngFor="let item of purchase.accommodations"
+         class="columns">
+      <p>{{item.name}} </p>
+      <p class="centerded-p">{{item.quantity}}</p>
+      <p class="centerded-p">{{item.price*item.quantity | currency: 'EUR'}}</p>
+    </div>
+  </div>
+  <div class="whitespace">
+    <div class="columns">
+      <div class="grid-filler"></div>
+      <p class="centerded-p bold">Prix total : </p>
+      <p class="colored-text centerded-p">{{purchase.totalPrice | currency: 'EUR'}} </p>
+    </div>
+    <div class="buttons">
+      <app-button action="fermer"
+                  (click)="closeModal()" (keydown.enter)="closeModal()" />
+    </div>
   </div>

@@ -5,9 +5,15 @@ export class Employee {
   public lastName: string;
   public serialNumber?: string;
   public password: string;
-   public roles: { name: string }[];
+  public roles: { name: string }[];
 
-  constructor(id: string, firstName: string, lastName: string, serialNumber: string, password: string, roles: { name: string }[]) {
+  constructor(
+    id: string,
+    firstName: string,
+    lastName: string,
+    serialNumber: string,
+    password: string,
+    roles: { name: string }[]) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -15,4 +21,5 @@ export class Employee {
     this.password = password;
     this.roles = roles;
   }
+
 }

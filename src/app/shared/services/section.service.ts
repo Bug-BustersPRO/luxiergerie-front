@@ -46,30 +46,24 @@ export class SectionService {
     return this.http.get<Category[]>(`${this.url}/sections/${id}/categories`, { headers: this.getHeaders() })
   }
 
-  // CREATE
-  public createSection(section: Section): void {
-    this.http.post(`${this.url}/sections`, section, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Section created successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while creating section")
-      });
+  public getSectionImageById(id: any): Observable<Blob> {
+    return this.http.get(`${this.url}/sections/image/${id}`, { headers: this.getHeaders(), responseType: 'blob' });
   }
 
-  // UPDATE
-  public updateSection(section: Section): void {
-    this.http.put(`${this.url}/sections/${section.id}`, section, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Section updated successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while updating section with id: " + section.id)
-      });
+
+  // CREATE
+  public createSection(section: FormData): Observable<any> {
+    return this.http.post(`${this.url}/sections`, section, { headers: this.getHeaders() });
+  }
+
+  //   // UPDATE
+  public updateSection(section: FormData, id: any): Observable<any> {
+    return this.http.put(`${this.url}/sections/${id}`, section, { headers: this.getHeaders() });
   }
 
   // DELETE
-  public deleteSection(id: number): void {
-    this.http.delete(`${this.url}/sections/${id}`, { headers: this.getHeaders() })
-      .subscribe({
-        next: () => console.log("Section deleted successfully"),
-        error: (error: HttpErrorResponse) => console.log(error, "There was an error while deleting section with id: " + id)
-      });
+  public deleteSection(id: number): Observable<any> {
+    return this.http.delete(`${this.url}/sections/${id}`, { headers: this.getHeaders() });
   }
+
 }

@@ -1,16 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 87%;
+  flex: auto;
+}
+
 .section-global {
-   display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: auto;
-    max-width: 628px;
-    padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  padding-bottom: 50px;
 
   .buttons {
     justify-content: space-between;
     list-style: none;
     display: flex;
-    padding-top: 3rem;
     width: 100%;
+    margin-left: 4rem;
   }
 }

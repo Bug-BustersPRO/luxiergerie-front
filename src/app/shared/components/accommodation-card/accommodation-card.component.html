@@ -1,6 +1,6 @@
 <section class="global-container">
   <div class="picture">
-    <img [src]="item.image"
+    <img [src]="item.urlImage"
          alt="{{ item.name }}" />
   </div>
   <div class="info-container">
@@ -8,15 +8,21 @@
       <h2 class="title">{{ item.name }}</h2>
       <div class="description">{{ item.description }}</div>
     </div>
-
     <div class="price-button">
       <div class="price">{{ item.price | number: '1.2-2' }} €</div>
-      <div [ngClass]="{ 'only-more-button': item.quantity === 0 }" class="quantity-button">
-        <button *ngIf="item.quantity > 0" type="button" class="button-less" (click)="decreaseQuantity()">
+      <div [ngClass]="{ 'only-more-button': item.quantity == 0 }"
+           class="quantity-button">
+        <button *ngIf="item.quantity > 0"
+                type="button"
+                class="button-less"
+                (click)="decreaseQuantity()">
           <p>-</p>
         </button>
-        <div *ngIf="item.quantity > 0" class="quantity">{{item.quantity}}</div>
-        <button type="button" class="button-more" (click)="increaseQuantity()">
+        <div *ngIf="item.quantity > 0"
+             class="quantity">{{item.quantity}}</div>
+        <button type="button"
+                class="button-more"
+                (click)="increaseQuantity()">
           <p>+</p>
         </button>
       </div>

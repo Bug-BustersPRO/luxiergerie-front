@@ -129,21 +129,21 @@
               <p>Couleur principale</p>
               <div class="color-hex">
                 <input type="color" [(ngModel)]="firstSelectedColor" (change)="onColorSelectedFirst($event)" class="color-input" />
-                <input type="text" [(ngModel)]="firstSelectedColor" class="text-input">
+                <input type="text" [(ngModel)]="firstSelectedColor" class="text-input" disabled>
               </div>
             </div>
             <div class="colors-container">
               <p>Couleur secondaire</p>
               <div class="color-hex">
                 <input type="color" [(ngModel)]="secondSelectedColor" (change)="onColorSelectedSecond($event)" class="color-input" />
-                <input type="text" [(ngModel)]="secondSelectedColor" class="text-input">
+                <input type="text" [(ngModel)]="secondSelectedColor" class="text-input" disabled>
               </div>
             </div>
             <div class="colors-container">
               <p>Couleur tertiaire</p>
               <div class="color-hex">
                 <input type="color" [(ngModel)]="thirdSelectedColor" (change)="onColorSelectedThird($event)" class="color-input" />
-                <input type="text" [(ngModel)]="thirdSelectedColor" class="text-input">
+                <input type="text" [(ngModel)]="thirdSelectedColor" class="text-input" disabled>
               </div>
             </div>
           </div>
@@ -186,16 +186,18 @@
         </div>
         <div class="config-confirmation">
           <div class="confirmation-text">
-            <h4>Nom : </h4>  {{hotel.name}}
+            <h5>Nom : </h5>  {{hotel.name}}
           </div>
           <div class="confirmation-text">
-            <h4>Logo : </h4>  <img [src]="imageUrl" alt="" width="115px">
+            <h5>Logo : </h5>
+            <img [src]="imageUrl" alt="" width="115px">
           </div>
           <div class="confirmation-text">
-            <h4>Image de fond : </h4>  <img [src]="backgroundImageUrl" alt="" width="115px">
+            <h5>Image de fond : </h5>
+            <img [src]="backgroundImageUrl" alt="" width="115px">
           </div>
           <div class="confirmation-text">
-            <h4>Couleurs choisies : </h4>
+            <h5>Couleurs choisies : </h5>
             <div *ngFor="let color of hotel.colors" class="confirmation-colors">
               <input type="color" [ngModel]="([color])" disabled class="color-input">  {{color}}
             </div>

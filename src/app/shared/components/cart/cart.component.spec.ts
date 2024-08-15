@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing'; // Import HttpClientTestingModule
 import { CartComponent } from './cart.component';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -13,7 +12,7 @@ describe('CartComponent', () => {
         HttpClientTestingModule,
         ToastrModule.forRoot()]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CartComponent);
     component = fixture.componentInstance;
@@ -23,4 +22,5 @@ describe('CartComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

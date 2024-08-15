@@ -17,13 +17,11 @@
     <h3>LISTE D'EMPLOYE(E)S</h3>
   </div>
   <div>
-  <app-list-employee></app-list-employee>
+    <app-list-employee></app-list-employee>
   </div>
 </section>
-<app-modal
-  title="Ajout d'un employé"
-  [showModal]="isModalOpen"
-  (closeModalEvent)="isModalOpen = false"
->
-  <app-register-employee (closeModal)="closeModal()"></app-register-employee>
+<app-modal title="Ajout d'un employé"
+           [showModal]="isModalOpen"
+           (closeModalEvent)="isModalOpen = false">
+  <app-register-employee (closeModal)="closeModal()" />
 </app-modal>

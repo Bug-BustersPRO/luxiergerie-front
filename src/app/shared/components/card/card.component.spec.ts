@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CardComponent } from './card.component';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -20,4 +19,5 @@ describe('CardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

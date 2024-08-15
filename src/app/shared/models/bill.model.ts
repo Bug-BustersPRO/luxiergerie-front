@@ -11,7 +11,8 @@ export class Bill {
   public totalPrice: number;
 
 
-  constructor(id: string,
+  constructor(
+    id: string,
     date: Date,
     client: Client,
     status: string,
@@ -26,4 +27,5 @@ export class Bill {
     this.roomNumber = roomNumber;
     this.totalPrice = totalPrice;
   }
+
 }

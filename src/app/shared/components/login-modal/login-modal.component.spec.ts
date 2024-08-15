@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LoginModalComponent } from './login-modal.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastrModule } from 'ngx-toastr';
@@ -24,4 +23,5 @@ describe('LoginModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

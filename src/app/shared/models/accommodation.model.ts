@@ -20,4 +20,5 @@ export class Accommodation {
     this.quantity = quantity;
     this.priceToDisplay = priceToDisplay;
   }
+
 }
