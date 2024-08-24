@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production",
     "docker-build-and-run": "docker build -t luxiergerie . && docker run -p 4201:4200 luxiergerie-front:latest",
     "docker-run": "docker run -p 4201:4200 luxiergerie-front:latest",
     "watch": "ng build --watch --configuration development",
@@ -24,6 +24,7 @@
     "@angular/router": "^17.3.4",
     "hammerjs": "^2.0.8",
     "js-big-decimal": "^2.0.7",
+    "luxiergerie": "file:",
     "ngx-cookie-service": "^17.1.0",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
