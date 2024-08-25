@@ -4,9 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 4200:4200
+      - 8081:80
     environment:
-      - API_URL=http://localhost:8090 # Remplacez cette URL par l'URL de votre backend si nécessaire
+      - API_URL=http://51.44.14.185:9080 # Remplacez cette URL par l'URL de votre backend si nécessaire
     networks:
       - springboot-mysql-network
 
