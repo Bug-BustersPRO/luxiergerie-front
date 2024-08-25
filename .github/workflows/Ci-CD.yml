@@ -29,3 +29,31 @@ jobs:
           docker build -t bugbstrspro/luxiergerie-front:${GITHUB_REF##*/} .
           docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
           docker push bugbstrspro/luxiergerie-front:${GITHUB_REF##*/}
+
+# A corriger pour déploiement continu
+# name: Deploy to EC2
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v2
+
+#     - name: Build Docker image
+#       run: |
+#         docker build -t luxiergerie-frontend .
+
+#     - name: Copy built files to EC2
+#       run: |
+#         scp -r ./dist/luxiergerie ubuntu@<EC2_IP>:/home/ubuntu/frontend
+
+#     - name: Restart Docker Compose on EC2
+#       run: |
+#         ssh ubuntu@<EC2_IP> 'cd /home/ubuntu && sudo docker-compose down && sudo docker-compose up -d'
