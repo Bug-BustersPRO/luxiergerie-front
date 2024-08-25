@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8081:80
+      - 4200:4200
     environment:
       - API_URL=http://51.44.14.185:9080 # Remplacez cette URL par l'URL de votre backend si nécessaire
     networks:
