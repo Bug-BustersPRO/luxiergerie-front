@@ -3,6 +3,7 @@ import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Client } from '../models/client.model';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 export class ClientService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  private url: string = "http://localhost:8090/api/client";
+  private url: string = `${environment.apiUrl}/client`;
   private getHeaders(): HttpHeaders {
     const token = this.cookieService.get('jwt-token');
     return new HttpHeaders({

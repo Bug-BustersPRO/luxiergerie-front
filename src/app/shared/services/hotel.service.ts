@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, Subject, tap } from 'rxjs';
 import { Hotel } from '../models/hotel.model';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HotelService {
-  private url: string = "http://localhost:8090/api/hotel";
+  private url: string = `${environment.apiUrl}/hotel`;
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
   public backgroundImageUrl!: string;

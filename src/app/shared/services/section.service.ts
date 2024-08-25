@@ -4,6 +4,7 @@ import { Section } from '../models/section.model';
 import { Category } from '../models/category.model';
 import { Observable } from 'rxjs';
 import { CookieService } from "ngx-cookie-service";
+import { environment } from 'src/environments/environment.prod';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ import { CookieService } from "ngx-cookie-service";
 export class SectionService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  private url: string = "http://localhost:8090/api";
+  private url: string = environment.apiUrl;
   private getHeaders(): HttpHeaders {
     const token = this.cookieService.get('jwt-token');
     return new HttpHeaders({

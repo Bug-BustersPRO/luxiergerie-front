@@ -3,6 +3,7 @@ import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Category } from '../models/category.model';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 export class CategoryService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  private url: string = "http://localhost:8090/api";
+  private url: string = environment.apiUrl;
   private getHeaders(): HttpHeaders {
     const token = this.cookieService.get('jwt-token');
     return new HttpHeaders({
