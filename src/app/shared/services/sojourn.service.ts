@@ -3,6 +3,7 @@ import { computed, Injectable, signal, WritableSignal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Sojourn } from '../models/sojourn.model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 export class SojournService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  private url: string = "http://localhost:8090/api/sojourns";
+  private url: string = `${environment.apiUrl}/sojourns`;
   private getHeaders(): HttpHeaders {
     const token = this.cookieService.get('jwt-token');
     return new HttpHeaders({
