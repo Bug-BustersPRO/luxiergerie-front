@@ -1,0 +1,51 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4200:4200
+    environment:
+      - API_URL=http://51.44.14.185:9080 # Remplacez cette URL par l'URL de votre backend si nécessaire
+    networks:
+      - springboot-mysql-network
+
+networks:
+  springboot-mysql-network:
+    name: springboot-mysql-network
+
+#Configuration pour EC2
+
+#services:
+   #luxiergerie-backend:
+      #image: bugbstrspro/luxiergerie:main
+      #environment:
+        #- SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+        #- SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+        #- SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+        #- SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+      #ports:
+        #- "9080:8090"
+      #networks:
+        #- luxiergerie-network
+
+  #luxiergerie-frontend:
+      #image: bugbstrspro/luxiergerie-frontend:main
+      #build:
+        #context: .
+        #dockerfile: DockerFile
+      #ports:
+        #- "8081:80"
+      #environment:
+        #- API_URL= url du backend
+      #networks:
+        #- luxiergerie-network
+#networks:
+  #luxiergerie-network:
+    #driver: bridge
+
+#Fixer les permissions de docker sur EC2
+# sudo chown -R ubuntu:ubuntu /home/ubuntu/nginx
+# sudo chown -R ubuntu:ubuntu /home/ubuntu/docker
+# sudo chmod -R 755 /home/ubuntu/nginx
+# sudo chmod -R 755 /home/ubuntu/docker

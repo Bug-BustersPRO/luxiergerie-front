@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Role } from '../models/role.model';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class RoleService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  private url: string = "http://localhost:8090/api";
+  private url: string = environment.apiUrl;
   private getHeaders(): HttpHeaders {
     const token = this.cookieService.get('jwt-token');
     return new HttpHeaders({
