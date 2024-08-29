@@ -21,7 +21,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "localize": true,
-            "outputPath": "dist/luxiergerie",
+            "outputPath": "dist/luxiergerie/fr",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -47,12 +47,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "1000kb",
                   "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
+                  "maximumWarning": "4kb",
                   "maximumError": "4kb"
                 }
               ],

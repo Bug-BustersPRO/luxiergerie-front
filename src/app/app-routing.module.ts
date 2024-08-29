@@ -16,7 +16,8 @@ import { AdminSojournComponent } from './pages/admin/admin-sojourn/admin-sojourn
 import { AdminRoomComponent } from './pages/admin/admin-room/admin-room.component';
 import { AdminClientComponent } from './pages/admin/admin-client/admin-client.component';
 import { AdminPurchaseDetailComponent } from './pages/admin/admin-purchases/admin-purchase-detail/admin-purchase-detail.component';
-import { LoginEmployeeComponent } from './security/login-employee/login-employee.component';
+import { LoginEmployeeComponent } from './pages/security/login-employee/login-employee.component';
+import { CguComponent } from './shared/components/cgu/cgu.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sections', pathMatch: 'full' },
@@ -39,7 +40,8 @@ const routes: Routes = [
   },
   { path: 'login/employee', component: LoginEmployeeComponent, canActivate: ['authEmployee'] },
   { path: 'config-hotel', component: ConfigHotelComponent, canActivate: ['authEmployee', 'configHotel', 'roleGuard', 'roleGuardAdmin'] },
-  { path: 'cart', component: CartComponent, canActivate: ['authRoom'] }
+  { path: 'cart', component: CartComponent, canActivate: ['authRoom'] },
+  { path: 'cgu', component: CguComponent, canActivate: ['authRoom'] }
 ];
 
 @NgModule({

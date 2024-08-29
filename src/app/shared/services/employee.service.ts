@@ -3,12 +3,13 @@ import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-  private url: string = "http://localhost:8090/api";
+  private url: string = environment.apiUrl;
   private getHeaders(): HttpHeaders {
     const token = this.cookieService.get('jwt-token');
     return new HttpHeaders({

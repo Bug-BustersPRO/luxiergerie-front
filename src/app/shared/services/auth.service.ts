@@ -7,12 +7,13 @@ import { LoginEmployee } from '../models/loginEmployee.model';
 import { Employee } from '../models/employee.model';
 import { Router } from '@angular/router';
 import { Client } from '../models/client.model';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private url: string = 'http://localhost:8090/api/auth';
+  private url: string = `${environment.apiUrl}/auth`;
   private employee$: WritableSignal<Employee> = signal({} as Employee);
   public employee = computed(() => this.employee$());
   private client$: WritableSignal<Client> = signal({} as Client);
@@ -26,7 +27,7 @@ export class AuthService {
   // faire une vérification différente quand on est connecté via le serial number de l'employée, la solution est pour le moment uniquement via le client room
   public clientLogin(loginClient: LoginClient): Observable<HttpResponse<any>> {
     return this.http
-      .post('http://localhost:8090/api/auth/room/login', loginClient, {
+      .post(`${environment.apiUrl}/auth/room/login`, loginClient, {
         observe: 'response',
         withCredentials: true,
       })
@@ -46,7 +47,7 @@ export class AuthService {
       Token: token ? token : '',
     };
     return this.http
-      .get('http://localhost:8090/api/auth/validate-token', {
+      .get(`${environment.apiUrl}/auth/validate-token`, {
         observe: 'response',
         headers: headers,
         responseType: 'text',
@@ -97,7 +98,7 @@ export class AuthService {
     // A modifier avec un .env lors du déploiement
     this.cookieService.delete('jwt-token', '/', 'localhost');
     this.http
-      .get('http://localhost:8090/api/auth/logout', {
+      .get(`${environment.apiUrl}/auth/logout`, {
         withCredentials: true,
         observe: 'response',
         responseType: 'text',
