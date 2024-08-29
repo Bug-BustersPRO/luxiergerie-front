@@ -13,15 +13,21 @@
          *ngFor="let category of categories">
       <p class="bold"> {{category.category}}</p>
       <div *ngFor="let item of items">
-        <div *ngIf="item.category == category.category"
+        <div *ngIf="item.category === category.category"
              class="columns">
           <p>{{item.name}} </p>
           <div class="quantity">
             <p class="right-p tertiary bold"
-               (click)="removeItem(item)">-</p>
+
+              (click)="removeItem(item)"
+              (keydown.enter)="removeItem(item)"
+              role="button" tabindex="0">-</p>
             <p class="centerded-p">{{item.quantity}}</p>
             <p class="tertiary bold"
-               (click)="addQuantity(item)">+</p>
+
+              (click)="addQuantity(item)"
+              (keydown.enter)="addQuantity(item)"
+              role="button" tabindex="0">+</p>
           </div>
           <p class="centerded-p">{{item.price*item.quantity | currency: 'EUR'}}</p>
         </div>
@@ -43,12 +49,12 @@
       @if (hotel) {
         <app-button *ngIf="this.items?.length"
                   action="Vider le panier"
-                  (click)="clearCart()"
+                  (click)="clearCart()" (keydown.enter)="clearCart()"
                   [txtColor]="hotel.colors[0]"
                   [btnBackground]="hotel.colors[1]"/>
         <app-button *ngIf="this.items?.length"
                   action="commander"
-                  (click)="order()"
+                  (click)="order()" (keydown.enter)="order()"
                   [txtColor]="hotel.colors[0]"
                   [btnBackground]="hotel.colors[1]"/>
       }
@@ -81,6 +87,6 @@
     </div>
     <div class="buttons">
       <app-button action="fermer"
-                  (click)="closeModal()" />
+                  (click)="closeModal()" (keydown.enter)="closeModal()" />
     </div>
   </div>

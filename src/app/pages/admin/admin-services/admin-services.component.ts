@@ -111,7 +111,7 @@ export class AdminAccomodationsComponent {
               const reader = new FileReader()
               reader.readAsDataURL(accommodationImage)
               reader.onloadend = () => {
-                accommodation.urlImage = reader.result as string
+                accommodation.image = reader.result as string
               }
               this.accommodationService
                 .getById(accommodation.id)

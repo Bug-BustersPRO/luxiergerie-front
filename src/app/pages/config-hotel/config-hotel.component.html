@@ -22,7 +22,9 @@
           <input type="text" [(ngModel)]="hotel.name" class="hotel-name" placeholder="Veuillez saisir un nom" required>
         </div>
         <div class="config-button" *ngIf="hotel.name !== ''">
-          <app-button (click)="goToStep('image')" [disabled]="hotel.name === ''" action="suivant"/>
+          <app-button (click)="goToStep('image')"
+          (keydown.enter)="goToStep('image')"
+          [disabled]="hotel.name === ''" action="suivant"/>
         </div>
       }
       @case ('image') {
@@ -39,7 +41,10 @@
         </div>
         <div class="config-body">
           <h2>Ajoutez le logo de l'hôtel :</h2>
-          <div class="add-button" (click)="selectFile()" title="Ajouter" >
+          <div class="add-button"
+          (click)="selectFile()"
+          (keydown.enter)="selectFile()"
+          title="Ajouter" >
             <span class="button-icon">+</span>
           </div>
           <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;"/>
@@ -54,8 +59,14 @@
           <img [src]="imageUrl" alt="" width="115px">
         </div>
         <div class="config-button">
-          <app-button (click)="goToStep('name')" action="retour"/>
-          <app-button (click)="goToStep('backgroundImage')" [disabled]="hotel.image.length === 0" *ngIf="hotel.image.length" action="suivant"/>
+          <app-button
+          (click)="goToStep('name')"
+          (keydown.enter)="goToStep('name')"
+          action="retour"/>
+          <app-button
+          (click)="goToStep('backgroundImage')"
+          (keydown.enter)="goToStep('backgroundImage')"
+          [disabled]="hotel.image.length === 0" *ngIf="hotel.image.length" action="suivant"/>
         </div>
       }
       @case ('backgroundImage') {
@@ -72,7 +83,10 @@
         </div>
         <div class="config-body">
           <h2>Ajoutez l'image de fond de l'hôtel :</h2>
-          <div class="add-button" (click)="selectBackgroundFile()" title="Ajouter" >
+          <div class="add-button"
+          (click)="selectBackgroundFile()"
+          (keydown.enter)="selectBackgroundFile()"
+          title="Ajouter" >
             <span class="button-icon">+</span>
           </div>
           <input type="file" #fileInput (change)="onBackgroundFileSelected($event)" style="display: none;"/>
@@ -87,8 +101,13 @@
           <img [src]="backgroundImageUrl" alt="" width="115px">
         </div>
         <div class="config-button">
-          <app-button (click)="goToStep('image')" action="retour"/>
-          <app-button (click)="goToStep('colors')" [disabled]="hotel.backgroundImage.length === 0" *ngIf="hotel.backgroundImage.length" action="suivant"/>
+          <app-button (click)="goToStep('image')"
+          (keydown.enter)="goToStep('image')"
+          action="retour"/>
+          <app-button
+          (click)="goToStep('colors')"
+          (keydown.enter)="goToStep('colors')"
+          [disabled]="hotel.image.length === 0" *ngIf="hotel.image.length" action="suivant"/>
         </div>
       }
       @case ('colors') {
@@ -140,8 +159,14 @@
           </div>
         </div>
         <div class="config-button">
-          <app-button (click)="goToStep('backgroundImage')" action="retour"/>
-          <app-button (click)="goToStep('confirmation')" [disabled]="hotel.colors.length === 0" *ngIf="hotel.colors.length " action="suivant"/>
+          <app-button
+          (click)="goToStep('backgroundImage')"
+          (keydown.enter)="goToStep('backgroundImage')"
+          action="retour"/>
+          <app-button
+          (click)="goToStep('confirmation')"
+          (keydown.enter)="goToStep('confirmation')"
+          [disabled]="hotel.colors.length === 0" *ngIf="hotel.colors.length " action="suivant"/>
         </div>
       }
       @case ('confirmation') {

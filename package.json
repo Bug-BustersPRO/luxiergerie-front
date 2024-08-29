@@ -8,7 +8,8 @@
     "docker-build-and-run": "docker build -t luxiergerie . && docker run -p 4201:4200 luxiergerie-front:latest",
     "docker-run": "docker run -p 4201:4200 luxiergerie-front:latest",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -33,11 +34,19 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.4",
+    "@angular-eslint/builder": "17.5.2",
+    "@angular-eslint/eslint-plugin": "17.5.2",
+    "@angular-eslint/eslint-plugin-template": "17.5.2",
+    "@angular-eslint/schematics": "17.5.2",
+    "@angular-eslint/template-parser": "17.5.2",
     "@angular/cli": "~17.3.4",
     "@angular/compiler-cli": "^17.3.4",
     "@angular/localize": "^17.3.4",
     "@types/hammerjs": "^2.0.45",
     "@types/jasmine": "~4.3.0",
+    "@typescript-eslint/eslint-plugin": "7.11.0",
+    "@typescript-eslint/parser": "7.11.0",
+    "eslint": "^8.57.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

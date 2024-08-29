@@ -19,6 +19,7 @@
       </div>
     </div>
     <div class="connection">
+      <span (click)="logout()" (keydown.enter)="logout()" role="button" tabIndex="0">Se déconnecter</span>
       <span (click)="logout()"(keydown.enter)="logout()">
         Se déconnecter
       </span>
@@ -58,11 +59,17 @@
          matBadgePosition="before"
          (click)="openCart()"
          (keydown.enter)="openCart()">shopping_basket</i>
+      <i class="material-icons md-36"
+        role="button" tabindex="0"
+         (click)="openCart()"
+         (keydown.enter)="openCart()">shopping_basket</i>
     </div>
     <div class="btn">
       <i class="material-icons md-36"
          (click)="navigateTo('/')"
-         (keydown.enter)="navigateTo('/')">home</i>
+         role="button" tabindex="0"
+          (keydown.enter)="navigateTo('/')"
+         >home</i>
     </div>
   </label>
 </div>

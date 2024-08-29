@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminHomeComponent } from '../admin-home/admin-home.component';
@@ -14,7 +14,8 @@ import { CommonModule } from '@angular/common';
   imports: [AdminHomeComponent, RouterLink, CommonModule],
   providers: [],
 })
-export class AdminNavbarComponent {
+
+export class AdminNavbarComponent implements OnInit {
   public hotel: Hotel = {} as Hotel;
   public hotelImageUrl!: string;
   isAdmin!: boolean;
@@ -119,5 +120,4 @@ export class AdminNavbarComponent {
         return this.router.url.includes(route);
     }
   }
-
 }

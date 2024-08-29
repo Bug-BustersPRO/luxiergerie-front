@@ -1,13 +1,17 @@
 <section class="global-container">
   <div class="add-employee-container">
-    <div>
-      <h3>AJOUTER UN(E) EMPLOYE(E)</h3>
-    </div>
-    <div class="add-button"
-         (click)="openModal()"
-         title="Ajouter un(e) employé(e)">
-      <span class="button-icon">+</span>
-    </div>
+  <div>
+    <h3>AJOUTER UN(E) EMPLOYE(E)</h3>
+  </div>
+  <div
+    class="add-button"
+    (click)="openModal()"
+    (keydown.enter)="openModal()"
+    role="button" tabIndex="0"
+    title="Ajouter un(e) employé(e)"
+  >
+    <span class="button-icon">+</span>
+  </div>
   </div>
   <div>
     <h3>LISTE D'EMPLOYE(E)S</h3>

@@ -12,7 +12,7 @@ import {CategoryService} from 'src/app/shared/services/category.service';
   templateUrl: './accommodation-page.component.html',
   styleUrls: ['./accommodation-page.component.scss'],
 })
-export class AccommodationPage {
+export class AccommodationPageComponent {
   public accommodations: Accommodation[] = [];
   public accommodation!: Accommodation;
   public hotel!: Hotel;
@@ -55,7 +55,7 @@ export class AccommodationPage {
           const reader = new FileReader();
           reader.readAsDataURL(accommodationImage);
           reader.onloadend = () => {
-            accommodation.urlImage = reader.result as string;
+            accommodation.image = reader.result as string;
             accommodationsProcessed++;
             if (accommodationsProcessed === totalAccommodations) {
               this.accommodations = accommodations;
@@ -71,7 +71,7 @@ export class AccommodationPage {
     this.carouselItems = this.accommodations.map((element) => ({
       title: element.name,
       description: element.description,
-      image: element.urlImage,
+      image: element.image,
     }));
   }
 

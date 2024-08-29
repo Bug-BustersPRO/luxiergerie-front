@@ -9,7 +9,7 @@ import { CategoryService } from 'src/app/shared/services/category.service';
   templateUrl: './category-page.html',
   styleUrls: ['./category-page.scss'],
 })
-export class CategoryPage implements OnInit {
+export class CategoryPageComponent implements OnInit {
   public categories: Category[] = [];
   public category!: Category;
   public carouselItems: any[] = [];

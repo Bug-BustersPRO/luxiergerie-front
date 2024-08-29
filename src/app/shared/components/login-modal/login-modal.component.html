@@ -19,7 +19,10 @@
     <div *ngIf="step === 2"
          class="second-step-container">
       <label for="password"> Entrez le mot de passe pour la chambre {{loginForm.get('sojournIdentifier')?.value}} <span class="edit-icon"
-              (click)="onEditsojournIdentifier()">&#9998;</span>
+
+        (click)="onEditsojournIdentifier()"
+        (onkeydown.enter)="onEditsojournIdentifier()"
+        role="button" tabindex="0">&#9998;</span>
       </label>
       <div *ngIf="invalidLogin"
            class="error-message"> Numéro d'identifiant ou mot de passe ne correspondent pas. </div>
@@ -37,7 +40,9 @@
         <div *ngFor="let key of keys"
              class="key"
              [class.action]="key.type === 'action'"
-             (click)="key.type === 'number' ? onKey(key.value) : key.value === 'erase' ? onErase() : onSubmit()">
+             (click)="key.type === 'number' ? onKey(key.value) : key.value === 'erase' ? onErase() : onSubmit()"
+             (keydown.enter)="key.type === 'number' ? onKey(key.value) : key.value === 'erase' ? onErase() : onSubmit()"
+             role="button" tabindex="0">
           <span [innerHTML]="getKeyDisplay(key)"></span>
         </div>
       </div>

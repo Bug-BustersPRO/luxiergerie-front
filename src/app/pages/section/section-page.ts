@@ -6,8 +6,8 @@ import { SectionService } from 'src/app/shared/services/section.service';
   templateUrl: './section-page.html',
   styleUrls: ['./section-page.scss', '../../../styles.scss'],
 })
-export class SectionPage implements OnInit {
-  public isModalOpen: boolean = false;
+export class SectionPageComponent implements OnInit {
+  public isModalOpen: boolean = false; // to use the modal, we need this variable
   public section!: Section;
   public sections: Section[] = [];
   public carouselItems: any[] = [];

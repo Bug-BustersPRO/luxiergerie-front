@@ -6,7 +6,10 @@
       <h2>{{currentEmployee.firstName}} {{currentEmployee.lastName}}</h2>
       <p>{{getRoleName(roles[0])}}</p>
       <p (click)="logout()"
-         class="logoutBtn">Se déconnecter</p>
+        (keydown.enter)="logout()"
+        role="button" tabIndex="0"
+         class="logoutBtn"
+         >Se déconnecter</p>
     </div>
   </nav>
   <router-outlet></router-outlet>
