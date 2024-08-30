@@ -4,7 +4,7 @@ import { Section } from '../models/section.model';
 import { Category } from '../models/category.model';
 import { Observable } from 'rxjs';
 import { CookieService } from "ngx-cookie-service";
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({

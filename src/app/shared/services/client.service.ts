@@ -3,7 +3,7 @@ import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Client } from '../models/client.model';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
