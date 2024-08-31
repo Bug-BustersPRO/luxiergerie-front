@@ -1,59 +1,43 @@
 name: CI-CD
 
 on:
-  push:
-    branches:
-      - main
-      - dev
-      - implementCi
-  pull_request:
-    branches: ["main","dev"]
+    push:
+        branches:
+            - main
+            - dev
+            - implementCi
+    pull_request:
+        branches: ['main', 'dev']
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+    build:
+        runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-      - name: Install dependencies
-        run: npm install
-      - name: Build and Push Docker Image
-        env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-        run: |
-          docker build -t bugbstrspro/luxiergerie-front:${GITHUB_REF##*/} .
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-          docker push bugbstrspro/luxiergerie-front:${GITHUB_REF##*/}
-
-# A corriger pour déploiement continu
-# name: Deploy to EC2
-
-# on:
-#   push:
-#     branches:
-#       - main
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#     - name: Checkout code
-#       uses: actions/checkout@v2
-
-#     - name: Build Docker image
-#       run: |
-#         docker build -t luxiergerie-frontend .
-
-#     - name: Copy built files to EC2
-#       run: |
-#         scp -r ./dist/luxiergerie ubuntu@<EC2_IP>:/home/ubuntu/frontend
-
-#     - name: Restart Docker Compose on EC2
-#       run: |
-#         ssh ubuntu@<EC2_IP> 'cd /home/ubuntu && sudo docker-compose down && sudo docker-compose up -d'
+        steps:
+            - uses: actions/checkout@v4
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20.x'
+            - name: Install dependencies
+              run: npm install
+            - name: Build and Push Docker Image
+              env:
+                  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+                  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+              run: |
+                  docker build -t bugbstrspro/luxiergerie-front:${GITHUB_REF##*/} .
+                  docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+                  docker push bugbstrspro/luxiergerie-front:${GITHUB_REF##*/}
+            - name: Connect to EC2, pull and run
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
+                  ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_HOST }} << EOF
+                  cd /home/ubuntu/docker
+                  sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin <<< ${{ secrets.DOCKERHUB_TOKEN }}
+                  sudo docker pull bugbstrspro/luxiergerie:${GITHUB_REF##*/}
+                  sudo docker compose down
+                  sudo docker compose up --build
+                  EOF
