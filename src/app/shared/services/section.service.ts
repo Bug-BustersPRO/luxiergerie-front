@@ -1,10 +1,11 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Injectable, WritableSignal, computed, signal} from '@angular/core';
-import {Section} from '../models/section.model';
-import {Category} from '../models/category.model';
-import {Observable} from 'rxjs';
-import {CookieService} from 'ngx-cookie-service';
-import {environment} from 'src/environments/environment.prod';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Injectable, WritableSignal, computed, signal } from '@angular/core';
+import { Section } from '../models/section.model';
+import { Category } from '../models/category.model';
+import { Observable } from 'rxjs';
+import { CookieService } from "ngx-cookie-service";
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root',

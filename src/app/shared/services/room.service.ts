@@ -1,9 +1,9 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Injectable, WritableSignal, computed, signal} from '@angular/core';
-import {Room} from '../models/room.model';
-import {CookieService} from 'ngx-cookie-service';
-import {Observable} from 'rxjs';
-import {environment} from 'src/environments/environment.prod';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Injectable, WritableSignal, computed, signal } from '@angular/core';
+import { Room } from '../models/room.model';
+import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
