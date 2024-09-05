@@ -7,7 +7,7 @@ import { LoginEmployee } from '../models/loginEmployee.model';
 import { Employee } from '../models/employee.model';
 import { Router } from '@angular/router';
 import { Client } from '../models/client.model';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

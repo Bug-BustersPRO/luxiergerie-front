@@ -4,7 +4,7 @@ import { Purchase } from '../models/purchase.model';
 import { CookieService } from 'ngx-cookie-service';
 import { Bill } from '../models/bill.model';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Role } from '../models/role.model';
 import { CookieService } from 'ngx-cookie-service';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
