@@ -41,6 +41,15 @@ export class ClientFormComponent implements OnChanges {
         this.toastr.error("Veuillez remplir tous les champs obligatoires");
         return;
       }
+      if (!this.client.email.includes("@")) {
+        this.toastr.error("Veuillez entrer une adresse email valide");
+        return;
+      }
+      if (!this.client.phoneNumber.toString().match(/^[0-9]{10}$/)) {
+        this.toastr.error("Veuillez entrer un numéro de téléphone valide");
+        return;
+      }
+
       this.clientService.createClient(this.client).subscribe({
         next: () => {
           this.clientService.getAll();
@@ -56,6 +65,15 @@ export class ClientFormComponent implements OnChanges {
         this.toastr.error("Veuillez remplir tous les champs obligatoires");
         return;
       }
+      if (!this.client.email.includes("@")) {
+        this.toastr.error("Veuillez entrer une adresse email valide");
+        return;
+      }
+      if (!this.client.phoneNumber.toString().match(/^[0-9]{10}$/)) {
+        this.toastr.error("Veuillez entrer un numéro de téléphone valide");
+        return;
+      }
+      
       this.clientService.updateClient(this.client).subscribe({
         next: () => {
           this.clientService.getAll();
