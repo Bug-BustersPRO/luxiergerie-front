@@ -32,10 +32,10 @@
                [(ngModel)]="client.email"
                type="email"
                #email="ngModel"
-               required />
+               required email/>
         <div *ngIf="email.invalid && (email.dirty || email.touched)">
           <div class="error-length-required"
-               *ngIf="email.errors?.['required']"> L'email est requis. </div>
+               *ngIf="email.errors?.['required'] || email.errors?.['email'] "> L'email est requis. </div>
         </div>
       </div>
       <div class="label-and-input">
