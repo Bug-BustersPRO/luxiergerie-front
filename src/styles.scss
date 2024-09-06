@@ -39,10 +39,12 @@ button {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 2rem;
   margin: 2rem auto;
   width: 90%;
   justify-content: center;
   overflow: auto;
-  max-height: 50%;
+  max-height: 60%;
+  height: 56%;
+  padding-top: 15px;
 }
