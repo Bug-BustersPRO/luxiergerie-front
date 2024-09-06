@@ -26,6 +26,10 @@
   z-index: 1000;
   overflow: scroll;
 
+  @media screen and (min-width: 1000px) {
+    width: 50%;
+    height: auto;
+  }
 
   .modal-header {
     display: flex;
@@ -61,7 +65,6 @@
 
   .modal-content {
     padding: 20px;
-    // overflow-y: auto;
     height: 80%;
   }
 }
