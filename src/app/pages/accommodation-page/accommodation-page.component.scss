@@ -8,14 +8,13 @@
 .section-global {
   display: flex;
   flex-direction: column;
-  height: 90%;
-  padding-bottom: 50px;
+  height: 94%;
 
   .buttons {
     justify-content: space-between;
     list-style: none;
     display: flex;
     width: 100%;
-    margin-left: 4rem;
+    margin-left: 6.5rem;
   }
 }

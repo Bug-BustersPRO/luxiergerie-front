@@ -75,7 +75,7 @@
   </form>
   <div class="button-alignement">
     <app-button action="annuler"
-                (click)="resetForm()" />
+                (click)="closeModal.emit()" />
     <app-button action="valider"
                 (click)="onSubmit(form)" />
   </div>
